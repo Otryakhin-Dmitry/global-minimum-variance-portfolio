@@ -57,11 +57,58 @@ W_EU_hat <- function(x, gamma){
 }
 
 
+#### R_GMV (page 5, IEEE)
+#' R_GMV. The deterministic value.
+#'
+#'
+#'  The expected return of the GMV portfolio
+#'
+#' @inheritParams Sigma_sample_estimator
+#' @param gamma positive numeric. Investors attitude towards risk
+#'
+#' @examples
+#' mu <- c(1,5,3,4,9)
+#' sm <- c(1,0,0,0,0,
+#'         0,1,0,0,0,
+#'         0,0,1,0,0,
+#'         0,0,0,1,0,
+#'         0,0,0,0,1)
+#' Sigma <- matrix(data = sm, nrow = p, ncol = p)
+R_GMV <- function(mu, Sigma){
+
+  p <- length(mu)
+  invSS <- solve(Sigma)
+  Ip <- rep.int(1, p)
+
+  as.numeric((t(Ip) %*% invSS %*% mu)/(t(Ip) %*% invSS %*% Ip))
+}
 
 
+R_hat_GMV <- function(x){
+
+  a <- rowMeans(x, na.rm = TRUE)
+  SS <- Sigma_sample_estimator(x)
+  invSS <- solve(SS)
+  Ip <- rep.int(1, nrow(x))
+
+  as.numeric((t(Ip) %*% invSS %*% a)/(t(Ip) %*% invSS %*% Ip))
+}
 
 
+R_b <- function(mu, b) as.numeric(b %*% mu)
 
+R_hat_b <- function(x, b) as.numeric(b %*% rowMeans(x, na.rm = TRUE))
+
+####
+
+V_b <- function(Sigma, b) as.numeric(t(b) %*% Sigma %*% b)
+
+V_hat_b <- function(x, b) {
+
+  Sigma <- Sigma_sample_estimator(x)
+  as.numeric(t(b) %*% Sigma %*% b)
+
+}
 
 
 
