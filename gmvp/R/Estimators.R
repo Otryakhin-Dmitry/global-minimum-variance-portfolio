@@ -144,7 +144,8 @@ V_hat_GMV <- function(x){
 }
 
 
-####
+#### alphas, B and A expressions
+
 # In case of GMV portfolio one needs to set gamma=infty
 alpha_star <- function(gamma, mu, Sigma, b, c){
 
@@ -187,6 +188,24 @@ alpha_hat_star_c <- function(gamma, x, b){
   Exp6 <- ((s+c)/(1-c)^3)/gamma^2
   denomenator <- Exp4 + Exp5 + Exp6 + V_b
   as.numeric(numerator/denomenator)
+}
+
+
+# A and B expressions
+B_hat <- function(gamma, x, b){
+  
+  R_GMV <- R_hat_GMV(x)
+  R_b <- R_hat_b(x, b)
+  V_GMV <- V_hat_GMV(x)
+  V_b <- V_hat_b(x, b)
+  c <- nrow(x)/ncol(x)
+  s <- s_hat_c(x)
+  
+  Exp4 <- V_GMV/(1-c)
+  Exp5 <- 2*(V_GMV + (R_b - R_GMV)/(gamma*(1-c)))
+  Exp6 <- ((s+c)/(1-c)^3)/gamma^2
+  denomenator <- Exp4 + Exp5 + Exp6 + V_b
+  as.numeric(denomenator)
 }
 
 
