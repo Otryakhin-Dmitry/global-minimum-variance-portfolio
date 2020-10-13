@@ -52,7 +52,7 @@ Sigma <- matrix(data=0, nrow=p, ncol=p)
 diag(Sigma) <- 1
 
 test_that("alpha_hat is equivalent to its asymptotic value", {
-  expect_lt(abs(alpha_star(gamma=gamma, mu=mu, Sigma=Sigma, b=b, c=c) - alpha_star_c(gamma, x, b)), 0.2)
+  expect_lt(abs(alpha_star(gamma=gamma, mu=mu, Sigma=Sigma, b=b, c=c) - alpha_hat_star_c(gamma, x, b)), 0.2)
 })
 
 

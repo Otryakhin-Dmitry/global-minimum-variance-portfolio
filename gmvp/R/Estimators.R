@@ -64,6 +64,7 @@ W_EU_hat <- function(x, gamma){
   Q_n_hat %*% rowMeans(x, na.rm = TRUE)/gamma
 }
 
+
 #### S's
 
 s_hat <- function(x) {
@@ -144,7 +145,7 @@ V_hat_GMV <- function(x){
 
 
 ####
-
+# In case of GMV portfolio one needs to set gamma=infty
 alpha_star <- function(gamma, mu, Sigma, b, c){
 
   R_GMV <- R_GMV(mu, Sigma)
@@ -166,8 +167,8 @@ alpha_star <- function(gamma, mu, Sigma, b, c){
 }
 
 
-
-alpha_star_c <- function(gamma, x, b){
+# In case of GMV portfolio one needs to set gamma=infty
+alpha_hat_star_c <- function(gamma, x, b){
 
   R_GMV <- R_hat_GMV(x)
   R_b <- R_hat_b(x, b)
@@ -189,7 +190,14 @@ alpha_star_c <- function(gamma, x, b){
 }
 
 
+#### W_BFGSE
 
+W_hat_BFGSE <- function(x, gamma, b){
+
+  # make output a vector instead of a matrix?
+  al <- alpha_hat_star_c(gamma, x, b)
+  al*W_EU_hat(x, gamma) + (1-al)*b
+}
 
 
 
