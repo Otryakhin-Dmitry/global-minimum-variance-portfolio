@@ -21,7 +21,7 @@ Omega_hat_al_c <- function(x, c, b){
   V_hat_b <- V_hat_b(x, b)
 
   diag(M) <- c(V_hat_c*(s_hat_c+1)/(1-c), (2*V_hat_c^2)/(1-c),
-               2*(((s_hat_c+1)^2+c-1)/(1-c)), V_hat_b, 2*V_hat_b^2)
+               2*((s_hat_c+1)^2+c-1)/(1-c), V_hat_b, 2*V_hat_b^2)
 
   R_hat_b <- R_hat_b(x=x, b=b)
   R_hat_GMV<-R_hat_GMV(x=x)
@@ -29,7 +29,7 @@ Omega_hat_al_c <- function(x, c, b){
   M[4,1] <- M[1,4] <- V_hat_c
   M[5,1] <- M[1,5] <- -2*V_hat_c*(R_hat_b-R_hat_GMV)
   M[5,2] <- M[2,5] <- 2*V_hat_c^2
-  M[4,3] <- M[3,4] <- 2*(R_hat_b-R_hat_GMV)^2
+  M[4,3] <- M[3,4] <- 2*(R_hat_b-R_hat_GMV)
   M[5,3] <- M[3,5] <- -2*(R_hat_b-R_hat_GMV)^2
   M
 }
