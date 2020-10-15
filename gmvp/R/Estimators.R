@@ -143,6 +143,7 @@ V_hat_GMV <- function(x){
   as.numeric(1/(rep.int(1, nrow(Sigma)) %*% solve(Sigma) %*% rep.int(1, nrow(Sigma))))
 }
 
+V_hat_c <- function(x) {V_hat_GMV(x)/(1-nrow(x)/ncol(x))}
 
 #### alphas, B and A expressions
 
@@ -155,10 +156,10 @@ alpha_star <- function(gamma, mu, Sigma, b, c){
   V_b <- V_b(Sigma, b)
   s <- s(mu, Sigma)
 
-  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))
+  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))/gamma
   Exp2 <- gamma*(V_b-V_GMV)
   Exp3 <- s/(gamma*(1-c))
-  numerator <- (Exp1 + Exp2 + Exp3)/gamma
+  numerator <- (Exp1 + Exp2 + Exp3)
 
   Exp4 <- V_GMV/(1-c)
   Exp5 <- -2*(V_GMV + (R_b - R_GMV)/(gamma*(1-c)))
@@ -182,10 +183,10 @@ alpha_hat_star_c <- function(gamma, x, b){
 
   V_c <- V_GMV/(1-c)
 
-  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))
+  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))/gamma
   Exp2 <- gamma*(V_b-V_c)
   Exp3 <- s/(gamma*(1-c))
-  numerator <- (Exp1 + Exp2 + Exp3)/gamma
+  numerator <- (Exp1 + Exp2 + Exp3)
 
   Exp4 <- V_c/(1-c)
   Exp5 <- -2*(V_c + (R_b - R_GMV)/(gamma*(1-c)))

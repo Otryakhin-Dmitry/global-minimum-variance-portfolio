@@ -48,7 +48,3 @@ T_alpha <- function(gamma, x, w_0, c) {
 }
 
 
-
-
-
-
