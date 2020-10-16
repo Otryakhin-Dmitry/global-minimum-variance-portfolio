@@ -55,7 +55,7 @@ plot(density(vect_al_simple), xlim=c(-0.01,0.01))
 #### Check convergence for T_alpha and (44) ####
 
 vect_T_al <-
-replicate(n=5e2,{
+replicate(n=3e2,{
     x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
     T_alpha(gamma=gamma, x=x, w_0=w_0, c=p/n)
 })
@@ -71,7 +71,7 @@ mu=rep(0,p)
 d_0 <- d_0(gamma=gamma, p=p, n=n)
 
 vect_T_al_S <-
-  replicate(n=5e2,{
+  replicate(n=3e2,{
     x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
     Omega.est <- Omega_hat_al_c(x=x, c=p/n, b=w_0)
@@ -86,9 +86,9 @@ vect_T_al_S <-
   })
 
 mean(vect_T_al)
-sd(vect_T_al)
-
 mean(vect_T_al_S)
+
+sd(vect_T_al)
 sd(vect_T_al_S)
 
 

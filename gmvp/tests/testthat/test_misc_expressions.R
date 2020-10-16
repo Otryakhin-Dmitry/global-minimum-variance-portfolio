@@ -56,9 +56,23 @@ test_that("alpha_hat is equivalent to its asymptotic value", {
 })
 
 
+#### High-dimensional setting ####
 
+n<-8e2 # number of realizations
+p<-0.8*n # number of assets
+w_0 <- rep(1/p,p)
+gamma<-5e4
 
+###############################
+Sigma<-matrix(data=0, nrow=p, ncol=p)
+diag(Sigma) <- 1
 
+x <-matrix(data = rnorm(n=n*p), nrow = p, ncol = n)
+abs(V_hat_c(x) - V_GMV(Sigma=Sigma))
+
+test_that("V_s is equivalent to ", {
+  expect_lt(abs(V_hat_c(x) - V_GMV(Sigma=Sigma)), 1e-3)
+})
 
 
 
