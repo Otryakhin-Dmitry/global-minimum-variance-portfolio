@@ -3,7 +3,7 @@
 n<-8e2 # number of realizations
 p<-0.3*n # number of assets
 w_0 <- rep(1/p,p)
-gamma<-5e4
+gamma<-5e1
 
 #################################################
 
@@ -55,7 +55,7 @@ plot(density(vect_al_simple), xlim=c(-0.01,0.01))
 #### Check convergence for T_alpha and (44) ####
 
 vect_T_al <-
-replicate(n=3e2,{
+replicate(n=3e2, {
     x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
     T_alpha(gamma=gamma, x=x, w_0=w_0, c=p/n)
 })
@@ -71,7 +71,7 @@ mu=rep(0,p)
 d_0 <- d_0(gamma=gamma, p=p, n=n)
 
 vect_T_al_S <-
-  replicate(n=3e2,{
+  replicate(n=3e2, {
     x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
     Omega.est <- Omega_hat_al_c(x=x, c=p/n, b=w_0)

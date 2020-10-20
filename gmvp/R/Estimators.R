@@ -156,10 +156,10 @@ alpha_star <- function(gamma, mu, Sigma, b, c){
   V_b <- V_b(Sigma, b)
   s <- s(mu, Sigma)
 
-  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))
-  Exp2 <- gamma*(V_b-V_GMV)
-  Exp3 <- s/(gamma*(1-c))
-  numerator <- (Exp1 + Exp2 + Exp3)/gamma
+  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))/gamma
+  Exp2 <- (V_b-V_GMV)
+  Exp3 <- s/(gamma^2)/(1-c)
+  numerator <- Exp1 + Exp2 + Exp3
 
   Exp4 <- V_GMV/(1-c)
   Exp5 <- -2*(V_GMV + (R_b - R_GMV)/(gamma*(1-c)))
@@ -183,10 +183,10 @@ alpha_hat_star_c <- function(gamma, x, b){
 
   V_c <- V_GMV/(1-c)
 
-  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))
-  Exp2 <- gamma*(V_b-V_c)
-  Exp3 <- s/(gamma*(1-c))
-  numerator <- (Exp1 + Exp2 + Exp3)/gamma
+  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))/gamma
+  Exp2 <- (V_b-V_c)
+  Exp3 <- s/(gamma^2)/(1-c)
+  numerator <- Exp1 + Exp2 + Exp3
 
   Exp4 <- V_c/(1-c)
   Exp5 <- -2*(V_c + (R_b - R_GMV)/(gamma*(1-c)))
@@ -196,6 +196,26 @@ alpha_hat_star_c <- function(gamma, x, b){
   as.numeric(numerator/denomenator)
 }
 
+alpha_star_GMV <- function(Sigma, b, c){
+
+  V_GMV <- V_GMV(Sigma)
+  V_b <- V_b(Sigma, b)
+
+  numer <- (1-c)*(V_b-V_GMV)
+  as.numeric(numer/(numer + c))
+}
+
+# simplified alphas when gamma=Inf
+alpha_hat_star_c_GMV <- function(x, b){
+
+  V_GMV <- V_hat_GMV(x)
+  V_b <- V_hat_b(x, b)
+  c <- nrow(x)/ncol(x)
+  V_c <- V_GMV/(1-c)
+
+  numer <- (1-c)*(V_b-V_c)
+  as.numeric(numer/(numer + c))
+}
 
 # A and B expressions
 B_hat <- function(gamma, x, b){
