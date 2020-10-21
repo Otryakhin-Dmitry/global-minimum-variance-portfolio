@@ -202,11 +202,11 @@ alpha_star_GMV <- function(Sigma, b, c){
   V_b <- V_b(Sigma, b)
 
   numer <- (1-c)*(V_b-V_GMV)
-  as.numeric(numer/(numer + c))
+  as.numeric(numer/(numer + c*V_GMV))
 }
 
 # simplified alphas when gamma=Inf
-alpha_hat_star_c_GMV <- function(x, b){
+alpha_hat_star_c_GMV <- function(x, b, c = nrow(x)/ncol(x)){
 
   V_GMV <- V_hat_GMV(x)
   V_b <- V_hat_b(x, b)
@@ -214,7 +214,7 @@ alpha_hat_star_c_GMV <- function(x, b){
   V_c <- V_GMV/(1-c)
 
   numer <- (1-c)*(V_b-V_c)
-  as.numeric(numer/(numer + c))
+  as.numeric(numer/(numer + c*V_c))
 }
 
 # A and B expressions
@@ -238,7 +238,20 @@ B_hat <- function(gamma, x, b){
   as.numeric(denomenator)
 }
 
+SD_alpha_simple <- function(Sigma, b, mu, n){
 
+  c <- nrow(Sigma)/n
+  V_b <- V_b(Sigma, b)
+  V_GMV <- V_GMV(Sigma)
+  Lb <- V_b/V_GMV - 1
+  R_b <- R_b(mu, b)
+
+  numer <- 2*(1-c)*c^2*(Lb+1)
+  denom <- ((1-c)*R_b+c)^4
+  multip<- (2-c)*Lb +c
+
+  numer / denom * multip
+}
 #### W_BFGSE
 
 W_hat_BFGSE <- function(x, gamma, b){
