@@ -22,5 +22,7 @@ vect_as <- sqrt(n)*
 SD_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
 
 
-
+# Plot densities
+plot(density(vect_as), xlim=c(-1,1))
+points(x=seq(-1,1, by=0.1), y=dnorm(x=seq(-1,1, by=0.1), sd=sqrt(var_al)))
 

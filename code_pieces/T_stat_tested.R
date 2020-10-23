@@ -1,9 +1,9 @@
 
 
-n<-8e2 # number of realizations
+n<-5e2 # number of realizations
 p<-0.3*n # number of assets
 w_0 <- rep(1/p,p)
-gamma<-5e1
+gamma<-5e-3
 
 #################################################
 
@@ -91,11 +91,12 @@ mean(vect_T_al_S)
 sd(vect_T_al)
 sd(vect_T_al_S)
 
+ylims <- c(0,.5)
+xlims <- c(-4,4)
+plot(density(vect_T_al), xlim=xlims, ylim=ylims, col='blue')
+lines(x=seq(-5,5, by=0.1), y=dnorm(x=seq(-5,5, by=0.1)), col=10, xlim=xlims)
 
-plot(density(vect_T_al), xlim=c(-5,5))
-lines(x=seq(-5,5, by=0.1), y=dnorm(x=seq(-5,5, by=0.1)), col=10, xlim=c(-5,5))
-
-lines(density(vect_T_al_S), col=3, xlim=c(-5,5))
+lines(density(vect_T_al_S), col=3, xlim=xlims)
 
 
 

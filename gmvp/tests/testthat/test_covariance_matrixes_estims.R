@@ -37,3 +37,25 @@ test_that("Diagonal elements are close to 1 when components are independent", {
                   abs(SS[4,4]), abs(SS[5,5])), 0.05)
 })
 
+
+# Test with cov.shrink
+
+library(corpcor)
+
+####
+n<-1e3 # number of realizations
+p<-0.8*n # number of assets
+
+x <-matrix(data = rnorm(n*p, mean=10), nrow = p, ncol = n)
+
+s2 = cov.shrink(t(x), lambda=0, verbose=FALSE)
+s1 = Sigma_sample_estimator(x)
+Expr <- abs(s2[1:6,1:6] - s1[1:6,1:6]) / abs(s2[1:6,1:6])<0.2
+
+test_that("cov.shrink produces about the same matrix as Sigma_sample_estimator", {
+  expect_equal(sum(Expr), 36)
+})
+
+
+
+
