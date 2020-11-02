@@ -1,5 +1,4 @@
-library('MASS')
-
+context("Different expressions for alphas")
 
 #### alphas EU and GMV work and are equal when gamma=Inf
 
@@ -23,6 +22,9 @@ test_that("alphas EU and GMV work and are equal when gamma=Inf", {
 #### x with dependent components
 
 test_that("alphas EU and GMV work and are equal when gamma=Inf and components of x are dependent", {
+
+  if (!requireNamespace("MASS", quietly =TRUE)) skip("package MASS is not installed")
+  library('MASS')
 
   n<-3e2 # number of realizations
   p<-0.3*n # number of assets

@@ -19,29 +19,6 @@ vect_as <- sqrt(n)*
   })
 
 
-sd(vect_as)
-SD_alpha_simple(Sigma=Sigma, b=w_0, mu=rep(0,p), n=n)
-
-abs(
-  sd(vect_as) -
-  SD_alpha_simple(Sigma=Sigma, b=w_0, mu=rep(0,p), n=n)
-)
-
-
-#### Alpha simple computed through the general one ####
-vect_gen <- sqrt(n)*
-  replicate(n=3e2, {
-    x <-matrix(data = rnorm(n=n*p), nrow = p, ncol = n)
-    alpha_hat_star_c(gamma=Inf, x=x, b=w_0) -
-      alpha_star(gamma=Inf, mu=rep(0,p), Sigma=Sigma, b=w_0, c=p/n)
-  })
-
-sd(vect_as)
-sd(vect_gen)
-SD_alpha_simple(Sigma=Sigma, b=w_0, mu=rep(0,p), n=n)
-
-
-
-
-
+var(vect_as)
+Var_alpha_simple(Sigma=Sigma, b=w_0, mu=rep(0,p), n=n)
 

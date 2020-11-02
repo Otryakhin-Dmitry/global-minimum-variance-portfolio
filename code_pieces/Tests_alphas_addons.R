@@ -18,11 +18,11 @@ vect_as <- sqrt(n)*
   })
 
 
-(sd(vect_as))^2
-SD_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
-
+var(vect_as)
+varr<-Var_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
+varr
 
 # Plot densities
-plot(density(vect_as), xlim=c(-1,1))
-points(x=seq(-1,1, by=0.1), y=dnorm(x=seq(-1,1, by=0.1), sd=sqrt(var_al)))
+plot(density(vect_as), xlim=c(-0.5,0.5))
+points(x=seq(-0.5,0.5, by=0.01), y=dnorm(x=seq(-0.5,0.5, by=0.01), sd=sqrt(varr)))
 

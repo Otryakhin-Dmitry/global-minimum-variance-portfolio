@@ -238,16 +238,16 @@ B_hat <- function(gamma, x, b){
   as.numeric(denomenator)
 }
 
-SD_alpha_simple <- function(Sigma, b, mu, n){
+Var_alpha_simple <- function(Sigma, b, mu, n){
 
   c <- nrow(Sigma)/n
   V_b <- V_b(Sigma, b)
   V_GMV <- V_GMV(Sigma)
   Lb <- V_b/V_GMV - 1
-  R_b <- R_b(mu, b)
+  # R_b <- R_b(mu, b)
 
   numer <- 2*(1-c)*c^2*(Lb+1)
-  denom <- ((1-c)*R_b+c)^4
+  denom <- ((1-c)*Lb+c)^4
   multip<- (2-c)*Lb +c
 
   numer / denom * multip

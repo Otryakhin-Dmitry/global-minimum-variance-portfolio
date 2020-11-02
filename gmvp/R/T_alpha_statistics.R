@@ -1,10 +1,11 @@
+
 d_0 <- function(gamma, p, n){
 
-  c(1+1/(1-p/n),
-    -gamma,
-    1/(gamma*(1-p/n)),
-    -1-1/(1-p/n),
-    gamma)
+  c((1+1/(1-p/n))/gamma,
+    -1,
+    1/(gamma^2*(1-p/n)),
+    (-1-1/(1-p/n))/gamma,
+    1)
 }
 
 
