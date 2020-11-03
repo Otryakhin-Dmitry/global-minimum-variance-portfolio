@@ -26,3 +26,25 @@ SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55, mu=seq(0.2,-0.2, length.out=p)){
   cov.mat.H0
 }
 
+
+# Yarema's version
+RandCovMtrx <- function(n=3e2, p=2e2, q=20.55, mu=seq(0.2,-0.2, length.out=p)){
+
+  cc <- p/n
+  #####---Covariance matrix from Wishart distr. with given eigenvalues---#####
+
+  eig = 0.1*exp(q*cc*seq(0,1,length=p)) # eig.v[i.eig] was replaced
+
+  Z  <- array(rnorm(p*p,0,1), dim=c(p,p))
+  QR <- qr(Z)
+  Q  <- qr.Q(QR)
+  R  <- qr.R(QR)
+  D  <- diag(as.vector(diag(R)))
+  D  <-D%*%solve(chol(D%*%D))
+  H  <-Q%*%D
+  E  <-diag(eig)
+  Sigma<-H%*%E%*%t(H)
+  Sigma
+}
+
+
