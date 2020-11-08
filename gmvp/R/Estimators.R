@@ -14,9 +14,11 @@
 #' Sigma_sample_estimator(x)
 Sigma_sample_estimator <- function(x) {
 
-  a <- rowMeans(x, na.rm = TRUE)
-  a_x_size <- matrix(rep(a,ncol(x)),nrow=nrow(x), ncol=ncol(x))
-  (x-a_x_size) %*% t(x-a_x_size)/(ncol(x)-1)
+  p <- nrow(x)
+  n <- ncol(x)
+  a <- .rowMeans(x, m=p, n=n, na.rm = TRUE)
+  a_x_size <- matrix(rep(a,n),nrow=p, ncol=n)
+  tcrossprod(x-a_x_size)/(ncol(x)-1)
 }
 
 
