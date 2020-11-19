@@ -41,7 +41,7 @@ str(test)
 
 
 #### constructor of EU portfolio object. Type=mean, Mean.type=Bayes-Stein.
-new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, b, mu_0=1){
+new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 
   cov_mtrx <- Sigma_sample_estimator(x)
   invSS <- solve(cov_mtrx)
@@ -56,35 +56,31 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, b, mu_0=1){
   mu_hat_JS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
 
   W_EU_hat <- (invSS %*% I_vect)/as.numeric(t(I_vect) %*% invSS %*% I_vect) +
-              Q_n_hat %*% mu_hat_JS / gamma # !!!! gamma instead of alpha^-1 like in Yarema's notes
-  al <- alpha_hat_star_c(gamma, x, b)
-  W_hat_BFGSE <- al*W_EU_hat + (1-al)*b
+              Q_n_hat %*% mu_hat_JS / gamma
 
   structure(list(cov_mtrx=cov_mtrx,
                  means=means,
                  mu_hat_JS=mu_hat_JS,
                  alp_JS_hat=alp_JS_hat,
-                 W_EU_hat=W_EU_hat,
-                 weights=W_hat_BFGSE,
-                 alpha=al),
+                 W_EU_hat=W_EU_hat
+                 ),
             class = c("ExUtil_portfolio","ExUtil_portfolio_mean_Bayes-Stein")) # add alpha, stand dev, p-value when type=weights
 }
 
 # Example
 n<-3e2 # number of realizations
 p<-.5*n # number of assets
-b<-rep(1/p,p)
 gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 rm(n,p)
 
-test <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, b=b)
+test <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, mu_0 = 0)
 str(test)
 
 
 #### constructor of EU portfolio object. Type=mean, Mean.type=James-Stein.
-new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, b, mu_0=1){
+new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 
   cov_mtrx <- Sigma_sample_estimator(x)
   invSS <- solve(cov_mtrx)
@@ -100,29 +96,25 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, b, mu_0=1){
   mu_hat_JS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
 
   W_EU_hat <- (invSS %*% I_vect)/as.numeric(t(I_vect) %*% invSS %*% I_vect) +
-    Q_n_hat %*% mu_hat_JS / gamma # !!!! gamma instead of alpha^-1 like in Yarema's notes
-  al <- alpha_hat_star_c(gamma, x, b)
-  W_hat_BFGSE <- al*W_EU_hat + (1-al)*b
+    Q_n_hat %*% mu_hat_JS / gamma
 
   structure(list(cov_mtrx=cov_mtrx,
                  means=means,
                  mu_hat_JS=mu_hat_JS,
                  alp_JS_hat=alp_JS_hat,
-                 W_EU_hat=W_EU_hat,
-                 weights=W_hat_BFGSE,
-                 alpha=al),
+                 W_EU_hat=W_EU_hat
+                 ),
             class = c("ExUtil_portfolio","ExUtil_portfolio_mean_Bayes-Stein")) # add alpha, stand dev, p-value when type=weights
 }
 
 # Example
 n<-3e2 # number of realizations
 p<-.5*n # number of assets
-b<-rep(1/p,p)
 gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 rm(n,p)
 
-test <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, b=b)
+test <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, mu_0=0)
 str(test)
 
