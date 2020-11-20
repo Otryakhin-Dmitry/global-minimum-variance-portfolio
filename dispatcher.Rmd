@@ -1,0 +1,64 @@
+---
+title: "The portfolio creator. Examples"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo = FALSE}
+library(gmvp)
+
+EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
+
+  if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
+  if(gamma==Inf) stop("GMVP methods are absent")
+
+  if(type=='mean') {
+    if(subtype=='James-Stein') {
+      output <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, ...)
+    }
+    if(subtype=='Bayes-Stein') {
+      output <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, ...)
+    }
+  }
+
+  if(type=='weights') {
+    output <- new_ExUtil_portfolio(x=x, gamma=gamma, ...)
+  }
+  output
+}
+```
+
+
+The general function performing portfolio creation is EUShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and subtype. It returns either a portfolio or a human-readable error message.
+
+```{r experiment setup}
+
+# Examples
+n<-3e2 # number of realizations
+p<-.5*n # number of assets
+gamma<-1
+
+x <- matrix(data = rnorm(n*p), nrow = p, ncol = n) # asset returns
+```
+
+## EU portfolio from IEEE2020 paper:
+```{r}
+portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=rep(1/p,p))
+str(portfolio)
+```
+
+## Bayes-Stein from Jorion 1986:
+```{r}
+portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='Bayes-Stein')
+str(portfolio)
+```
+
+## James-Stein from Jorion 1986: 
+```{r}
+portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='James-Stein')
+str(portfolio)
+```
+
