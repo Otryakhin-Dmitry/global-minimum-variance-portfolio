@@ -19,5 +19,6 @@ sm <- c(1,0,0,0,0,
         0,0,1,0,0,
         0,0,0,1,0,
         0,0,0,0,1)
-Sigma <- matrix(data = sm, nrow = p, ncol = p)
+Sigma <- matrix(data = sm, nrow = 5, ncol = 5)
+R_GMV(mu, Sigma)
 }

@@ -98,7 +98,8 @@ s_hat_c <- function(x) as.numeric((1-nrow(x)/ncol(x))*s_hat(x) - nrow(x)/ncol(x)
 #'         0,0,1,0,0,
 #'         0,0,0,1,0,
 #'         0,0,0,0,1)
-#' Sigma <- matrix(data = sm, nrow = p, ncol = p)
+#' Sigma <- matrix(data = sm, nrow = 5, ncol = 5)
+#' R_GMV(mu, Sigma)
 R_GMV <- function(mu, Sigma){
 
   p <- length(mu)
