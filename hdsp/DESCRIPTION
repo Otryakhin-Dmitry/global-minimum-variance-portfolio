@@ -1,0 +1,17 @@
+Package: hdsp
+Type: Package
+Title: High dimensional shrinkage portfolios
+Version: 0.1.0
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: Constructs high dimensional Expected Utility portfolios using 
+    various shrinkage estimators.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat,
+    MASS,
+    corpcor,
+    EstimDiagnostics
+RoxygenNote: 7.1.1
