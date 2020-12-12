@@ -8,7 +8,7 @@ Sigma=matrix(0, p, p)
 diag(Sigma) <- 1
 invSigma <- solve(Sigma)
 
-X <- matrix(data=rnorm(500), nrow=p, ncol=n)
+X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
 
 y_n_aver <- rowMeans(X)
 Sigma_n_inv <- solve(Sigma)
