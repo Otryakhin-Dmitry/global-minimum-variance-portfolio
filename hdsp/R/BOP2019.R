@@ -23,6 +23,36 @@ beta_star_n_BOP19 <- function(y_n_aver, Sigma_n_inv, mu_n, mu_0) {
   as.numeric(numerator / denomen)
 }
 
+
+# From Theorem 1
+alpha_star_BOP19 <- function(c, mu_n, Sigma_n_inv, mu_0) {
+
+  I1 <- t(mu_n) %*% Sigma_n_inv %*% mu_n
+  I2 <- t(mu_0) %*% Sigma_n_inv %*% mu_0
+  I3 <- t(mu_n) %*% Sigma_n_inv %*% mu_0
+
+  numerator <- I1*I2 - I3^2
+
+  I4 <- t(mu_n) %*% Sigma_n_inv %*% mu_n
+  I5 <- t(mu_0) %*% Sigma_n_inv %*% mu_0
+  I6 <- t(mu_n) %*% Sigma_n_inv %*% mu_0
+
+  denomen <- (c+I4)*I5 - I6^2
+
+  as.numeric(numerator / denomen)
+}
+
+
+beta_star_BOP19 <- function(alpha_star, mu_n_t, Sigma_n_inv, mu_0) {
+
+  I1 <- mu_n_t %*% Sigma_n_inv %*% mu_0
+  I2 <- t(mu_0) %*% Sigma_n_inv %*% mu_0
+
+  II <-I1 / I2
+  as.numeric((1-alpha_star)*II)
+}
+
+
 # From Theorem 3
 alpha_star_hat_BOP19 <- function(n, p, y_n_aver, Sigma_n_inv, mu_0) {
 
@@ -30,13 +60,13 @@ alpha_star_hat_BOP19 <- function(n, p, y_n_aver, Sigma_n_inv, mu_0) {
   I2 <- t(mu_0) %*% Sigma_n_inv %*% mu_0
   I3 <- t(y_n_aver) %*% Sigma_n_inv %*% mu_0
 
-  numerator <- I1*I2 -I3
+  numerator <- I1*I2 - I3^2
 
   I4 <- t(y_n_aver) %*% Sigma_n_inv %*% y_n_aver
   I5 <- t(mu_0) %*% Sigma_n_inv %*% mu_0
-  I6 <- (t(y_n_aver) %*% Sigma_n_inv %*% mu_0)^2
+  I6 <- t(y_n_aver) %*% Sigma_n_inv %*% mu_0
 
-  denomen <- I4*I5 - I6
+  denomen <- I4*I5 - I6^2
 
   as.numeric(numerator / denomen)
 }
