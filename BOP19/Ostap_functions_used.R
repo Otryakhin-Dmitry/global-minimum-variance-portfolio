@@ -49,27 +49,25 @@ our.bonafide = function(X, e.mean, ie.cov, mu0, params = FALSE){ ## gooood!
 #### Parameter setting ####
 
 c <- 0.3
-n <- 5e2
+n <- 3e2
 p <- c*n
 
-#### Computing the results ####
-
-mu_0<-rep(5, p)
-mu_n<-rep(10, p)
+mu_0<-rep(1, p)
+mu_n<-rep(1, p)
 Sigma=matrix(0, p, p)
-diag(Sigma) <- 5
-invSigma <- solve(Sigma)
+diag(Sigma) <- 1
+invSigma <- Sigma #solve(Sigma)
 
 
-#### Simulation and computation is here ####
+#### Computation with singular Sigma ####
 dv <- MASS::mvrnorm(n = n, mu = mu_n, Sigma = Sigma)
 X <- matrix(data=dv, nrow=p, ncol=n, byrow = FALSE)
 
 y_n_aver <- rowMeans(X)
-Sigma_n_inv <- solve(cov(X))
+#Sigma_n_inv <- solve(cov(X))
+Sigma_n_inv <- cov(t(X))
 
 our.oracle(e.mean=y_n_aver, t.mean=mu_n, mu0=mu_0, icov.matr=invSigma, params = TRUE)
-
 our.bonafide(X=X, e.mean=y_n_aver, ie.cov=Sigma_n_inv, mu0=mu_0, params = TRUE)
 
 
