@@ -20,7 +20,7 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
   I_vect <- rep(1, times=p)
   Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
 
-  # James-Stein mus and alphas
+  # Bayes-Stein mus and alphas
   alp_JS_hat <- as.numeric((p+2) / (p+2 + n*t(means-mu_0*I_vect)%*%invSS%*%(means-mu_0*I_vect)))
   mu_hat_JS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
 

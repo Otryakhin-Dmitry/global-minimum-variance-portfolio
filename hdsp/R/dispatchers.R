@@ -1,4 +1,8 @@
-# EU portfolio dispatcher
+
+
+
+
+#### EU portfolio dispatcher
 
 #' Shrinkage portfolio
 #'
@@ -50,6 +54,79 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 
   if(type=='weights') {
     output <- new_ExUtil_portfolio(x=x, gamma=gamma, ...)
+  }
+  output
+}
+
+
+
+#### Covariance shrinkage ####
+
+#' Covariance matrix estimator
+#'
+#' Function dispatcher for portfolio construction
+#' @examples
+#' n<-3e2 # number of realizations
+#' p<-.5*n # number of assets
+#'
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#'
+#' Mtrx_naive <- CovarEstim(x, subtype="naive")
+#'
+#' TM <- matrix(0, p, p)
+#' diag(TM) <- 1
+#' Mtrx_bgp <- CovarEstim(x, subtype="BGP14", TM=TM)
+#'
+#' Mtrx_bgp <- CovarEstim(x, subtype="LW20", TM=TM)
+CovarEstim <- function(x, subtype, ...)
+{
+    if(subtype=='naive') {
+      output <- Sigma_sample_estimator(x=x)
+    }
+    if(subtype=='BGP14') {
+      SCM <- Sigma_sample_estimator(x=x)
+      output <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+    }
+    if(subtype=='LW20') {
+      output <- nonlin_shrinkLW(x=x)
+    }
+    output
+}
+
+
+
+#### Mean vector shrinkage ####
+
+#' Mean vector shrinkage estimator
+#'
+#' Function dispatcher for portfolio construction
+#' @examples
+#' n<-3e2 # number of realizations
+#' p<-.5*n # number of assets
+#'
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#'
+#'
+#' Mean_naive <- MeanEstim(x, subtype="naive")
+#' Mean_BGP <- MeanEstim(x, subtype="naive")
+#'
+#' mu_0 <- rep(1/p, p)
+#'
+MeanEstim <- function(x, subtype, ...)
+{
+  if(subtype=='naive') {
+    n <- ncol(x)
+    p <- nrow(x)
+    output <- .rowMeans(x=x, m=p, n=n)
+  }
+  if(subtype=='BOP19') {
+    output <- mean_bop19(x, mu_0)
+  }
+  if(subtype=='js') {
+    output <- mean_js(x=x, mu_0=mu_0)
+  }
+  if(subtype=='bs') {
+    output <- mean_bs(x=x, mu_0=mu_0)
   }
   output
 }

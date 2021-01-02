@@ -1,0 +1,50 @@
+
+# Bayes-Stein shrinkage mean estimator
+mean_bs <- function(x, mu_0)
+{
+  cov_mtrx <- Sigma_sample_estimator(x)
+  invSS <- solve(cov_mtrx)
+  p <- nrow(x)
+  n <- ncol(x)
+  means <- .rowMeans(x, m=p, n=n)
+  I_vect <- rep(1, times=p)
+
+  # James-Stein mus and alphas
+  alp_JS_hat <- as.numeric((p+2) / (p+2 + n*t(means-mu_0*I_vect)%*%invSS%*%(means-mu_0*I_vect)))
+  means <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
+  means
+}
+
+
+# James-Stein shrinkage mean estimator
+mean_js <- function(x, mu_0)
+{
+  cov_mtrx <- Sigma_sample_estimator(x)
+  invSS <- solve(cov_mtrx)
+  p <- nrow(x)
+  n <- ncol(x)
+  means <- .rowMeans(x, m=p, n=n)
+  I_vect <- rep(1, times=p)
+
+  # James-Stein mus and alphas
+  val <- as.numeric( (p-2) / n / (t(means-mu_0*I_vect)%*%invSS%*%(means-mu_0*I_vect)) )
+  alp_JS_hat <- min(1,val)
+  mu_hat_JS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
+}
+
+mean_bop19 <- function(x, mu_0)
+{
+  n <- ncol(x)
+  p <- nrow(x)
+  samp_mean <- .rowMeans(x=x, m=p, n=n)
+  Sigma_n_inv <- solve(Sigma_sample_estimator(x=x))
+
+  alpha_n <- alpha_star_hat_BOP19(n=n, p=p, y_n_aver=samp_mean,
+                                  Sigma_n_inv=Sigma_n_inv, mu_0=mu_0)
+
+  beta_n <- beta_star_hat_BOP19(n=n, p=p, alpha_star_hat=alpha_n,
+                                y_n_aver_t = t(samp_mean),
+                                Sigma_n_inv=Sigma_n_inv, mu_0=mu_0)
+  output <-alpha_n *samp_mean + beta_n * mu_0
+  output
+}
