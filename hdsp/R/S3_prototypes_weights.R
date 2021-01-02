@@ -8,9 +8,9 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_ExUtil_portfolio(x=x, gamma=gamma, b=b)
+#' test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b)
 #' str(test)
-new_ExUtil_portfolio <- function(x, gamma, b){
+new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
 
   p <- nrow(x)
   n <- ncol(x)
@@ -34,7 +34,7 @@ new_ExUtil_portfolio <- function(x, gamma, b){
                  W_EU_hat=W_EU_hat,
                  weights=weights,
                  alpha=al),
-            class = c("ExUtil_portfolio","ExUtil_portfolio_weights_2020")) # add alpha, stand dev, p-value when type=weights
+            class = c("ExUtil_portfolio","ExUtil_portfolio_weights_BDOPS20")) # add alpha, stand dev, p-value when type=weights
 }
 
 

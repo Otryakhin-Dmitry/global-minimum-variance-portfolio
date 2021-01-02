@@ -27,12 +27,13 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 # Bodnar, Gupta, Parolya 2014
 new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 
-  SCM <- Sigma_sample_estimator(x)
-  cov_mtrx <- CovShrinkBGP(TM=TM, SCM=SCM)
-  invSS <- solve(cov_mtrx)
-
   p <- nrow(x)
   n <- ncol(x)
+
+  SCM <- Sigma_sample_estimator(x)
+  cov_mtrx <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+  invSS <- solve(cov_mtrx)
+
   means <- .rowMeans(x, m=p, n=n)
   I_vect <- rep(1, times=p)
   Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
@@ -51,14 +52,15 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 
 # Inverse cov shrinkage
 
-new_ExUtil_portfolio_pm_BGP16 <- function(x, gamma, TM){
-
-  SCM <- Sigma_sample_estimator(x)
-  iSCM=solve(SCM)
-  invSS <- InvCovShrinkBGP(TM,iSCM)
+new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
 
   p <- nrow(x)
   n <- ncol(x)
+
+  SCM <- Sigma_sample_estimator(x)
+  iSCM=solve(SCM)
+  invSS <- InvCovShrinkBGP16(n=n, p=p, TM,iSCM)
+
   means <- .rowMeans(x, m=p, n=n)
   I_vect <- rep(1, times=p)
   Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)

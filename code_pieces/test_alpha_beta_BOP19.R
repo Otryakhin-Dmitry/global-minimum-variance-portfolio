@@ -1,14 +1,14 @@
 c <- 0.5
-n <- 200
+n <- 2e3
 p <- c*n
 
-mu_0<-rep(1, p)
-mu_n<-rep(0, p)
+mu_0<-rep(1/sqrt(p), p)
+mu_n<-rep(1/sqrt(p), p)
 Sigma=matrix(0, p, p)
 diag(Sigma) <- 1
 invSigma <- solve(Sigma)
 
-X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
+X <- matrix(data=rnorm(n*p), nrow=p, ncol=n) # replace with Y matrix. X-
 
 y_n_aver <- rowMeans(X)
 Sigma_n_inv <- solve(Sigma)

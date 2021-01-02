@@ -1,4 +1,4 @@
-context("Work of T_alpha")
+context("T_alpha")
 
 ###############################
 n<-5e2 # number of realizations

@@ -7,8 +7,8 @@
 #' where SCM should be the sample covariance matrix and TM is a shrinkage target.
 #' In most cases, we took TM=I but could be any deterministic pos. def. matrix.
 #' In order to use the estimator for portfolio weights one needs to invert it,
-#' i.e., solve(CovShrink(TM,SCM)).
-CovShrinkBGP<-function(TM, SCM)
+#' i.e., solve(CovShrink(TM,SCM)). n- the number of observations of X.
+CovShrinkBGP14<-function(n, TM, SCM)
 {
   a_1<-(1/n)*sum(diag(TM%*%TM))*(sum(diag(SCM)))^2
   a_2<-sum(diag(SCM%*%SCM))*sum(diag(TM%*%TM))-(sum(diag(SCM%*%TM)))^2
@@ -58,8 +58,8 @@ nonlin_shrinkLW = function(X){
 #'
 #' iSCM=solve(S) with S sample covariance matrix and TM is again a target matrix,
 #' for example TM=I. Thus, InvCovShrink(solve(S), TM) will return the estimator of
-#' the inverse covariance matrix (no need to invert anymore).
-InvCovShrinkBGP<-function(TM,iSCM)
+#' the inverse covariance matrix (no need to invert anymore). n- the number of observations of X.
+InvCovShrinkBGP16<-function(n, p, TM,iSCM)
 {
   a_1<-(1/n)*sum(diag(TM%*%TM))*(sum(diag(iSCM)))^2
   a_2<-sum(diag(iSCM%*%iSCM))*sum(diag(TM%*%TM))-(sum(diag(iSCM%*%TM)))^2
@@ -68,24 +68,4 @@ InvCovShrinkBGP<-function(TM,iSCM)
   BSR<-alfa1*iSCM+beta1*TM
   return(BSR)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
