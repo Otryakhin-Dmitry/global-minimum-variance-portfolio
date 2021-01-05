@@ -12,6 +12,8 @@
 #'
 #' x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #' Sigma_sample_estimator(x)
+#' @importFrom stats rnorm
+#' @export
 Sigma_sample_estimator <- function(x) {
 
   p <- nrow(x)
@@ -23,12 +25,6 @@ Sigma_sample_estimator <- function(x) {
 
 
 #### Q estimator (page 3, IEEE)
-#' Q_n_hat
-#'
-#' Q estimator from (6) of EU_IEEE.
-#'
-#' @inheritParams Sigma_sample_estimator
-#'
 Q_hat_n <- function(x){
 
   SS <- Sigma_sample_estimator(x)
@@ -83,23 +79,8 @@ s <- function(mu, Sigma) {
 s_hat_c <- function(x) as.numeric((1-nrow(x)/ncol(x))*s_hat(x) - nrow(x)/ncol(x))
 
 #### R_GMV (page 5, IEEE)
-#' R_GMV. The deterministic value.
-#'
-#'
-#'  The expected return of the GMV portfolio
-#'
-#' @inheritParams Sigma_sample_estimator
-#' @param gamma positive numeric. Investors attitude towards risk
-#'
-#' @examples
-#' mu <- c(1,5,3,4,9)
-#' sm <- c(1,0,0,0,0,
-#'         0,1,0,0,0,
-#'         0,0,1,0,0,
-#'         0,0,0,1,0,
-#'         0,0,0,0,1)
-#' Sigma <- matrix(data = sm, nrow = 5, ncol = 5)
-#' R_GMV(mu, Sigma)
+# R_GMV. The deterministic value. The expected return of the GMV portfolio
+
 R_GMV <- function(mu, Sigma){
 
   p <- length(mu)
@@ -109,7 +90,7 @@ R_GMV <- function(mu, Sigma){
   as.numeric((t(Ip) %*% invSS %*% mu)/(t(Ip) %*% invSS %*% Ip))
 }
 
-
+# Its estimator
 R_hat_GMV <- function(x){
 
   a <- rowMeans(x, na.rm = TRUE)

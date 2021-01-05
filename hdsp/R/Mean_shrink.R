@@ -1,5 +1,9 @@
 
-# Bayes-Stein shrinkage mean estimator
+#' Bayes-Stein shrinkage mean estimator
+#'
+#' @param x a numeric matrix. Rows represent different variables, columns- observations.
+#' @param mu_0 a numeric value. The scaling of the target for shrinkage of the mean vector.
+#' @export
 mean_bs <- function(x, mu_0)
 {
   cov_mtrx <- Sigma_sample_estimator(x)
@@ -9,14 +13,17 @@ mean_bs <- function(x, mu_0)
   means <- .rowMeans(x, m=p, n=n)
   I_vect <- rep(1, times=p)
 
-  # James-Stein mus and alphas
+  # Bayes-Stein mus and alphas
   alp_JS_hat <- as.numeric((p+2) / (p+2 + n*t(means-mu_0*I_vect)%*%invSS%*%(means-mu_0*I_vect)))
   means <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
   means
 }
 
 
-# James-Stein shrinkage mean estimator
+#' James-Stein shrinkage mean estimator
+#'
+#' @inheritParams mean_bs
+#' @export
 mean_js <- function(x, mu_0)
 {
   cov_mtrx <- Sigma_sample_estimator(x)
@@ -32,6 +39,11 @@ mean_js <- function(x, mu_0)
   mu_hat_JS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
 }
 
+#' BOP shrinkage estimator
+#'
+#' @param x a numeric matrix. Rows represent different variables, columns- observations.
+#' @param mu_0 a numeric vector. The target for shrinkage of the mean vector.
+#' @export
 mean_bop19 <- function(x, mu_0)
 {
   n <- ncol(x)

@@ -1,5 +1,8 @@
 
 #' constructor of EU portfolio object. IEEE 2020
+#'
+#' @inheritParams EUShrinkPortfolio
+#' @param b a numeric value. The target for weight shrinkage.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -10,6 +13,7 @@
 #'
 #' test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b)
 #' str(test)
+#' @export
 new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
 
   p <- nrow(x)
@@ -28,7 +32,6 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
 
   al <- alpha_hat_star_c(gamma, x=x, b=b)
   weights <- al*W_EU_hat + (1-al)*b
-  # methods for covar and means could be mixed in W_EU_hat only, not here nor in BFGSE
   structure(list(cov_mtrx=cov_mtrx,
                  means=means,
                  W_EU_hat=W_EU_hat,

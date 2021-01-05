@@ -7,6 +7,12 @@
 #' Shrinkage portfolio
 #'
 #' Function dispatcher for portfolio construction
+#'
+#' @param x a matrix of asset returns. Rows represent different assets, columns- observations.
+#' @param gamma a numerical variable. Investors attitude towards risk.
+#' @param type a character. The type of methods to use to construct the portfolio.
+#' @param subtype a character. The exact method to use within the type.
+#' @param ... arguments to pass to portfolio constructors
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -23,6 +29,7 @@
 #'
 #' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='James-Stein')
 #' str(test)
+#' @export
 EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
@@ -48,12 +55,12 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 
   if(type=='inv_cov') {
     if(subtype=='BGP16') {
-      output <- new_ExUtil_portfolio_pm_BGP16(x=x, gamma=gamma, ...)
+      output <- new_ExUtil_portfolio_icov_BGP16(x=x, gamma=gamma, ...)
     }
   }
 
   if(type=='weights') {
-    output <- new_ExUtil_portfolio(x=x, gamma=gamma, ...)
+    output <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, ...)
   }
   output
 }
@@ -64,30 +71,35 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 
 #' Covariance matrix estimator
 #'
-#' Function dispatcher for portfolio construction
+#' Function dispatcher for covariance estimation.
+#' @param x a matrix of asset returns. Rows represent different assets, columns- observations.
+#' @param type a character. The the estimation method to use.
+#' @param ... arguments to pass to estimators
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' Mtrx_naive <- CovarEstim(x, subtype="naive")
+#' Mtrx_naive <- CovarEstim(x, type="naive")
 #'
 #' TM <- matrix(0, p, p)
 #' diag(TM) <- 1
-#' Mtrx_bgp <- CovarEstim(x, subtype="BGP14", TM=TM)
+#' Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
 #'
-#' Mtrx_bgp <- CovarEstim(x, subtype="LW20", TM=TM)
-CovarEstim <- function(x, subtype, ...)
+#' Mtrx_bgp <- CovarEstim(x, type="LW20")#, TM=TM)
+#' @export
+CovarEstim <- function(x, type, ...)
 {
-    if(subtype=='naive') {
+    if(type=='naive') {
       output <- Sigma_sample_estimator(x=x)
     }
-    if(subtype=='BGP14') {
+    if(type=='BGP14') {
       SCM <- Sigma_sample_estimator(x=x)
-      output <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+      n<-ncol(x)
+      output <- CovShrinkBGP14(n, ...)
     }
-    if(subtype=='LW20') {
+    if(type=='LW20') {
       output <- nonlin_shrinkLW(x=x)
     }
     output
@@ -99,34 +111,35 @@ CovarEstim <- function(x, subtype, ...)
 
 #' Mean vector shrinkage estimator
 #'
-#' Function dispatcher for portfolio construction
+#' Function dispatcher for mean value estimators.
+#' @inheritParams CovarEstim
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#'
-#' Mean_naive <- MeanEstim(x, subtype="naive")
-#' Mean_BGP <- MeanEstim(x, subtype="naive")
+#' Mean_naive <- MeanEstim(x, type="naive")
 #'
 #' mu_0 <- rep(1/p, p)
+#' Mean_BOP <- MeanEstim(x, type="BOP19", mu_0=mu_0)
 #'
-MeanEstim <- function(x, subtype, ...)
+#' @export
+MeanEstim <- function(x, type, ...)
 {
-  if(subtype=='naive') {
+  if(type=='naive') {
     n <- ncol(x)
     p <- nrow(x)
     output <- .rowMeans(x=x, m=p, n=n)
   }
-  if(subtype=='BOP19') {
-    output <- mean_bop19(x, mu_0)
+  if(type=='BOP19') {
+    output <- mean_bop19(x=x, ...)
   }
-  if(subtype=='js') {
-    output <- mean_js(x=x, mu_0=mu_0)
+  if(type=='js') {
+    output <- mean_js(x=x, ...)
   }
-  if(subtype=='bs') {
-    output <- mean_bs(x=x, mu_0=mu_0)
+  if(type=='bs') {
+    output <- mean_bs(x=x, ...)
   }
   output
 }

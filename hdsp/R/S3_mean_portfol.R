@@ -1,6 +1,8 @@
 
 #' constructor of EU portfolio object. Type=mean, Mean.type=Bayes-Stein.
 #'
+#' @inheritParams EUShrinkPortfolio
+#' @param mu_0 a numeric value. The scaling of the target for shrinkage of the mean vector.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -10,6 +12,7 @@
 #'
 #' test <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, mu_0 = 0)
 #' str(test)
+#' @export
 new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 
   cov_mtrx <- Sigma_sample_estimator(x)
@@ -40,6 +43,8 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 
 
 #' constructor of EU portfolio object. Type=mean, Mean.type=James-Stein.
+#'
+#' @inheritParams new_ExUtil_portfolio_mean_BayesStein
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -49,6 +54,7 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 #'
 #' test <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, mu_0=0)
 #' str(test)
+#' @export
 new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 
   cov_mtrx <- Sigma_sample_estimator(x)
@@ -80,6 +86,9 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 
 
 #' constructor of EU portfolio object. Type=mean, Mean.type=BOP.
+#'
+#' @inheritParams EUShrinkPortfolio
+#' @param mu_0 a numeric vector. The target for shrinkage of the mean vector of asset returns.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -90,6 +99,7 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 #'
 #' test <- new_ExUtil_portfolio_mean_BOP(x=x, gamma=gamma, mu_0=mu_0)
 #' str(test)
+#' @export
 new_ExUtil_portfolio_mean_BOP <- function(x, gamma, mu_0=mu_0){
 
   cov_mtrx <- Sigma_sample_estimator(x)

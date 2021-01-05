@@ -1,17 +1,41 @@
 Package: hdsp
-Type: Package
 Title: High dimensional shrinkage portfolios
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: 
+    c(person(given = "Taras", 
+             family = "Bodnar", 
+             role = "aut"),
+      person(given = "Solomiia", 
+             family = "Dmytriv", 
+             role = "aut"),
+      person(given = "Yarema", 
+             family = "Okhrin", 
+             role = "aut"),
+      person(given = "Dmitry", 
+             family = "Otryakhin", 
+             role = c("aut", "cre"),             
+             email = "d.otryakhin.acad@protonmail.ch", 
+             comment = c(ORCID = "0000-0002-4700-7221")),             
+      person(given = "Nestor", 
+             family = "Parolya", 
+             role = "aut"))
+Maintainer: Dmitry Otryakhin <d.otryakhin.acad@protonmail.ch>
+Author: Taras Bodnar [aut],
+    Solomiia Dmytriv [aut],
+    Yarema Okhrin [aut],
+    Dmitry Otryakhin [aut, cre] (<https://orcid.org/0000-0002-4700-7221>), 
+    Nestor Parolya [aut]
 Description: Constructs high dimensional Expected Utility portfolios using 
-    various shrinkage estimators.
+    shrinkage estimators. Shrinkage estimators are available 
+    for different quantities including mean vectors and covariance matrices.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    Rdpack,
 Suggests: 
     testthat,
     MASS,
-    corpcor,
-    EstimDiagnostics
+    corpcor
+RdMacros: Rdpack
 RoxygenNote: 7.1.1

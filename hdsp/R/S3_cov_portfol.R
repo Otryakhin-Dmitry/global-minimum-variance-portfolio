@@ -1,7 +1,10 @@
-# Direct cov
+#### Direct cov
 
 
-# Ledoit and Wolf 2002
+#' Ledoit and Wolf 2020
+#'
+#' @inheritParams EUShrinkPortfolio
+#' @export
 new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 
   cov_mtrx <- nonlin_shrinkLW(x)
@@ -24,7 +27,11 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
             class = c("ExUtil_portfolio","ExUtil_portfolio_cov_LW02"))
 }
 
-# Bodnar, Gupta, Parolya 2014
+#' Bodnar, Gupta, Parolya 2014
+#'
+#' @inheritParams EUShrinkPortfolio
+#' @param TM the target matrix for shrinkage of covariance
+#' @export
 new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 
   p <- nrow(x)
@@ -50,8 +57,12 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 }
 
 
-# Inverse cov shrinkage
-
+#### Inverse cov shrinkage
+#' Portfolio with inverse covariance shrinkage
+#'
+#' @inheritParams EUShrinkPortfolio
+#' @param TM the target matrix for shrinkage of the inverse covariance matrix
+#' @export
 new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
 
   p <- nrow(x)

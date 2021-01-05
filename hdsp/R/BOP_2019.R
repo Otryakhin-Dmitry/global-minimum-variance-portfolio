@@ -103,7 +103,7 @@ R_BOP19 <- function(mu_0, Sigma_n_inv, mu_n){
 sigma_s_square_BOP19 <- function(c, s) 2*(c+2*s) + 2/(1-c)*(c+s)^2
 
 
-Omega_BOP19 <- function(c, sigma_s_square, s, R){
+Omega_BOP19 <- function(c, sigma_s_square, Sigma_n_inv, mu_0, s, R){
 
   El11 <- c^2 * sigma_s_square / (c + s)^4
   El12 <- El21 <- c^2 * sigma_s_square * R / (c + s)^4
