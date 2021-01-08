@@ -21,7 +21,6 @@
 #' @docType package
 #' @references
 #' \insertAllCited{}
-#' @import htmltools httpuv xtable digest R6 mime
 NULL
 
 # Importing from Rdpack (for working with references)

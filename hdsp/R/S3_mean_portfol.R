@@ -41,7 +41,7 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
                  alp_JS_hat=alp_JS_hat,
                  W_EU_hat=W_EU_hat
                  ),
-            class = c("ExUtil_portfolio","ExUtil_portfolio_mean_Bayes-Stein")) # add alpha, stand dev, p-value when type=weights
+            class = c("ExUtil_portfolio_mean_Bayes-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
 
 
@@ -87,7 +87,7 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
                  alp_JS_hat=alp_JS_hat,
                  W_EU_hat=W_EU_hat
                  ),
-            class = c("ExUtil_portfolio","ExUtil_portfolio_mean_James-Stein")) # add alpha, stand dev, p-value when type=weights
+            class = c("ExUtil_portfolio_mean_James-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
 
 
@@ -136,5 +136,5 @@ new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
                  beta_star_hat=beta_star_hat,
                  W_EU_hat=W_EU_hat
   ),
-  class = c("ExUtil_portfolio","ExUtil_portfolio_mean_BOP")) # add alpha, stand dev, p-value when type=weights
+  class = c("ExUtil_portfolio_mean_BOP", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }

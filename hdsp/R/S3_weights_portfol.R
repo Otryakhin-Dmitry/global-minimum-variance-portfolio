@@ -41,7 +41,7 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
                  W_EU_hat=W_EU_hat,
                  weights=weights,
                  alpha=al),
-            class = c("ExUtil_portfolio","ExUtil_portfolio_weights_BDOPS20")) # add alpha, stand dev, p-value when type=weights
+            class = c("ExUtil_portfolio_weights_BDOPS20", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
 
 

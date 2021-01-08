@@ -27,7 +27,7 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
   structure(list(cov_mtrx=cov_mtrx,
                  means=means,
                  W_EU_hat=W_EU_hat),
-            class = c("ExUtil_portfolio","ExUtil_portfolio_cov_LW02"))
+            class = c("ExUtil_portfolio_cov_LW02", "ExUtil_portfolio"))
 }
 
 #' Bodnar, Gupta, Parolya 2014
@@ -59,7 +59,7 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
   structure(list(cov_mtrx=cov_mtrx,
                  means=means,
                  W_EU_hat=W_EU_hat),
-            class = c("ExUtil_portfolio","ExUtil_portfolio_cov_BGP14"))
+            class = c("ExUtil_portfolio_cov_BGP14", "ExUtil_portfolio"))
 }
 
 
@@ -94,7 +94,7 @@ new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
                  invSS=invSS,
                  means=means,
                  W_EU_hat=W_EU_hat),
-            class = c("ExUtil_portfolio","ExUtil_portfolio_pm_BGP16"))
+            class = c("ExUtil_portfolio_pm_BGP16", "ExUtil_portfolio"))
 }
 
 
