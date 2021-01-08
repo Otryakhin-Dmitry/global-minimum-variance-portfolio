@@ -16,6 +16,15 @@ MeanEstim(x, type, ...)
 \description{
 Function dispatcher for mean value estimators.
 }
+\details{
+\tabular{lll}{
+   Function \tab Paper \tab Type \cr
+   \code{\link{.rowMeans}} \tab  \tab naive \cr
+   \code{\link{mean_bs}} \tab Jorion 1986 \tab bs \cr
+   \code{\link{mean_js}} \tab Jorion 1986 \tab js \cr
+   \code{\link{mean_bop19}} \tab Bodnar et al 2019 \tab BOP19 \cr
+}
+}
 \examples{
 n<-3e2 # number of realizations
 p<-.5*n # number of assets

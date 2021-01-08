@@ -1,18 +1,30 @@
 
 
-
-
 #### EU portfolio dispatcher
 
-#' Shrinkage portfolio
+#' Shrinkage Expected Utility portfolio
 #'
-#' Function dispatcher for portfolio construction
+#' The main function for EU portfolio construction. It is a dispatcher using methods according
+#' to the name supplied.
 #'
-#' @param x a matrix of asset returns. Rows represent different assets, columns- observations.
+#' | Function | Paper | Type |
+#' | --- | --- | --- |
+#' | \code{\link{new_ExUtil_portfolio_mean_BayesStein}} | Jorion 1986 | mean |
+#' | \code{\link{new_ExUtil_portfolio_mean_JamesStein}} | Jorion 1986 | mean |
+#' | \code{\link{new_ExUtil_portfolio_mean_BOP19}} | Bodnar et al 2019 | mean |
+#' | \code{\link{new_ExUtil_portfolio_cov_LW02}} | Ledoit & Wolf 2020 | cov |
+#' | \code{\link{new_ExUtil_portfolio_cov_BGP14}} | Bodnar et al 2014 | cov |
+#' | \code{\link{new_ExUtil_portfolio_icov_BGP16}} | Bodnar et al 2016 | inv_cov |
+#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS20}} | Bodnar et al 2020 | weights |
+#'
+#' @md
+#' @param x a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.
 #' @param gamma a numerical variable. Investors attitude towards risk.
 #' @param type a character. The type of methods to use to construct the portfolio.
 #' @param subtype a character. The exact method to use within the type.
 #' @param ... arguments to pass to portfolio constructors
+#'
+#' @return an object of class ExUtil_portfolio potentially with a subclass.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -35,34 +47,55 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
   if(gamma==Inf) stop("GMVP methods are absent")
 
-  if(type=='mean') {
-    if(subtype=='James-Stein') {
-      output <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, ...)
-    }
-    if(subtype=='Bayes-Stein') {
-      output <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, ...)
-    }
-  }
+  if(!is.character(type)) stop("type is not character")
 
-  if(type=='cov') {
+  if(type=='mean') {
+
+    if(subtype=='BOP19') {
+      output <- new_ExUtil_portfolio_mean_BOP19(x=x, gamma=gamma, ...)
+      return(output)
+
+    } else if(subtype=='James-Stein') {
+      output <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, ...)
+      return(output)
+
+    } else if(subtype=='Bayes-Stein') {
+      output <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, ...)
+      return(output)
+
+    } else {
+      stop(paste('Invalid subtype for type',type,sep=" "))
+    }
+  } else if(type=='cov') {
+
     if(subtype=='LW02') {
       output <- new_ExUtil_portfolio_cov_LW02(x=x, gamma=gamma, ...)
-    }
-    if(subtype=='BGP14') {
-      output <- new_ExUtil_portfolio_cov_BGP14(x=x, gamma=gamma, ...)
-    }
-  }
+      return(output)
 
-  if(type=='inv_cov') {
+    } else if(subtype=='BGP14') {
+      output <- new_ExUtil_portfolio_cov_BGP14(x=x, gamma=gamma, ...)
+      return(output)
+
+    } else {
+      stop(paste('Invalid subtype for type',type,sep=" "))
+    }
+  } else if(type=='inv_cov') {
+
     if(subtype=='BGP16') {
       output <- new_ExUtil_portfolio_icov_BGP16(x=x, gamma=gamma, ...)
-    }
-  }
+      return(output)
 
-  if(type=='weights') {
+    } else {
+      stop(paste('Invalid subtype for type',type,sep=" "))
+    }
+  } else  if(type=='weights') {
+
     output <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, ...)
+    return(output)
+  } else {
+
+    stop(paste('Invalid type:',type,sep=" "))
   }
-  output
 }
 
 
@@ -72,6 +105,14 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 #' Covariance matrix estimator
 #'
 #' Function dispatcher for covariance estimation.
+#'
+#' | Function | Paper | Type |
+#' | --- | --- | --- |
+#' | \code{\link{Sigma_sample_estimator}} |  | naive |
+#' | \code{\link{CovShrinkBGP14}} | Bodnar et al 2014 | BGP14 |
+#' | \code{\link{nonlin_shrinkLW}} | Ledoit & Wolf 2020| LW20 |
+#' @md
+#'
 #' @param x a matrix of asset returns. Rows represent different assets, columns- observations.
 #' @param type a character. The the estimation method to use.
 #' @param ... arguments to pass to estimators
@@ -87,7 +128,7 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 #' diag(TM) <- 1
 #' Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
 #'
-#' Mtrx_bgp <- CovarEstim(x, type="LW20")#, TM=TM)
+#' Mtrx_bgp <- CovarEstim(x, type="LW20")
 #' @export
 CovarEstim <- function(x, type, ...)
 {
@@ -112,6 +153,15 @@ CovarEstim <- function(x, type, ...)
 #' Mean vector shrinkage estimator
 #'
 #' Function dispatcher for mean value estimators.
+#'
+#' | Function | Paper | Type |
+#' | --- | --- | --- |
+#' | \code{\link{.rowMeans}} |  | naive |
+#' | \code{\link{mean_bs}} | Jorion 1986 | bs |
+#' | \code{\link{mean_js}} | Jorion 1986 | js |
+#' | \code{\link{mean_bop19}} | Bodnar et al 2019 | BOP19 |
+#' @md
+#'
 #' @inheritParams CovarEstim
 #' @examples
 #' n<-3e2 # number of realizations

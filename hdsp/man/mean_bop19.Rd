@@ -14,3 +14,6 @@ mean_bop19(x, mu_0)
 \description{
 BOP shrinkage estimator
 }
+\references{
+\insertRef{BOP2019}{hdsp}
+}

@@ -12,3 +12,6 @@ nonlin_shrinkLW(x)
 \description{
 Returns the estimator of the covariance matrix.
 }
+\references{
+\insertRef{LW2020}{hdsp}
+}

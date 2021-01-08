@@ -1,5 +1,5 @@
 ---
-title: "The portfolio creator. Examples"
+title: "An introduction to hdsp package with examples."
 output: pdf_document
 ---
 
@@ -8,57 +8,110 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r echo = FALSE}
-library(gmvp)
-
-EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
-
-  if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
-  if(gamma==Inf) stop("GMVP methods are absent")
-
-  if(type=='mean') {
-    if(subtype=='James-Stein') {
-      output <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, ...)
-    }
-    if(subtype=='Bayes-Stein') {
-      output <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, ...)
-    }
-  }
-
-  if(type=='weights') {
-    output <- new_ExUtil_portfolio(x=x, gamma=gamma, ...)
-  }
-  output
-}
+library(hdsp)
 ```
 
+## Overview
+This package is implementation of various shrinkage techniques with application to the so-called expected utility portfolios. It contains three main functions: EUShrinkPortfolio, CovarEstim and MeanEstim. 
 
-The general function performing portfolio creation is EUShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and subtype. It returns either a portfolio or a human-readable error message.
-
+The following setup will be used throughout all examples:
 ```{r experiment setup}
 
-# Examples
 n<-3e2 # number of realizations
 p<-.5*n # number of assets
 gamma<-1
 
+# the target for covariance shrinkage
+TM <- matrix(0, p, p) 
+diag(TM) <- 1
+
+# the target for shrinkage of the mean vector
+mu_0 <- rep(0, p)
+mu_0[1:10] <- 10:1
+```
+
+All data matrices in the package are handled in a way that the variables are in rows and observations- in columns.
+```{r}
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n) # asset returns
 ```
 
-## EU portfolio from IEEE2020 paper:
+## EU Portfolios
+The general function performing portfolio creation is EUShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and subtype. It returns either a portfolio in the form of ExUtil_portfolio S3 class or a human-readable error message. Argument type represents the type of shrinkage to use, while subtype is a particular method. EUShrinkPortfolio should be used in interactive programming as it is more user-friendly and slower than underlying methods, while methods themselves should be exploited for writing more complicated but at the same time efficient and fast code.
+
+### EU portfolio with shrinked weights
+
+Weight-shrinked portfolio from [IEEE2020] is constructed by setting type='weights'. Subtype argument is not set since the method is the only one of its type implemented.
 ```{r}
 portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=rep(1/p,p))
 str(portfolio)
 ```
 
-## Bayes-Stein from Jorion 1986:
+### EU portfolio with shrinked means
+
+In this kind of portfolios shrinkage for mean values is used with no shrinkage of other elements. The subtype options available are: James-Stein and Bayes-Stein from [Jorion 1986] and Bodnar-Okhrin-Parolya from [BOP19].
+
+Bodnar-Okhrin-Parolya [BOP19]:
 ```{r}
-portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='Bayes-Stein')
+portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', 
+                               subtype='BOP19', mu_0=mu_0)
 str(portfolio)
 ```
 
-## James-Stein from Jorion 1986: 
+Bayes-Stein [Jorion 1986]:
 ```{r}
-portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='James-Stein')
+portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', 
+                               subtype='Bayes-Stein', mu_0=mu_0)
 str(portfolio)
 ```
 
+James-Stein [Jorion 1986]:
+```{r}
+portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', 
+                               subtype='James-Stein', mu_0=mu_0)
+str(portfolio)
+```
+
+### EU portfolio with a shrinked covariance matrix
+
+In this type (type='cov') the covariance matrix is obtained via shrinkage estimators. The available subtypes are: 'BGP14' and 'LW20' corresponding to methods from [BGP14] and [LW20].
+
+```{r}
+portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='cov',
+                               subtype='BGP14', TM=TM)
+str(portfolio)
+```
+
+
+## Shrinkage estimators for covariance matrix
+The next important function is CovarEstim. This is a dispatcher for functions computing the covariance matrix of the data.
+```{r}
+Mtrx_naive <- CovarEstim(x, type="naive")
+# Mtrx_naive[1:6,1:6]
+format(Mtrx_naive[1:6,1:6], scientific = TRUE, digits = 3)
+```
+
+```{r}
+Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
+# Mtrx_bgp[1:6,1:6]
+format(Mtrx_bgp[1:6,1:6], scientific = TRUE, digits = 3)
+```
+
+
+## Shrinkage estimators for mean vectors
+
+```{r}
+Mean_BOP <- MeanEstim(x, type="BOP19", mu_0=mu_0)
+head(Mean_BOP)
+```
+
+## Custom Expected Utility portfolios
+There is a possibility to make custom EU portfolios having mean values of returns and an inverse covariance matrix.
+```{r}
+cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
+invSS <- solve(cov_mtrx)
+means <- MeanEstim(x, type="BOP19", mu_0=mu_0)
+
+cust_port_BS_LW <- new_ExUtil_portfolio_custom(mean_vec=means, 
+                                               inv_cov_mtrx=invSS, gamma=2)
+str(cust_port_BS_LW)
+```

@@ -3,6 +3,7 @@
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric value. The target for weight shrinkage.
+#' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -18,6 +19,9 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
 
   p <- nrow(x)
   n <- ncol(x)
+
+  if (is.data.frame(x)) x <- as.matrix(x)
+
   cov_mtrx <- Sigma_sample_estimator(x)
   means <- .rowMeans(x, m=p, n=n)
 

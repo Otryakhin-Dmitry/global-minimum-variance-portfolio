@@ -7,10 +7,13 @@
 new_ExUtil_portfolio_cov_LW02(x, gamma)
 }
 \arguments{
-\item{x}{a matrix of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
 \item{gamma}{a numerical variable. Investors attitude towards risk.}
 }
 \description{
 Ledoit and Wolf 2020
+}
+\references{
+\insertRef{LW2020}{hdsp}
 }

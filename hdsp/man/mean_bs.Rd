@@ -14,3 +14,6 @@ mean_bs(x, mu_0)
 \description{
 Bayes-Stein shrinkage mean estimator
 }
+\references{
+\insertRef{Jorion1986}{hdsp}
+}

@@ -2,12 +2,12 @@
 % Please edit documentation in R/dispatchers.R
 \name{EUShrinkPortfolio}
 \alias{EUShrinkPortfolio}
-\title{Shrinkage portfolio}
+\title{Shrinkage Expected Utility portfolio}
 \usage{
 EUShrinkPortfolio(x, gamma, type, subtype, ...)
 }
 \arguments{
-\item{x}{a matrix of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
 \item{gamma}{a numerical variable. Investors attitude towards risk.}
 
@@ -17,8 +17,24 @@ EUShrinkPortfolio(x, gamma, type, subtype, ...)
 
 \item{...}{arguments to pass to portfolio constructors}
 }
+\value{
+an object of class ExUtil_portfolio potentially with a subclass.
+}
 \description{
-Function dispatcher for portfolio construction
+The main function for EU portfolio construction. It is a dispatcher using methods according
+to the name supplied.
+}
+\details{
+\tabular{lll}{
+   Function \tab Paper \tab Type \cr
+   \code{\link{new_ExUtil_portfolio_mean_BayesStein}} \tab Jorion 1986 \tab mean \cr
+   \code{\link{new_ExUtil_portfolio_mean_JamesStein}} \tab Jorion 1986 \tab mean \cr
+   \code{\link{new_ExUtil_portfolio_mean_BOP19}} \tab Bodnar et al 2019 \tab mean \cr
+   \code{\link{new_ExUtil_portfolio_cov_LW02}} \tab Ledoit & Wolf 2020 \tab cov \cr
+   \code{\link{new_ExUtil_portfolio_cov_BGP14}} \tab Bodnar et al 2014 \tab cov \cr
+   \code{\link{new_ExUtil_portfolio_icov_BGP16}} \tab Bodnar et al 2016 \tab inv_cov \cr
+   \code{\link{new_ExUtil_portfolio_weights_BDOPS20}} \tab Bodnar et al 2020 \tab weights \cr
+}
 }
 \examples{
 n<-3e2 # number of realizations

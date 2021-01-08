@@ -3,6 +3,7 @@
 #'
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
 #' @param mu_0 a numeric value. The scaling of the target for shrinkage of the mean vector.
+#' @references \insertRef{Jorion1986}{hdsp}
 #' @export
 mean_bs <- function(x, mu_0)
 {
@@ -23,6 +24,7 @@ mean_bs <- function(x, mu_0)
 #' James-Stein shrinkage mean estimator
 #'
 #' @inheritParams mean_bs
+#' @references \insertRef{Jorion1986}{hdsp}
 #' @export
 mean_js <- function(x, mu_0)
 {
@@ -43,6 +45,7 @@ mean_js <- function(x, mu_0)
 #'
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
 #' @param mu_0 a numeric vector. The target for shrinkage of the mean vector.
+#' @references \insertRef{BOP2019}{hdsp}
 #' @export
 mean_bop19 <- function(x, mu_0)
 {

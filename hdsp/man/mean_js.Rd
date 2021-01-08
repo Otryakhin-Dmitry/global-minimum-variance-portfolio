@@ -14,3 +14,6 @@ mean_js(x, mu_0)
 \description{
 James-Stein shrinkage mean estimator
 }
+\references{
+\insertRef{Jorion1986}{hdsp}
+}

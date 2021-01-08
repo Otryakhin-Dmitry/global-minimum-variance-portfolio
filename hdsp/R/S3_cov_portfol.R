@@ -4,8 +4,11 @@
 #' Ledoit and Wolf 2020
 #'
 #' @inheritParams EUShrinkPortfolio
+#' @references \insertRef{LW2020}{hdsp}
 #' @export
 new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
+
+  if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- nonlin_shrinkLW(x)
   invSS <- solve(cov_mtrx)
@@ -31,11 +34,14 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param TM the target matrix for shrinkage of covariance
+#' @references \insertRef{BGP2014}{hdsp}
 #' @export
 new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 
   p <- nrow(x)
   n <- ncol(x)
+
+  if (is.data.frame(x)) x <- as.matrix(x)
 
   SCM <- Sigma_sample_estimator(x)
   cov_mtrx <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
@@ -62,11 +68,14 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param TM the target matrix for shrinkage of the inverse covariance matrix
+#' @references \insertRef{BGP2016}{hdsp}
 #' @export
 new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
 
   p <- nrow(x)
   n <- ncol(x)
+
+  if (is.data.frame(x)) x <- as.matrix(x)
 
   SCM <- Sigma_sample_estimator(x)
   iSCM=solve(SCM)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{InvCovShrinkBGP16}
 \alias{InvCovShrinkBGP16}
-\title{For the shrinkage of the inverse covariance matrix (2016, JMVA, Direct shrinkage)}
+\title{For the shrinkage of the inverse covariance matrix.}
 \usage{
 InvCovShrinkBGP16(n, p, TM, iSCM)
 }
@@ -19,4 +19,7 @@ InvCovShrinkBGP16(n, p, TM, iSCM)
 iSCM=solve(S) with S sample covariance matrix and TM is again a target matrix,
 for example TM=I. Thus, InvCovShrink(solve(S), TM) will return the estimator of
 the inverse covariance matrix (no need to invert anymore). n- the number of observations of X.
+}
+\references{
+\insertRef{BGP2016}{hdsp}
 }

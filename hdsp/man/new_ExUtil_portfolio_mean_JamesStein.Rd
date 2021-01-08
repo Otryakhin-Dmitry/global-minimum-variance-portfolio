@@ -7,7 +7,7 @@
 new_ExUtil_portfolio_mean_JamesStein(x, gamma, mu_0 = 0)
 }
 \arguments{
-\item{x}{a matrix of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
 \item{gamma}{a numerical variable. Investors attitude towards risk.}
 
@@ -25,4 +25,7 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
 test <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, mu_0=0)
 str(test)
+}
+\references{
+\insertRef{Jorion1986}{hdsp}
 }

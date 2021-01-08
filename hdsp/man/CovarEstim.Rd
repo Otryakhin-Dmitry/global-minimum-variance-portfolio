@@ -16,6 +16,14 @@ CovarEstim(x, type, ...)
 \description{
 Function dispatcher for covariance estimation.
 }
+\details{
+\tabular{lll}{
+   Function \tab Paper \tab Type \cr
+   \code{\link{Sigma_sample_estimator}} \tab  \tab naive \cr
+   \code{\link{CovShrinkBGP14}} \tab Bodnar et al 2014 \tab BGP14 \cr
+   \code{\link{nonlin_shrinkLW}} \tab Ledoit & Wolf 2020 \tab LW20 \cr
+}
+}
 \examples{
 n<-3e2 # number of realizations
 p<-.5*n # number of assets
@@ -28,5 +36,5 @@ TM <- matrix(0, p, p)
 diag(TM) <- 1
 Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
 
-Mtrx_bgp <- CovarEstim(x, type="LW20")#, TM=TM)
+Mtrx_bgp <- CovarEstim(x, type="LW20")
 }

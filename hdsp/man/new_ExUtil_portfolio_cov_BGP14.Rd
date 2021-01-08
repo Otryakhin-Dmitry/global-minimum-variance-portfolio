@@ -7,7 +7,7 @@
 new_ExUtil_portfolio_cov_BGP14(x, gamma, TM)
 }
 \arguments{
-\item{x}{a matrix of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
 \item{gamma}{a numerical variable. Investors attitude towards risk.}
 
@@ -15,4 +15,7 @@ new_ExUtil_portfolio_cov_BGP14(x, gamma, TM)
 }
 \description{
 Bodnar, Gupta, Parolya 2014
+}
+\references{
+\insertRef{BGP2014}{hdsp}
 }

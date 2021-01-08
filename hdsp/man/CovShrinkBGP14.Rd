@@ -20,3 +20,6 @@ In most cases, we took TM=I but could be any deterministic pos. def. matrix.
 In order to use the estimator for portfolio weights one needs to invert it,
 i.e., solve(CovShrink(TM,SCM)).
 }
+\references{
+\insertRef{BGP2014}{hdsp}
+}

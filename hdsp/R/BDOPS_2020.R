@@ -1,11 +1,13 @@
 
 #### Sigma simple estimator (5) in EU tests paper
-#' Simple covariance estimator
+#' Simple sample covariance estimator
 #'
-#' Some description
+#' It computes covariance of matrix x as follows:
+#' \deqn{\hat\Sigma_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)^T
+#' ,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j}
 #'
-#' @param x numeric matrix in which columns are independent realizations of asset returns
-#'
+#' @param x a numeric matrix or a data frame in which columns are independent realizations of asset returns
+#' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
 #' p<-5 # number of assets
 #' n<-1e1 # number of realizations
@@ -18,6 +20,7 @@ Sigma_sample_estimator <- function(x) {
 
   p <- nrow(x)
   n <- ncol(x)
+  if (is.data.frame(x)) x <- as.matrix(x)
   a <- .rowMeans(x, m=p, n=n, na.rm = TRUE)
   a_x_size <- matrix(rep(a,n),nrow=p, ncol=n)
   tcrossprod(x-a_x_size)/(ncol(x)-1)

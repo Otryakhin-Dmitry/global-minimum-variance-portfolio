@@ -7,7 +7,7 @@
 W_EU_hat(x, gamma)
 }
 \arguments{
-\item{x}{numeric matrix in which columns are independent realizations of asset returns}
+\item{x}{a numeric matrix or a data frame in which columns are independent realizations of asset returns}
 
 \item{gamma}{positive numeric. Investors attitude towards risk}
 }

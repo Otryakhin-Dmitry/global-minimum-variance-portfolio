@@ -7,7 +7,7 @@
 new_ExUtil_portfolio_weights_BDOPS20(x, gamma, b)
 }
 \arguments{
-\item{x}{a matrix of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
 \item{gamma}{a numerical variable. Investors attitude towards risk.}
 
@@ -26,4 +26,7 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
 test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b)
 str(test)
+}
+\references{
+\insertRef{BDOPS2020}{hdsp}
 }

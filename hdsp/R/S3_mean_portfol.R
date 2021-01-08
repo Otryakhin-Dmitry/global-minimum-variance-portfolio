@@ -3,6 +3,7 @@
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param mu_0 a numeric value. The scaling of the target for shrinkage of the mean vector.
+#' @references \insertRef{Jorion1986}{hdsp}
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -14,6 +15,8 @@
 #' str(test)
 #' @export
 new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
+
+  if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- Sigma_sample_estimator(x)
   invSS <- solve(cov_mtrx)
@@ -45,6 +48,7 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 #' constructor of EU portfolio object. Type=mean, Mean.type=James-Stein.
 #'
 #' @inheritParams new_ExUtil_portfolio_mean_BayesStein
+#' @references \insertRef{Jorion1986}{hdsp}
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -56,6 +60,8 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 #' str(test)
 #' @export
 new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
+
+  if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- Sigma_sample_estimator(x)
   invSS <- solve(cov_mtrx)
@@ -89,6 +95,7 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param mu_0 a numeric vector. The target for shrinkage of the mean vector of asset returns.
+#' @references \insertRef{BOP2019}{hdsp}
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -97,10 +104,12 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_ExUtil_portfolio_mean_BOP(x=x, gamma=gamma, mu_0=mu_0)
+#' test <- new_ExUtil_portfolio_mean_BOP19(x=x, gamma=gamma, mu_0=mu_0)
 #' str(test)
 #' @export
-new_ExUtil_portfolio_mean_BOP <- function(x, gamma, mu_0=mu_0){
+new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
+
+  if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- Sigma_sample_estimator(x)
   invSS <- solve(cov_mtrx)

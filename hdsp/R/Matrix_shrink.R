@@ -11,6 +11,7 @@
 #' @param n the number of observations of x.
 #' @param TM a shrinkage target.
 #' @param SCM the sample covariance matrix.
+#' @references \insertRef{BGP2014}{hdsp}
 #' @export
 CovShrinkBGP14<-function(n, TM, SCM)
 {
@@ -28,6 +29,7 @@ CovShrinkBGP14<-function(n, TM, SCM)
 #' Returns the estimator of the covariance matrix.
 #'
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
+#' @references \insertRef{LW2020}{hdsp}
 #' @export
 nonlin_shrinkLW = function(x){
   # the original version suggested that p is # of columns
@@ -61,7 +63,7 @@ nonlin_shrinkLW = function(x){
 
 # Shrinkage of the inverse covariance matrix
 
-#' For the shrinkage of the inverse covariance matrix (2016, JMVA, Direct shrinkage)
+#' For the shrinkage of the inverse covariance matrix.
 #'
 #' iSCM=solve(S) with S sample covariance matrix and TM is again a target matrix,
 #' for example TM=I. Thus, InvCovShrink(solve(S), TM) will return the estimator of
@@ -70,6 +72,7 @@ nonlin_shrinkLW = function(x){
 #' @param n the number of observations
 #' @param p the number of variables (rows of the covariance matrix)
 #' @param iSCM the inverse of the sample covariance matrix
+#' @references \insertRef{BGP2016}{hdsp}
 #' @export
 InvCovShrinkBGP16<-function(n, p, TM, iSCM)
 {

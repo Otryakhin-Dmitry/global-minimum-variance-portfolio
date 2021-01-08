@@ -25,7 +25,7 @@ port_BGP16 <-new_ExUtil_portfolio_icov_BGP16(x=X, gamma, TM=Sigma)
 # mean shrink portfolios
 port_BS <- new_ExUtil_portfolio_mean_BayesStein(x=X, gamma=gamma, mu_0=rep(1,p))
 port_JS <- new_ExUtil_portfolio_mean_JamesStein(x=X, gamma=gamma, mu_0=rep(1,p))
-port_BOP<- new_ExUtil_portfolio_mean_BOP(x=X, gamma=gamma, mu_0=rep(1,p))
+port_BOP<- new_ExUtil_portfolio_mean_BOP19(x=X, gamma=gamma, mu_0=rep(1,p))
 
 # weight shrink portfolios
 port_BDOPS20 <- new_ExUtil_portfolio_weights_BDOPS20(x=X, gamma=gamma, b=rep(1/p,p))
