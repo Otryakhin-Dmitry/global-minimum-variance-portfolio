@@ -46,25 +46,6 @@ Q <- function(Sigma){
 }
 
 
-#### W_EU estimator (page 3, IEEE)
-#' W_EU estimator
-#'
-#' EU portfolio weights estimator from (6) of EU_IEEE.
-#'
-#' @inheritParams Sigma_sample_estimator
-#' @param gamma positive numeric. Investors attitude towards risk
-#'
-W_EU_hat <- function(x, gamma){
-
-  SS <- Sigma_sample_estimator(x)
-  invSS <- solve(SS)
-  Ip <- rep.int(1, nrow(x))
-  Q_n_hat <- Q_hat_n(x)
-
-  (invSS %*% Ip)/as.numeric(t(Ip) %*% invSS %*% Ip) +
-  Q_n_hat %*% rowMeans(x, na.rm = TRUE)/gamma
-}
-
 
 #### S's
 
@@ -239,15 +220,6 @@ Var_alpha_simple <- function(Sigma, b, mu, n){
 
   numer / denom * multip
 }
-#### W_BFGSE
-
-W_hat_BFGSE <- function(x, gamma, b){
-
-  # make output a vector instead of a matrix?
-  al <- alpha_hat_star_c(gamma, x, b)
-  al*W_EU_hat(x, gamma) + (1-al)*b
-}
-
 
 
 
