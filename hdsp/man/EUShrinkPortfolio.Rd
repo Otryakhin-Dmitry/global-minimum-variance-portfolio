@@ -19,6 +19,7 @@ EUShrinkPortfolio(x, gamma, type, subtype, ...)
 }
 \value{
 an object of class ExUtil_portfolio potentially with a subclass.
+See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
 }
 \description{
 The main function for EU portfolio construction. It is a dispatcher using methods according

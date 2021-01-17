@@ -25,6 +25,7 @@
 #' @param ... arguments to pass to portfolio constructors
 #'
 #' @return an object of class ExUtil_portfolio potentially with a subclass.
+#' See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -156,7 +157,7 @@ CovarEstim <- function(x, type, ...)
 #'
 #' | Function | Paper | Type |
 #' | --- | --- | --- |
-#' | \code{\link{.rowMeans}} |  | naive |
+#' | .rowMeans |  | naive |
 #' | \code{\link{mean_bs}} | Jorion 1986 | bs |
 #' | \code{\link{mean_js}} | Jorion 1986 | js |
 #' | \code{\link{mean_bop19}} | Bodnar et al 2019 | BOP19 |

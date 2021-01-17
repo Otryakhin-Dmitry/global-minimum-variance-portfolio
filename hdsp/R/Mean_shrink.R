@@ -4,6 +4,11 @@
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
 #' @param mu_0 a numeric value. The scaling of the target for shrinkage of the mean vector.
 #' @references \insertRef{Jorion1986}{hdsp}
+#' @examples
+#' n <- 7e2 # number of realizations
+#' p <- .5*n # number of assets
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#' mm <- mean_bs(x=x, mu_0 = rep(1,p))
 #' @export
 mean_bs <- function(x, mu_0)
 {
@@ -25,6 +30,11 @@ mean_bs <- function(x, mu_0)
 #'
 #' @inheritParams mean_bs
 #' @references \insertRef{Jorion1986}{hdsp}
+#' @examples
+#' n<-7e2 # number of realizations
+#' p<-.5*n # number of assets
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#' mm <- mean_js(x=x, mu_0 = rep(1,p))
 #' @export
 mean_js <- function(x, mu_0)
 {
@@ -46,6 +56,11 @@ mean_js <- function(x, mu_0)
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
 #' @param mu_0 a numeric vector. The target for shrinkage of the mean vector.
 #' @references \insertRef{BOP2019}{hdsp}
+#' @examples
+#' n<-7e2 # number of realizations
+#' p<-.5*n # number of assets
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#' mm <- mean_bop19(x=x, mu_0 = rep(1,1))
 #' @export
 mean_bop19 <- function(x, mu_0)
 {

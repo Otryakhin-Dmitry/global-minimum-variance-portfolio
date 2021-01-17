@@ -14,6 +14,12 @@ mean_bs(x, mu_0)
 \description{
 Bayes-Stein shrinkage mean estimator
 }
+\examples{
+n <- 7e2 # number of realizations
+p <- .5*n # number of assets
+x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+mm <- mean_bs(x=x, mu_0 = rep(1,p))
+}
 \references{
 \insertRef{Jorion1986}{hdsp}
 }

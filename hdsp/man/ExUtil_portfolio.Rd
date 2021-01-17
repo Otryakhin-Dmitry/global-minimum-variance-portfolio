@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_custom_portfol.R
 \name{new_ExUtil_portfolio_custom}
 \alias{new_ExUtil_portfolio_custom}
-\title{Custom EU portfolio constructors}
+\title{A constructor for class ExUtil_portfolio}
 \usage{
 new_ExUtil_portfolio_custom(mean_vec, inv_cov_mtrx, gamma)
 }
@@ -13,8 +13,15 @@ new_ExUtil_portfolio_custom(mean_vec, inv_cov_mtrx, gamma)
 
 \item{gamma}{a numerical variable. Investors attitude towards risk.}
 }
+\value{
+Object of S3 class ExUtil_portfolio.
+
+This class is designed to describe Expected Utility portfolios. It comprises portfolio weights
+W_EU_hat, mean vector means and a covariance cov_mtrx. W_EU_hat and means both
+have the form of a numeric vector, while cov_mtrx is a matrix.
+}
 \description{
-Custom EU portfolio constructors
+A light-weight constructor of objects of S3 class ExUtil_portfolio.
 }
 \examples{
 n<-3e2 # number of realizations
