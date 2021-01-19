@@ -16,3 +16,18 @@ ExUtil_portfolio_custom(mean_vec, inv_cov_mtrx, gamma)
 \description{
 A helper function for ExUtil_portfolio
 }
+\examples{
+n<-3e2 # number of realizations
+p<-.5*n # number of assets
+gamma<-1
+
+x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+
+# Simple EU portfolio
+cov_mtrx <- Sigma_sample_estimator(x)
+invSS <- solve(cov_mtrx)
+means <- rowMeans(x)
+
+cust_port_simp <- ExUtil_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+str(cust_port_simp)
+}

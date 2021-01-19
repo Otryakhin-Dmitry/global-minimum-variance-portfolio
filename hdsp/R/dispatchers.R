@@ -5,7 +5,9 @@
 #' Shrinkage Expected Utility portfolio
 #'
 #' The main function for EU portfolio construction. It is a dispatcher using methods according
-#' to the name supplied.
+#' to arguments type and subtype.
+#'
+#' The available estimation methods are:
 #'
 #' | Function | Paper | Type |
 #' | --- | --- | --- |
@@ -105,7 +107,9 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 
 #' Covariance matrix estimator
 #'
-#' Function dispatcher for covariance estimation.
+#' Essentially it is a function dispatcher for covariance estimation that chooses a method according to the type argument.
+#'
+#' The available estimation methods are:
 #'
 #' | Function | Paper | Type |
 #' | --- | --- | --- |
@@ -153,7 +157,9 @@ CovarEstim <- function(x, type, ...)
 
 #' Mean vector shrinkage estimator
 #'
-#' Function dispatcher for mean value estimators.
+#' Essentially it is a function dispatcher for mean value estimators that chooses a method according to the type argument.
+#'
+#' The available estimation methods are:
 #'
 #' | Function | Paper | Type |
 #' | --- | --- | --- |

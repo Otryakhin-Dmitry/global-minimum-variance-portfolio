@@ -14,10 +14,10 @@ MeanEstim(x, type, ...)
 \item{...}{arguments to pass to estimators}
 }
 \description{
-Function dispatcher for mean value estimators.
+Essentially it is a function dispatcher for mean value estimators that chooses a method according to the type argument.
 }
 \details{
-\tabular{lll}{
+The available estimation methods are:\tabular{lll}{
    Function \tab Paper \tab Type \cr
    .rowMeans \tab  \tab naive \cr
    \code{\link{mean_bs}} \tab Jorion 1986 \tab bs \cr

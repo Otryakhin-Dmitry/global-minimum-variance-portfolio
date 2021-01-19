@@ -14,10 +14,10 @@ CovarEstim(x, type, ...)
 \item{...}{arguments to pass to estimators}
 }
 \description{
-Function dispatcher for covariance estimation.
+Essentially it is a function dispatcher for covariance estimation that chooses a method according to the type argument.
 }
 \details{
-\tabular{lll}{
+The available estimation methods are:\tabular{lll}{
    Function \tab Paper \tab Type \cr
    \code{\link{Sigma_sample_estimator}} \tab  \tab naive \cr
    \code{\link{CovShrinkBGP14}} \tab Bodnar et al 2014 \tab BGP14 \cr

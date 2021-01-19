@@ -18,7 +18,7 @@ BOP shrinkage estimator
 n<-7e2 # number of realizations
 p<-.5*n # number of assets
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-mm <- mean_bop19(x=x, mu_0 = rep(1,1))
+mm <- mean_bop19(x=x, mu_0 = rep(1,p))
 }
 \references{
 \insertRef{BOP2019}{hdsp}

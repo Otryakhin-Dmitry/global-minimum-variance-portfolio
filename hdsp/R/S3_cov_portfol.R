@@ -25,6 +25,7 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
     mode = 'numeric')
 
   structure(list(cov_mtrx=cov_mtrx,
+                 inv_cov_mtrx=invSS,
                  means=means,
                  W_EU_hat=W_EU_hat),
             class = c("ExUtil_portfolio_cov_LW02", "ExUtil_portfolio"))
@@ -57,6 +58,7 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
     mode = 'numeric')
 
   structure(list(cov_mtrx=cov_mtrx,
+                 inv_cov_mtrx=invSS,
                  means=means,
                  W_EU_hat=W_EU_hat),
             class = c("ExUtil_portfolio_cov_BGP14", "ExUtil_portfolio"))
@@ -90,8 +92,7 @@ new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
       Q_n_hat %*% means / gamma,
     mode = 'numeric')
 
-  structure(list(cov_mtrx=solve(invSS),
-                 invSS=invSS,
+  structure(list(inv_cov_mtrx=invSS,
                  means=means,
                  W_EU_hat=W_EU_hat),
             class = c("ExUtil_portfolio_pm_BGP16", "ExUtil_portfolio"))

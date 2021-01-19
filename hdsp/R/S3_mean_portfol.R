@@ -28,16 +28,16 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 
   # Bayes-Stein mus and alphas
   alp_JS_hat <- as.numeric((p+2) / (p+2 + n*t(means-mu_0*I_vect)%*%invSS%*%(means-mu_0*I_vect)))
-  mu_hat_JS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
+  mu_hat_BS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
 
   W_EU_hat <- as.vector(
     (invSS %*% I_vect)/as.numeric(t(I_vect) %*% invSS %*% I_vect) +
-    Q_n_hat %*% mu_hat_JS / gamma,
+    Q_n_hat %*% mu_hat_BS / gamma,
     mode = 'numeric')
 
   structure(list(cov_mtrx=cov_mtrx,
-                 means=means,
-                 mu_hat_JS=mu_hat_JS,
+                 inv_cov_mtrx=invSS,
+                 means=mu_hat_BS,
                  alp_JS_hat=alp_JS_hat,
                  W_EU_hat=W_EU_hat
                  ),
@@ -82,8 +82,8 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
     mode = 'numeric')
 
   structure(list(cov_mtrx=cov_mtrx,
-                 means=means,
-                 mu_hat_JS=mu_hat_JS,
+                 inv_cov_mtrx=invSS,
+                 means=mu_hat_JS,
                  alp_JS_hat=alp_JS_hat,
                  W_EU_hat=W_EU_hat
                  ),
@@ -130,8 +130,8 @@ new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
     mode = 'numeric')
 
   structure(list(cov_mtrx=cov_mtrx,
-                 means=means,
-                 mu_hat_BOP=mu_hat_BOP,
+                 inv_cov_mtrx=invSS,
+                 means=mu_hat_BOP,
                  alpha_star_hat=alpha_star_hat,
                  beta_star_hat=beta_star_hat,
                  W_EU_hat=W_EU_hat

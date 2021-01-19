@@ -2,7 +2,7 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{InvCovShrinkBGP16}
 \alias{InvCovShrinkBGP16}
-\title{For the shrinkage of the inverse covariance matrix.}
+\title{For the shrinkage of the inverse covariance matrix}
 \usage{
 InvCovShrinkBGP16(n, p, TM, iSCM)
 }

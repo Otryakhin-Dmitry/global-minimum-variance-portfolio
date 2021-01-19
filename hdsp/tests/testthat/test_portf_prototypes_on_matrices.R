@@ -47,3 +47,20 @@ test_that("All prototypes produce not NULLs", {
   # Weights
   expect_false(is.null(port_BDOPS20))
 })
+
+
+test_that("All prototypes are valid ExUtil_portfolio objects", {
+
+  # (i-)Covariance
+  expect_s3_class(object=port_LW02, class="ExUtil_portfolio", exact = FALSE)
+  expect_s3_class(object=port_BGP14, class="ExUtil_portfolio", exact = FALSE)
+  expect_s3_class(object=port_BGP16, class="ExUtil_portfolio", exact = FALSE)
+
+  # Mean
+  expect_s3_class(object=port_BS, class="ExUtil_portfolio", exact = FALSE)
+  expect_s3_class(object=port_JS, class="ExUtil_portfolio", exact = FALSE)
+  expect_s3_class(object=port_BOP, class="ExUtil_portfolio", exact = FALSE)
+
+  # Weights
+  expect_s3_class(object=port_BDOPS20, class="ExUtil_portfolio", exact = FALSE)
+})

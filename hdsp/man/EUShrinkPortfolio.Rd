@@ -23,10 +23,10 @@ See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
 }
 \description{
 The main function for EU portfolio construction. It is a dispatcher using methods according
-to the name supplied.
+to arguments type and subtype..
 }
 \details{
-\tabular{lll}{
+The available estimation methods are:\tabular{lll}{
    Function \tab Paper \tab Type \cr
    \code{\link{new_ExUtil_portfolio_mean_BayesStein}} \tab Jorion 1986 \tab mean \cr
    \code{\link{new_ExUtil_portfolio_mean_JamesStein}} \tab Jorion 1986 \tab mean \cr

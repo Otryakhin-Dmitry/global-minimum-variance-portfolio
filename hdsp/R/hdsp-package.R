@@ -5,7 +5,8 @@
 #' portfolios using shrinkage estimation methods including ones for mean vectors, direct and inverse
 #' covariance matrices and portfolio weights. CovarEstim computes sample covariance matrices while MeanEstim-
 #' mean vectors. Every of these three functions is supplied a name of the method to use to perform estimation.
-#'
+#' Portfolios are stored in objects of class ExUtil_portfolio. For this class constructor, validator and
+#' helper functions are available.
 #'
 #'
 #' @section Methods:

@@ -63,7 +63,7 @@ nonlin_shrinkLW = function(x){
 
 # Shrinkage of the inverse covariance matrix
 
-#' For the shrinkage of the inverse covariance matrix.
+#' For the shrinkage of the inverse covariance matrix
 #'
 #' iSCM=solve(S) with S sample covariance matrix and TM is again a target matrix,
 #' for example TM=I. Thus, InvCovShrink(solve(S), TM) will return the estimator of
