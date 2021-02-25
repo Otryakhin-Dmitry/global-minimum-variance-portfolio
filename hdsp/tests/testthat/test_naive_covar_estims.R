@@ -45,6 +45,9 @@ test_that("cov.shrink produces about the same matrix as Sigma_sample_estimator",
   if (!requireNamespace("corpcor", quietly =TRUE)) skip("corpcor is not installed")
   library(corpcor)
 
+  if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
+  library('waldo')
+
   ####
   n<-1e3 # number of realizations
   p<-0.8*n # number of assets

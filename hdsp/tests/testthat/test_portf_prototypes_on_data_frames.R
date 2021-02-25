@@ -34,6 +34,9 @@ port_BDOPS20 <- new_ExUtil_portfolio_weights_BDOPS20(x=X, gamma=gamma, b=rep(1/p
 
 test_that("All prototypes produce not NULLs", {
 
+  if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
+  library('waldo')
+
   # (i-)Covariance
   expect_false(is.null(port_LW02))
   expect_false(is.null(port_BGP14))

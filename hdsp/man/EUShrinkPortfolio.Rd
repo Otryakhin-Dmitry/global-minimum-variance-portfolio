@@ -23,7 +23,7 @@ See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
 }
 \description{
 The main function for EU portfolio construction. It is a dispatcher using methods according
-to arguments type and subtype..
+to arguments type and subtype.
 }
 \details{
 The available estimation methods are:\tabular{lll}{

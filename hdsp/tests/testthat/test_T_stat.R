@@ -10,6 +10,9 @@ gamma<-5e-3
 
 test_that("Ts from (44) and (41) are equivalent", {
 
+  if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
+  library('waldo')
+
   mu=rep(0,p)
   d_0 <- d_0(gamma=gamma, p=p, n=n)
   ind_len <- 5e1
@@ -22,7 +25,6 @@ test_that("Ts from (44) and (41) are equivalent", {
 
     x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
     X[ind,1] <- T_alpha(gamma=gamma, x=x, w_0=w_0, c=p/n)
-
 
     # Computing T_alpha in another way, (29 & 41)
     Omega.est <- Omega_hat_al_c(x=x, c=p/n, b=w_0)
@@ -38,14 +40,5 @@ test_that("Ts from (44) and (41) are equivalent", {
 
   expect_true(all(round(X[,1], digits =4)==round(X[,2], digits =4)))
 })
-
-
-
-
-
-
-
-
-
 
 

@@ -36,6 +36,7 @@ Imports:
 Suggests: 
     testthat,
     MASS,
-    corpcor
+    corpcor,
+    waldo
 RdMacros: Rdpack
 RoxygenNote: 7.1.1

@@ -4,6 +4,10 @@ context("Different expressions for alphas")
 
 test_that("alphas EU and GMV work and are equal when gamma=Inf", {
 
+
+  if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
+  library('waldo')
+
   n<-1e3 # number of realizations
   p<-0.8*n # number of assets
   w_0 <- rep(1/p,p)
@@ -26,6 +30,9 @@ test_that("alphas EU and GMV work and are equal when gamma=Inf and components of
   if (!requireNamespace("MASS", quietly =TRUE)) skip("package MASS is not installed")
   library('MASS')
 
+  if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
+  library('waldo')
+
   n<-3e2 # number of realizations
   p<-0.3*n # number of assets
   w_0 <- rep(1/p,p)
@@ -45,6 +52,9 @@ test_that("alphas EU and GMV work and are equal when gamma=Inf and components of
 
 ####
 test_that("Deterministic alphas EU and GMV work and are equal when gamma=Inf", {
+
+  if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
+  library('waldo')
 
   n<-3e2 # number of realizations
   p<-0.3*n # number of assets
