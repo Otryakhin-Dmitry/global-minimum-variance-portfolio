@@ -164,6 +164,23 @@ alpha_hat_star_c <- function(gamma, x, b){
   as.numeric(numerator/denomenator)
 }
 
+alpha_hat_star_c_fast <- function(gamma, c, s, b, R_GMV, R_b, V_GMV, V_b){
+
+  V_c <- V_GMV/(1-c)
+
+  Exp1 <- (R_GMV-R_b)*(1+1/(1-c))/gamma
+  Exp2 <- (V_b-V_c)
+  Exp3 <- s/(gamma^2)/(1-c)
+  numerator <- Exp1 + Exp2 + Exp3
+
+  Exp4 <- V_c/(1-c)
+  Exp5 <- -2*(V_c + (R_b - R_GMV)/(gamma*(1-c)))
+  Exp6 <- ((s+c)/(1-c)^3)/gamma^2
+  denomenator <- Exp4 + Exp5 + Exp6 + V_b
+
+  as.numeric(numerator/denomenator)
+}
+
 alpha_star_GMV <- function(Sigma, b, c){
 
   V_GMV <- V_GMV(Sigma)
@@ -219,6 +236,14 @@ Var_alpha_simple <- function(Sigma, b, mu, n){
   multip<- (2-c)*Lb +c
 
   numer / denom * multip
+}
+
+# BDOPS2020, under formula 16
+Omega.Lest <- function(s.est, cc, gamma, V.est, L, Q.est, eta.est){
+
+  (((1-cc)/(s.est+cc)+ (s.est+cc)/gamma)/gamma + V.est)*(1-cc)*L%*%Q.est%*%t(L)+
+  gamma^{-2}*(2*(1-cc)*cc^3/(s.est+cc)^2+ 4*(1-cc)*cc*s.est*(s.est+2*cc)/(s.est+cc)^2 +
+              2*(1-cc)*cc^2*(s.est+cc)^2/(s.est^2)-s.est^2)*eta.est%*%t(eta.est)
 }
 
 
