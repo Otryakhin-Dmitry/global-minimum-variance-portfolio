@@ -247,11 +247,11 @@ Var_alpha_simple <- function(Sigma, b, mu, n){
 }
 
 # BDOPS2020, under formula 16
-Omega.Lest <- function(s.est, cc, gamma, V.est, L, Q.est, eta.est){
+Omega.Lest <- function(s_hat_c, cc, gamma, V_hat_c, L, Q_n_hat, eta.est){
 
-  (((1-cc)/(s.est+cc)+ (s.est+cc)/gamma)/gamma + V.est)*(1-cc)*L%*%Q.est%*%t(L)+
-  gamma^{-2}*(2*(1-cc)*cc^3/(s.est+cc)^2+ 4*(1-cc)*cc*s.est*(s.est+2*cc)/(s.est+cc)^2 +
-              2*(1-cc)*cc^2*(s.est+cc)^2/(s.est^2)-s.est^2)*eta.est%*%t(eta.est)
+  (((1-cc)/(s_hat_c+cc) + (s_hat_c+cc)/gamma)/gamma + V_hat_c)*(1-cc)*L%*%Q_n_hat%*%t(L)+
+  gamma^{-2}*(2*(1-cc)*cc^3/(s_hat_c+cc)^2+ 4*(1-cc)*cc*s_hat_c*(s_hat_c+2*cc)/(s_hat_c+cc)^2 +
+              2*(1-cc)*cc^2*(s_hat_c+cc)^2/(s_hat_c^2)-s_hat_c^2)*eta.est%*%t(eta.est)
 }
 
 
