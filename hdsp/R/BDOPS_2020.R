@@ -37,6 +37,9 @@ Q_hat_n <- function(x){
   invSS - (invSS %*% Ip %*% t(Ip) %*% invSS)/as.numeric(t(Ip) %*% invSS %*% Ip)
 }
 
+Q_hat_n_fast <- function(invSS, Ip, tIp){
+  invSS - (invSS %*% Ip %*% tIp %*% invSS)/as.numeric(tIp %*% invSS %*% Ip)
+}
 
 Q <- function(Sigma){
 
@@ -94,6 +97,7 @@ R_hat_b <- function(x, b) as.numeric(b %*% rowMeans(x, na.rm = TRUE))
 
 V_b <- function(Sigma, b) as.numeric(t(b) %*% Sigma %*% b)
 
+# this one could be deleted?
 V_hat_b <- function(x, b) {
 
   Sigma <- Sigma_sample_estimator(x)
@@ -112,6 +116,12 @@ V_hat_GMV <- function(x){
 }
 
 V_hat_c <- function(x) {V_hat_GMV(x)/(1-nrow(x)/ncol(x))}
+
+V_hat_c_fast <- function(ones, invSS, tones, c) {
+
+  V_hat_GMV <- as.numeric(1/(tones %*% invSS %*% ones))
+  V_hat_GMV/(1-c)
+}
 
 #### alphas, B and A expressions
 
@@ -164,9 +174,7 @@ alpha_hat_star_c <- function(gamma, x, b){
   as.numeric(numerator/denomenator)
 }
 
-alpha_hat_star_c_fast <- function(gamma, c, s, b, R_GMV, R_b, V_GMV, V_b){
-
-  V_c <- V_GMV/(1-c)
+alpha_hat_star_c_fast <- function(gamma, c, s, b, R_GMV, R_b, V_c, V_b){
 
   Exp1 <- (R_GMV-R_b)*(1+1/(1-c))/gamma
   Exp2 <- (V_b-V_c)

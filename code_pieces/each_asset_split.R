@@ -100,18 +100,17 @@ stopCluster(cl)
  invSS <- solve(cov_mtrx)
  ones <- rep.int(1, nrow(x))
  tones<-t(ones)
- Q_n_hat <- hdsp:::Q_hat_n(x) # this could be optimized
 
 
  ########
- V.est<-(1-cc)^{-1}/sum(tones%*%invSS%*%ones) #estimated variance (cons.)
- Q.est<- invSS-(invSS%*%ones%*%tones%*%invSS)/sum(tones%*%invSS%*%ones)
- s.est<- as.numeric((1-cc)*t(mu_est)%*% Q.est %*% mu_est-cc)
- R.est<- (tones%*% invSS %*% mu_est)/sum(tones%*%invSS%*%ones) #returns of EU portfolio
+ V_hat_c <- hdsp:::V_hat_c_fast(ones=ones, invSS=invSS, tones=tones, c=cc)  # V_hat_c_fast is V.est
+ Q_n_hat <- hdsp:::Q_hat_n_fast(invSS=invSS, Ip=ones, tIp=tones)  # Q_n_hat is Q.est
+ s_hat_c <- as.numeric((1-cc)*t(mu_est)%*% Q_n_hat %*% mu_est-cc) # s.est
+ R_hat_GMV<-(tones%*% invSS %*% mu_est)/sum(tones%*%invSS%*%ones) # R.est, returns of EU portfolio
 
  ######## calculate shrinkage weights for EU or GMVP ##############
- Vb.est<-t(b)%*%cov_mtrx%*%b     #optional:can be removed if you decide to import an existing function for shrinakge portolio weights
- Rb.est<-t(b) %*% mu_est
+ V_hat_b <- hdsp:::V_b(Sigma=cov_mtrx, b=b)  # Vb.est
+ R_hat_b <- hdsp:::R_b(mu=mu_est, b=b) # Rb.est
 
 
  W_EU_hat <- as.vector(
@@ -119,15 +118,39 @@ stopCluster(cl)
      Q_n_hat %*% mu_est/gamma,
    mode = 'numeric')
 
- al <- alpha_hat_star_c(gamma, x=x, b=b)
- weights <- al*W_EU_hat + (1-al)*b
-
- alpha_EU<- as.numeric(gamma^{-1}*((R.est-Rb.est)*(1+1/(1-cc))+ gamma*(Vb.est-V.est)+gamma^{-1}*s.est/(1-cc))/(V.est/(1-cc)-2*(V.est+gamma^{-1}*(Rb.est-R.est)/(1-cc))+ gamma^{-2}*(s.est/(1-cc)^3+cc/(1-cc)^3)+Vb.est))
- #f.(25) IEEE 21
-
- w_EU_shr <- alpha_EU*w_EU_whole + (1-alpha_EU)*b # f.(26) IEEE 2021
+ # alpha_EU
+ al <- hdsp:::alpha_hat_star_c_fast(gamma=gamma, c=cc, s=s_hat_c, b=b, R_GMV=R_hat_GMV,
+                                    R_b=R_hat_b, V_c=V_hat_c, V_b=V_hat_b)
+ weights <- al*W_EU_hat + (1-al)*b # w_EU_shr
 
 
+
+ #### Loop ####
+
+ T.dens = foreach(i=1:p, .combine="rbind", .inorder=FALSE, .packages=c("MASS")) %dopar%
+   {
+     ## EU case
+     L <- matrix(rep(0,p), nrow=1)
+     L[1,i]<- 1 # select one!!! component of weights vector for a test
+     #s.est<- as.numeric((1-cc)*t(mu_est)%*% Q.est %*% mu_est-cc)
+     eta.est<-((s.est+cc)/s.est)*L%*%Q.est%*%mu_est/as.numeric(t(mu_est)%*%Q.est%*%mu_est)
+     w.est<-(L%*%iS%*%ones)/sum(tones%*%iS%*%ones)+gamma^{-1}*s.est*eta.est # weight (component of weights vector)
+
+     ############# BDOPS, formula 15
+
+     Omega.Lest<- (((1-cc)/(s.est+cc)+ (s.est+cc)/gamma)/gamma + V.est)*(1-cc)*L%*%Q.est%*%t(L)+
+       gamma^{-2}*(2*(1-cc)*cc^3/(s.est+cc)^2+ 4*(1-cc)*cc*s.est*(s.est+2*cc)/(s.est+cc)^2 +
+                     2*(1-cc)*cc^2*(s.est+cc)^2/(s.est^2)-s.est^2)*eta.est%*%t(eta.est)
+
+     TDn<- (n-p)*t(w.est)%*%solve(Omega.Lest)%*%(w.est)
+     low_bound <- w.est - qnorm(1-alph/2)*sqrt(Omega.Lest)/sqrt(n-p)
+     upp_bound <- w.est + qnorm(1-alph/2)*sqrt(Omega.Lest)/sqrt(n-p)
+
+     p_value<- pchisq(TDn, df=1, lower.tail=FALSE)
+
+     #return(c(w.est, low_bound, upp_bound, TDn,  p_value)) #if you want to have the components of the weights vector in F. ()
+     return(c(w_EU_shr[i], low_bound, upp_bound, TDn,  p_value)) #first column= shrinkage estimator for EU Portfolio weights
+   }
 
 
 
