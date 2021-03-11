@@ -28,6 +28,7 @@ SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55, mu=seq(0.2,-0.2, length.out=p)){
 
 
 # Yarema's version
+#' @export
 RandCovMtrx <- function(n=3e2, p=2e2, q=20.55, mu=seq(0.2,-0.2, length.out=p)){
 
   cc <- p/n
