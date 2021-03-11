@@ -1,8 +1,8 @@
-
 #' constructor of EU portfolio object. IEEE 2020
 #'
 #' @inheritParams EUShrinkPortfolio
-#' @param b a numeric value. The target for weight shrinkage.
+#' @param b a numeric variable. The target for weight shrinkage.
+#' @param alph a numeric variable. The level of confidence for weight intervals
 #' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
 #' n<-3e2 # number of realizations
@@ -12,11 +12,12 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b)
+#' test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b, alph=0.05)
 #' str(test)
 #' @export
-new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
+new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 
+  cl <- match.call()
   p <- nrow(x)
   n <- ncol(x)
   cc<- p/n
@@ -77,7 +78,8 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
 
   colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
 
-  structure(list(cov_mtrx=cov_mtrx,
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
                  means=mu_est,
                  W_EU_hat=W_EU_hat,
                  weights=weights,
@@ -87,18 +89,17 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
   }
 
 
-#' constructor of EU portfolio object. IEEE 2020
+#' constructor of GMVA portfolio object.
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric value. The target for weight shrinkage.
-#' @param alph a numeric value. The level of confidence for weight intervals
+#' @inheritParams new_ExUtil_portfolio_weights_BDOPS20
 #' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
 #' library(MASS)
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
 #' b<-rep(1/p,p)
-#' gamma<-1
 #'
 #' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
 #' x <- mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx)
@@ -109,6 +110,7 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b){
 #' @export
 new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
 
+  cl <- match.call()
   p <- ncol(x)
   n <- nrow(x)
   cc<- p/n
@@ -160,7 +162,8 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
 
 
   #### Output
-  structure(list(cov_mtrx=S,
+  structure(list(call=cl,
+                 cov_mtrx=S,
                  means=mu_est,
                  w_GMVP=w_GMVP_whole,
                  weights=w_GMV_shr,

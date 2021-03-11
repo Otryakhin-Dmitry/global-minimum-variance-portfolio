@@ -21,7 +21,7 @@
 #'
 #' @md
 #' @param x a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.
-#' @param gamma a numerical variable. Investors attitude towards risk.
+#' @param gamma a numeric variable. Investors attitude towards risk.
 #' @param type a character. The type of methods to use to construct the portfolio.
 #' @param subtype a character. The exact method to use within the type.
 #' @param ... arguments to pass to portfolio constructors
@@ -36,7 +36,7 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=b)
+#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=b, alph = 0.05)
 #' str(test)
 #'
 #' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='Bayes-Stein')

@@ -45,7 +45,7 @@ gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-test <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=b)
+test <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=b, alph = 0.05)
 str(test)
 
 test <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='Bayes-Stein')

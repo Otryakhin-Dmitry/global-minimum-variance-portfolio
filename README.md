@@ -1,4 +1,4 @@
-# Expected utility and global minimum variance portfolios
+# Expected utility and global minimum variance portfolios. Package version 0.1.0.
 
 ## Installation from github
 ``` r

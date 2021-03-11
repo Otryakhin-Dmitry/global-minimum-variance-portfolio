@@ -41,3 +41,16 @@ vignettes/*.pdf
 
 # Pdf output
 *.pdf
+/TestEU/Empirical_study/SP500_April2020_c08p100gamma5.R
+/TestEU/Empirical_study/SP500_all_20Y_070402020.txt
+/TestEU/Simulations/Asym_vs_Kernel(2_1,2_2).R
+/TestEU/Simulations/Asymp_vs_Kernel(42, 44).R
+/TestEU/Simulations/PowerShrinkageApril2020.R
+/TestEU/Simulations/ROC_shrinkage.R
+/TestGMV/Asympt_power_T2(function of R_b).R
+/TestGMV/lambda_asympt_vs_emp.R
+/TestGMV/m02n500nonsing_ROC/m02n500nonsing_c09.R
+/TestGMV/m05n500nonsing_Power/m05n500nonsing_c01.R
+/code_pieces/rolling_portf.R
+/single_empiric_cluster (1).r
+/single_empiric_cluster_LW (1).r

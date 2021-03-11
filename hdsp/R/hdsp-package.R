@@ -28,3 +28,7 @@ NULL
 # to avoid getting a warning from "R CMD check"
 #' @importFrom Rdpack reprompt
 NULL
+
+# Imports from stats
+#' @importFrom stats cov pchisq qnorm
+NULL
