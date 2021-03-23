@@ -8,6 +8,7 @@
 #' @export
 new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 
+  cl <- match.call()
   if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- nonlin_shrinkLW(x)
@@ -24,10 +25,19 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
       Q_n_hat %*% means / gamma,
     mode = 'numeric')
 
-  structure(list(cov_mtrx=cov_mtrx,
+  # Sharpe, mean return and portfolio variance
+  Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
+  Port_mean_return <- means %*% W_EU_hat
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=means,
-                 W_EU_hat=W_EU_hat),
+                 W_EU_hat=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe),
             class = c("ExUtil_portfolio_cov_LW02", "ExUtil_portfolio"))
 }
 
@@ -39,6 +49,7 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 #' @export
 new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 
+  cl <- match.call()
   p <- nrow(x)
   n <- ncol(x)
 
@@ -57,10 +68,19 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
       Q_n_hat %*% means / gamma,
     mode = 'numeric')
 
-  structure(list(cov_mtrx=cov_mtrx,
+  # Sharpe, mean return and portfolio variance
+  Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
+  Port_mean_return <- means %*% W_EU_hat
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=means,
-                 W_EU_hat=W_EU_hat),
+                 W_EU_hat=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe),
             class = c("ExUtil_portfolio_cov_BGP14", "ExUtil_portfolio"))
 }
 
@@ -74,6 +94,7 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 #' @export
 new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
 
+  cl <- match.call()
   p <- nrow(x)
   n <- ncol(x)
 
@@ -92,9 +113,19 @@ new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
       Q_n_hat %*% means / gamma,
     mode = 'numeric')
 
-  structure(list(inv_cov_mtrx=invSS,
+  # Sharpe, mean return and portfolio variance
+  Port_Var <- t(W_EU_hat)%*%SCM%*%W_EU_hat
+  Port_mean_return <- means %*% W_EU_hat
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
+  structure(list(call=cl,
+                 cov_mtrx=SCM,
+                 inv_cov_mtrx=invSS,
                  means=means,
-                 W_EU_hat=W_EU_hat),
+                 W_EU_hat=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe),
             class = c("ExUtil_portfolio_pm_BGP16", "ExUtil_portfolio"))
 }
 

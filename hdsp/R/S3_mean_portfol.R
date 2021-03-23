@@ -16,6 +16,7 @@
 #' @export
 new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 
+  cl <- match.call()
   if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- Sigma_sample_estimator(x)
@@ -35,11 +36,20 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
     Q_n_hat %*% mu_hat_BS / gamma,
     mode = 'numeric')
 
-  structure(list(cov_mtrx=cov_mtrx,
+  # Sharpe, mean return and portfolio variance
+  Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
+  Port_mean_return <- mu_hat_BS %*% W_EU_hat
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=mu_hat_BS,
                  alp_JS_hat=alp_JS_hat,
-                 W_EU_hat=W_EU_hat
+                 W_EU_hat=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe
                  ),
             class = c("ExUtil_portfolio_mean_Bayes-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
@@ -61,6 +71,7 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 #' @export
 new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 
+  cl <- match.call()
   if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- Sigma_sample_estimator(x)
@@ -81,11 +92,20 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
     Q_n_hat %*% mu_hat_JS / gamma,
     mode = 'numeric')
 
-  structure(list(cov_mtrx=cov_mtrx,
+  # Sharpe, mean return and portfolio variance
+  Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
+  Port_mean_return <- mu_hat_JS %*% W_EU_hat
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=mu_hat_JS,
                  alp_JS_hat=alp_JS_hat,
-                 W_EU_hat=W_EU_hat
+                 W_EU_hat=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe
                  ),
             class = c("ExUtil_portfolio_mean_James-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
@@ -109,6 +129,7 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 #' @export
 new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
 
+  cl <- match.call()
   if (is.data.frame(x)) x <- as.matrix(x)
 
   cov_mtrx <- Sigma_sample_estimator(x)
@@ -129,12 +150,21 @@ new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
       Q_n_hat %*% mu_hat_BOP / gamma,
     mode = 'numeric')
 
-  structure(list(cov_mtrx=cov_mtrx,
+  # Sharpe, mean return and portfolio variance
+  Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
+  Port_mean_return <- mu_hat_BOP %*% W_EU_hat
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=mu_hat_BOP,
                  alpha_star_hat=alpha_star_hat,
                  beta_star_hat=beta_star_hat,
-                 W_EU_hat=W_EU_hat
+                 W_EU_hat=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe
   ),
   class = c("ExUtil_portfolio_mean_BOP", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }

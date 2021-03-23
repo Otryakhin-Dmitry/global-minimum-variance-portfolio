@@ -78,12 +78,19 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 
   colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
 
+  Port_Var <- t(weights)%*%cov_mtrx%*%weights
+  Port_mean_return <- mu_est %*% weights
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
   structure(list(call=cl,
                  cov_mtrx=cov_mtrx,
                  means=mu_est,
                  W_EU_hat=W_EU_hat,
                  weights=weights,
                  alpha=al,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe,
                  weight_intervals=T_dens),
             class = c("ExUtil_portfolio_weights_BDOPS20", "ExUtil_portfolio"))
   }
@@ -114,7 +121,6 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
   p <- ncol(x)
   n <- nrow(x)
   cc<- p/n
-  #b <-rep(1/p, p) #for shrinkage, target
 
   ones<-matrix(1,p,1)
   tones<-t(ones)
@@ -160,6 +166,9 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
 
   colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
 
+  Port_Var <- 1/(tones%*%iS%*%ones)
+  Port_mean_return <- mu_est %*% w_GMV_shr
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
 
   #### Output
   structure(list(call=cl,
@@ -168,6 +177,9 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
                  w_GMVP=w_GMVP_whole,
                  weights=w_GMV_shr,
                  alpha=alpha_GMVP,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe,
                  weight_intervals=T_dens),
             class = c("GMV_portfolio_weights_BDPS19", "ExUtil_portfolio"))
 }

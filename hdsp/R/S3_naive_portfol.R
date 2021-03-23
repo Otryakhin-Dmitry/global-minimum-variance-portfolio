@@ -8,7 +8,7 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma)
+#' test <- new_ExUtil_portfolio_naive(x=x, gamma=gamma)
 #' str(test)
 #' @export
 new_ExUtil_portfolio_naive <- function(x, gamma){
@@ -30,9 +30,17 @@ new_ExUtil_portfolio_naive <- function(x, gamma){
       Q_n_hat %*% means / gamma,
     mode = 'numeric')
 
+  # Sharpe, mean return and portfol variance
+  Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
+  Port_mean_return <- means %*% W_EU_hat
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
   structure(list(cov_mtrx=cov_mtrx,
                  means=means,
-                 W_EU_hat=W_EU_hat
+                 W_EU_hat=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe
   ),
   class = c("ExUtil_portfolio"))
 }
