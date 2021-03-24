@@ -9,11 +9,11 @@ new_ExUtil_portfolio_weights_BDOPS20(x, gamma, b, alph)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numerical variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk.}
 
-\item{b}{a numeric value. The target for weight shrinkage.}
+\item{b}{a numeric variable. The target for weight shrinkage.}
 
-\item{alph}{a numeric value. The level of confidence for weight intervals}
+\item{alph}{a numeric variable. The level of confidence for weight intervals}
 }
 \description{
 constructor of EU portfolio object. IEEE 2020

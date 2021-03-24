@@ -11,7 +11,7 @@ ExUtil_portfolio_custom(mean_vec, inv_cov_mtrx, gamma)
 
 \item{inv_cov_mtrx}{the inverse covariance matrix of asset returns. Could be a matrix or a data frame.}
 
-\item{gamma}{a numerical variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk.}
 }
 \description{
 A helper function for ExUtil_portfolio

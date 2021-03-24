@@ -5,6 +5,16 @@
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @references \insertRef{LW2020}{hdsp}
+#' @examples
+#' c <- 0.4
+#' n <- 7e2
+#' p <- c*n
+#' gamma <- 1
+#'
+#' X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
+#' port_LW02 <- new_ExUtil_portfolio_cov_LW02(x=X, gamma)
+#' str(port_LW02)
+#'
 #' @export
 new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 
@@ -46,6 +56,19 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 #' @inheritParams EUShrinkPortfolio
 #' @param TM the target matrix for shrinkage of covariance
 #' @references \insertRef{BGP2014}{hdsp}
+#' @examples
+#' c <- 0.4
+#' n <- 7e2
+#' p <- c*n
+#' gamma <- 1
+#'
+#' Sigma=matrix(0, p, p)
+#' diag(Sigma) <- 1
+#'
+#' X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
+#' port_BGP14 <- new_ExUtil_portfolio_cov_BGP14(x=X, gamma, TM=Sigma)
+#' str(port_BGP14)
+#'
 #' @export
 new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 
@@ -91,6 +114,19 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 #' @inheritParams EUShrinkPortfolio
 #' @param TM the target matrix for shrinkage of the inverse covariance matrix
 #' @references \insertRef{BGP2016}{hdsp}
+#' @examples
+#' c <- 0.4
+#' n <- 7e2
+#' p <- c*n
+#' gamma <- 1
+#'
+#' Sigma=matrix(0, p, p)
+#' diag(Sigma) <- 1
+#'
+#' X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
+#' port_BGP16 <- new_ExUtil_portfolio_icov_BGP16(x=X, gamma, TM=Sigma)
+#' str(port_BGP16)
+#'
 #' @export
 new_ExUtil_portfolio_icov_BGP16 <- function(x, gamma, TM){
 

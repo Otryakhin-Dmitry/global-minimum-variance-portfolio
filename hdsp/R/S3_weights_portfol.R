@@ -84,6 +84,7 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 
   structure(list(call=cl,
                  cov_mtrx=cov_mtrx,
+                 inv_cov_mtrx=invSS,
                  means=mu_est,
                  W_EU_hat=W_EU_hat,
                  weights=weights,
@@ -127,7 +128,7 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
 
 
   ####
-  S <- cov(x)
+  S <- Sigma_sample_estimator(x)
   mu_est <- .rowMeans(x, m=p, n=n)
   iS<-solve(S)
   V.est<-(1-cc)^{-1}/sum(tones%*%iS%*%ones) #estimated variance (cons.)
@@ -173,6 +174,7 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
   #### Output
   structure(list(call=cl,
                  cov_mtrx=S,
+                 inv_cov_mtrx=iS,
                  means=mu_est,
                  w_GMVP=w_GMVP_whole,
                  weights=w_GMV_shr,

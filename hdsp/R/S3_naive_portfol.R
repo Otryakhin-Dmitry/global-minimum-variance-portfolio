@@ -24,7 +24,6 @@ new_ExUtil_portfolio_naive <- function(x, gamma){
   Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
 
   # Portfolio weights
-
   W_EU_hat <- as.vector(
     (invSS %*% I_vect)/as.numeric(t(I_vect) %*% invSS %*% I_vect) +
       Q_n_hat %*% means / gamma,
@@ -36,6 +35,7 @@ new_ExUtil_portfolio_naive <- function(x, gamma){
   Sharpe <- Port_mean_return/sqrt(Port_Var)
 
   structure(list(cov_mtrx=cov_mtrx,
+                 inv_cov_mtrx=invSS,
                  means=means,
                  W_EU_hat=W_EU_hat,
                  Port_Var=Port_Var,

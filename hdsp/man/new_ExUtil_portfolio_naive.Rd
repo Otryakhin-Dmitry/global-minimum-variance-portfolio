@@ -9,7 +9,7 @@ new_ExUtil_portfolio_naive(x, gamma)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numerical variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk.}
 }
 \description{
 constructor of EU portfolio object. Type=naive.
@@ -21,6 +21,6 @@ gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-test <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma)
+test <- new_ExUtil_portfolio_naive(x=x, gamma=gamma)
 str(test)
 }

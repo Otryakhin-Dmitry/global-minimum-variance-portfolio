@@ -9,12 +9,26 @@ new_ExUtil_portfolio_cov_BGP14(x, gamma, TM)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numerical variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk.}
 
 \item{TM}{the target matrix for shrinkage of covariance}
 }
 \description{
 Bodnar, Gupta, Parolya 2014
+}
+\examples{
+c <- 0.4
+n <- 7e2
+p <- c*n
+gamma <- 1
+
+Sigma=matrix(0, p, p)
+diag(Sigma) <- 1
+
+X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
+port_BGP14 <- new_ExUtil_portfolio_cov_BGP14(x=X, gamma, TM=Sigma)
+str(port_BGP14)
+
 }
 \references{
 \insertRef{BGP2014}{hdsp}

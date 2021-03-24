@@ -9,7 +9,7 @@ EUShrinkPortfolio(x, gamma, type, subtype, ...)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numerical variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk.}
 
 \item{type}{a character. The type of methods to use to construct the portfolio.}
 

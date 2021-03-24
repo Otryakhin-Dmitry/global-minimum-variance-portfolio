@@ -2,12 +2,10 @@
 % Please edit documentation in R/random_cov_matrix.R
 \name{RandCovMtrx}
 \alias{RandCovMtrx}
-\title{Covariance matrix generator
-Useful for examples and tests when an arbitrary covariance is needed.}
+\title{Covariance matrix generator}
 \usage{
 RandCovMtrx(n = 300, p = 200, q = 20.55, mu = seq(0.2, -0.2, length.out = p))
 }
 \description{
-Covariance matrix generator
 Useful for examples and tests when an arbitrary covariance is needed.
 }

@@ -11,7 +11,7 @@ new_GMV_portfolio_weights_BDPS19(x, b, alph)
 
 \item{b}{a numeric value. The target for weight shrinkage.}
 
-\item{alph}{a numeric value. The level of confidence for weight intervals}
+\item{alph}{a numeric variable. The level of confidence for weight intervals}
 }
 \description{
 constructor of GMVA portfolio object.

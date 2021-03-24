@@ -85,7 +85,7 @@ validate_ExUtil_portfolio <- function(x) {
 
   if (!is.vector(values$means))  stop("means is not a vector", call. = FALSE)
   if (!identical(class(values$inv_cov_mtrx), c("matrix", "array"))){
-    stop("cov_mtrx is not a matrix", call. = FALSE)
+    stop("inv_cov_mtrx is not a matrix", call. = FALSE)
   }
 
   if (length(values$means)!=length(values$W_EU_hat) | nrow(values$inv_cov_mtrx)!=length(values$W_EU_hat)) {

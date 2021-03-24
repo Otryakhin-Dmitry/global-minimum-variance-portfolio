@@ -11,7 +11,7 @@ new_ExUtil_portfolio_custom(mean_vec, inv_cov_mtrx, gamma)
 
 \item{inv_cov_mtrx}{the inverse covariance matrix of asset returns}
 
-\item{gamma}{a numerical variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk.}
 }
 \value{
 Object of S3 class ExUtil_portfolio.

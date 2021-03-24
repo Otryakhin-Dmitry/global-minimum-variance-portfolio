@@ -9,10 +9,21 @@ new_ExUtil_portfolio_cov_LW02(x, gamma)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numerical variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk.}
 }
 \description{
 Ledoit and Wolf 2020
+}
+\examples{
+c <- 0.4
+n <- 7e2
+p <- c*n
+gamma <- 1
+
+X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
+port_LW02 <- new_ExUtil_portfolio_cov_LW02(x=X, gamma)
+str(port_LW02)
+
 }
 \references{
 \insertRef{LW2020}{hdsp}
