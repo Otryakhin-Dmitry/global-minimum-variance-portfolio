@@ -18,11 +18,19 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
 
   cl <- match.call()
   if (is.data.frame(x)) x <- as.matrix(x)
-
-  cov_mtrx <- Sigma_sample_estimator(x)
-  invSS <- solve(cov_mtrx)
   p <- nrow(x)
   n <- ncol(x)
+
+  #### Direct / inverse covariance computation
+  cov_mtrx <- Sigma_sample_estimator(x)
+  Message <- 'No problems occured'
+  invSS <- tryCatch(solve(cov_mtrx), error = function(e) e)
+  if(!is.matrix(invSS)) {
+    invSS <- MASS::ginv(cov_mtrx)
+    invSS <- invSS[1:p, 1:p]
+    Message <- 'solve() failed, falled back to generalized inverse'
+  }
+
   means <- .rowMeans(x, m=p, n=n)
   I_vect <- rep(1, times=p)
   Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
@@ -49,7 +57,8 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
                  W_EU_hat=W_EU_hat,
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
-                 Sharpe=Sharpe
+                 Sharpe=Sharpe,
+                 Message=Message
                  ),
             class = c("ExUtil_portfolio_mean_Bayes-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
@@ -74,10 +83,21 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
   cl <- match.call()
   if (is.data.frame(x)) x <- as.matrix(x)
 
-  cov_mtrx <- Sigma_sample_estimator(x)
-  invSS <- solve(cov_mtrx)
+  # cov_mtrx <- Sigma_sample_estimator(x)
+  # invSS <- solve(cov_mtrx)
   p <- nrow(x)
   n <- ncol(x)
+
+  #### Direct / inverse covariance computation
+  cov_mtrx <- Sigma_sample_estimator(x)
+  Message <- 'No problems occured'
+  invSS <- tryCatch(solve(cov_mtrx), error = function(e) e)
+  if(!is.matrix(invSS)) {
+    invSS <- MASS::ginv(cov_mtrx)
+    invSS <- invSS[1:p, 1:p]
+    Message <- 'solve() failed, falled back to generalized inverse'
+  }
+
   means <- .rowMeans(x, m=p, n=n)
   I_vect <- rep(1, times=p)
   Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
@@ -105,7 +125,8 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
                  W_EU_hat=W_EU_hat,
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
-                 Sharpe=Sharpe
+                 Sharpe=Sharpe,
+                 Message=Message
                  ),
             class = c("ExUtil_portfolio_mean_James-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
@@ -132,10 +153,21 @@ new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
   cl <- match.call()
   if (is.data.frame(x)) x <- as.matrix(x)
 
-  cov_mtrx <- Sigma_sample_estimator(x)
-  invSS <- solve(cov_mtrx)
+  # cov_mtrx <- Sigma_sample_estimator(x)
+  # invSS <- solve(cov_mtrx)
   p <- nrow(x)
   n <- ncol(x)
+
+  #### Direct / inverse covariance computation
+  cov_mtrx <- Sigma_sample_estimator(x)
+  Message <- 'No problems occured'
+  invSS <- tryCatch(solve(cov_mtrx), error = function(e) e)
+  if(!is.matrix(invSS)) {
+    invSS <- MASS::ginv(cov_mtrx)
+    invSS <- invSS[1:p, 1:p]
+    Message <- 'solve() failed, falled back to generalized inverse'
+  }
+
   means <- .rowMeans(x, m=p, n=n)
   I_vect <- rep(1, times=p)
   Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
@@ -164,7 +196,8 @@ new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
                  W_EU_hat=W_EU_hat,
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
-                 Sharpe=Sharpe
+                 Sharpe=Sharpe,
+                 Message=Message
   ),
   class = c("ExUtil_portfolio_mean_BOP", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
