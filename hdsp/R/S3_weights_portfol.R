@@ -85,8 +85,8 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 
   colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
 
-  Port_Var <- t(weights)%*%cov_mtrx%*%weights
-  Port_mean_return <- mu_est %*% weights
+  Port_Var <- as.numeric(t(weights)%*%cov_mtrx%*%weights)
+  Port_mean_return <- as.numeric(mu_est %*% weights)
   Sharpe <- Port_mean_return/sqrt(Port_Var)
 
   structure(list(call=cl,
@@ -184,8 +184,8 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
 
   colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
 
-  Port_Var <- 1/(tones%*%iS%*%ones)
-  Port_mean_return <- mu_est %*% w_GMV_shr
+  Port_Var <- 1/as.numeric(tones%*%iS%*%ones)
+  Port_mean_return <- as.numeric(mu_est %*% w_GMV_shr)
   Sharpe <- Port_mean_return/sqrt(Port_Var)
 
   #### Output

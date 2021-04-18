@@ -127,3 +127,32 @@ ExUtil_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
                                     gamma=gamma)
   validate_ExUtil_portfolio(xx)
 }
+
+
+# Summary method for ExUtil_portfolio
+#' @export
+summary.ExUtil_portfolio <- function(object){
+
+  list(call=object$call
+  )
+}
+
+#' @export
+summary.ExUtil_portfolio_weights_BDOPS20 <- function(object){
+
+  list(call=object$call,
+       Port_Var=object$Port_Var,
+       Port_mean_return=object$Port_mean_return,
+       Sharpe=object$Sharpe
+      )
+}
+
+#' @export
+summary.GMV_portfolio_weights_BDPS19 <- function(object){
+
+  list(call=object$call,
+       Port_Var=object$Port_Var,
+       Port_mean_return=object$Port_mean_return,
+       Sharpe=object$Sharpe
+  )
+}

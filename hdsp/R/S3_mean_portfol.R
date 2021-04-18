@@ -199,5 +199,5 @@ new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
                  Sharpe=Sharpe,
                  Message=Message
   ),
-  class = c("ExUtil_portfolio_mean_BOP", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
+  class = c("ExUtil_portfolio_mean_BOP19", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
 }
