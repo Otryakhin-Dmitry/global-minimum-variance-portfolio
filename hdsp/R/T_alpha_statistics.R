@@ -37,15 +37,25 @@ Omega_hat_al_c <- function(x, c, b){
 
 
 # T_alpha, formula (44)
-T_alpha <- function(gamma, x, w_0, c) {
+#' @export
+T_alpha <- function(gamma, x, w_0, beta=0.05) {
 
   n <- ncol(x)
   p <- nrow(x)
-  Omega_hat_al_c <- Omega_hat_al_c(x=x, c=c, b=w_0)
-  d_0<-d_0(gamma, p, n)
 
-  as.numeric(sqrt(n) * alpha_hat_star_c(gamma=gamma, x=x, b=w_0) *
-             B_hat(gamma=gamma, x=x, b=w_0) / sqrt(t(d_0) %*% Omega_hat_al_c %*% d_0))
+  Omega_hat_al_c <- Omega_hat_al_c(x=x, c=p/n, b=w_0)
+  d_0<-d_0(gamma, p, n)
+  B_hat <- B_hat(gamma=gamma, x=x, b=w_0)
+
+  T_alpha <- as.numeric(sqrt(n) * alpha_hat_star_c(gamma=gamma, x=x, b=w_0) *
+                        B_hat / sqrt(t(d_0) %*% Omega_hat_al_c %*% d_0))
+
+  p_value <- 2*(1-pnorm(abs(T_alpha), mean = 0, sd = 1))
+  z <- qnorm(p=1-beta/2 , mean = 0, sd = 1)
+  alpha_lower <- as.numeric(z/sqrt(n) * sqrt(t(d_0) %*% Omega_hat_al_c %*% d_0) / B_hat)
+  alpha_higher <- -alpha_lower
+  list(T_alpha=T_alpha, p_value=p_value,
+       alpha_lower=alpha_lower, alpha_higher=alpha_higher)
 }
 
 

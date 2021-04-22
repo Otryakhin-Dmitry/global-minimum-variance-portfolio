@@ -24,7 +24,7 @@ test_that("Ts from (44) and (41) are equivalent", {
   for (ind in 1:ind_len) {
 
     x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
-    X[ind,1] <- T_alpha(gamma=gamma, x=x, w_0=w_0, c=p/n)
+    X[ind,1] <- T_alpha(gamma=gamma, x=x, w_0=w_0)$T_alpha
 
     # Computing T_alpha in another way, (29 & 41)
     Omega.est <- Omega_hat_al_c(x=x, c=p/n, b=w_0)
