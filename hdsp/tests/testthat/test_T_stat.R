@@ -27,7 +27,7 @@ test_that("Ts from (44) and (41) are equivalent", {
     X[ind,1] <- T_alpha(gamma=gamma, x=x, w_0=w_0)$T_alpha
 
     # Computing T_alpha in another way, (29 & 41)
-    Omega.est <- Omega_hat_al_c(x=x, c=p/n, b=w_0)
+    Omega.est <- Omega_hat_al_c(x=x, b=w_0)
 
     t.a<- c(R_hat_GMV(x)-R_GMV(mu, Sigma),
             V_hat_c(x)-V_GMV(Sigma),

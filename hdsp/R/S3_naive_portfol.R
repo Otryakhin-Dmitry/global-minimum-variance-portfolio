@@ -40,7 +40,6 @@ new_ExUtil_portfolio_naive <- function(x, gamma){
                  W_EU_hat=W_EU_hat,
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
-                 Sharpe=Sharpe
-  ),
+                 Sharpe=Sharpe),
   class = c("ExUtil_portfolio"))
 }

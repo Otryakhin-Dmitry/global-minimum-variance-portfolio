@@ -17,13 +17,20 @@ new_GMV_portfolio_weights_BDPS19(x, b, alph)
 constructor of GMVA portfolio object.
 }
 \examples{
-library(MASS)
+
 n<-3e2 # number of realizations
 p<-.5*n # number of assets
 b<-rep(1/p,p)
 
+# Assets with a diagonal covariance matrix
+x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+
+test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
+str(test)
+
+# Assets with a non-diagonal covariance matrix
 Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
-x <- t(mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
+x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
 test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
 str(test)

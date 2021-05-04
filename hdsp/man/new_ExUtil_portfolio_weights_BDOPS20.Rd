@@ -19,12 +19,22 @@ new_ExUtil_portfolio_weights_BDOPS20(x, gamma, b, alph)
 constructor of EU portfolio object. IEEE 2020
 }
 \examples{
+# Assets with a diagonal covariance matrix
+
 n<-3e2 # number of realizations
 p<-.5*n # number of assets
 b<-rep(1/p,p)
 gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+
+test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b, alph=0.05)
+str(test)
+
+# Assets with a non-diagonal covariance matrix
+
+Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
+x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
 test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b, alph=0.05)
 str(test)

@@ -5,12 +5,22 @@
 #' @param alph a numeric variable. The level of confidence for weight intervals
 #' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
+#' # Assets with a diagonal covariance matrix
+#'
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
 #' b<-rep(1/p,p)
 #' gamma<-1
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#'
+#' test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b, alph=0.05)
+#' str(test)
+#'
+#' # Assets with a non-diagonal covariance matrix
+#'
+#' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
+#' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
 #' test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b, alph=0.05)
 #' str(test)
@@ -26,13 +36,7 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 
   #### Direct / inverse covariance computation
   cov_mtrx <- Sigma_sample_estimator(x)
-  Message <- 'No problems occured'
-  invSS <- tryCatch(solve(cov_mtrx), error = function(e) e)
-  if(!is.matrix(invSS)) {
-    invSS <- MASS::ginv(cov_mtrx)
-    invSS <- invSS[1:p, 1:p]
-    Message <- 'solve() failed, falled back to generalized inverse'
-  }
+  invSS <- solve(cov_mtrx)
 
   mu_est <- .rowMeans(x, m=p, n=n)
   ones <- rep.int(1, p)
@@ -99,8 +103,7 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe,
-                 weight_intervals=T_dens,
-                 Message=Message),
+                 weight_intervals=T_dens),
             class = c("ExUtil_portfolio_weights_BDOPS20", "ExUtil_portfolio"))
   }
 
@@ -112,13 +115,20 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 #' @inheritParams new_ExUtil_portfolio_weights_BDOPS20
 #' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
-#' library(MASS)
+#'
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
 #' b<-rep(1/p,p)
 #'
+#' # Assets with a diagonal covariance matrix
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#'
+#' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
+#' str(test)
+#'
+#' # Assets with a non-diagonal covariance matrix
 #' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
-#' x <- t(mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
+#' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
 #' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
 #' str(test)
@@ -139,13 +149,7 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
 
   #### Direct / inverse covariance computation
   cov_mtrx <- Sigma_sample_estimator(x)
-  Message <- 'No problems occured'
-  iS <- tryCatch(solve(cov_mtrx), error = function(e) e)
-  if(!is.matrix(iS)) {
-    iS <- MASS::ginv(cov_mtrx)
-    iS <- iS[1:p, 1:p]
-    Message <- 'solve() failed, falled back to generalized inverse'
-  }
+  iS <- solve(cov_mtrx)
 
   V.est <- V_hat_c_fast(ones=ones, invSS=iS, tones=tones, c=cc)
   # V.est<-(1-cc)^{-1}/sum(tones%*%iS%*%ones) #estimated variance (cons.)
@@ -199,7 +203,6 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe,
-                 weight_intervals=T_dens,
-                 Message=Message),
+                 weight_intervals=T_dens),
             class = c("GMV_portfolio_weights_BDPS19", "ExUtil_portfolio"))
 }
