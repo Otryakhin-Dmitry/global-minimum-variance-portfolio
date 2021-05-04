@@ -18,7 +18,7 @@ EUShrinkPortfolio(x, gamma, type, subtype, ...)
 \item{...}{arguments to pass to portfolio constructors}
 }
 \value{
-an object of class ExUtil_portfolio potentially with a subclass.
+A portfolio in the form of an object of class ExUtil_portfolio potentially with a subclass.
 See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
 }
 \description{
@@ -26,15 +26,15 @@ The main function for EU portfolio construction. It is a dispatcher using method
 to arguments type and subtype.
 }
 \details{
-The available estimation methods are:\tabular{lll}{
-   Function \tab Paper \tab Type \cr
-   \code{\link{new_ExUtil_portfolio_mean_BayesStein}} \tab Jorion 1986 \tab mean \cr
-   \code{\link{new_ExUtil_portfolio_mean_JamesStein}} \tab Jorion 1986 \tab mean \cr
-   \code{\link{new_ExUtil_portfolio_mean_BOP19}} \tab Bodnar et al 2019 \tab mean \cr
-   \code{\link{new_ExUtil_portfolio_cov_LW02}} \tab Ledoit & Wolf 2020 \tab cov \cr
-   \code{\link{new_ExUtil_portfolio_cov_BGP14}} \tab Bodnar et al 2014 \tab cov \cr
-   \code{\link{new_ExUtil_portfolio_icov_BGP16}} \tab Bodnar et al 2016 \tab inv_cov \cr
-   \code{\link{new_ExUtil_portfolio_weights_BDOPS20}} \tab Bodnar et al 2020 \tab weights \cr
+The available estimation methods are:\tabular{llll}{
+   Function \tab Paper \tab Type \tab Subtype \cr
+   \code{\link{new_ExUtil_portfolio_mean_BayesStein}} \tab Jorion 1986 \tab mean \tab Bayes-Stein \cr
+   \code{\link{new_ExUtil_portfolio_mean_JamesStein}} \tab Jorion 1986 \tab mean \tab James-Stein \cr
+   \code{\link{new_ExUtil_portfolio_mean_BOP19}} \tab Bodnar et al 2019 \tab mean \tab BOP19 \cr
+   \code{\link{new_ExUtil_portfolio_cov_LW02}} \tab Ledoit & Wolf 2020 \tab cov \tab LW02 \cr
+   \code{\link{new_ExUtil_portfolio_cov_BGP14}} \tab Bodnar et al 2014 \tab cov \tab BGP14 \cr
+   \code{\link{new_ExUtil_portfolio_icov_BGP16}} \tab Bodnar et al 2016 \tab inv_cov \tab BGP16 \cr
+   \code{\link{new_ExUtil_portfolio_weights_BDOPS20}} \tab Bodnar et al 2020 \tab weights \tab  \cr
 }
 }
 \examples{

@@ -36,7 +36,26 @@ Omega_hat_al_c <- function(x, b){
 }
 
 
-# T_alpha, formula (44)
+#  T_alpha, formula (44) in BDOP20
+#
+#' T statistic for shrinkage intensity
+#'
+#' An asymptotic test of a given EU portfolio. The tested hypotheses are
+#' \deqn{H_0: w_EU = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
+#' @inheritParams EUShrinkPortfolio
+#' @param w_0 a numeric vector of tested weights.
+#' @param beta a confidence level for alpha
+#' @references \insertRef{BDOPS2020}{hdsp}
+#' @examples
+#' n<-3e2 # number of realizations
+#' p<-.5*n # number of assets
+#' b<-rep(1/p,p)
+#' gamma<-1
+#'
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#'
+#' T_alpha <- T_alpha(gamma=gamma, x=x, w_0=b, beta=0.05)
+#' T_alpha
 #' @export
 T_alpha <- function(gamma, x, w_0, beta=0.05) {
 

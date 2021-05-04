@@ -1,4 +1,4 @@
-context("T_alpha")
+context("T_alpha test")
 
 ###############################
 n<-5e2 # number of realizations
@@ -39,6 +39,32 @@ test_that("Ts from (44) and (41) are equivalent", {
   }
 
   expect_true(all(round(X[,1], digits =4)==round(X[,2], digits =4)))
+})
+
+
+
+test_that("Ts are standard normal", {
+
+  if (!requireNamespace("EstimDiagnostics", quietly =TRUE)) skip("package waldo is not installed")
+  library('EstimDiagnostics')
+
+  set.seed(1)
+  sample <-
+  replicate(n=3e1, {
+    x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+    T_alpha <- T_alpha(gamma=gamma, x=x, w_0=w_0, beta=0.05)
+    T_alpha$T_alpha
+  })
+  expect_distfit(sample, p_value = 0.01, nulldist=pnorm, mean = 0, sd = 1)
+
+  set.seed(2)
+  sample <-
+    replicate(n=3e1, {
+      x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+      T_alpha <- T_alpha(gamma=gamma, x=x, w_0=w_0, beta=0.05)
+      T_alpha$T_alpha
+    })
+  expect_distfit(sample, p_value = 0.01, nulldist=pnorm, mean = 0, sd = 1)
 })
 
 

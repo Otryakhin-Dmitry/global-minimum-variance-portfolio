@@ -9,15 +9,15 @@
 #'
 #' The available estimation methods are:
 #'
-#' | Function | Paper | Type |
-#' | --- | --- | --- |
-#' | \code{\link{new_ExUtil_portfolio_mean_BayesStein}} | Jorion 1986 | mean |
-#' | \code{\link{new_ExUtil_portfolio_mean_JamesStein}} | Jorion 1986 | mean |
-#' | \code{\link{new_ExUtil_portfolio_mean_BOP19}} | Bodnar et al 2019 | mean |
-#' | \code{\link{new_ExUtil_portfolio_cov_LW02}} | Ledoit & Wolf 2020 | cov |
-#' | \code{\link{new_ExUtil_portfolio_cov_BGP14}} | Bodnar et al 2014 | cov |
-#' | \code{\link{new_ExUtil_portfolio_icov_BGP16}} | Bodnar et al 2016 | inv_cov |
-#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS20}} | Bodnar et al 2020 | weights |
+#' | Function | Paper | Type | Subtype |
+#' | --- | --- | --- | --- |
+#' | \code{\link{new_ExUtil_portfolio_mean_BayesStein}} | Jorion 1986 | mean | Bayes-Stein |
+#' | \code{\link{new_ExUtil_portfolio_mean_JamesStein}} | Jorion 1986 | mean | James-Stein |
+#' | \code{\link{new_ExUtil_portfolio_mean_BOP19}} | Bodnar et al 2019 | mean | BOP19 |
+#' | \code{\link{new_ExUtil_portfolio_cov_LW02}} | Ledoit & Wolf 2020 | cov | LW02 |
+#' | \code{\link{new_ExUtil_portfolio_cov_BGP14}} | Bodnar et al 2014 | cov | BGP14 |
+#' | \code{\link{new_ExUtil_portfolio_icov_BGP16}} | Bodnar et al 2016 | inv_cov | BGP16 |
+#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS20}} | Bodnar et al 2020 | weights | |
 #'
 #' @md
 #' @param x a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.
@@ -26,7 +26,7 @@
 #' @param subtype a character. The exact method to use within the type.
 #' @param ... arguments to pass to portfolio constructors
 #'
-#' @return an object of class ExUtil_portfolio potentially with a subclass.
+#' @return A portfolio in the form of an object of class ExUtil_portfolio potentially with a subclass.
 #' See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
 #' @examples
 #' n<-3e2 # number of realizations

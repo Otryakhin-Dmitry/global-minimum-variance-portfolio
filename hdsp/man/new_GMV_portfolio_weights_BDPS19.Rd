@@ -37,5 +37,7 @@ str(test)
 
 }
 \references{
-\insertRef{BDOPS2020}{hdsp}
+\insertRef{BDPS2019}{hdsp}
+
+\insertRef{BPS2018}{hdsp}
 }

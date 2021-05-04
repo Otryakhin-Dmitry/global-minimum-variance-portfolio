@@ -133,8 +133,7 @@ ExUtil_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
 #' @export
 summary.ExUtil_portfolio <- function(object){
 
-  list(call=object$call
-  )
+  list(call=object$call)
 }
 
 #' @export

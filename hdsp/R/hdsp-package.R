@@ -30,5 +30,5 @@ NULL
 NULL
 
 # Imports from stats
-#' @importFrom stats cov pchisq qnorm
+#' @importFrom stats cov pchisq qnorm pnorm
 NULL

@@ -113,7 +113,8 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric value. The target for weight shrinkage.
 #' @inheritParams new_ExUtil_portfolio_weights_BDOPS20
-#' @references \insertRef{BDOPS2020}{hdsp}
+#' @references \insertRef{BDPS2019}{hdsp}
+#' @references \insertRef{BPS2018}{hdsp}
 #' @examples
 #'
 #' n<-3e2 # number of realizations
@@ -152,8 +153,6 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
   iS <- solve(cov_mtrx)
 
   V.est <- V_hat_c_fast(ones=ones, invSS=iS, tones=tones, c=cc)
-  # V.est<-(1-cc)^{-1}/sum(tones%*%iS%*%ones) #estimated variance (cons.)
-  # Q.est<- iS-(iS%*%ones%*%tones%*%iS)/sum(tones%*%iS%*%ones)
   Q.est <- Q_hat_n_fast(invSS=iS, Ip=ones, tIp=tones)
 
   ####  for calculating shrinkage GMVP weights
