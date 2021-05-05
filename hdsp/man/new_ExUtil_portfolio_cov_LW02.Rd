@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_cov_portfol.R
 \name{new_ExUtil_portfolio_cov_LW02}
 \alias{new_ExUtil_portfolio_cov_LW02}
-\title{Ledoit and Wolf 2020}
+\title{constructor of EU portfolio object. Ledoit and Wolf 2020}
 \usage{
 new_ExUtil_portfolio_cov_LW02(x, gamma)
 }
@@ -11,8 +11,21 @@ new_ExUtil_portfolio_cov_LW02(x, gamma)
 
 \item{gamma}{a numeric variable. Investors attitude towards risk.}
 }
+\value{
+an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+   Element \tab Description \cr
+   call \tab the function call with which it was created \cr
+   cov_mtrx \tab the covariance matrix estimate of the assets according to Ledoit and Wolf 2020 \cr
+   inv_cov_mtrx \tab the inverse of the covariance matrix estimate \cr
+   means \tab sample mean vector estimate for the assets \cr
+   W_EU_hat \tab portfolio weights estimate obtained via the above cov_mtrx and means \cr
+   Port_Var \tab portfolio variance \cr
+   Port_mean_return \tab portfolio mean returns \cr
+   Sharpe \tab portfolio Sharpe coefficient \cr
+}
+}
 \description{
-Ledoit and Wolf 2020
+constructor of EU portfolio object. Ledoit and Wolf 2020
 }
 \examples{
 c <- 0.4

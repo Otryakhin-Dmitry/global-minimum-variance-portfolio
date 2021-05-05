@@ -38,7 +38,7 @@ test_that("alphas EU and GMV work and are equal when gamma=Inf and components of
   w_0 <- rep(1/p,p)
   mu <- seq(0.2,-0.2, length.out=p)
 
-  cov_mat <- RandCovMtrx(n=n, p=p, mu=mu)
+  cov_mat <- RandCovMtrx(n=n, p=p)
   x <- t(mvrnorm(n,mu, cov_mat))
 
   al_EU <- alpha_hat_star_c(gamma=Inf, x, b=w_0) # must be computable
@@ -85,7 +85,7 @@ test_that("Remark 1. Variances on both sides must be equal; components of x are 
   mu <- rep(0,p)
   mu[1:10] <-c(1,-1,2,4,6,-10,3,0,2,5)
   set.seed(2)
-  Sigma <- 10*RandCovMtrx(n=n, p=p, mu=mu)
+  Sigma <- 10*RandCovMtrx(n=n, p=p)
 
   vect_as <- sqrt(n)*
     replicate(n=9e2, {

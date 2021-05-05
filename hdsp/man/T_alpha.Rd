@@ -15,6 +15,17 @@ T_alpha(gamma, x, w_0, beta = 0.05)
 
 \item{beta}{a confidence level for alpha}
 }
+\value{
+\tabular{ll}{
+   Element \tab Description \cr
+   alpha_hat \tab  \cr
+   alpha_sd \tab  \cr
+   alpha_lower \tab  \cr
+   alpha_upper \tab  \cr
+   T_alpha \tab  \cr
+   p_value \tab  \cr
+}
+}
 \description{
 An asymptotic test of a given EU portfolio. The tested hypotheses are
 \deqn{H_0: w_EU = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}

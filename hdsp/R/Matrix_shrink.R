@@ -43,7 +43,7 @@ CovShrinkBGP14<-function(n, TM, SCM)
 
 #' Ledoit-Wolf Nonlinear shrinkage estimator (Annals of Statistics (2020))
 #'
-#' Returns the estimator of the covariance matrix.
+#' Returns the estimation of the covariance matrix.
 #'
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
 #' @references \insertRef{LW2020}{hdsp}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_cov_portfol.R
 \name{new_ExUtil_portfolio_cov_BGP14}
 \alias{new_ExUtil_portfolio_cov_BGP14}
-\title{Bodnar, Gupta, Parolya 2014}
+\title{constructor of EU portfolio object. Bodnar, Gupta, Parolya 2014}
 \usage{
 new_ExUtil_portfolio_cov_BGP14(x, gamma, TM)
 }
@@ -13,8 +13,21 @@ new_ExUtil_portfolio_cov_BGP14(x, gamma, TM)
 
 \item{TM}{the target matrix for shrinkage of covariance}
 }
+\value{
+an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+   Element \tab Description \cr
+   call \tab the function call with which it was created \cr
+   cov_mtrx \tab the covariance matrix estimate of the assets according to Bodnar et al, 2014 \cr
+   inv_cov_mtrx \tab the inverse of the covariance matrix estimate \cr
+   means \tab sample mean vector estimate for the assets \cr
+   W_EU_hat \tab portfolio weights estimate obtained via the above cov_mtrx and means \cr
+   Port_Var \tab portfolio variance \cr
+   Port_mean_return \tab portfolio mean returns \cr
+   Sharpe \tab portfolio Sharpe coefficient \cr
+}
+}
 \description{
-Bodnar, Gupta, Parolya 2014
+constructor of EU portfolio object. Bodnar, Gupta, Parolya 2014
 }
 \examples{
 c <- 0.4

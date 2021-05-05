@@ -11,6 +11,9 @@ mean_js(x, mu_0)
 
 \item{mu_0}{a numeric value. The scaling of the target for shrinkage of the mean vector.}
 }
+\value{
+numeric vector of mean values
+}
 \description{
 James-Stein shrinkage mean estimator
 }

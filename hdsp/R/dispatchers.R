@@ -158,7 +158,7 @@ CovarEstim <- function(x, type, ...)
 
 #' Mean vector shrinkage estimator
 #'
-#' Essentially it is a function dispatcher for mean value estimators that chooses a method according to the type argument.
+#' A user-friendly function for estimation of mean vectors from data. Essentially it is a function dispatcher for mean value estimators that chooses a method according to the type argument.
 #'
 #' The available estimation methods are:
 #'

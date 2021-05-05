@@ -10,7 +10,7 @@ nonlin_shrinkLW(x)
 \item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
 }
 \description{
-Returns the estimator of the covariance matrix.
+Returns the estimation of the covariance matrix.
 }
 \examples{
 n<-5e2

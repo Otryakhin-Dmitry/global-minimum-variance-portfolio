@@ -13,6 +13,19 @@ new_ExUtil_portfolio_icov_BGP16(x, gamma, TM)
 
 \item{TM}{the target matrix for shrinkage of the inverse covariance matrix}
 }
+\value{
+an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+   Element \tab Description \cr
+   call \tab the function call with which it was created \cr
+   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   inv_cov_mtrx \tab the inverse of the covariance matrix estimate obtained via the method from Bodnar et al, 2016 \cr
+   means \tab sample mean vector estimate for the assets \cr
+   W_EU_hat \tab portfolio weights estimate obtained via the above inv_cov_mtrx and means \cr
+   Port_Var \tab portfolio variance \cr
+   Port_mean_return \tab portfolio mean returns \cr
+   Sharpe \tab portfolio Sharpe coefficient \cr
+}
+}
 \description{
 Portfolio with inverse covariance shrinkage
 }

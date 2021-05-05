@@ -6,7 +6,7 @@ p<-.5*n # number of assets
 b<-rep(1/p,p)
 
 
-Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
+Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 x <- t(mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
 test_GMV <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)

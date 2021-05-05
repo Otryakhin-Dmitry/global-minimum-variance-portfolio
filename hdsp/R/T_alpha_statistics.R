@@ -45,6 +45,18 @@ Omega_hat_al_c <- function(x, b){
 #' @inheritParams EUShrinkPortfolio
 #' @param w_0 a numeric vector of tested weights.
 #' @param beta a confidence level for alpha
+#' @return
+#'
+#' | Element | Description |
+#' | --- | --- |
+#' | alpha_hat |  |
+#' | alpha_sd |  |
+#' | alpha_lower |  |
+#' | alpha_upper |  |
+#' | T_alpha |  |
+#' | p_value |  |
+#' @md
+#'
 #' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
 #' n<-3e2 # number of realizations

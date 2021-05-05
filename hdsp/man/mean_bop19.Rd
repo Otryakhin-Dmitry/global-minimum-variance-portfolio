@@ -11,6 +11,9 @@ mean_bop19(x, mu_0)
 
 \item{mu_0}{a numeric vector. The target for shrinkage of the mean vector.}
 }
+\value{
+numeric vector of mean values
+}
 \description{
 BOP shrinkage estimator
 }

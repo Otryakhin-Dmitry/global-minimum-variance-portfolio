@@ -3,6 +3,23 @@
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric variable. The target for weight shrinkage.
 #' @param alph a numeric variable. The level of confidence for weight intervals
+#' @return an object of class ExUtil_portfolio with a subclass ... .
+#'
+#' | Element | Description |
+#' | --- | --- |
+#' | call | the function call with which it was created |
+#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | inv_cov_mtrx | the inverse of the sample covariance matrix |
+#' | means | sample mean vector estimate for the assets |
+#' | W_EU_hat | portfolio weights_sample estimate |
+#' | weights | shrunk portfolio weights |
+#' | alpha | shrinkage intensity for the weights |
+#' | Port_Var | portfolio variance |
+#' | Port_mean_return | portfolio mean returns |
+#' | Sharpe | portfolio Sharpe coefficient |
+#' | weight_intervals | A data frame |
+#' @md
+#'
 #' @references \insertRef{BDOPS2020}{hdsp}
 #' @examples
 #' # Assets with a diagonal covariance matrix
@@ -15,7 +32,7 @@
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
 #' test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b, alph=0.05)
-#' str(test)
+#' summary(test)
 #'
 #' # Assets with a non-diagonal covariance matrix
 #'
@@ -113,6 +130,23 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric value. The target for weight shrinkage.
 #' @inheritParams new_ExUtil_portfolio_weights_BDOPS20
+#' @return an object of class ExUtil_portfolio with a subclass ... .
+#'
+#' | Element | Description |
+#' | --- | --- |
+#' | call | the function call with which it was created |
+#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | inv_cov_mtrx | the inverse of the sample covariance matrix |
+#' | means | sample mean vector estimate for the assets |
+#' | w_GMVP | portfolio weights_sample estimate |
+#' | weights | shrunk portfolio weights |
+#' | alpha | shrinkage intensity for the weights |
+#' | Port_Var | portfolio variance |
+#' | Port_mean_return | portfolio mean returns |
+#' | Sharpe | portfolio Sharpe coefficient |
+#' | weight_intervals | A data frame |
+#' @md
+#'
 #' @references \insertRef{BDPS2019}{hdsp}
 #' @references \insertRef{BPS2018}{hdsp}
 #' @examples
@@ -132,7 +166,7 @@ new_ExUtil_portfolio_weights_BDOPS20 <- function(x, gamma, b, alph){
 #' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
 #' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
-#' str(test)
+#' summary(test)
 #'
 #' @export
 new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){

@@ -4,13 +4,16 @@ Version: 0.1.0
 Authors@R: 
     c(person(given = "Taras", 
              family = "Bodnar", 
-             role = "aut"),
+             role = "aut",
+             comment = c(ORCID = "0000-0001-7855-8221")),
       person(given = "Solomiia", 
              family = "Dmytriv", 
-             role = "aut"),
+             role = "aut",
+             comment = c(ORCID = "0000-0003-1855-3044")),
       person(given = "Yarema", 
              family = "Okhrin", 
-             role = "aut"),
+             role = "aut",
+             comment = c(ORCID = "0000-0003-4704-5233")),
       person(given = "Dmitry", 
              family = "Otryakhin", 
              role = c("aut", "cre"),             
@@ -21,9 +24,9 @@ Authors@R:
              role = "aut",
              comment = c(ORCID = "0000-0003-2147-2288")))
 Maintainer: Dmitry Otryakhin <d.otryakhin.acad@protonmail.ch>
-Author: Taras Bodnar [aut],
-    Solomiia Dmytriv [aut],
-    Yarema Okhrin [aut],
+Author: Taras Bodnar [aut] (<https://orcid.org/0000-0001-7855-8221>),
+    Solomiia Dmytriv [aut] (<https://orcid.org/0000-0003-1855-3044>),
+    Yarema Okhrin [aut] (<https://orcid.org/0000-0003-4704-5233>),
     Dmitry Otryakhin [aut, cre] (<https://orcid.org/0000-0002-4700-7221>), 
     Nestor Parolya [aut] (<https://orcid.org/0000-0003-2147-2288>)
 Description: Constructs high dimensional Expected Utility portfolios using various 

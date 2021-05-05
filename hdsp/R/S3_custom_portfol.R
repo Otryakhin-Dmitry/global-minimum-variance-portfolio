@@ -131,13 +131,13 @@ ExUtil_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
 
 # Summary method for ExUtil_portfolio
 #' @export
-summary.ExUtil_portfolio <- function(object){
+summary.ExUtil_portfolio <- function(object, ...){
 
   list(call=object$call)
 }
 
 #' @export
-summary.ExUtil_portfolio_weights_BDOPS20 <- function(object){
+summary.ExUtil_portfolio_weights_BDOPS20 <- function(object, ...){
 
   list(call=object$call,
        Port_Var=object$Port_Var,
@@ -147,7 +147,7 @@ summary.ExUtil_portfolio_weights_BDOPS20 <- function(object){
 }
 
 #' @export
-summary.GMV_portfolio_weights_BDPS19 <- function(object){
+summary.GMV_portfolio_weights_BDPS19 <- function(object, ...){
 
   list(call=object$call,
        Port_Var=object$Port_Var,

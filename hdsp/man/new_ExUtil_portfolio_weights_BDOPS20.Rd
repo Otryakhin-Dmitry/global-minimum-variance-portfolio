@@ -15,6 +15,22 @@ new_ExUtil_portfolio_weights_BDOPS20(x, gamma, b, alph)
 
 \item{alph}{a numeric variable. The level of confidence for weight intervals}
 }
+\value{
+an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+   Element \tab Description \cr
+   call \tab the function call with which it was created \cr
+   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
+   means \tab sample mean vector estimate for the assets \cr
+   W_EU_hat \tab portfolio weights_sample estimate \cr
+   weights \tab shrunk portfolio weights \cr
+   alpha \tab shrinkage intensity for the weights \cr
+   Port_Var \tab portfolio variance \cr
+   Port_mean_return \tab portfolio mean returns \cr
+   Sharpe \tab portfolio Sharpe coefficient \cr
+   weight_intervals \tab A data frame \cr
+}
+}
 \description{
 constructor of EU portfolio object. IEEE 2020
 }
@@ -29,7 +45,7 @@ gamma<-1
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
 test <- new_ExUtil_portfolio_weights_BDOPS20(x=x, gamma=gamma, b=b, alph=0.05)
-str(test)
+summary(test)
 
 # Assets with a non-diagonal covariance matrix
 

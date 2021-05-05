@@ -11,6 +11,19 @@ new_ExUtil_portfolio_naive(x, gamma)
 
 \item{gamma}{a numeric variable. Investors attitude towards risk.}
 }
+\value{
+an object of class ExUtil_portfolio\tabular{ll}{
+   Element \tab Description \cr
+   call \tab the function call with which it was created \cr
+   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
+   means \tab sample mean vector estimate for the assets \cr
+   W_EU_hat \tab portfolio weights_sample estimate \cr
+   Port_Var \tab portfolio variance \cr
+   Port_mean_return \tab portfolio mean returns \cr
+   Sharpe \tab portfolio Sharpe coefficient \cr
+}
+}
 \description{
 constructor of EU portfolio object. Type=naive.
 }

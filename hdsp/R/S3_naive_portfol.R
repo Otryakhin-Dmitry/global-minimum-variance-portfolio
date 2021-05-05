@@ -1,6 +1,20 @@
 #' constructor of EU portfolio object. Type=naive.
 #'
 #' @inheritParams EUShrinkPortfolio
+#' @return an object of class ExUtil_portfolio
+#'
+#' | Element | Description |
+#' | --- | --- |
+#' | call | the function call with which it was created |
+#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | inv_cov_mtrx | the inverse of the sample covariance matrix |
+#' | means | sample mean vector estimate for the assets |
+#' | W_EU_hat | portfolio weights_sample estimate |
+#' | Port_Var | portfolio variance |
+#' | Port_mean_return | portfolio mean returns |
+#' | Sharpe | portfolio Sharpe coefficient |
+#' @md
+#'
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -14,7 +28,7 @@
 new_ExUtil_portfolio_naive <- function(x, gamma){
 
   if (is.data.frame(x)) x <- as.matrix(x)
-
+  cl <- match.call()
   cov_mtrx <- Sigma_sample_estimator(x)
   invSS <- solve(cov_mtrx)
   p <- nrow(x)
@@ -34,7 +48,8 @@ new_ExUtil_portfolio_naive <- function(x, gamma){
   Port_mean_return <- means %*% W_EU_hat
   Sharpe <- Port_mean_return/sqrt(Port_Var)
 
-  structure(list(cov_mtrx=cov_mtrx,
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=means,
                  W_EU_hat=W_EU_hat,

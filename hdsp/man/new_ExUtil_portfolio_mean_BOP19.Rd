@@ -13,6 +13,21 @@ new_ExUtil_portfolio_mean_BOP19(x, gamma, mu_0 = mu_0)
 
 \item{mu_0}{a numeric vector. The target for shrinkage of the mean vector of asset returns.}
 }
+\value{
+an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+   Element \tab Description \cr
+   call \tab the function call with which it was created \cr
+   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
+   means \tab mean vector estimate for the assets obtained through the method by Bodnar et al \cr
+   alpha_star_hat \tab shrinkage intensity for the mean vector \cr
+   beta_star_hat \tab shrinkage intensity for the target vector \cr
+   W_EU_hat \tab portfolio weights estimate computed via the above means and cov_mtrx \cr
+   Port_Var \tab portfolio variance \cr
+   Port_mean_return \tab portfolio mean returns \cr
+   Sharpe \tab portfolio Sharpe coefficient \cr
+}
+}
 \description{
 constructor of EU portfolio object. Type=mean, Mean.type=BOP.
 }
