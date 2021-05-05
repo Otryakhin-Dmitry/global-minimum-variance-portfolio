@@ -5,13 +5,30 @@
 #'
 #' It returns the estimator CovShrink(TM,SCM)=alfa*SCM+beta*TM,
 #' where SCM should be the sample covariance matrix and TM is a shrinkage target.
-#' In most cases, we took TM=I but could be any deterministic pos. def. matrix.
+#' In most cases, we take TM=I but could be any deterministic pos. def. matrix.
 #' In order to use the estimator for portfolio weights one needs to invert it,
 #' i.e., solve(CovShrink(TM,SCM)).
 #' @param n the number of observations of x.
 #' @param TM a shrinkage target.
 #' @param SCM the sample covariance matrix.
 #' @references \insertRef{BGP2014}{hdsp}
+#' @examples
+#' # Parameter setting
+#' n<-5e2
+#' c<-0.7
+#' p<-c*n
+#' mu <- rep(0, p)
+#' Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+#'
+#' # Generating observations
+#' X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
+#'
+#' # Estimation
+#' TM <- matrix(0, nrow=p, ncol=p)
+#' diag(TM) <- 1
+#' SCM <- Sigma_sample_estimator(X)
+#' Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+#' Sigma_shr[1:6, 1:6]
 #' @export
 CovShrinkBGP14<-function(n, TM, SCM)
 {
@@ -30,6 +47,15 @@ CovShrinkBGP14<-function(n, TM, SCM)
 #'
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
 #' @references \insertRef{LW2020}{hdsp}
+#' @examples
+#' n<-5e2
+#' c<-0.7
+#' p<-c*n
+#' mu <- rep(0, p)
+#' Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+#'
+#' X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
+#' Sigma_shr <- nonlin_shrinkLW(X)
 #' @export
 nonlin_shrinkLW = function(x){
   # the original version suggested that p is # of columns

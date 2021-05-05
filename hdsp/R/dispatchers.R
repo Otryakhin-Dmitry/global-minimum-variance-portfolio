@@ -121,6 +121,7 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 #' @param x a matrix of asset returns. Rows represent different assets, columns- observations.
 #' @param type a character. The the estimation method to use.
 #' @param ... arguments to pass to estimators
+#' @return an object of class matrix
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -133,7 +134,7 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 #' diag(TM) <- 1
 #' Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
 #'
-#' Mtrx_bgp <- CovarEstim(x, type="LW20")
+#' Mtrx_lw <- CovarEstim(x, type="LW20")
 #' @export
 CovarEstim <- function(x, type, ...)
 {
@@ -170,6 +171,7 @@ CovarEstim <- function(x, type, ...)
 #' @md
 #'
 #' @inheritParams CovarEstim
+#' @return a numeric vector
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets

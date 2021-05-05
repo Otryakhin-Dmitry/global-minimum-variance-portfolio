@@ -13,6 +13,9 @@ MeanEstim(x, type, ...)
 
 \item{...}{arguments to pass to estimators}
 }
+\value{
+a numeric vector
+}
 \description{
 Essentially it is a function dispatcher for mean value estimators that chooses a method according to the type argument.
 }

@@ -37,10 +37,10 @@ SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55, mu=seq(0.2,-0.2, length.out=p)){
 #' p<-.5*n # number of assets
 #' b<-rep(1/p,p)
 #' # A non-diagonal covariance matrix
-#' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
+#' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 #' Mtrx[1:6,1:6]
 #' @export
-RandCovMtrx <- function(n=3e2, p=2e2, q=20.55, mu=seq(0.2,-0.2, length.out=p)){
+RandCovMtrx <- function(n=3e2, p=2e2, q=20.55){
 
   cc <- p/n
   #####---Covariance matrix from Wishart distr. with given eigenvalues---#####

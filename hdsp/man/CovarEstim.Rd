@@ -13,6 +13,9 @@ CovarEstim(x, type, ...)
 
 \item{...}{arguments to pass to estimators}
 }
+\value{
+an object of class matrix
+}
 \description{
 Essentially it is a function dispatcher for covariance estimation that chooses a method according to the type argument.
 }
@@ -36,5 +39,5 @@ TM <- matrix(0, p, p)
 diag(TM) <- 1
 Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
 
-Mtrx_bgp <- CovarEstim(x, type="LW20")
+Mtrx_lw <- CovarEstim(x, type="LW20")
 }

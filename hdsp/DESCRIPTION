@@ -18,13 +18,14 @@ Authors@R:
              comment = c(ORCID = "0000-0002-4700-7221")),             
       person(given = "Nestor", 
              family = "Parolya", 
-             role = "aut"))
+             role = "aut",
+             comment = c(ORCID = "0000-0003-2147-2288")))
 Maintainer: Dmitry Otryakhin <d.otryakhin.acad@protonmail.ch>
 Author: Taras Bodnar [aut],
     Solomiia Dmytriv [aut],
     Yarema Okhrin [aut],
     Dmitry Otryakhin [aut, cre] (<https://orcid.org/0000-0002-4700-7221>), 
-    Nestor Parolya [aut]
+    Nestor Parolya [aut] (<https://orcid.org/0000-0003-2147-2288>)
 Description: Constructs high dimensional Expected Utility portfolios using various 
     shrinkage estimators. Shrinkage estimators are available 
     for such quantities as asset mean returns, direct and inverse 

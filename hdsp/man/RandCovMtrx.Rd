@@ -4,7 +4,7 @@
 \alias{RandCovMtrx}
 \title{Covariance matrix generator}
 \usage{
-RandCovMtrx(n = 300, p = 200, q = 20.55, mu = seq(0.2, -0.2, length.out = p))
+RandCovMtrx(n = 300, p = 200, q = 20.55)
 }
 \description{
 Useful for examples and tests when an arbitrary covariance is needed.
@@ -15,6 +15,6 @@ n<-3e2 # number of realizations
 p<-.5*n # number of assets
 b<-rep(1/p,p)
 # A non-diagonal covariance matrix
-Mtrx <- RandCovMtrx(n=n, p=p, q=20.55, mu=seq(0.2,-0.2, length.out=p))
+Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 Mtrx[1:6,1:6]
 }

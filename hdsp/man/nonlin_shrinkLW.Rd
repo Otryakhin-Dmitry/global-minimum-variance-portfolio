@@ -12,6 +12,16 @@ nonlin_shrinkLW(x)
 \description{
 Returns the estimator of the covariance matrix.
 }
+\examples{
+n<-5e2
+c<-0.7
+p<-c*n
+mu <- rep(0, p)
+Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+
+X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
+Sigma_shr <- nonlin_shrinkLW(X)
+}
 \references{
 \insertRef{LW2020}{hdsp}
 }

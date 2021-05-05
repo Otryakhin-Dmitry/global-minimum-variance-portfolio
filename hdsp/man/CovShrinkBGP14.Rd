@@ -16,9 +16,27 @@ CovShrinkBGP14(n, TM, SCM)
 \description{
 It returns the estimator CovShrink(TM,SCM)=alfa*SCM+beta*TM,
 where SCM should be the sample covariance matrix and TM is a shrinkage target.
-In most cases, we took TM=I but could be any deterministic pos. def. matrix.
+In most cases, we take TM=I but could be any deterministic pos. def. matrix.
 In order to use the estimator for portfolio weights one needs to invert it,
 i.e., solve(CovShrink(TM,SCM)).
+}
+\examples{
+# Parameter setting
+n<-5e2
+c<-0.7
+p<-c*n
+mu <- rep(0, p)
+Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+
+# Generating observations
+X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
+
+# Estimation
+TM <- matrix(0, nrow=p, ncol=p)
+diag(TM) <- 1
+SCM <- Sigma_sample_estimator(X)
+Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+Sigma_shr[1:6, 1:6]
 }
 \references{
 \insertRef{BGP2014}{hdsp}
