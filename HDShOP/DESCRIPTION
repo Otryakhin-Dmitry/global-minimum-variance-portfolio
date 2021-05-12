@@ -1,0 +1,47 @@
+Package: HDShOP
+Title: High dimensional shrinkage optimal portfolios
+Version: 0.1.0
+Authors@R: 
+    c(person(given = "Taras", 
+             family = "Bodnar", 
+             role = "aut",
+             comment = c(ORCID = "0000-0001-7855-8221")),
+      person(given = "Solomiia", 
+             family = "Dmytriv", 
+             role = "aut",
+             comment = c(ORCID = "0000-0003-1855-3044")),
+      person(given = "Yarema", 
+             family = "Okhrin", 
+             role = "aut",
+             comment = c(ORCID = "0000-0003-4704-5233")),
+      person(given = "Dmitry", 
+             family = "Otryakhin", 
+             role = c("aut", "cre"),             
+             email = "d.otryakhin.acad@protonmail.ch", 
+             comment = c(ORCID = "0000-0002-4700-7221")),             
+      person(given = "Nestor", 
+             family = "Parolya", 
+             role = "aut",
+             comment = c(ORCID = "0000-0003-2147-2288")))
+Maintainer: Dmitry Otryakhin <d.otryakhin.acad@protonmail.ch>
+Author: Taras Bodnar [aut] (<https://orcid.org/0000-0001-7855-8221>),
+    Solomiia Dmytriv [aut] (<https://orcid.org/0000-0003-1855-3044>),
+    Yarema Okhrin [aut] (<https://orcid.org/0000-0003-4704-5233>),
+    Dmitry Otryakhin [aut, cre] (<https://orcid.org/0000-0002-4700-7221>), 
+    Nestor Parolya [aut] (<https://orcid.org/0000-0003-2147-2288>)
+Description: Constructs high dimensional Expected Utility portfolios using various 
+    shrinkage estimators. Shrinkage estimators are available 
+    for such quantities as asset mean returns, direct and inverse 
+    covariance matrices and portfolio weights.
+License: GPL-3
+Encoding: UTF-8
+Imports: 
+    Rdpack,
+Suggests: 
+    testthat,
+    EstimDiagnostics,
+    MASS,
+    corpcor,
+    waldo
+RdMacros: Rdpack
+RoxygenNote: 7.1.1
