@@ -7,17 +7,19 @@
 MeanEstim(x, type, ...)
 }
 \arguments{
-\item{x}{a matrix of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a matrix. Rows represent different variables, columns- observations.}
 
-\item{type}{a character. The the estimation method to use.}
+\item{type}{a character. The estimation method to be used.}
 
 \item{...}{arguments to pass to estimators}
 }
 \value{
-a numeric vector
+a numeric vector containing the specified estimation of the mean vector.
 }
 \description{
-A user-friendly function for estimation of mean vectors from data. Essentially it is a function dispatcher for mean value estimators that chooses a method according to the type argument.
+A user-friendly function for estimation of the mean vector from a set of vectors.
+Essentially, it is a function dispatcher for estimation of the mean vector that
+chooses a method accordingly to the type argument.
 }
 \details{
 The available estimation methods are:\tabular{lll}{
@@ -39,4 +41,9 @@ Mean_naive <- MeanEstim(x, type="naive")
 mu_0 <- rep(1/p, p)
 Mean_BOP <- MeanEstim(x, type="BOP19", mu_0=mu_0)
 
+}
+\references{
+\insertRef{Jorion1986}{HDShOP}
+
+\insertRef{BOP2019}{HDShOP}
 }

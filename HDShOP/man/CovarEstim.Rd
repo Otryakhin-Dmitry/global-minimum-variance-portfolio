@@ -7,9 +7,9 @@
 CovarEstim(x, type, ...)
 }
 \arguments{
-\item{x}{a matrix of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a matrix. Rows represent different variables, columns- observations.}
 
-\item{type}{a character. The the estimation method to use.}
+\item{type}{a character. The estimation method to be used.}
 
 \item{...}{arguments to pass to estimators}
 }

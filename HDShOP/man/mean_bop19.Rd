@@ -9,13 +9,13 @@ mean_bop19(x, mu_0)
 \arguments{
 \item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
 
-\item{mu_0}{a numeric vector. The target for shrinkage of the mean vector.}
+\item{mu_0}{a numeric vector. The target vector used in the construction of the shrinkage estimator of the mean vector.}
 }
 \value{
-numeric vector of mean values
+a numeric vector containing the shrinkage estimation of the mean vector
 }
 \description{
-BOP shrinkage estimator
+Shrinkage estimator of the high-dimensional mean vector as suggested in Bodnar et al. (2019).
 }
 \examples{
 n<-7e2 # number of realizations

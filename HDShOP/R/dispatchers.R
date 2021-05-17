@@ -118,8 +118,8 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 #' | \code{\link{nonlin_shrinkLW}} | Ledoit & Wolf 2020| LW20 |
 #' @md
 #'
-#' @param x a matrix of asset returns. Rows represent different assets, columns- observations.
-#' @param type a character. The the estimation method to use.
+#' @param x a matrix. Rows represent different variables, columns- observations.
+#' @param type a character. The estimation method to be used.
 #' @param ... arguments to pass to estimators
 #' @return an object of class matrix
 #' @examples
@@ -158,7 +158,9 @@ CovarEstim <- function(x, type, ...)
 
 #' Mean vector shrinkage estimator
 #'
-#' A user-friendly function for estimation of mean vectors from data. Essentially it is a function dispatcher for mean value estimators that chooses a method according to the type argument.
+#' A user-friendly function for estimation of the mean vector from a set of vectors.
+#' Essentially, it is a function dispatcher for estimation of the mean vector that
+#' chooses a method accordingly to the type argument.
 #'
 #' The available estimation methods are:
 #'
@@ -171,7 +173,11 @@ CovarEstim <- function(x, type, ...)
 #' @md
 #'
 #' @inheritParams CovarEstim
-#' @return a numeric vector
+#' @return a numeric vector containing the specified estimation of the mean vector.
+#' @references
+#' \insertRef{Jorion1986}{HDShOP}
+#'
+#' \insertRef{BOP2019}{HDShOP}
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets

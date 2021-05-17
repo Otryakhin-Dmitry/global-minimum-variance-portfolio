@@ -2,20 +2,21 @@
 % Please edit documentation in R/Mean_shrink.R
 \name{mean_js}
 \alias{mean_js}
-\title{James-Stein shrinkage mean estimator}
+\title{James-Stein shrinkage estimator of the mean vector}
 \usage{
 mean_js(x, mu_0)
 }
 \arguments{
 \item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
 
-\item{mu_0}{a numeric value. The scaling of the target for shrinkage of the mean vector.}
+\item{mu_0}{a numeric value. The scaling parameter of the target vector used in the
+construction of the shrinkage estimator of the mean vector.}
 }
 \value{
-numeric vector of mean values
+a numeric vector containing the James-Stein shrinkage estimator of the mean vector
 }
 \description{
-James-Stein shrinkage mean estimator
+James-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986)
 }
 \examples{
 n<-7e2 # number of realizations

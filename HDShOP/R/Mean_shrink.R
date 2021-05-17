@@ -1,9 +1,12 @@
 
-#' Bayes-Stein shrinkage mean estimator
+#' Bayes-Stein shrinkage estimator of the mean vector
+#'
+#' Bayes-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986)
 #'
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
-#' @param mu_0 a numeric value. The scaling of the target for shrinkage of the mean vector.
-#' @return numeric vector of mean values
+#' @param mu_0 a numeric value. The scaling parameter of the target vector used in the
+#' construction of the shrinkage estimator of the mean vector.
+#' @return a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
 #' @references \insertRef{Jorion1986}{HDShOP}
 #' @examples
 #' n <- 7e2 # number of realizations
@@ -27,10 +30,12 @@ mean_bs <- function(x, mu_0)
 }
 
 
-#' James-Stein shrinkage mean estimator
+#' James-Stein shrinkage estimator of the mean vector
+#'
+#' James-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986)
 #'
 #' @inheritParams mean_bs
-#' @return numeric vector of mean values
+#' @return a numeric vector containing the James-Stein shrinkage estimator of the mean vector
 #' @references \insertRef{Jorion1986}{HDShOP}
 #' @examples
 #' n<-7e2 # number of realizations
@@ -55,9 +60,11 @@ mean_js <- function(x, mu_0)
 
 #' BOP shrinkage estimator
 #'
+#'Shrinkage estimator of the high-dimensional mean vector as suggested in Bodnar et al. (2019).
+#'
 #' @param x a numeric matrix. Rows represent different variables, columns- observations.
-#' @param mu_0 a numeric vector. The target for shrinkage of the mean vector.
-#' @return numeric vector of mean values
+#' @param mu_0 a numeric vector. The target vector used in the construction of the shrinkage estimator of the mean vector.
+#' @return a numeric vector containing the shrinkage estimation of the mean vector
 #' @references \insertRef{BOP2019}{HDShOP}
 #' @examples
 #' n<-7e2 # number of realizations
