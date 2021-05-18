@@ -9,7 +9,7 @@ EUShrinkPortfolio(x, gamma, type, subtype, ...)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 
 \item{type}{a character. The type of methods to use to construct the portfolio.}
 
@@ -34,7 +34,8 @@ The available estimation methods are:\tabular{llll}{
    \code{\link{new_ExUtil_portfolio_cov_LW02}} \tab Ledoit & Wolf 2020 \tab cov \tab LW02 \cr
    \code{\link{new_ExUtil_portfolio_cov_BGP14}} \tab Bodnar et al 2014 \tab cov \tab BGP14 \cr
    \code{\link{new_ExUtil_portfolio_icov_BGP16}} \tab Bodnar et al 2016 \tab inv_cov \tab BGP16 \cr
-   \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} \tab Bodnar et al 2020 \tab weights \tab  \cr
+   \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} \tab Bodnar et al 2021 \tab weights \tab  \cr
+   \code{\link{new_GMV_portfolio_weights_BDPS19}} \tab Bodnar et al 2019 \tab weights \tab  \cr
 }
 }
 \examples{

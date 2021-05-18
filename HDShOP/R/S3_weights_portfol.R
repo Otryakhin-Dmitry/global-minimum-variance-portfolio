@@ -1,22 +1,22 @@
-#' constructor of EU portfolio object. IEEE 2020
+#' constructor of EU portfolio object. IEEE 2021
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric variable. The target for weight shrinkage.
 #' @param alph a numeric variable. The level of confidence for weight intervals
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_weights_BDOPS21.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean vector estimate for the assets |
+#' | means | sample mean vector estimate for the asset returns |
 #' | W_EU_hat | portfolio weights_sample estimate |
 #' | weights | shrunk portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' | weight_intervals | A data frame |
 #' @md
 #'
@@ -130,20 +130,20 @@ new_ExUtil_portfolio_weights_BDOPS21 <- function(x, gamma, b, alph){
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric value. The target for weight shrinkage.
 #' @inheritParams new_ExUtil_portfolio_weights_BDOPS21
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass GMV_portfolio_weights_BDPS19.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean vector estimate for the assets |
+#' | means | sample mean vector estimate for the asset returns |
 #' | w_GMVP | portfolio weights_sample estimate |
 #' | weights | shrunk portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' | weight_intervals | A data frame |
 #' @md
 #'

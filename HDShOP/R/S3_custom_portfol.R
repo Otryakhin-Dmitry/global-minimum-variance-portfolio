@@ -11,7 +11,7 @@
 #' This class is designed to describe Expected Utility portfolios. It comprises portfolio weights
 #' W_EU_hat, mean vector means and an inverse covariance inv_cov_mtrx. W_EU_hat and means both
 #' have the form of a numeric vector, while inv_cov_mtrx is a matrix. The direct covariance matrix
-#' is not included in order to cover cases where only the inverse one exists.
+#' is not included in order to cover cases where only the inverse exists.
 #'
 #' @examples
 #' n<-3e2 # number of realizations

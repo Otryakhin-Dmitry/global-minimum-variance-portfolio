@@ -1,24 +1,30 @@
 
-#' constructor of EU portfolio object. Type=mean, Mean.type=Bayes-Stein.
+#' EU portfolio with Bayes-Stein shrinkage of the mean vector of assets returns
+#'
+#' Expected utility portfolios constructed by inserting the Bayes-Stein shrinkage
+#' estimator for the mean vector of assets returns. For details of the estimation
+#' technique, see Jorion (1986).
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param mu_0 a numeric value. The scaling of the target for shrinkage of the mean vector.
 #' @references \insertRef{Jorion1986}{HDShOP}
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_mean_Bayes-Stein.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | mean vector estimate for the assets obtained through the Bayes-Stein method |
+#' | means | mean vector estimate for the asset returns obtained through the Bayes-Stein method |
 #' | alp_BS_hat | shrinkage intensity for the mean vector |
 #' | W_EU_hat | portfolio weights estimate computed via the above means and cov_mtrx |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
+#' @seealso \code{\link{mean_bs}} computes the Bayes-Stein shrinkage estimate of
+#' the mean vector
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -67,29 +73,34 @@ new_ExUtil_portfolio_mean_BayesStein <- function(x, gamma, mu_0=0){
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe),
-            class = c("ExUtil_portfolio_mean_Bayes-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
+            class = c("ExUtil_portfolio_mean_Bayes-Stein", "ExUtil_portfolio"))
 }
 
 
-#' constructor of EU portfolio object. Type=mean, Mean.type=James-Stein.
+#' EU portfolio with James-Stein shrinkage of the mean vector of assets returns
+#'
+#' Expected utility portfolios constructed by inserting the James-Stein shrinkage
+#' estimator for the mean vector of assets returns. For details of the estimation
+#' technique, see Jorion (1986).
 #'
 #' @inheritParams new_ExUtil_portfolio_mean_BayesStein
 #' @references \insertRef{Jorion1986}{HDShOP}
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_mean_James-Stein.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | mean vector estimate for the assets obtained through the James-Stein method |
+#' | means | mean vector estimate for the asset returns obtained through the James-Stein method |
 #' | alp_JS_hat | shrinkage intensity for the mean vector |
 #' | W_EU_hat | portfolio weights estimate computed via the above means and cov_mtrx |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' @md
-#'
+#' @seealso \code{\link{mean_js}} computes the James-Stein shrinkage estimate of
+#' the mean vector
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -140,31 +151,34 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe),
-            class = c("ExUtil_portfolio_mean_James-Stein", "ExUtil_portfolio")) # add alpha, stand dev, p-value when type=weights
+            class = c("ExUtil_portfolio_mean_James-Stein", "ExUtil_portfolio"))
 }
 
 
-#' constructor of EU portfolio object. Type=mean, Mean.type=BOP.
+
+#' EU portfolio with Bodnar-Okhrin-Parolya shrinkage of the mean vector of assets returns
+#'
+#' Expected utility portfolios constructed by inserting the shrinkage estimator
+#' for the mean vector developed in Bodnar, Okhrin and Parolya (2019).
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param mu_0 a numeric vector. The target for shrinkage of the mean vector of asset returns.
 #' @references \insertRef{BOP2019}{HDShOP}
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_mean_BOP19.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | mean vector estimate for the assets obtained through the method by Bodnar et al |
+#' | means | mean vector estimate for the asset returns obtained through the method by Bodnar et al (2019) |
 #' | alpha_star_hat | shrinkage intensity for the mean vector |
 #' | beta_star_hat | shrinkage intensity for the target vector |
 #' | W_EU_hat | portfolio weights estimate computed via the above means and cov_mtrx |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' @md
-#'
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -175,6 +189,8 @@ new_ExUtil_portfolio_mean_JamesStein <- function(x, gamma, mu_0=0){
 #'
 #' test <- new_ExUtil_portfolio_mean_BOP19(x=x, gamma=gamma, mu_0=mu_0)
 #' str(test)
+#' @seealso \code{\link{mean_bop19}} computes the Bodnar-Okhrin-Parolya shrinkage estimate of
+#' the mean vector
 #' @export
 new_ExUtil_portfolio_mean_BOP19 <- function(x, gamma, mu_0=mu_0){
 

@@ -9,21 +9,21 @@ new_ExUtil_portfolio_cov_BGP14(x, gamma, TM)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 
 \item{TM}{the target matrix for shrinkage of covariance}
 }
 \value{
-an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+an object of class ExUtil_portfolio with subclass ExUtil_portfolio_cov_BGP14.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
-   cov_mtrx \tab the covariance matrix estimate of the assets according to Bodnar et al, 2014 \cr
+   cov_mtrx \tab the covariance matrix estimate of the asset returns according to Bodnar et al, 2014 \cr
    inv_cov_mtrx \tab the inverse of the covariance matrix estimate \cr
-   means \tab sample mean vector estimate for the assets \cr
+   means \tab sample mean vector estimate for the asset returns \cr
    W_EU_hat \tab portfolio weights estimate obtained via the above cov_mtrx and means \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab portfolio mean returns \cr
-   Sharpe \tab portfolio Sharpe coefficient \cr
+   Sharpe \tab portfolio Sharpe ratio \cr
 }
 }
 \description{

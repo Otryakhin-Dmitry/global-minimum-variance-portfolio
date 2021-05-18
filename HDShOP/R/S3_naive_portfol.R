@@ -1,4 +1,7 @@
-#' constructor of EU portfolio object. Type=traditional
+#' Traditional EU portfolio
+#'
+#' Expected utility portfolios with the traditional estimators for the mean vector
+#' and the covariance matrix of the asset returns.
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @return an object of class ExUtil_portfolio
@@ -6,13 +9,13 @@
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean vector estimate for the assets |
+#' | means | sample mean vector estimate for the asset returns |
 #' | W_EU_hat | portfolio weights_sample estimate |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
 #' @examples
@@ -43,7 +46,7 @@ new_ExUtil_portfolio_traditional <- function(x, gamma){
       Q_n_hat %*% means / gamma,
     mode = 'numeric')
 
-  # Sharpe, mean return and portfol variance
+  # Sharpe, mean return and portfolio variance
   Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
   Port_mean_return <- means %*% W_EU_hat
   Sharpe <- Port_mean_return/sqrt(Port_Var)

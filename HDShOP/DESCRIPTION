@@ -29,9 +29,8 @@ Author: Taras Bodnar [aut] (<https://orcid.org/0000-0001-7855-8221>),
     Yarema Okhrin [aut] (<https://orcid.org/0000-0003-4704-5233>),
     Dmitry Otryakhin [aut, cre] (<https://orcid.org/0000-0002-4700-7221>), 
     Nestor Parolya [aut] (<https://orcid.org/0000-0003-2147-2288>)
-Description: Constructs high dimensional Expected Utility portfolios using various 
-    shrinkage estimators. Shrinkage estimators are available 
-    for such quantities as asset mean returns, direct and inverse 
+Description: Constructs high dimensional Expected Utility portfolios using various shrinkage estimators.
+    Shrinkage estimators are available for such quantities as asset mean returns, direct and inverse 
     covariance matrices and portfolio weights.
 License: GPL-3
 Encoding: UTF-8

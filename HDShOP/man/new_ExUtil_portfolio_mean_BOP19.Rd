@@ -2,34 +2,35 @@
 % Please edit documentation in R/S3_mean_portfol.R
 \name{new_ExUtil_portfolio_mean_BOP19}
 \alias{new_ExUtil_portfolio_mean_BOP19}
-\title{constructor of EU portfolio object. Type=mean, Mean.type=BOP.}
+\title{EU portfolio with Bodnar-Okhrin-Parolya shrinkage of the mean vector of assets returns}
 \usage{
 new_ExUtil_portfolio_mean_BOP19(x, gamma, mu_0 = mu_0)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 
 \item{mu_0}{a numeric vector. The target for shrinkage of the mean vector of asset returns.}
 }
 \value{
-an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+an object of class ExUtil_portfolio with subclass ExUtil_portfolio_mean_BOP19.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
-   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab mean vector estimate for the assets obtained through the method by Bodnar et al \cr
+   means \tab mean vector estimate for the asset returns obtained through the method by Bodnar et al (2019) \cr
    alpha_star_hat \tab shrinkage intensity for the mean vector \cr
    beta_star_hat \tab shrinkage intensity for the target vector \cr
    W_EU_hat \tab portfolio weights estimate computed via the above means and cov_mtrx \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab portfolio mean returns \cr
-   Sharpe \tab portfolio Sharpe coefficient \cr
+   Sharpe \tab portfolio Sharpe ratio \cr
 }
 }
 \description{
-constructor of EU portfolio object. Type=mean, Mean.type=BOP.
+Expected utility portfolios constructed by inserting the shrinkage estimator
+for the mean vector developed in Bodnar, Okhrin and Parolya (2019).
 }
 \examples{
 n<-3e2 # number of realizations
@@ -44,4 +45,8 @@ str(test)
 }
 \references{
 \insertRef{BOP2019}{HDShOP}
+}
+\seealso{
+\code{\link{mean_bop19}} computes the Bodnar-Okhrin-Parolya shrinkage estimate of
+the mean vector
 }

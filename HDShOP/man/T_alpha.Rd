@@ -7,7 +7,7 @@
 T_alpha(gamma, x, w_0, beta = 0.05)
 }
 \arguments{
-\item{gamma}{a numeric variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 

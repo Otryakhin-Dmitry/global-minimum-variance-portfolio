@@ -2,37 +2,37 @@
 % Please edit documentation in R/S3_weights_portfol.R
 \name{new_ExUtil_portfolio_weights_BDOPS21}
 \alias{new_ExUtil_portfolio_weights_BDOPS21}
-\title{constructor of EU portfolio object. IEEE 2020}
+\title{constructor of EU portfolio object. IEEE 2021}
 \usage{
 new_ExUtil_portfolio_weights_BDOPS21(x, gamma, b, alph)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 
 \item{b}{a numeric variable. The target for weight shrinkage.}
 
 \item{alph}{a numeric variable. The level of confidence for weight intervals}
 }
 \value{
-an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+an object of class ExUtil_portfolio with subclass ExUtil_portfolio_weights_BDOPS21.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
-   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate for the assets \cr
+   means \tab sample mean vector estimate for the asset returns \cr
    W_EU_hat \tab portfolio weights_sample estimate \cr
    weights \tab shrunk portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab portfolio mean returns \cr
-   Sharpe \tab portfolio Sharpe coefficient \cr
+   Sharpe \tab portfolio Sharpe ratio \cr
    weight_intervals \tab A data frame \cr
 }
 }
 \description{
-constructor of EU portfolio object. IEEE 2020
+constructor of EU portfolio object. IEEE 2021
 }
 \examples{
 # Assets with a diagonal covariance matrix

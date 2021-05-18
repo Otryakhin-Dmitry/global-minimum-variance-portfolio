@@ -2,30 +2,31 @@
 % Please edit documentation in R/S3_naive_portfol.R
 \name{new_ExUtil_portfolio_traditional}
 \alias{new_ExUtil_portfolio_traditional}
-\title{constructor of EU portfolio object. Type=traditional}
+\title{Traditional EU portfolio}
 \usage{
 new_ExUtil_portfolio_traditional(x, gamma)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 }
 \value{
 an object of class ExUtil_portfolio\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
-   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate for the assets \cr
+   means \tab sample mean vector estimate for the asset returns \cr
    W_EU_hat \tab portfolio weights_sample estimate \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab portfolio mean returns \cr
-   Sharpe \tab portfolio Sharpe coefficient \cr
+   Sharpe \tab portfolio Sharpe ratio \cr
 }
 }
 \description{
-constructor of EU portfolio object. Type=traditional
+Expected utility portfolios with the traditional estimators for the mean vector
+and the covariance matrix of the asset returns.
 }
 \examples{
 n<-3e2 # number of realizations

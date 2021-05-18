@@ -2,33 +2,35 @@
 % Please edit documentation in R/S3_mean_portfol.R
 \name{new_ExUtil_portfolio_mean_JamesStein}
 \alias{new_ExUtil_portfolio_mean_JamesStein}
-\title{constructor of EU portfolio object. Type=mean, Mean.type=James-Stein.}
+\title{EU portfolio with James-Stein shrinkage of the mean vector of assets returns}
 \usage{
 new_ExUtil_portfolio_mean_JamesStein(x, gamma, mu_0 = 0)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk.}
+\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 
 \item{mu_0}{a numeric value. The scaling of the target for shrinkage of the mean vector.}
 }
 \value{
-an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+an object of class ExUtil_portfolio with subclass ExUtil_portfolio_mean_James-Stein.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
-   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab mean vector estimate for the assets obtained through the James-Stein method \cr
+   means \tab mean vector estimate for the asset returns obtained through the James-Stein method \cr
    alp_JS_hat \tab shrinkage intensity for the mean vector \cr
    W_EU_hat \tab portfolio weights estimate computed via the above means and cov_mtrx \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab portfolio mean returns \cr
-   Sharpe \tab portfolio Sharpe coefficient \cr
+   Sharpe \tab portfolio Sharpe ratio \cr
 }
 }
 \description{
-constructor of EU portfolio object. Type=mean, Mean.type=James-Stein.
+Expected utility portfolios constructed by inserting the James-Stein shrinkage
+estimator for the mean vector of assets returns. For details of the estimation
+technique, see Jorion (1986).
 }
 \examples{
 n<-3e2 # number of realizations
@@ -42,4 +44,8 @@ str(test)
 }
 \references{
 \insertRef{Jorion1986}{HDShOP}
+}
+\seealso{
+\code{\link{mean_js}} computes the James-Stein shrinkage estimate of
+the mean vector
 }

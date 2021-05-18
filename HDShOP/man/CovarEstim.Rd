@@ -22,7 +22,7 @@ Essentially it is a function dispatcher for covariance estimation that chooses a
 \details{
 The available estimation methods are:\tabular{lll}{
    Function \tab Paper \tab Type \cr
-   \code{\link{Sigma_sample_estimator}} \tab  \tab naive \cr
+   \code{\link{Sigma_sample_estimator}} \tab  \tab traditional \cr
    \code{\link{CovShrinkBGP14}} \tab Bodnar et al 2014 \tab BGP14 \cr
    \code{\link{nonlin_shrinkLW}} \tab Ledoit & Wolf 2020 \tab LW20 \cr
 }

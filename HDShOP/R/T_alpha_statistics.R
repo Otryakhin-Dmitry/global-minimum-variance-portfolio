@@ -56,7 +56,6 @@ Omega_hat_al_c <- function(x, b){
 #' | T_alpha |  |
 #' | p_value |  |
 #' @md
-#'
 #' @references \insertRef{BDOPS2021}{HDShOP}
 #' @examples
 #' n<-3e2 # number of realizations

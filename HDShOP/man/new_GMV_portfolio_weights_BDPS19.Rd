@@ -14,18 +14,18 @@ new_GMV_portfolio_weights_BDPS19(x, b, alph)
 \item{alph}{a numeric variable. The level of confidence for weight intervals}
 }
 \value{
-an object of class ExUtil_portfolio with a subclass ... .\tabular{ll}{
+an object of class ExUtil_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
-   cov_mtrx \tab the sample covariance matrix of the assets \cr
+   cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate for the assets \cr
+   means \tab sample mean vector estimate for the asset returns \cr
    w_GMVP \tab portfolio weights_sample estimate \cr
    weights \tab shrunk portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab portfolio mean returns \cr
-   Sharpe \tab portfolio Sharpe coefficient \cr
+   Sharpe \tab portfolio Sharpe ratio \cr
    weight_intervals \tab A data frame \cr
 }
 }

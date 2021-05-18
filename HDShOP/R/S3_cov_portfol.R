@@ -4,18 +4,18 @@
 #' constructor of EU portfolio object. Ledoit and Wolf 2020
 #'
 #' @inheritParams EUShrinkPortfolio
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_cov_LW02.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the covariance matrix estimate of the assets according to Ledoit and Wolf 2020|
+#' | cov_mtrx | the covariance matrix estimate of the asset returns according to Ledoit and Wolf 2020|
 #' | inv_cov_mtrx | the inverse of the covariance matrix estimate |
-#' | means | sample mean vector estimate for the assets |
+#' | means | sample mean vector estimate for the asset returns |
 #' | W_EU_hat | portfolio weights estimate obtained via the above cov_mtrx and means |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
 #' @references \insertRef{LW2020}{HDShOP}
@@ -69,18 +69,18 @@ new_ExUtil_portfolio_cov_LW02 <- function(x, gamma){
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param TM the target matrix for shrinkage of covariance
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_cov_BGP14.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the covariance matrix estimate of the assets according to Bodnar et al, 2014|
+#' | cov_mtrx | the covariance matrix estimate of the asset returns according to Bodnar et al, 2014|
 #' | inv_cov_mtrx | the inverse of the covariance matrix estimate |
-#' | means | sample mean vector estimate for the assets |
+#' | means | sample mean vector estimate for the asset returns |
 #' | W_EU_hat | portfolio weights estimate obtained via the above cov_mtrx and means |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
 #' @references \insertRef{BGP2014}{HDShOP}
@@ -137,22 +137,25 @@ new_ExUtil_portfolio_cov_BGP14 <- function(x, gamma, TM){
 
 
 #### Inverse cov shrinkage
-#' Portfolio with inverse covariance shrinkage
+#' EU portfolio with shrinkage of precision matrix
+#'
+#' Expected utility portfolios constructed by inserting the direct shrinkage estimator
+#' for the precision matrix derived in Bodnar, Gupta, Parolya (2016).
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param TM the target matrix for shrinkage of the inverse covariance matrix
-#' @return an object of class ExUtil_portfolio with a subclass ... .
+#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_pm_BGP16.
 #'
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the assets |
+#' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the covariance matrix estimate obtained via the method from Bodnar et al, 2016 |
-#' | means | sample mean vector estimate for the assets |
+#' | means | sample mean vector estimate for the asset returns |
 #' | W_EU_hat | portfolio weights estimate obtained via the above inv_cov_mtrx and means |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | portfolio mean returns |
-#' | Sharpe | portfolio Sharpe coefficient |
+#' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
 #' @references \insertRef{BGP2016}{HDShOP}

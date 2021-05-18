@@ -17,11 +17,11 @@
 #' | \code{\link{new_ExUtil_portfolio_cov_LW02}} | Ledoit & Wolf 2020 | cov | LW02 |
 #' | \code{\link{new_ExUtil_portfolio_cov_BGP14}} | Bodnar et al 2014 | cov | BGP14 |
 #' | \code{\link{new_ExUtil_portfolio_icov_BGP16}} | Bodnar et al 2016 | inv_cov | BGP16 |
-#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} | Bodnar et al 2020 | weights | |
-#'
+#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} | Bodnar et al 2021 | weights | |
+#' | \code{\link{new_GMV_portfolio_weights_BDPS19}} | Bodnar et al 2019 | weights | |
 #' @md
 #' @param x a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.
-#' @param gamma a numeric variable. Investors attitude towards risk.
+#' @param gamma a numeric variable. Investors attitude towards risk aversion.
 #' @param type a character. The type of methods to use to construct the portfolio.
 #' @param subtype a character. The exact method to use within the type.
 #' @param ... arguments to pass to portfolio constructors
@@ -48,7 +48,6 @@
 EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
-  if(gamma==Inf) stop("GMVP methods are absent")
 
   if(!is.character(type)) stop("type is not character")
 
@@ -93,7 +92,11 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
     }
   } else  if(type=='weights') {
 
-    output <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
+    if(gamma != Inf) {
+      output <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
+    } else {
+      output <- new_GMV_portfolio_weights_BDPS19(x=x, ...)
+    }
     return(output)
   } else {
 
@@ -113,7 +116,7 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
 #'
 #' | Function | Paper | Type |
 #' | --- | --- | --- |
-#' | \code{\link{Sigma_sample_estimator}} |  | naive |
+#' | \code{\link{Sigma_sample_estimator}} |  | traditional |
 #' | \code{\link{CovShrinkBGP14}} | Bodnar et al 2014 | BGP14 |
 #' | \code{\link{nonlin_shrinkLW}} | Ledoit & Wolf 2020| LW20 |
 #' @md
