@@ -4,7 +4,7 @@
 \alias{new_ExUtil_portfolio_weights_BDOPS21}
 \title{constructor of EU portfolio object. IEEE 2021}
 \usage{
-new_ExUtil_portfolio_weights_BDOPS21(x, gamma, b, alph)
+new_ExUtil_portfolio_weights_BDOPS21(x, gamma, b, beta)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
@@ -13,7 +13,7 @@ new_ExUtil_portfolio_weights_BDOPS21(x, gamma, b, alph)
 
 \item{b}{a numeric variable. The target for weight shrinkage.}
 
-\item{alph}{a numeric variable. The level of confidence for weight intervals}
+\item{beta}{a numeric variable. The level of confidence for weight intervals}
 }
 \value{
 an object of class ExUtil_portfolio with subclass ExUtil_portfolio_weights_BDOPS21.\tabular{ll}{
@@ -44,7 +44,7 @@ gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, alph=0.05)
+test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
 summary(test)
 
 # Assets with a non-diagonal covariance matrix
@@ -52,7 +52,7 @@ summary(test)
 Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
-test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, alph=0.05)
+test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
 str(test)
 }
 \references{

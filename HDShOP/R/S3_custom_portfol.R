@@ -57,11 +57,46 @@ new_ExUtil_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
   structure(list(call=cl,
                  inv_cov_mtrx=inv_cov_mtrx,
                  means=mean_vec,
-                 W_EU_hat=W_EU_hat,
+                 weights=W_EU_hat,
                  Port_mean_return=Port_mean_return
                  ),
             class = "ExUtil_portfolio")
 }
+
+
+# ExUtil_portfolio with existing both covariance matrix and its inverse.
+# Unused for now
+new_ExUtil_portfolio_covar_custom <- function(mean_vec, cov_mtrx, gamma){
+
+  cl <- match.call()
+
+  inv_cov_mtrx <- solve(cov_mtrx)
+  p <- nrow(inv_cov_mtrx)
+  I_vect <- rep(1, times=p)
+
+  Q_n_hat <- inv_cov_mtrx - (inv_cov_mtrx %*% I_vect %*% t(I_vect) %*% inv_cov_mtrx)/as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect)
+
+  W_EU_hat <- as.vector(
+    (inv_cov_mtrx %*% I_vect)/as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect) +
+      Q_n_hat %*% mean_vec / gamma,
+    mode = 'numeric')
+
+  Port_Var <- as.numeric(t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat)
+  Port_mean_return <- as.numeric(mean_vec %*% W_EU_hat)
+  Sharpe <- Port_mean_return/sqrt(Port_Var)
+
+  structure(list(call=cl,
+                 cov_mtrx=cov_mtrx,
+                 inv_cov_mtrx=inv_cov_mtrx,
+                 means=mean_vec,
+                 weights=W_EU_hat,
+                 Port_Var=Port_Var,
+                 Port_mean_return=Port_mean_return,
+                 Sharpe=Sharpe),
+            class = c("ExUtil_portfolio_covar", "ExUtil_portfolio"))
+}
+
+
 
 #' A validator for ExUtil_portfolio
 #' @param x Object of class ExUtil_portfolio.
@@ -86,14 +121,14 @@ validate_ExUtil_portfolio <- function(x) {
 
   if (is.null(values$inv_cov_mtrx))  stop("an inverse covariance matrix is missing", call. = FALSE)
   if (is.null(values$means))  stop("a mean vector is missing", call. = FALSE)
-  if (is.null(values$W_EU_hat))  stop("a vector of weights is missing", call. = FALSE)
+  if (is.null(values$weights))  stop("a vector of weights is missing", call. = FALSE)
 
   if (!is.vector(values$means))  stop("means is not a vector", call. = FALSE)
   if (!identical(class(values$inv_cov_mtrx), c("matrix", "array"))){
     stop("inv_cov_mtrx is not a matrix", call. = FALSE)
   }
 
-  if (length(values$means)!=length(values$W_EU_hat) | nrow(values$inv_cov_mtrx)!=length(values$W_EU_hat)) {
+  if (length(values$means)!=length(values$weights) | nrow(values$inv_cov_mtrx)!=length(values$weights)) {
     stop(
       "lenghts of the mean vector and the weights must equal the row number of the covariance matrix",
       call. = FALSE

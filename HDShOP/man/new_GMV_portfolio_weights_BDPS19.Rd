@@ -4,14 +4,14 @@
 \alias{new_GMV_portfolio_weights_BDPS19}
 \title{constructor of GMVA portfolio object.}
 \usage{
-new_GMV_portfolio_weights_BDPS19(x, b, alph)
+new_GMV_portfolio_weights_BDPS19(x, b, beta)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
 \item{b}{a numeric value. The target for weight shrinkage.}
 
-\item{alph}{a numeric variable. The level of confidence for weight intervals}
+\item{beta}{a numeric variable. The level of confidence for weight intervals}
 }
 \value{
 an object of class ExUtil_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
@@ -41,14 +41,14 @@ b<-rep(1/p,p)
 # Assets with a diagonal covariance matrix
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
+test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)
 str(test)
 
 # Assets with a non-diagonal covariance matrix
 Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
-test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
+test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)
 summary(test)
 
 }

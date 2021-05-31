@@ -9,8 +9,8 @@ b<-rep(1/p,p)
 Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 x <- t(mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
-test_GMV <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
-test_EU <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=Inf, b=b, alph=0.05)
+test_GMV <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)
+test_EU <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=Inf, b=b, beta=0.05)
 
 test_that("Elements of outputs GMV and EU portfolios are equal", {
 

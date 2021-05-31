@@ -5,25 +5,19 @@
 #' Shrinkage Expected Utility portfolio
 #'
 #' The main function for EU portfolio construction. It is a dispatcher using methods according
-#' to arguments type and subtype.
+#' to argument type.
 #'
 #' The available estimation methods are:
 #'
-#' | Function | Paper | Type | Subtype |
+#' | Function | Paper | Type | gamma |
 #' | --- | --- | --- | --- |
-#' | \code{\link{new_ExUtil_portfolio_mean_BayesStein}} | Jorion 1986 | mean | Bayes-Stein |
-#' | \code{\link{new_ExUtil_portfolio_mean_JamesStein}} | Jorion 1986 | mean | James-Stein |
-#' | \code{\link{new_ExUtil_portfolio_mean_BOP19}} | Bodnar et al 2019 | mean | BOP19 |
-#' | \code{\link{new_ExUtil_portfolio_cov_LW02}} | Ledoit & Wolf 2020 | cov | LW02 |
-#' | \code{\link{new_ExUtil_portfolio_cov_BGP14}} | Bodnar et al 2014 | cov | BGP14 |
-#' | \code{\link{new_ExUtil_portfolio_icov_BGP16}} | Bodnar et al 2016 | inv_cov | BGP16 |
-#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} | Bodnar et al 2021 | weights | |
-#' | \code{\link{new_GMV_portfolio_weights_BDPS19}} | Bodnar et al 2019 | weights | |
+#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} | Bodnar et al 2021 | shrinkage | < Inf |
+#' | \code{\link{new_GMV_portfolio_weights_BDPS19}} | Bodnar et al 2019 | shrinkage | Inf |
+#' | \code{\link{new_ExUtil_portfolio_traditional}} |  | traditional | numeric |
 #' @md
 #' @param x a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.
 #' @param gamma a numeric variable. Investors attitude towards risk aversion.
 #' @param type a character. The type of methods to use to construct the portfolio.
-#' @param subtype a character. The exact method to use within the type.
 #' @param ... arguments to pass to portfolio constructors
 #'
 #' @return A portfolio in the form of an object of class ExUtil_portfolio potentially with a subclass.
@@ -36,61 +30,25 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=b, alph = 0.05)
+#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='Bayes-Stein')
+#' test <- EUShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='James-Stein')
+#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='traditional')
 #' str(test)
+#'
 #' @export
-EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
+EUShrinkPortfolio <- function(x, gamma, type='traditional', ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
 
   if(!is.character(type)) stop("type is not character")
 
-  if(type=='mean') {
-
-    if(subtype=='BOP19') {
-      output <- new_ExUtil_portfolio_mean_BOP19(x=x, gamma=gamma, ...)
-      return(output)
-
-    } else if(subtype=='James-Stein') {
-      output <- new_ExUtil_portfolio_mean_JamesStein(x=x, gamma=gamma, ...)
-      return(output)
-
-    } else if(subtype=='Bayes-Stein') {
-      output <- new_ExUtil_portfolio_mean_BayesStein(x=x, gamma=gamma, ...)
-      return(output)
-
-    } else {
-      stop(paste('Invalid subtype for type',type,sep=" "))
-    }
-  } else if(type=='cov') {
-
-    if(subtype=='LW02') {
-      output <- new_ExUtil_portfolio_cov_LW02(x=x, gamma=gamma, ...)
-      return(output)
-
-    } else if(subtype=='BGP14') {
-      output <- new_ExUtil_portfolio_cov_BGP14(x=x, gamma=gamma, ...)
-      return(output)
-
-    } else {
-      stop(paste('Invalid subtype for type',type,sep=" "))
-    }
-  } else if(type=='inv_cov') {
-
-    if(subtype=='BGP16') {
-      output <- new_ExUtil_portfolio_icov_BGP16(x=x, gamma=gamma, ...)
-      return(output)
-
-    } else {
-      stop(paste('Invalid subtype for type',type,sep=" "))
-    }
-  } else  if(type=='weights') {
+  if(type=='traditional') {
+    output <- new_ExUtil_portfolio_traditional(x=x, gamma=gamma)
+  } else  if(type=='shrinkage') {
 
     if(gamma != Inf) {
       output <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
@@ -103,7 +61,6 @@ EUShrinkPortfolio <- function(x, gamma, type, subtype, ...) {
     stop(paste('Invalid type:',type,sep=" "))
   }
 }
-
 
 
 #### Covariance shrinkage ####

@@ -2,7 +2,7 @@
 #'
 #' @inheritParams EUShrinkPortfolio
 #' @param b a numeric variable. The target for weight shrinkage.
-#' @param alph a numeric variable. The level of confidence for weight intervals
+#' @param beta a numeric variable. The level of confidence for weight intervals
 #' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_weights_BDOPS21.
 #'
 #' | Element | Description |
@@ -31,7 +31,7 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, alph=0.05)
+#' test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
 #' summary(test)
 #'
 #' # Assets with a non-diagonal covariance matrix
@@ -39,10 +39,10 @@
 #' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 #' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
-#' test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, alph=0.05)
+#' test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
 #' str(test)
 #' @export
-new_ExUtil_portfolio_weights_BDOPS21 <- function(x, gamma, b, alph){
+new_ExUtil_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 
   cl <- match.call()
   p <- nrow(x)
@@ -97,8 +97,8 @@ new_ExUtil_portfolio_weights_BDOPS21 <- function(x, gamma, b, alph){
                             V_hat_c=V_hat_c, L=L, Q_n_hat=Q_n_hat, eta.est=eta.est)
 
     TDn<- (n-p)*t(w.est)%*%solve(Omega.Lest)%*%(w.est)
-    low_bound <- w.est - qnorm(1-alph/2)*sqrt(Omega.Lest)/sqrt(n-p)
-    upp_bound <- w.est + qnorm(1-alph/2)*sqrt(Omega.Lest)/sqrt(n-p)
+    low_bound <- w.est - qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
+    upp_bound <- w.est + qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
     p_value<- pchisq(TDn, df=1, lower.tail=FALSE)
 
     T_dens[i,] <- c(weights[i], low_bound, upp_bound, TDn,  p_value) #first column= shrinkage estimator for EU Portfolio weights
@@ -158,18 +158,18 @@ new_ExUtil_portfolio_weights_BDOPS21 <- function(x, gamma, b, alph){
 #' # Assets with a diagonal covariance matrix
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
+#' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)
 #' str(test)
 #'
 #' # Assets with a non-diagonal covariance matrix
 #' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 #' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
-#' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, alph=0.05)
+#' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)
 #' summary(test)
 #'
 #' @export
-new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
+new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
 
   cl <- match.call()
   p <- nrow(x)
@@ -210,8 +210,8 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, alph){
 
     TDn<- (n-p)*t(w.est)%*%solve(Omega.Lest)%*%(w.est) #test statistics
 
-    low_bound <- w.est - qnorm(1-alph/2)*sqrt(Omega.Lest)/sqrt(n-p)
-    upp_bound <- w.est + qnorm(1-alph/2)*sqrt(Omega.Lest)/sqrt(n-p)
+    low_bound <- w.est - qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
+    upp_bound <- w.est + qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
 
     p_value <- pchisq(TDn, df=1, lower.tail=FALSE)
 

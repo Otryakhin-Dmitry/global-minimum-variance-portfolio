@@ -4,7 +4,7 @@
 \alias{EUShrinkPortfolio}
 \title{Shrinkage Expected Utility portfolio}
 \usage{
-EUShrinkPortfolio(x, gamma, type, subtype, ...)
+EUShrinkPortfolio(x, gamma, type = "traditional", ...)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
@@ -12,8 +12,6 @@ EUShrinkPortfolio(x, gamma, type, subtype, ...)
 \item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
 
 \item{type}{a character. The type of methods to use to construct the portfolio.}
-
-\item{subtype}{a character. The exact method to use within the type.}
 
 \item{...}{arguments to pass to portfolio constructors}
 }
@@ -23,19 +21,14 @@ See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
 }
 \description{
 The main function for EU portfolio construction. It is a dispatcher using methods according
-to arguments type and subtype.
+to argument type.
 }
 \details{
 The available estimation methods are:\tabular{llll}{
-   Function \tab Paper \tab Type \tab Subtype \cr
-   \code{\link{new_ExUtil_portfolio_mean_BayesStein}} \tab Jorion 1986 \tab mean \tab Bayes-Stein \cr
-   \code{\link{new_ExUtil_portfolio_mean_JamesStein}} \tab Jorion 1986 \tab mean \tab James-Stein \cr
-   \code{\link{new_ExUtil_portfolio_mean_BOP19}} \tab Bodnar et al 2019 \tab mean \tab BOP19 \cr
-   \code{\link{new_ExUtil_portfolio_cov_LW02}} \tab Ledoit & Wolf 2020 \tab cov \tab LW02 \cr
-   \code{\link{new_ExUtil_portfolio_cov_BGP14}} \tab Bodnar et al 2014 \tab cov \tab BGP14 \cr
-   \code{\link{new_ExUtil_portfolio_icov_BGP16}} \tab Bodnar et al 2016 \tab inv_cov \tab BGP16 \cr
-   \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} \tab Bodnar et al 2021 \tab weights \tab  \cr
-   \code{\link{new_GMV_portfolio_weights_BDPS19}} \tab Bodnar et al 2019 \tab weights \tab  \cr
+   Function \tab Paper \tab Type \tab gamma \cr
+   \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} \tab Bodnar et al 2021 \tab shrinkage \tab < Inf \cr
+   \code{\link{new_GMV_portfolio_weights_BDPS19}} \tab Bodnar et al 2019 \tab shrinkage \tab Inf \cr
+   \code{\link{new_ExUtil_portfolio_traditional}} \tab  \tab traditional \tab numeric \cr
 }
 }
 \examples{
@@ -46,12 +39,13 @@ gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-test <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=b, alph = 0.05)
+test <- EUShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
 str(test)
 
-test <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='Bayes-Stein')
+test <- EUShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
 str(test)
 
-test <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', subtype='James-Stein')
+test <- EUShrinkPortfolio(x=x, gamma=gamma, type='traditional')
 str(test)
+
 }
