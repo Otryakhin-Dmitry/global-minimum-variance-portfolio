@@ -11,9 +11,9 @@
 #'
 #' | Function | Paper | Type | gamma |
 #' | --- | --- | --- | --- |
-#' | \code{\link{new_ExUtil_portfolio_weights_BDOPS21}} | Bodnar et al 2021 | shrinkage | < Inf |
+#' | \code{\link{new_MV_portfolio_weights_BDOPS21}} | Bodnar et al 2021 | shrinkage | < Inf |
 #' | \code{\link{new_GMV_portfolio_weights_BDPS19}} | Bodnar et al 2019 | shrinkage | Inf |
-#' | \code{\link{new_ExUtil_portfolio_traditional}} |  | traditional | numeric |
+#' | \code{\link{new_MV_portfolio_traditional}} |  | traditional | > 0 |
 #' @md
 #' @param x a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.
 #' @param gamma a numeric variable. Investors attitude towards risk aversion.
@@ -21,7 +21,7 @@
 #' @param ... arguments to pass to portfolio constructors
 #'
 #' @return A portfolio in the form of an object of class ExUtil_portfolio potentially with a subclass.
-#' See \code{\link{new_ExUtil_portfolio_custom}} for the details of the class.
+#' See \code{\link{new_MV_portfolio_custom}} for the details of the class.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -30,28 +30,28 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
+#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- EUShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
+#' test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- EUShrinkPortfolio(x=x, gamma=gamma, type='traditional')
+#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='traditional')
 #' str(test)
 #'
 #' @export
-EUShrinkPortfolio <- function(x, gamma, type='traditional', ...) {
+MVShrinkPortfolio <- function(x, gamma, type='shrinkage', ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
 
   if(!is.character(type)) stop("type is not character")
 
   if(type=='traditional') {
-    output <- new_ExUtil_portfolio_traditional(x=x, gamma=gamma)
+    output <- new_MV_portfolio_traditional(x=x, gamma=gamma)
   } else  if(type=='shrinkage') {
 
     if(gamma != Inf) {
-      output <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
+      output <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
     } else {
       output <- new_GMV_portfolio_weights_BDPS19(x=x, ...)
     }

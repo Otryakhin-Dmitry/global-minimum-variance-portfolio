@@ -1,5 +1,5 @@
 # version for tests with arbitrary covariance matrices
-SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55, mu=seq(0.2,-0.2, length.out=p)){
+SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55){
 
   cc <- p/n
   ones<-matrix(1,p,1)

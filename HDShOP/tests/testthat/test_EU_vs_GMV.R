@@ -10,7 +10,7 @@ Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 x <- t(mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
 test_GMV <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)
-test_EU <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=Inf, b=b, beta=0.05)
+test_MV <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=Inf, b=b, beta=0.05)
 
 test_that("Elements of outputs GMV and EU portfolios are equal", {
 
@@ -18,8 +18,8 @@ test_that("Elements of outputs GMV and EU portfolios are equal", {
   library('waldo')
 
   # Weights
-  expect_equivalent(test_GMV$weights, test_EU$weights)
-  expect_equivalent(test_GMV$means, test_EU$means)
-  expect_equivalent(test_GMV$cov_mtrx, test_EU$cov_mtrx)
-  expect_equivalent(test_GMV$inv_cov_mtrx, test_EU$inv_cov_mtrx)
+  expect_equivalent(test_GMV$weights, test_MV$weights)
+  expect_equivalent(test_GMV$means, test_MV$means)
+  expect_equivalent(test_GMV$cov_mtrx, test_MV$cov_mtrx)
+  expect_equivalent(test_GMV$inv_cov_mtrx, test_MV$inv_cov_mtrx)
 })

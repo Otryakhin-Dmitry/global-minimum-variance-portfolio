@@ -24,7 +24,7 @@ test_that("Ts from (44) and (41) are equivalent", {
   for (ind in 1:ind_len) {
 
     x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
-    X[ind,1] <- T_alpha(gamma=gamma, x=x, w_0=w_0)$T_alpha
+    X[ind,1] <- test_MVSP(gamma=gamma, x=x, w_0=w_0)$T_alpha
 
     # Computing T_alpha in another way, (29 & 41)
     Omega.est <- Omega_hat_al_c(x=x, b=w_0)
@@ -52,7 +52,7 @@ test_that("Ts are standard normal", {
   sample <-
   replicate(n=3e1, {
     x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-    T_alpha <- T_alpha(gamma=gamma, x=x, w_0=w_0, beta=0.05)
+    T_alpha <- test_MVSP(gamma=gamma, x=x, w_0=w_0, beta=0.05)
     T_alpha$T_alpha
   })
   expect_distfit(sample, p_value = 0.01, nulldist=pnorm, mean = 0, sd = 1)
@@ -61,7 +61,7 @@ test_that("Ts are standard normal", {
   sample <-
     replicate(n=3e1, {
       x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-      T_alpha <- T_alpha(gamma=gamma, x=x, w_0=w_0, beta=0.05)
+      T_alpha <- test_MVSP(gamma=gamma, x=x, w_0=w_0, beta=0.05)
       T_alpha$T_alpha
     })
   expect_distfit(sample, p_value = 0.01, nulldist=pnorm, mean = 0, sd = 1)

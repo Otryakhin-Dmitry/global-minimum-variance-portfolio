@@ -5,8 +5,8 @@
 \alias{HDShOP-package}
 \title{A set of tools for shrinkage estimators and Expected Utility portfolios}
 \description{
-Package HDShOP has the following three important functions: \code{\link{EUShrinkPortfolio}},
-\code{\link{CovarEstim}} and \code{\link{MeanEstim}}. EUShrinkPortfolio creates Expected Utility
+Package HDShOP has the following three important functions: \code{\link{MVShrinkPortfolio}},
+\code{\link{CovarEstim}} and \code{\link{MeanEstim}}. MVShrinkPortfolio creates Expected Utility
 portfolios using shrinkage estimation methods for portfolio weights. CovarEstim computes estimates of
 covariance matrices while MeanEstim- ones for mean vectors. Every of these three functions is
 supplied a name of the method to use to perform estimation.
@@ -21,7 +21,7 @@ MeanEstim: \insertCite{BOP2019}{HDShOP}, James-Stein and Bayes-Stein estimators 
 
 CovarEstim: \insertCite{BGP2014}{HDShOP}, \insertCite{LW2020}{HDShOP}.
 
-EUShrinkPortfolio: \insertCite{BDOPS2021}{HDShOP}, \insertCite{BDPS2019}{HDShOP}.
+MVShrinkPortfolio: \insertCite{BDOPS2021}{HDShOP}, \insertCite{BDPS2019}{HDShOP}.
 }
 
 \references{

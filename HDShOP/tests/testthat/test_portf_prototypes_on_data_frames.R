@@ -17,7 +17,7 @@ X <- as.data.frame(X)
 
 
 # weight shrink portfolios
-port_BDOPS21 <- new_ExUtil_portfolio_weights_BDOPS21(x=X, gamma=gamma, b=rep(1/p,p), beta = 0.05)
+port_BDOPS21 <- new_MV_portfolio_weights_BDOPS21(x=X, gamma=gamma, b=rep(1/p,p), beta = 0.05)
 port_BDPS19 <- new_GMV_portfolio_weights_BDPS19(x=X, b=rep(1/p,p), beta=0.05)
 
 

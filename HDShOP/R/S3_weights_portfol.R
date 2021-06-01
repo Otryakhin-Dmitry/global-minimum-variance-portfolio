@@ -1,9 +1,9 @@
 #' constructor of EU portfolio object. IEEE 2021
 #'
-#' @inheritParams EUShrinkPortfolio
+#' @inheritParams MVShrinkPortfolio
 #' @param b a numeric variable. The target for weight shrinkage.
 #' @param beta a numeric variable. The level of confidence for weight intervals
-#' @return an object of class ExUtil_portfolio with subclass ExUtil_portfolio_weights_BDOPS21.
+#' @return an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.
 #'
 #' | Element | Description |
 #' | --- | --- |
@@ -31,7 +31,7 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
+#' test <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
 #' summary(test)
 #'
 #' # Assets with a non-diagonal covariance matrix
@@ -39,10 +39,10 @@
 #' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 #' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
-#' test <- new_ExUtil_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
+#' test <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
 #' str(test)
 #' @export
-new_ExUtil_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
+new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 
   cl <- match.call()
   p <- nrow(x)
@@ -127,10 +127,10 @@ new_ExUtil_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 
 #' constructor of GMVA portfolio object.
 #'
-#' @inheritParams EUShrinkPortfolio
+#' @inheritParams MVShrinkPortfolio
 #' @param b a numeric value. The target for weight shrinkage.
-#' @inheritParams new_ExUtil_portfolio_weights_BDOPS21
-#' @return an object of class ExUtil_portfolio with subclass GMV_portfolio_weights_BDPS19.
+#' @inheritParams new_MV_portfolio_weights_BDOPS21
+#' @return an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.
 #'
 #' | Element | Description |
 #' | --- | --- |

@@ -1,11 +1,11 @@
 #' A constructor for class ExUtil_portfolio
 #'
 #' A light-weight constructor of objects of S3 class ExUtil_portfolio. This  function is for development purposes.
-#' A helper function equipped with error messages and allowing more flexible input is \code{\link{ExUtil_portfolio_custom}}.
+#' A helper function equipped with error messages and allowing more flexible input is \code{\link{MV_portfolio_custom}}.
 #'
 #' @param mean_vec mean vector of asset returns
 #' @param inv_cov_mtrx the inverse covariance matrix of asset returns
-#' @inheritParams EUShrinkPortfolio
+#' @inheritParams MVShrinkPortfolio
 #' @return Object of S3 class ExUtil_portfolio.
 #'
 #' This class is designed to describe Expected Utility portfolios. It comprises portfolio weights
@@ -25,7 +25,7 @@
 #' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_ExUtil_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
 #' str(cust_port_simp)
 #'
 #' # Portfolio with Bayes-Stein shrinked means
@@ -36,10 +36,10 @@
 #' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_BS_LW <- new_ExUtil_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' cust_port_BS_LW <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
 #' str(cust_port_BS_LW)
 #' @export
-new_ExUtil_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
+new_MV_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
 
   cl <- match.call()
   p <- nrow(inv_cov_mtrx)
@@ -66,7 +66,7 @@ new_ExUtil_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
 
 # ExUtil_portfolio with existing both covariance matrix and its inverse.
 # Unused for now
-new_ExUtil_portfolio_covar_custom <- function(mean_vec, cov_mtrx, gamma){
+new_MV_portfolio_covar_custom <- function(mean_vec, cov_mtrx, gamma){
 
   cl <- match.call()
 
@@ -112,10 +112,10 @@ new_ExUtil_portfolio_covar_custom <- function(mean_vec, cov_mtrx, gamma){
 #' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_ExUtil_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
-#' str(validate_ExUtil_portfolio(cust_port_simp))
+#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' str(validate_MV_portfolio(cust_port_simp))
 #' @export
-validate_ExUtil_portfolio <- function(x) {
+validate_MV_portfolio <- function(x) {
 
   values <- unclass(x)
 
@@ -141,7 +141,7 @@ validate_ExUtil_portfolio <- function(x) {
 #' A helper function for ExUtil_portfolio
 #' @param mean_vec mean vector or list of asset returns.
 #' @param inv_cov_mtrx the inverse covariance matrix of asset returns. Could be a matrix or a data frame.
-#' @inheritParams EUShrinkPortfolio
+#' @inheritParams MVShrinkPortfolio
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -154,18 +154,18 @@ validate_ExUtil_portfolio <- function(x) {
 #' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- ExUtil_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' cust_port_simp <- MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
 #' str(cust_port_simp)
 #' @export
-ExUtil_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
+MV_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
 
   inv_cov_mtrx <- as.matrix(inv_cov_mtrx)
   mean_vec<-unlist(mean_vec)
 
-  xx <- new_ExUtil_portfolio_custom(mean_vec=mean_vec,
+  xx <- new_MV_portfolio_custom(mean_vec=mean_vec,
                                     inv_cov_mtrx=inv_cov_mtrx,
                                     gamma=gamma)
-  validate_ExUtil_portfolio(xx)
+  validate_MV_portfolio(xx)
 }
 
 

@@ -1,9 +1,9 @@
-#' Traditional EU portfolio
+#' Traditional expected utility portfolio
 #'
 #' Expected utility portfolios with the traditional estimators for the mean vector
 #' and the covariance matrix of the asset returns.
 #'
-#' @inheritParams EUShrinkPortfolio
+#' @inheritParams MVShrinkPortfolio
 #' @return an object of class ExUtil_portfolio
 #'
 #' | Element | Description |
@@ -25,10 +25,10 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_ExUtil_portfolio_traditional(x=x, gamma=gamma)
+#' test <- new_MV_portfolio_traditional(x=x, gamma=gamma)
 #' str(test)
 #' @export
-new_ExUtil_portfolio_traditional <- function(x, gamma){
+new_MV_portfolio_traditional <- function(x, gamma){
 
   if (is.data.frame(x)) x <- as.matrix(x)
   cl <- match.call()

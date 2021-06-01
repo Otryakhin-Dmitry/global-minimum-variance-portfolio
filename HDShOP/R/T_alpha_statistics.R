@@ -42,7 +42,7 @@ Omega_hat_al_c <- function(x, b){
 #'
 #' An asymptotic test of a given EU portfolio. The tested hypotheses are
 #' \deqn{H_0: w_EU = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
-#' @inheritParams EUShrinkPortfolio
+#' @inheritParams MVShrinkPortfolio
 #' @param w_0 a numeric vector of tested weights.
 #' @param beta a confidence level for alpha
 #' @return
@@ -65,10 +65,10 @@ Omega_hat_al_c <- function(x, b){
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' T_alpha <- T_alpha(gamma=gamma, x=x, w_0=b, beta=0.05)
+#' T_alpha <- test_MVSP(gamma=gamma, x=x, w_0=b, beta=0.05)
 #' T_alpha
 #' @export
-T_alpha <- function(gamma, x, w_0, beta=0.05) {
+test_MVSP <- function(gamma, x, w_0, beta=0.05) {
 
   n <- ncol(x)
   p <- nrow(x)

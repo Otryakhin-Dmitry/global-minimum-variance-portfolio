@@ -17,7 +17,7 @@ X <- matrix(data=rnorm(n*p), nrow=p, ncol=n)
 
 
 # weight shrink portfolios
-port_BDOPS21 <- new_ExUtil_portfolio_weights_BDOPS21(x=X, gamma=gamma, b=rep(1/p,p), beta = 0.05)
+port_BDOPS21 <- new_MV_portfolio_weights_BDOPS21(x=X, gamma=gamma, b=rep(1/p,p), beta = 0.05)
 port_BDPS19 <- new_GMV_portfolio_weights_BDPS19(x=X, b=rep(1/p,p), beta=0.05)
 
 
@@ -40,8 +40,8 @@ test_that("All prototypes are valid ExUtil_portfolio objects", {
   library('waldo')
 
   # Weights
-  expect_s3_class(object=validate_ExUtil_portfolio(port_BDOPS21), class="ExUtil_portfolio", exact = FALSE)
-  expect_s3_class(object=validate_ExUtil_portfolio(port_BDPS19), class="ExUtil_portfolio", exact = FALSE)
+  expect_s3_class(object=validate_MV_portfolio(port_BDOPS21), class="ExUtil_portfolio", exact = FALSE)
+  expect_s3_class(object=validate_MV_portfolio(port_BDPS19), class="ExUtil_portfolio", exact = FALSE)
 })
 
 

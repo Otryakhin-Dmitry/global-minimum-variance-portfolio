@@ -14,7 +14,7 @@ new_GMV_portfolio_weights_BDPS19(x, b, beta)
 \item{beta}{a numeric variable. The level of confidence for weight intervals}
 }
 \value{
-an object of class ExUtil_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
+an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
