@@ -1,7 +1,8 @@
 #' Traditional expected utility portfolio
 #'
-#' Expected utility portfolios with the traditional estimators for the mean vector
-#' and the covariance matrix of the asset returns.
+#' Mean-variance portfolios with the traditional (sample) estimators for the mean
+#' vector and the covariance matrix of asset returns. For more details of the method,
+#' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @return an object of class ExUtil_portfolio
@@ -9,12 +10,12 @@
 #' | Element | Description |
 #' | --- | --- |
 #' | call | the function call with which it was created |
-#' | cov_mtrx | the sample covariance matrix of the asset returns |
+#' | cov_mtrx | the sample covariance matrix of asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean vector estimate for the asset returns |
-#' | W_EU_hat | portfolio weights_sample estimate |
+#' | means | sample mean estimate for the asset returns |
+#' | W_EU_hat | sample estimate of portfolio weights |
 #' | Port_Var | portfolio variance |
-#' | Port_mean_return | portfolio mean returns |
+#' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
@@ -47,15 +48,15 @@ new_MV_portfolio_traditional <- function(x, gamma){
     mode = 'numeric')
 
   # Sharpe, mean return and portfolio variance
-  Port_Var <- t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat
-  Port_mean_return <- means %*% W_EU_hat
+  Port_Var <- as.numeric(t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat)
+  Port_mean_return <- as.numeric(means %*% W_EU_hat)
   Sharpe <- Port_mean_return/sqrt(Port_Var)
 
   structure(list(call=cl,
                  cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=means,
-                 W_EU_hat=W_EU_hat,
+                 weights=W_EU_hat,
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe),

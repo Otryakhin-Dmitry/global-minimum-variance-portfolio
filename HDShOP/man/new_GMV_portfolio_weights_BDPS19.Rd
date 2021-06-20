@@ -2,16 +2,16 @@
 % Please edit documentation in R/S3_weights_portfol.R
 \name{new_GMV_portfolio_weights_BDPS19}
 \alias{new_GMV_portfolio_weights_BDPS19}
-\title{constructor of GMVA portfolio object.}
+\title{constructor of GMV portfolio object.}
 \usage{
 new_GMV_portfolio_weights_BDPS19(x, b, beta)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{b}{a numeric value. The target for weight shrinkage.}
+\item{b}{a numeric vector. The target for weight shrinkage.}
 
-\item{beta}{a numeric variable. The level of confidence for weight intervals}
+\item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
 \value{
 an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
@@ -20,17 +20,23 @@ an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabu
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
    means \tab sample mean vector estimate for the asset returns \cr
-   w_GMVP \tab portfolio weights_sample estimate \cr
-   weights \tab shrunk portfolio weights \cr
+   w_GMVP \tab sample estimate of portfolio weights \cr
+   weights \tab shrinkage estimate of portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr
-   Port_mean_return \tab portfolio mean returns \cr
+   Port_mean_return \tab expected portfolio return \cr
    Sharpe \tab portfolio Sharpe ratio \cr
-   weight_intervals \tab A data frame \cr
+   weight_intervals \tab A data frame, see details \cr
 }
+
+
+weight_intervals contains a shrinkage estimate of portfolio weights,
+asymptotic confidence intervals for the true portfolio weights, value of test
+statistic and a p-value for the test on the weight for each individual asset.
 }
 \description{
-constructor of GMVA portfolio object.
+Constructor of global minimum variance  portfolios. For more details of the method,
+see \code{\link{MVShrinkPortfolio}}.
 }
 \examples{
 

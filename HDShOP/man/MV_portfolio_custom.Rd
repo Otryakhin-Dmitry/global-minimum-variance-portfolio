@@ -4,14 +4,14 @@
 \alias{MV_portfolio_custom}
 \title{A helper function for ExUtil_portfolio}
 \usage{
-MV_portfolio_custom(mean_vec, inv_cov_mtrx, gamma)
+MV_portfolio_custom(mean_vec, cov_mtrx, gamma)
 }
 \arguments{
 \item{mean_vec}{mean vector or list of asset returns.}
 
-\item{inv_cov_mtrx}{the inverse covariance matrix of asset returns. Could be a matrix or a data frame.}
+\item{cov_mtrx}{the covariance matrix of asset returns. Could be a matrix or a data frame.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
+\item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
 \description{
 A helper function for ExUtil_portfolio
@@ -25,9 +25,8 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
 # Simple EU portfolio
 cov_mtrx <- Sigma_sample_estimator(x)
-invSS <- solve(cov_mtrx)
 means <- rowMeans(x)
 
-cust_port_simp <- MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+cust_port_simp <- MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 str(cust_port_simp)
 }

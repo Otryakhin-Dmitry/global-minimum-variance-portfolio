@@ -2,33 +2,40 @@
 % Please edit documentation in R/T_alpha_statistics.R
 \name{test_MVSP}
 \alias{test_MVSP}
-\title{T statistic for shrinkage intensity}
+\title{Test for MV portfolio weights}
 \usage{
 test_MVSP(gamma, x, w_0, beta = 0.05)
 }
 \arguments{
-\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
+\item{gamma}{a numeric variable. Coefficient of risk aversion.}
 
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
 \item{w_0}{a numeric vector of tested weights.}
 
-\item{beta}{a confidence level for alpha}
+\item{beta}{a confidence level for the test.}
 }
 \value{
 \tabular{ll}{
    Element \tab Description \cr
-   alpha_hat \tab  \cr
-   alpha_sd \tab  \cr
-   alpha_lower \tab  \cr
-   alpha_upper \tab  \cr
-   T_alpha \tab  \cr
-   p_value \tab  \cr
+   alpha_hat \tab the estimated shrinkage intensity \cr
+   alpha_sd \tab the standard deviation of the shrinkage intensity \cr
+   alpha_lower \tab the lower bound for the shrinkage intensity \cr
+   alpha_upper \tab the upper bound for the shrinkage intensity \cr
+   T_alpha \tab the value of the test statistic \cr
+   p_value \tab the p-value for the test \cr
 }
 }
 \description{
-An asymptotic test of a given EU portfolio. The tested hypotheses are
-\deqn{H_0: w_EU = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
+An asymptotic test of a given mean-variance portfolio in a high-dimensional setting.
+The tested hypotheses are
+\deqn{H_0: w_{EU} = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
+The rest statistic is based on the shrinkage estimator of MV portfolio weights,
+see \insertCite{BDOPS2021}{HDShOP}
+}
+\details{
+Note: when gamma == Inf, we get the test for the weights of the global minimum
+variance portfolio as in \insertCite{BDPS2019}{HDShOP}
 }
 \examples{
 n<-3e2 # number of realizations
@@ -42,5 +49,5 @@ T_alpha <- test_MVSP(gamma=gamma, x=x, w_0=b, beta=0.05)
 T_alpha
 }
 \references{
-\insertRef{BDOPS2021}{HDShOP}
+\insertAllCited{}
 }

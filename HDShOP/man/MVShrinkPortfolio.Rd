@@ -2,14 +2,14 @@
 % Please edit documentation in R/dispatchers.R
 \name{MVShrinkPortfolio}
 \alias{MVShrinkPortfolio}
-\title{Shrinkage Expected Utility portfolio}
+\title{Shrinkage Mean Variance portfolio}
 \usage{
 MVShrinkPortfolio(x, gamma, type = "shrinkage", ...)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
+\item{gamma}{a numeric variable. Coefficient of risk aversion.}
 
 \item{type}{a character. The type of methods to use to construct the portfolio.}
 
@@ -20,11 +20,33 @@ A portfolio in the form of an object of class ExUtil_portfolio potentially with 
 See \code{\link{new_MV_portfolio_custom}} for the details of the class.
 }
 \description{
-The main function for EU portfolio construction. It is a dispatcher using methods according
-to argument type.
+The main function for Mean Variance (also known as Expected Utility) portfolio construction.
+It is a dispatcher using methods according to argument type.
 }
 \details{
-The available estimation methods are:\tabular{llll}{
+The sample estimator of the mean-variance portfolio weights, which results in
+a traditional MV portfolio, is calculated by
+\deqn{\hat w_{EU} = \frac{S^{-1} 1}{1' S^{-1} 1} + \gamma^{-1} \hat Q \bar x \quad ,}
+where \eqn{S^{-1}} and \eqn{\bar x} are the inverse of the sample covariance
+matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
+is the coefficient of risk aversion and \eqn{\hat Q} is given by
+\deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
+Then the shrinkage estimator for MV portfolio weights in a high-dimensional
+setting is given by \deqn{\hat w_{GSEW} = \alpha \hat w_{EU} + (1-\alpha)b \quad,}
+where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
+a target vector.
+
+In the case \eqn{\gamma \neq \infty}, estimation of \eqn{\alpha} is based on
+a procedure proposed by BOP19? The case of a fully risk averse investor
+(\eqn{\gamma=\infty}) leads  to the construction of the traditional global minimum
+variance portfolio (GMVP):
+\deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
+The shrinkage estimator for the GMV portfolio is then calculated by
+\deqn{\hat w_{GSEW GMV} = \hat \alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
+with \eqn{\alpha} as in \insertCite{BPS2018}{HDShOP}.
+
+These three estimation methods are available as separate functions dispatched
+accordingly to the following parameter configurations:\tabular{llll}{
    Function \tab Paper \tab Type \tab gamma \cr
    \code{\link{new_MV_portfolio_weights_BDOPS21}} \tab Bodnar et al 2021 \tab shrinkage \tab < Inf \cr
    \code{\link{new_GMV_portfolio_weights_BDPS19}} \tab Bodnar et al 2019 \tab shrinkage \tab Inf \cr
@@ -48,4 +70,7 @@ str(test)
 test <- MVShrinkPortfolio(x=x, gamma=gamma, type='traditional')
 str(test)
 
+}
+\references{
+\insertAllCited{}
 }

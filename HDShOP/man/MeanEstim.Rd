@@ -7,7 +7,7 @@
 MeanEstim(x, type, ...)
 }
 \arguments{
-\item{x}{a matrix. Rows represent different variables, columns- observations.}
+\item{x}{a data matrix. Rows represent different variables, columns- observations.}
 
 \item{type}{a character. The estimation method to be used.}
 
@@ -22,7 +22,7 @@ Essentially, it is a function dispatcher for estimation of the mean vector that
 chooses a method accordingly to the type argument.
 }
 \details{
-The available estimation methods are:\tabular{lll}{
+The available estimation methods for the mean are:\tabular{lll}{
    Function \tab Paper \tab Type \cr
    .rowMeans \tab  \tab naive \cr
    \code{\link{mean_bs}} \tab Jorion 1986 \tab bs \cr

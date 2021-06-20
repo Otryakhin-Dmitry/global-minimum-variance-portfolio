@@ -4,7 +4,7 @@
 \alias{mean_bop19}
 \title{BOP shrinkage estimator}
 \usage{
-mean_bop19(x, mu_0)
+mean_bop19(x, mu_0 = rep(1, p))
 }
 \arguments{
 \item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
@@ -16,12 +16,17 @@ a numeric vector containing the shrinkage estimation of the mean vector
 }
 \description{
 Shrinkage estimator of the high-dimensional mean vector as suggested in Bodnar et al. (2019).
+It uses the formula
+\deqn{\hat \mu_{BOP} = \alpha \bar x + \beta \mu_0,} where
+\eqn{\alpha} and \eqn{\beta} are shrinkage coefficients that minimize weighted quadratic loss
+for a given target \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the ordinary
+sample estimator.
 }
 \examples{
 n<-7e2 # number of realizations
 p<-.5*n # number of assets
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-mm <- mean_bop19(x=x, mu_0 = rep(1,p))
+mm <- mean_bop19(x=x)
 }
 \references{
 \insertRef{BOP2019}{HDShOP}

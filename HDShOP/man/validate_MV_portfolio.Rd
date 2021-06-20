@@ -21,9 +21,8 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
 # Simple EU portfolio
 cov_mtrx <- Sigma_sample_estimator(x)
-invSS <- solve(cov_mtrx)
 means <- rowMeans(x)
 
-cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 str(validate_MV_portfolio(cust_port_simp))
 }

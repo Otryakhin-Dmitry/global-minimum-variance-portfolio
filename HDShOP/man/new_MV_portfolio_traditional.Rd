@@ -9,24 +9,25 @@ new_MV_portfolio_traditional(x, gamma)
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
+\item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
 \value{
 an object of class ExUtil_portfolio\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
-   cov_mtrx \tab the sample covariance matrix of the asset returns \cr
+   cov_mtrx \tab the sample covariance matrix of asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate for the asset returns \cr
-   W_EU_hat \tab portfolio weights_sample estimate \cr
+   means \tab sample mean estimate for the asset returns \cr
+   W_EU_hat \tab sample estimate of portfolio weights \cr
    Port_Var \tab portfolio variance \cr
-   Port_mean_return \tab portfolio mean returns \cr
+   Port_mean_return \tab expected portfolio return \cr
    Sharpe \tab portfolio Sharpe ratio \cr
 }
 }
 \description{
-Expected utility portfolios with the traditional estimators for the mean vector
-and the covariance matrix of the asset returns.
+Mean-variance portfolios with the traditional (sample) estimators for the mean
+vector and the covariance matrix of asset returns. For more details of the method,
+see \code{\link{MVShrinkPortfolio}}.
 }
 \examples{
 n<-3e2 # number of realizations

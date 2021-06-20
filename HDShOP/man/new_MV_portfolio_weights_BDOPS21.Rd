@@ -2,18 +2,18 @@
 % Please edit documentation in R/S3_weights_portfol.R
 \name{new_MV_portfolio_weights_BDOPS21}
 \alias{new_MV_portfolio_weights_BDOPS21}
-\title{constructor of EU portfolio object. IEEE 2021}
+\title{constructor of EU portfolio object.}
 \usage{
 new_MV_portfolio_weights_BDOPS21(x, gamma, b, beta)
 }
 \arguments{
 \item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
+\item{gamma}{a numeric variable. Coefficient of risk aversion.}
 
 \item{b}{a numeric variable. The target for weight shrinkage.}
 
-\item{beta}{a numeric variable. The level of confidence for weight intervals}
+\item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
 \value{
 an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.\tabular{ll}{
@@ -30,9 +30,15 @@ an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.\tabu
    Sharpe \tab portfolio Sharpe ratio \cr
    weight_intervals \tab A data frame \cr
 }
+
+
+weight_intervals contains a shrinkage estimate of portfolio weights,
+asymptotic confidence intervals for the true portfolio weights, value of test
+statistic and a p-value for the test on the weight for each individual asset.
 }
 \description{
-constructor of EU portfolio object. IEEE 2021
+Constructor of mean-variance shrinkage portfolios. For more details of the method,
+see \code{\link{MVShrinkPortfolio}}.
 }
 \examples{
 # Assets with a diagonal covariance matrix

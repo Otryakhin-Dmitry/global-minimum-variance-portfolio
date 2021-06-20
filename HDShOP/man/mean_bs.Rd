@@ -4,25 +4,25 @@
 \alias{mean_bs}
 \title{Bayes-Stein shrinkage estimator of the mean vector}
 \usage{
-mean_bs(x, mu_0)
+mean_bs(x)
 }
 \arguments{
-\item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
-
-\item{mu_0}{a numeric value. The scaling parameter of the target vector used in the
-construction of the shrinkage estimator of the mean vector.}
+\item{x}{a numeric data matrix. Rows represent different variables, columns- observations.}
 }
 \value{
 a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
 }
 \description{
-Bayes-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986)
+Bayes-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
+The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1}
+, where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
+derived using Bayesian approach.
 }
 \examples{
 n <- 7e2 # number of realizations
 p <- .5*n # number of assets
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-mm <- mean_bs(x=x, mu_0 = rep(1,p))
+mm <- mean_bs(x=x)
 }
 \references{
 \insertRef{Jorion1986}{HDShOP}

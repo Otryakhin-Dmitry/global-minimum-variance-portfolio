@@ -11,7 +11,7 @@ Sigma_sample_estimator(x)
 }
 \description{
 It computes covariance of matrix x as follows:
-\deqn{\hat\Sigma_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)^T
+\deqn{\hat\S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)^T
 ,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j}
 }
 \examples{

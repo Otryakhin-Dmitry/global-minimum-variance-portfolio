@@ -1,17 +1,13 @@
+
 #' A constructor for class ExUtil_portfolio
 #'
 #' A light-weight constructor of objects of S3 class ExUtil_portfolio. This  function is for development purposes.
 #' A helper function equipped with error messages and allowing more flexible input is \code{\link{MV_portfolio_custom}}.
 #'
 #' @param mean_vec mean vector of asset returns
-#' @param inv_cov_mtrx the inverse covariance matrix of asset returns
+#' @param cov_mtrx the covariance matrix of asset returns
 #' @inheritParams MVShrinkPortfolio
 #' @return Object of S3 class ExUtil_portfolio.
-#'
-#' This class is designed to describe Expected Utility portfolios. It comprises portfolio weights
-#' W_EU_hat, mean vector means and an inverse covariance inv_cov_mtrx. W_EU_hat and means both
-#' have the form of a numeric vector, while inv_cov_mtrx is a matrix. The direct covariance matrix
-#' is not included in order to cover cases where only the inverse exists.
 #'
 #' @examples
 #' n<-3e2 # number of realizations
@@ -22,51 +18,22 @@
 #'
 #' # Simple EU portfolio
 #' cov_mtrx <- Sigma_sample_estimator(x)
-#' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_simp)
 #'
-#' # Portfolio with Bayes-Stein shrinked means
+#' # Portfolio with Bayes-Stein shrunk means
 #' # and a Ledoit and Wolf estimator for covariance matrix
 #' TM <- matrix(0, p, p)
 #' diag(TM) <- 1
 #' cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
-#' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_BS_LW <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' cust_port_BS_LW <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_BS_LW)
 #' @export
-new_MV_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
-
-  cl <- match.call()
-  p <- nrow(inv_cov_mtrx)
-  I_vect <- rep(1, times=p)
-
-  Q_n_hat <- inv_cov_mtrx - (inv_cov_mtrx %*% I_vect %*% t(I_vect) %*% inv_cov_mtrx)/as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect)
-
-  W_EU_hat <- as.vector(
-    (inv_cov_mtrx %*% I_vect)/as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect) +
-       Q_n_hat %*% mean_vec / gamma,
-    mode = 'numeric')
-
-  Port_mean_return <- mean_vec %*% W_EU_hat
-
-  structure(list(call=cl,
-                 inv_cov_mtrx=inv_cov_mtrx,
-                 means=mean_vec,
-                 weights=W_EU_hat,
-                 Port_mean_return=Port_mean_return
-                 ),
-            class = "ExUtil_portfolio")
-}
-
-
-# ExUtil_portfolio with existing both covariance matrix and its inverse.
-# Unused for now
-new_MV_portfolio_covar_custom <- function(mean_vec, cov_mtrx, gamma){
+new_MV_portfolio_custom <- function(mean_vec, cov_mtrx, gamma){
 
   cl <- match.call()
 
@@ -93,7 +60,7 @@ new_MV_portfolio_covar_custom <- function(mean_vec, cov_mtrx, gamma){
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe),
-            class = c("ExUtil_portfolio_covar", "ExUtil_portfolio"))
+            class = "ExUtil_portfolio")
 }
 
 
@@ -109,21 +76,26 @@ new_MV_portfolio_covar_custom <- function(mean_vec, cov_mtrx, gamma){
 #'
 #' # Simple EU portfolio
 #' cov_mtrx <- Sigma_sample_estimator(x)
-#' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(validate_MV_portfolio(cust_port_simp))
 #' @export
 validate_MV_portfolio <- function(x) {
 
   values <- unclass(x)
 
+  if (is.null(values$cov_mtrx))  stop("a covariance matrix is missing", call. = FALSE)
   if (is.null(values$inv_cov_mtrx))  stop("an inverse covariance matrix is missing", call. = FALSE)
   if (is.null(values$means))  stop("a mean vector is missing", call. = FALSE)
   if (is.null(values$weights))  stop("a vector of weights is missing", call. = FALSE)
 
+  if (is.null(values$Port_Var))  stop("a portfolio variance is missing", call. = FALSE)
+  if (is.null(values$Port_mean_return))  stop("a portfolio mean return is missing", call. = FALSE)
+  if (is.null(values$Sharpe))  stop("a Sharpe ratio is missing", call. = FALSE)
+
   if (!is.vector(values$means))  stop("means is not a vector", call. = FALSE)
+  if (!is.vector(values$weights))  stop("weights is not a vector", call. = FALSE)
   if (!identical(class(values$inv_cov_mtrx), c("matrix", "array"))){
     stop("inv_cov_mtrx is not a matrix", call. = FALSE)
   }
@@ -140,7 +112,7 @@ validate_MV_portfolio <- function(x) {
 
 #' A helper function for ExUtil_portfolio
 #' @param mean_vec mean vector or list of asset returns.
-#' @param inv_cov_mtrx the inverse covariance matrix of asset returns. Could be a matrix or a data frame.
+#' @param cov_mtrx the covariance matrix of asset returns. Could be a matrix or a data frame.
 #' @inheritParams MVShrinkPortfolio
 #' @examples
 #' n<-3e2 # number of realizations
@@ -151,19 +123,18 @@ validate_MV_portfolio <- function(x) {
 #'
 #' # Simple EU portfolio
 #' cov_mtrx <- Sigma_sample_estimator(x)
-#' invSS <- solve(cov_mtrx)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+#' cust_port_simp <- MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_simp)
 #' @export
-MV_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
+MV_portfolio_custom <- function(mean_vec, cov_mtrx, gamma){
 
-  inv_cov_mtrx <- as.matrix(inv_cov_mtrx)
+  cov_mtrx <- as.matrix(cov_mtrx)
   mean_vec<-unlist(mean_vec)
 
   xx <- new_MV_portfolio_custom(mean_vec=mean_vec,
-                                    inv_cov_mtrx=inv_cov_mtrx,
+                                    cov_mtrx=cov_mtrx,
                                     gamma=gamma)
   validate_MV_portfolio(xx)
 }
@@ -173,25 +144,10 @@ MV_portfolio_custom <- function(mean_vec, inv_cov_mtrx, gamma){
 #' @export
 summary.ExUtil_portfolio <- function(object, ...){
 
-  list(call=object$call)
-}
-
-#' @export
-summary.ExUtil_portfolio_weights_BDOPS21 <- function(object, ...){
-
   list(call=object$call,
        Port_Var=object$Port_Var,
        Port_mean_return=object$Port_mean_return,
        Sharpe=object$Sharpe
-      )
+       )
 }
 
-#' @export
-summary.GMV_portfolio_weights_BDPS19 <- function(object, ...){
-
-  list(call=object$call,
-       Port_Var=object$Port_Var,
-       Port_mean_return=object$Port_mean_return,
-       Sharpe=object$Sharpe
-  )
-}

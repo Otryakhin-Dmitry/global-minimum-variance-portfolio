@@ -4,22 +4,17 @@
 \alias{new_MV_portfolio_custom}
 \title{A constructor for class ExUtil_portfolio}
 \usage{
-new_MV_portfolio_custom(mean_vec, inv_cov_mtrx, gamma)
+new_MV_portfolio_custom(mean_vec, cov_mtrx, gamma)
 }
 \arguments{
 \item{mean_vec}{mean vector of asset returns}
 
-\item{inv_cov_mtrx}{the inverse covariance matrix of asset returns}
+\item{cov_mtrx}{the covariance matrix of asset returns}
 
-\item{gamma}{a numeric variable. Investors attitude towards risk aversion.}
+\item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
 \value{
 Object of S3 class ExUtil_portfolio.
-
-This class is designed to describe Expected Utility portfolios. It comprises portfolio weights
-W_EU_hat, mean vector means and an inverse covariance inv_cov_mtrx. W_EU_hat and means both
-have the form of a numeric vector, while inv_cov_mtrx is a matrix. The direct covariance matrix
-is not included in order to cover cases where only the inverse exists.
 }
 \description{
 A light-weight constructor of objects of S3 class ExUtil_portfolio. This  function is for development purposes.
@@ -34,20 +29,18 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
 # Simple EU portfolio
 cov_mtrx <- Sigma_sample_estimator(x)
-invSS <- solve(cov_mtrx)
 means <- rowMeans(x)
 
-cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 str(cust_port_simp)
 
-# Portfolio with Bayes-Stein shrinked means
+# Portfolio with Bayes-Stein shrunk means
 # and a Ledoit and Wolf estimator for covariance matrix
 TM <- matrix(0, p, p)
 diag(TM) <- 1
 cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
-invSS <- solve(cov_mtrx)
 means <- rowMeans(x)
 
-cust_port_BS_LW <- new_MV_portfolio_custom(mean_vec=means, inv_cov_mtrx=invSS, gamma=2)
+cust_port_BS_LW <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 str(cust_port_BS_LW)
 }

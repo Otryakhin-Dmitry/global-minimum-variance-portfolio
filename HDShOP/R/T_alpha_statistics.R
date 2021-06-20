@@ -38,25 +38,31 @@ Omega_hat_al_c <- function(x, b){
 
 #  T_alpha, formula (44) in BDOP20
 #
-#' T statistic for shrinkage intensity
+#' Test for MV portfolio weights
 #'
-#' An asymptotic test of a given EU portfolio. The tested hypotheses are
-#' \deqn{H_0: w_EU = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
+#' An asymptotic test of a given mean-variance portfolio in a high-dimensional setting.
+#' The tested hypotheses are
+#' \deqn{H_0: w_{EU} = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
+#' The rest statistic is based on the shrinkage estimator of MV portfolio weights,
+#' see \insertCite{BDOPS2021}{HDShOP}
+#'
+#' Note: when gamma == Inf, we get the test for the weights of the global minimum
+#' variance portfolio as in \insertCite{BDPS2019}{HDShOP}
 #' @inheritParams MVShrinkPortfolio
 #' @param w_0 a numeric vector of tested weights.
-#' @param beta a confidence level for alpha
+#' @param beta a confidence level for the test.
 #' @return
 #'
 #' | Element | Description |
 #' | --- | --- |
-#' | alpha_hat |  |
-#' | alpha_sd |  |
-#' | alpha_lower |  |
-#' | alpha_upper |  |
-#' | T_alpha |  |
-#' | p_value |  |
+#' | alpha_hat | the estimated shrinkage intensity |
+#' | alpha_sd | the standard deviation of the shrinkage intensity |
+#' | alpha_lower | the lower bound for the shrinkage intensity |
+#' | alpha_upper | the upper bound for the shrinkage intensity  |
+#' | T_alpha | the value of the test statistic |
+#' | p_value | the p-value for the test |
 #' @md
-#' @references \insertRef{BDOPS2021}{HDShOP}
+#' @references \insertAllCited{}
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets

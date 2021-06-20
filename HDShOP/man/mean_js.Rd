@@ -4,25 +4,28 @@
 \alias{mean_js}
 \title{James-Stein shrinkage estimator of the mean vector}
 \usage{
-mean_js(x, mu_0)
+mean_js(x, Y_0 = 1)
 }
 \arguments{
-\item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
+\item{x}{a numeric data matrix. Rows represent different variables, columns- observations.}
 
-\item{mu_0}{a numeric value. The scaling parameter of the target vector used in the
-construction of the shrinkage estimator of the mean vector.}
+\item{Y_0}{shrinkage target coefficient}
 }
 \value{
-a numeric vector containing the James-Stein shrinkage estimator of the mean vector
+a numeric vector containing the James-Stein shrinkage estimator of the mean vector.
 }
 \description{
-James-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986)
+James-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
+The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1}
+, where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is a specific
+shrinkage coefficient which minimizes a quadratic loss. \eqn{Y_0} is a prespecified
+value (target).
 }
 \examples{
 n<-7e2 # number of realizations
 p<-.5*n # number of assets
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-mm <- mean_js(x=x, mu_0 = rep(1,p))
+mm <- mean_js(x=x, Y_0 = 1)
 }
 \references{
 \insertRef{Jorion1986}{HDShOP}

@@ -2,12 +2,34 @@
 
 #### EU portfolio dispatcher
 
-#' Shrinkage Expected Utility portfolio
+#' Shrinkage Mean Variance portfolio
 #'
-#' The main function for EU portfolio construction. It is a dispatcher using methods according
-#' to argument type.
+#' The main function for Mean Variance (also known as Expected Utility) portfolio construction.
+#' It is a dispatcher using methods according to argument type.
 #'
-#' The available estimation methods are:
+#' The sample estimator of the mean-variance portfolio weights, which results in
+#' a traditional MV portfolio, is calculated by
+#' \deqn{\hat w_{EU} = \frac{S^{-1} 1}{1' S^{-1} 1} + \gamma^{-1} \hat Q \bar x \quad ,}
+#' where \eqn{S^{-1}} and \eqn{\bar x} are the inverse of the sample covariance
+#' matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
+#' is the coefficient of risk aversion and \eqn{\hat Q} is given by
+#' \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
+#' Then the shrinkage estimator for MV portfolio weights in a high-dimensional
+#' setting is given by \deqn{\hat w_{GSEW} = \alpha \hat w_{EU} + (1-\alpha)b \quad,}
+#' where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
+#' a target vector.
+#'
+#' In the case \eqn{\gamma \neq \infty}, estimation of \eqn{\alpha} is based on
+#' a procedure proposed by BOP19? The case of a fully risk averse investor
+#' (\eqn{\gamma=\infty}) leads  to the construction of the traditional global minimum
+#' variance portfolio (GMVP):
+#' \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
+#' The shrinkage estimator for the GMV portfolio is then calculated by
+#' \deqn{\hat w_{GSEW GMV} = \hat \alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
+#' with \eqn{\alpha} as in \insertCite{BPS2018}{HDShOP}.
+#'
+#' These three estimation methods are available as separate functions dispatched
+#' accordingly to the following parameter configurations:
 #'
 #' | Function | Paper | Type | gamma |
 #' | --- | --- | --- | --- |
@@ -16,12 +38,13 @@
 #' | \code{\link{new_MV_portfolio_traditional}} |  | traditional | > 0 |
 #' @md
 #' @param x a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.
-#' @param gamma a numeric variable. Investors attitude towards risk aversion.
+#' @param gamma a numeric variable. Coefficient of risk aversion.
 #' @param type a character. The type of methods to use to construct the portfolio.
 #' @param ... arguments to pass to portfolio constructors
 #'
 #' @return A portfolio in the form of an object of class ExUtil_portfolio potentially with a subclass.
 #' See \code{\link{new_MV_portfolio_custom}} for the details of the class.
+#' @references \insertAllCited{}
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -43,23 +66,29 @@
 MVShrinkPortfolio <- function(x, gamma, type='shrinkage', ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
-
   if(!is.character(type)) stop("type is not character")
+
+  cl <- match.call()
 
   if(type=='traditional') {
     output <- new_MV_portfolio_traditional(x=x, gamma=gamma)
+
   } else  if(type=='shrinkage') {
 
     if(gamma != Inf) {
       output <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
+
     } else {
       output <- new_GMV_portfolio_weights_BDPS19(x=x, ...)
     }
-    return(output)
+
   } else {
 
     stop(paste('Invalid type:',type,sep=" "))
   }
+
+  output$call <- cl
+  return(output)
 }
 
 
@@ -78,7 +107,7 @@ MVShrinkPortfolio <- function(x, gamma, type='shrinkage', ...) {
 #' | \code{\link{nonlin_shrinkLW}} | Ledoit & Wolf 2020| LW20 |
 #' @md
 #'
-#' @param x a matrix. Rows represent different variables, columns- observations.
+#' @param x a data matrix. Rows represent different variables, columns- observations.
 #' @param type a character. The estimation method to be used.
 #' @param ... arguments to pass to estimators
 #' @return an object of class matrix
@@ -122,7 +151,7 @@ CovarEstim <- function(x, type, ...)
 #' Essentially, it is a function dispatcher for estimation of the mean vector that
 #' chooses a method accordingly to the type argument.
 #'
-#' The available estimation methods are:
+#' The available estimation methods for the mean are:
 #'
 #' | Function | Paper | Type |
 #' | --- | --- | --- |

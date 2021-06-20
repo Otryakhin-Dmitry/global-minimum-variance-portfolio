@@ -1,8 +1,11 @@
-#' constructor of EU portfolio object. IEEE 2021
+#' constructor of EU portfolio object.
+#'
+#' Constructor of mean-variance shrinkage portfolios. For more details of the method,
+#' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @param b a numeric variable. The target for weight shrinkage.
-#' @param beta a numeric variable. The level of confidence for weight intervals
+#' @param beta a numeric variable. The confidence level for weight intervals.
 #' @return an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.
 #'
 #' | Element | Description |
@@ -18,6 +21,10 @@
 #' | Port_mean_return | portfolio mean returns |
 #' | Sharpe | portfolio Sharpe ratio |
 #' | weight_intervals | A data frame |
+#'
+#' weight_intervals contains a shrinkage estimate of portfolio weights,
+#' asymptotic confidence intervals for the true portfolio weights, value of test
+#' statistic and a p-value for the test on the weight for each individual asset.
 #' @md
 #'
 #' @references \insertRef{BDOPS2021}{HDShOP}
@@ -125,10 +132,13 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
   }
 
 
-#' constructor of GMVA portfolio object.
+#' constructor of GMV portfolio object.
+#'
+#' Constructor of global minimum variance  portfolios. For more details of the method,
+#' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
-#' @param b a numeric value. The target for weight shrinkage.
+#' @param b a numeric vector. The target for weight shrinkage.
 #' @inheritParams new_MV_portfolio_weights_BDOPS21
 #' @return an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.
 #'
@@ -138,13 +148,17 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
 #' | means | sample mean vector estimate for the asset returns |
-#' | w_GMVP | portfolio weights_sample estimate |
-#' | weights | shrunk portfolio weights |
+#' | w_GMVP | sample estimate of portfolio weights |
+#' | weights | shrinkage estimate of portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
-#' | Port_mean_return | portfolio mean returns |
+#' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
-#' | weight_intervals | A data frame |
+#' | weight_intervals | A data frame, see details |
+#'
+#' weight_intervals contains a shrinkage estimate of portfolio weights,
+#' asymptotic confidence intervals for the true portfolio weights, value of test
+#' statistic and a p-value for the test on the weight for each individual asset.
 #' @md
 #'
 #' @references \insertRef{BDPS2019}{HDShOP}
@@ -190,7 +204,8 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
   Q.est <- Q_hat_n_fast(invSS=iS, Ip=ones, tIp=tones)
 
   ####  for calculating shrinkage GMVP weights
-  w_GMVP_whole <- iS%*%ones/as.numeric(tones%*%iS%*%ones) # sample estimator for GMVP weights
+  w_GMVP_whole <- as.vector(iS%*%ones/as.numeric(tones%*%iS%*%ones),
+                            mode='numeric') # sample estimator for GMVP weights
   Lb <- (1-cc)*t(b)%*%cov_mtrx%*%b*as.numeric(tones%*%iS%*%ones) -1 #relative loss of GMVP f.(16) IEEE 2019
   alpha_GMVP <- as.numeric((1-cc)*Lb/(cc+(1-cc)*Lb)) #shrinkage intensity f.(16) IEEE 2019
   w_GMV_shr <- alpha_GMVP*w_GMVP_whole + (1-alpha_GMVP)*b # f.(17) IEEE 2019
