@@ -2,15 +2,19 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{nonlin_shrinkLW}
 \alias{nonlin_shrinkLW}
-\title{Ledoit-Wolf Nonlinear shrinkage estimator (Annals of Statistics (2020))}
+\title{nonlinear shrinkage estimator of the covariance matrix  of Ledoit  and Wolf (2020, AoS)}
 \usage{
 nonlin_shrinkLW(x)
 }
 \arguments{
-\item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
+\item{x}{a data matrix. Rows represent different variables, columns- observations.}
+}
+\value{
+an object of class matrix
 }
 \description{
-Returns the estimation of the covariance matrix.
+The nonlinear shrinkage estimator of the covariance matrix, that minimizes the
+minimum variance loss functions as defined in Eq 2.1 of \insertCite{LW2020}{HDShOP}.
 }
 \examples{
 n<-5e2
@@ -23,5 +27,5 @@ X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
 Sigma_shr <- nonlin_shrinkLW(X)
 }
 \references{
-\insertRef{LW2020}{HDShOP}
+\insertAllCited{}
 }

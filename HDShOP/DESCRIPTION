@@ -33,6 +33,7 @@ Description: Constructs high dimensional Expected Utility portfolios using vario
     Shrinkage estimators are available for such quantities as asset mean returns, direct and inverse 
     covariance matrices and portfolio weights.
 License: GPL-3
+LazyData: yes
 Encoding: UTF-8
 Imports: 
     Rdpack,

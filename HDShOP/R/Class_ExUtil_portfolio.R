@@ -14,7 +14,7 @@
 #' | means | sample mean vector estimate for the asset returns |
 #' | weights | portfolio weights |
 #' | Port_Var | portfolio variance |
-#' | Port_mean_return | portfolio mean returns |
+#' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'

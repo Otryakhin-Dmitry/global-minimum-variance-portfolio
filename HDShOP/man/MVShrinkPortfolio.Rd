@@ -32,12 +32,12 @@ matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
 is the coefficient of risk aversion and \eqn{\hat Q} is given by
 \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
 Then the shrinkage estimator for MV portfolio weights in a high-dimensional
-setting is given by \deqn{\hat w_{GSEW} = \alpha \hat w_{EU} + (1-\alpha)b \quad,}
+setting is given by \deqn{\hat w_{GSEW} = \hat \alpha \hat w_{EU} + (1- \hat \alpha)b \quad,}
 where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 a target vector.
 
 In the case \eqn{\gamma \neq \infty}, estimation of \eqn{\alpha} is based on
-a procedure proposed by BOP19? The case of a fully risk averse investor
+a procedure proposed by \insertCite{BOP16}{HDShOP}. The case of a fully risk averse investor
 (\eqn{\gamma=\infty}) leads  to the construction of the traditional global minimum
 variance portfolio (GMVP):
 \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}

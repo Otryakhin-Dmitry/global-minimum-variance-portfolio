@@ -1,17 +1,22 @@
 # Shrinkage of the covariance matrix
 
 
-#' For shrinkage of the covariance matrix (2014, JMVA, Strong convergence)
+#' Linear shrinkage estimator of the covariance matrix of \insertCite{BGP2014}{HDShOP}
 #'
-#' It returns the estimator CovShrink(TM,SCM)=alfa*SCM+beta*TM,
-#' where SCM should be the sample covariance matrix and TM is a shrinkage target.
-#' In most cases, we take TM=I but could be any deterministic pos. def. matrix.
-#' In order to use the estimator for portfolio weights one needs to invert it,
-#' i.e., solve(CovShrink(TM,SCM)).
-#' @param n the number of observations of x.
-#' @param TM a shrinkage target.
-#' @param SCM the sample covariance matrix.
-#' @references \insertRef{BGP2014}{HDShOP}
+#' The optimal linear shrinkage estimator of the covariance matrix that minimizes the Frobenius norm:
+#' \deqn{\hat{\Sigma}_{OLSE} = \hat{\alpha} \hat{\Sigma} + \hat{\beta} \Sigma_0,}
+#' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
+#' given in Eq. 4.3 and 4.4 of \insertCite{BGP2014}{HDShOP}. \eqn{\hat{\Sigma}}
+#' is the sample covariance matrix (SCM) and \eqn{\Sigma_0} is a positive definite
+#' symmetric matrix used as the target (TM), for example, \eqn{\frac{1}{p} I}.
+#'
+#' @param n sample size.
+#' @param TM the target matrix for the shrinkage estimator.
+#' @param SCM sample covariance matrix.
+#'
+#' @return a list containing an object of class matrix (S) and the estimated shrinkage
+#' intensities \eqn{\alpha} and \eqn{\beta}.
+#' @references \insertAllCited{}
 #' @examples
 #' # Parameter setting
 #' n<-5e2
@@ -28,7 +33,7 @@
 #' diag(TM) <- 1
 #' SCM <- Sigma_sample_estimator(X)
 #' Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
-#' Sigma_shr[1:6, 1:6]
+#' Sigma_shr$S[1:6, 1:6]
 #' @export
 CovShrinkBGP14<-function(n, TM, SCM)
 {
@@ -37,16 +42,19 @@ CovShrinkBGP14<-function(n, TM, SCM)
   alfa1<-(1-a_1/a_2)
   beta1<-sum(diag(SCM%*%TM))*(1-alfa1)/sum(diag(TM%*%TM))
   BSR<-alfa1*SCM+beta1*TM
-  return(BSR)
+  list(S=BSR, alpha=alfa1, beta=beta1)
 }
 
 
-#' Ledoit-Wolf Nonlinear shrinkage estimator (Annals of Statistics (2020))
+#' nonlinear shrinkage estimator of the covariance matrix  of Ledoit  and Wolf (2020, AoS)
 #'
-#' Returns the estimation of the covariance matrix.
+#' The nonlinear shrinkage estimator of the covariance matrix, that minimizes the
+#' minimum variance loss functions as defined in Eq 2.1 of \insertCite{LW2020}{HDShOP}.
 #'
-#' @param x a numeric matrix. Rows represent different variables, columns- observations.
-#' @references \insertRef{LW2020}{HDShOP}
+#' @inheritParams CovarEstim
+#'
+#' @return an object of class matrix
+#' @references \insertAllCited{}
 #' @examples
 #' n<-5e2
 #' c<-0.7
@@ -87,18 +95,41 @@ nonlin_shrinkLW = function(x){
 } # analytical nonlinear shrinkage
 
 
-# Shrinkage of the inverse covariance matrix
-
-#' For the shrinkage of the inverse covariance matrix
+#' Linear shrinkage estimator of the inverse covariance matrix  of \insertCite{BGP2016}{HDShOP}
 #'
-#' iSCM=solve(S) with S sample covariance matrix and TM is again a target matrix,
-#' for example TM=I. Thus, InvCovShrink(solve(S), TM) will return the estimator of
-#' the inverse covariance matrix (no need to invert anymore). n- the number of observations of X.
-#' @param TM the target matrix for shrinkage of the inverse covariance matrix
+#' The optimal linear shrinkage estimator of the inverse covariance (precision)
+#' matrix that minimizes the Frobenius norm is given by:
+#' \deqn{\hat{\Pi}_{OLSE} = \hat{\alpha} \hat{\Pi} + \hat{\beta} \Pi_0,}
+#' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
+#' given in Eq. 4.4 and 4.5 of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
+#' the sample inverse covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
+#' symmetric matrix used as the target (TM), for example, I.
+#'
+#' @param TM the target matrix for the shrinkage estimator
 #' @param n the number of observations
 #' @param p the number of variables (rows of the covariance matrix)
 #' @param iSCM the inverse of the sample covariance matrix
-#' @references \insertRef{BGP2016}{HDShOP}
+#'
+#' @return a list containing an object of class matrix (S) and the estimated shrinkage
+#' intensities \eqn{\alpha} and \eqn{\beta}.
+#' @references \insertAllCited{}
+#' @examples
+#' # Parameter setting
+#' n<-5e2
+#' c<-0.7
+#' p<-c*n
+#' mu <- rep(0, p)
+#' Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+#'
+#' # Generating observations
+#' X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
+#'
+#' # Estimation
+#' TM <- matrix(0, nrow=p, ncol=p)
+#' diag(TM) <- 1
+#' iSCM <- solve(Sigma_sample_estimator(X))
+#' Sigma_shr <- InvCovShrinkBGP16(n=n, p=p, TM=TM, iSCM=iSCM)
+#' Sigma_shr$S[1:6, 1:6]
 #' @export
 InvCovShrinkBGP16<-function(n, p, TM, iSCM)
 {
@@ -107,6 +138,6 @@ InvCovShrinkBGP16<-function(n, p, TM, iSCM)
   alfa1<-(1-p/n-a_1/a_2)
   beta1<-sum(diag(iSCM%*%TM))*(1-p/n-alfa1)/sum(diag(TM%*%TM))
   BSR<-alfa1*iSCM+beta1*TM
-  return(BSR)
+  list(S=BSR, alpha=alfa1, beta=beta1)
 }
 

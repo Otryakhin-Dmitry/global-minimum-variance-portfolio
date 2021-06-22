@@ -9,17 +9,17 @@ mean_js(x, Y_0 = 1)
 \arguments{
 \item{x}{a numeric data matrix. Rows represent different variables, columns- observations.}
 
-\item{Y_0}{shrinkage target coefficient}
+\item{Y_0}{a numeric variable. Shrinkage target coefficient.}
 }
 \value{
 a numeric vector containing the James-Stein shrinkage estimator of the mean vector.
 }
 \description{
 James-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
-The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1}
-, where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is a specific
+The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
+where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is a specific
 shrinkage coefficient which minimizes a quadratic loss. \eqn{Y_0} is a prespecified
-value (target).
+value.
 }
 \examples{
 n<-7e2 # number of realizations

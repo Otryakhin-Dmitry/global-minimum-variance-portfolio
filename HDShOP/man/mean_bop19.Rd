@@ -7,9 +7,9 @@
 mean_bop19(x, mu_0 = rep(1, p))
 }
 \arguments{
-\item{x}{a numeric matrix. Rows represent different variables, columns- observations.}
+\item{x}{a data matrix. Rows represent different variables, columns- observations.}
 
-\item{mu_0}{a numeric vector. The target vector used in the construction of the shrinkage estimator of the mean vector.}
+\item{mu_0}{a numeric vector. The target vector used in the construction of the shrinkage estimator.}
 }
 \value{
 a numeric vector containing the shrinkage estimation of the mean vector
@@ -17,7 +17,7 @@ a numeric vector containing the shrinkage estimation of the mean vector
 \description{
 Shrinkage estimator of the high-dimensional mean vector as suggested in Bodnar et al. (2019).
 It uses the formula
-\deqn{\hat \mu_{BOP} = \alpha \bar x + \beta \mu_0,} where
+\deqn{\hat \mu_{BOP} = \alpha \bar x + \beta \mu_0 \quad ,} where
 \eqn{\alpha} and \eqn{\beta} are shrinkage coefficients that minimize weighted quadratic loss
 for a given target \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the ordinary
 sample estimator.

@@ -17,7 +17,8 @@ CovarEstim(x, type, ...)
 an object of class matrix
 }
 \description{
-Essentially it is a function dispatcher for covariance estimation that chooses a method according to the type argument.
+It is a function dispatcher for covariance matrix estimation. One can choose
+between traditional and shrinkage-based estimators.
 }
 \details{
 The available estimation methods are:\tabular{lll}{
@@ -26,6 +27,11 @@ The available estimation methods are:\tabular{lll}{
    \code{\link{CovShrinkBGP14}} \tab Bodnar et al 2014 \tab BGP14 \cr
    \code{\link{nonlin_shrinkLW}} \tab Ledoit & Wolf 2020 \tab LW20 \cr
 }
+
+
+Traditional estimator equals the unbiased estimator given by:
+\deqn{\hat{\Sigma} = \frac{1}{n-1}\sum_{i=1}^n (x_i-\bar{x})^\prime(x_i-\bar{x}),}
+where \eqn{x_i} is the i-th row of the data matrix and \eqn{\bar{x}} is the vector of means.
 }
 \examples{
 n<-3e2 # number of realizations

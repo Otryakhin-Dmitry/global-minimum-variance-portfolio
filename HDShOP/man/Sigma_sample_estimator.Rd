@@ -7,12 +7,14 @@
 Sigma_sample_estimator(x)
 }
 \arguments{
-\item{x}{a numeric matrix or a data frame in which columns are independent realizations of asset returns}
+\item{x}{a numeric \eqn{p\times n} matrix or a data frame with columns containing
+independent realizations of \eqn{p} variables}
 }
 \description{
-It computes covariance of matrix x as follows:
-\deqn{\hat\S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)^T
-,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j}
+It computes the sample covariance of matrix x as follows:
+\deqn{S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)^T
+,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j ,}
+where \eqn{x_j} is the \eqn{j}-th raw of the data matrix \eqn{x}.
 }
 \examples{
 p<-5 # number of assets
@@ -20,7 +22,4 @@ n<-1e1 # number of realizations
 
 x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
 Sigma_sample_estimator(x)
-}
-\references{
-\insertRef{BDOPS2021}{HDShOP}
 }

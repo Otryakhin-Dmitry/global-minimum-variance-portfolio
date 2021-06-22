@@ -30,7 +30,7 @@ test_MVSP(gamma, x, w_0, beta = 0.05)
 An asymptotic test of a given mean-variance portfolio in a high-dimensional setting.
 The tested hypotheses are
 \deqn{H_0: w_{EU} = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
-The rest statistic is based on the shrinkage estimator of MV portfolio weights,
+The test statistic is based on the shrinkage estimator of MV portfolio weights,
 see \insertCite{BDOPS2021}{HDShOP}
 }
 \details{

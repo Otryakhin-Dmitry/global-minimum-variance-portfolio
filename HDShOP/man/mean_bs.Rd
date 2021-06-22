@@ -14,8 +14,8 @@ a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vec
 }
 \description{
 Bayes-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
-The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1}
-, where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
+The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
+where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
 derived using Bayesian approach.
 }
 \examples{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{InvCovShrinkBGP16}
 \alias{InvCovShrinkBGP16}
-\title{For the shrinkage of the inverse covariance matrix}
+\title{Linear shrinkage estimator of the inverse covariance matrix  of \insertCite{BGP2016}{HDShOP}}
 \usage{
 InvCovShrinkBGP16(n, p, TM, iSCM)
 }
@@ -11,15 +11,41 @@ InvCovShrinkBGP16(n, p, TM, iSCM)
 
 \item{p}{the number of variables (rows of the covariance matrix)}
 
-\item{TM}{the target matrix for shrinkage of the inverse covariance matrix}
+\item{TM}{the target matrix for the shrinkage estimator}
 
 \item{iSCM}{the inverse of the sample covariance matrix}
 }
+\value{
+a list containing an object of class matrix (S) and the estimated shrinkage
+intensities \eqn{\alpha} and \eqn{\beta}.
+}
 \description{
-iSCM=solve(S) with S sample covariance matrix and TM is again a target matrix,
-for example TM=I. Thus, InvCovShrink(solve(S), TM) will return the estimator of
-the inverse covariance matrix (no need to invert anymore). n- the number of observations of X.
+The optimal linear shrinkage estimator of the inverse covariance (precision)
+matrix that minimizes the Frobenius norm is given by:
+\deqn{\hat{\Pi}_{OLSE} = \hat{\alpha} \hat{\Pi} + \hat{\beta} \Pi_0,}
+where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
+given in Eq. 4.4 and 4.5 of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
+the sample inverse covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
+symmetric matrix used as the target (TM), for example, I.
+}
+\examples{
+# Parameter setting
+n<-5e2
+c<-0.7
+p<-c*n
+mu <- rep(0, p)
+Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+
+# Generating observations
+X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
+
+# Estimation
+TM <- matrix(0, nrow=p, ncol=p)
+diag(TM) <- 1
+iSCM <- solve(Sigma_sample_estimator(X))
+Sigma_shr <- InvCovShrinkBGP16(n=n, p=p, TM=TM, iSCM=iSCM)
+Sigma_shr$S[1:6, 1:6]
 }
 \references{
-\insertRef{BGP2016}{HDShOP}
+\insertAllCited{}
 }

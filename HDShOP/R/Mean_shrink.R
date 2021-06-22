@@ -2,8 +2,8 @@
 #' Bayes-Stein shrinkage estimator of the mean vector
 #'
 #' Bayes-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
-#' The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1}
-#' , where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
+#' The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
+#' where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
 #' derived using Bayesian approach.
 #'
 #' @param x a numeric data matrix. Rows represent different variables, columns- observations.
@@ -37,13 +37,13 @@ mean_bs <- function(x)
 #' James-Stein shrinkage estimator of the mean vector
 #'
 #' James-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
-#' The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1}
-#' , where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is a specific
+#' The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
+#' where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is a specific
 #' shrinkage coefficient which minimizes a quadratic loss. \eqn{Y_0} is a prespecified
 #' value.
 #'
 #' @inheritParams mean_bs
-#' @param Y_0 shrinkage target coefficient
+#' @param Y_0 a numeric variable. Shrinkage target coefficient.
 #' @return a numeric vector containing the James-Stein shrinkage estimator of the mean vector.
 #' @references \insertRef{Jorion1986}{HDShOP}
 #' @examples
@@ -71,13 +71,13 @@ mean_js <- function(x, Y_0 = 1)
 #'
 #' Shrinkage estimator of the high-dimensional mean vector as suggested in Bodnar et al. (2019).
 #' It uses the formula
-#' \deqn{\hat \mu_{BOP} = \alpha \bar x + \beta \mu_0,} where
+#' \deqn{\hat \mu_{BOP} = \alpha \bar x + \beta \mu_0 \quad ,} where
 #' \eqn{\alpha} and \eqn{\beta} are shrinkage coefficients that minimize weighted quadratic loss
 #' for a given target \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the ordinary
 #' sample estimator.
 #'
-#' @param x a numeric matrix. Rows represent different variables, columns- observations.
-#' @param mu_0 a numeric vector. The target vector used in the construction of the shrinkage estimator of the mean vector.
+#' @param x a data matrix. Rows represent different variables, columns- observations.
+#' @param mu_0 a numeric vector. The target vector used in the construction of the shrinkage estimator.
 #' @return a numeric vector containing the shrinkage estimation of the mean vector
 #' @references \insertRef{BOP2019}{HDShOP}
 #' @examples

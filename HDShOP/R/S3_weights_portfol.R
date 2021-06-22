@@ -18,16 +18,18 @@
 #' | weights | shrunk portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
-#' | Port_mean_return | portfolio mean returns |
+#' | Port_mean_return | expected portfolio returns |
 #' | Sharpe | portfolio Sharpe ratio |
 #' | weight_intervals | A data frame |
 #'
 #' weight_intervals contains a shrinkage estimate of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
-#' statistic and a p-value for the test on the weight for each individual asset.
+#' statistic and a p-value for the test on the weight for each individual asset
+#' (Bodnar, Dette, Parolya and Thorsen 2021).
 #' @md
 #'
 #' @references \insertRef{BDOPS2021}{HDShOP}
+#' @references \insertRef{BDNT21}{HDShOP}
 #' @examples
 #' # Assets with a diagonal covariance matrix
 #'
@@ -158,11 +160,13 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #'
 #' weight_intervals contains a shrinkage estimate of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
-#' statistic and a p-value for the test on the weight for each individual asset.
+#' statistic and a p-value for the test on the weight for each individual asset
+#' \insertCite{BDNT21}{HDShOP}.
 #' @md
 #'
 #' @references \insertRef{BDPS2019}{HDShOP}
 #' @references \insertRef{BPS2018}{HDShOP}
+#' @references \insertRef{BDNT21}{HDShOP}
 #' @examples
 #'
 #' n<-3e2 # number of realizations

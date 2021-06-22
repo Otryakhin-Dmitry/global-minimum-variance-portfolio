@@ -32,7 +32,8 @@ an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabu
 
 weight_intervals contains a shrinkage estimate of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
-statistic and a p-value for the test on the weight for each individual asset.
+statistic and a p-value for the test on the weight for each individual asset
+\insertCite{BDNT21}{HDShOP}.
 }
 \description{
 Constructor of global minimum variance  portfolios. For more details of the method,
@@ -62,4 +63,6 @@ summary(test)
 \insertRef{BDPS2019}{HDShOP}
 
 \insertRef{BPS2018}{HDShOP}
+
+\insertRef{BDNT21}{HDShOP}
 }

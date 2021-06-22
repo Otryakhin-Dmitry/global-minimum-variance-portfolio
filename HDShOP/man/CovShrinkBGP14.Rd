@@ -2,23 +2,28 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{CovShrinkBGP14}
 \alias{CovShrinkBGP14}
-\title{For shrinkage of the covariance matrix (2014, JMVA, Strong convergence)}
+\title{Linear shrinkage estimator of the covariance matrix of \insertCite{BGP2014}{HDShOP}}
 \usage{
 CovShrinkBGP14(n, TM, SCM)
 }
 \arguments{
-\item{n}{the number of observations of x.}
+\item{n}{sample size.}
 
-\item{TM}{a shrinkage target.}
+\item{TM}{the target matrix for the shrinkage estimator.}
 
-\item{SCM}{the sample covariance matrix.}
+\item{SCM}{sample covariance matrix.}
+}
+\value{
+a list containing an object of class matrix (S) and the estimated shrinkage
+intensities \eqn{\alpha} and \eqn{\beta}.
 }
 \description{
-It returns the estimator CovShrink(TM,SCM)=alfa*SCM+beta*TM,
-where SCM should be the sample covariance matrix and TM is a shrinkage target.
-In most cases, we take TM=I but could be any deterministic pos. def. matrix.
-In order to use the estimator for portfolio weights one needs to invert it,
-i.e., solve(CovShrink(TM,SCM)).
+The optimal linear shrinkage estimator of the covariance matrix that minimizes the Frobenius norm:
+\deqn{\hat{\Sigma}_{OLSE} = \hat{\alpha} \hat{\Sigma} + \hat{\beta} \Sigma_0,}
+where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
+given in Eq. 4.3 and 4.4 of \insertCite{BGP2014}{HDShOP}. \eqn{\hat{\Sigma}}
+is the sample covariance matrix (SCM) and \eqn{\Sigma_0} is a positive definite
+symmetric matrix used as the target (TM), for example, \eqn{\frac{1}{p} I}.
 }
 \examples{
 # Parameter setting
@@ -36,8 +41,8 @@ TM <- matrix(0, nrow=p, ncol=p)
 diag(TM) <- 1
 SCM <- Sigma_sample_estimator(X)
 Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
-Sigma_shr[1:6, 1:6]
+Sigma_shr$S[1:6, 1:6]
 }
 \references{
-\insertRef{BGP2014}{HDShOP}
+\insertAllCited{}
 }

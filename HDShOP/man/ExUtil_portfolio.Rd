@@ -16,7 +16,7 @@ existing direct and inverse covariance matrices. It includes the following eleme
    means \tab sample mean vector estimate for the asset returns \cr
    weights \tab portfolio weights \cr
    Port_Var \tab portfolio variance \cr
-   Port_mean_return \tab portfolio mean returns \cr
+   Port_mean_return \tab expected portfolio return \cr
    Sharpe \tab portfolio Sharpe ratio \cr
 }
 }

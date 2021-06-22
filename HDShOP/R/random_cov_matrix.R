@@ -35,7 +35,6 @@ SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55){
 #'
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
-#' b<-rep(1/p,p)
 #' # A non-diagonal covariance matrix
 #' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
 #' Mtrx[1:6,1:6]

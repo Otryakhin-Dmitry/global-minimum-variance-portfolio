@@ -26,7 +26,7 @@ an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.\tabu
    weights \tab shrunk portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr
-   Port_mean_return \tab portfolio mean returns \cr
+   Port_mean_return \tab expected portfolio returns \cr
    Sharpe \tab portfolio Sharpe ratio \cr
    weight_intervals \tab A data frame \cr
 }
@@ -34,7 +34,8 @@ an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.\tabu
 
 weight_intervals contains a shrinkage estimate of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
-statistic and a p-value for the test on the weight for each individual asset.
+statistic and a p-value for the test on the weight for each individual asset
+(Bodnar, Dette, Parolya and Thorsen 2021).
 }
 \description{
 Constructor of mean-variance shrinkage portfolios. For more details of the method,
@@ -63,4 +64,6 @@ str(test)
 }
 \references{
 \insertRef{BDOPS2021}{HDShOP}
+
+\insertRef{BDNT21}{HDShOP}
 }
