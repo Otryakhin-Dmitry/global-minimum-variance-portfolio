@@ -29,8 +29,8 @@ mean_bs <- function(x)
 
   # Bayes-Stein mus and alphas
   alp_JS_hat <- as.numeric((p+2) / (p+2 + n*t(means-mu_0*I_vect)%*%invSS%*%(means-mu_0*I_vect)))
-  means <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
-  means
+  mu_hat_BS <- (1-alp_JS_hat) * means + alp_JS_hat * mu_0 * I_vect
+  list(means=mu_hat_BS, alpha=alp_JS_hat)
 }
 
 
@@ -65,6 +65,7 @@ mean_js <- function(x, Y_0 = 1)
   val <- as.numeric( (p-2) / n / (t(means-Y_0*I_vect)%*%invSS%*%(means-Y_0*I_vect)) )
   alp_JS_hat <- min(1,val)
   mu_hat_JS <- (1-alp_JS_hat) * means + alp_JS_hat * Y_0 * I_vect
+  list(means=mu_hat_JS, alpha=alp_JS_hat)
 }
 
 #' BOP shrinkage estimator
@@ -100,5 +101,5 @@ mean_bop19 <- function(x, mu_0 = rep(1,p))
                                 y_n_aver_t = t(samp_mean),
                                 Sigma_n_inv=Sigma_n_inv, mu_0=mu_0)
   output <-alpha_n *samp_mean + beta_n * mu_0
-  output
+  list(means=output, alpha_n=alpha_n, beta_n=beta_n)
 }
