@@ -21,7 +21,7 @@ Sigma_n_inv <- solve(Sigma)
 Cov_LW02 <- nonlin_shrinkLW(X)
 
 SCM <- Sigma_sample_estimator(X)
-Cov_BGP14 <- CovShrinkBGP14(n=n, TM=Sigma, SCM=SCM)
+Cov_BGP14 <- CovShrinkBGP14(n=n, TM=Sigma, SCM=SCM)$S
 
 # BGP16 doesn't converge!
 # iCov_BGP16 <- InvCovShrinkBGP16(n=n, p=p,TM=Sigma, iSCM=SCM)

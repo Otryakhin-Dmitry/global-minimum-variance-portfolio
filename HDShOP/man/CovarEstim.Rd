@@ -43,7 +43,7 @@ Mtrx_naive <- CovarEstim(x, type="naive")
 
 TM <- matrix(0, p, p)
 diag(TM) <- 1
-Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
+Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM)
 
 Mtrx_lw <- CovarEstim(x, type="LW20")
 }

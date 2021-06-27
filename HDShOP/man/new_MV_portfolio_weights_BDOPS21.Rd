@@ -16,13 +16,13 @@ new_MV_portfolio_weights_BDOPS21(x, gamma, b, beta)
 \item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
 \value{
-an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.\tabular{ll}{
+an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
    means \tab sample mean vector estimate for the asset returns \cr
-   W_EU_hat \tab portfolio weights_sample estimate \cr
+   W_mv_hat \tab portfolio weights_sample estimate \cr
    weights \tab shrunk portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr

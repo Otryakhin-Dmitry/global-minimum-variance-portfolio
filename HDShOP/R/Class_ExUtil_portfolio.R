@@ -1,7 +1,7 @@
-#' S3 class ExUtil_portfolio
+#' S3 class MeanVar_portfolio
 #'
 #'
-#' Class ExUtil_portfolio is designed to describe Expected Utility portfolios with
+#' Class MeanVar_portfolio is designed to describe mean-variance portfolios with
 #' existing direct and inverse covariance matrices. It includes the following elements:
 #'
 #' @section Slots:
@@ -18,8 +18,8 @@
 #' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
-#' @seealso [summary.ExUtil_portfolio] summary method for the class,
-#' [new_MV_portfolio_custom] class constructor, [validate_MV_portfolio] class validator,
-#' [MV_portfolio_custom] class helper.
-#' @name ExUtil_portfolio
+#' @seealso summary.MeanVar_portfolio summary method for the class,
+#' [new_MeanVar_portfolio] class constructor, [validate_MeanVar_portfolio] class validator,
+#' [MeanVar_portfolio] class helper.
+#' @name Class_MeanVar_portfolio
 NULL

@@ -6,7 +6,7 @@
 #' @inheritParams MVShrinkPortfolio
 #' @param b a numeric variable. The target for weight shrinkage.
 #' @param beta a numeric variable. The confidence level for weight intervals.
-#' @return an object of class MV_portfolio with subclass MV_portfolio_weights_BDOPS21.
+#' @return an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
 #'
 #' | Element | Description |
 #' | --- | --- |
@@ -14,7 +14,7 @@
 #' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
 #' | means | sample mean vector estimate for the asset returns |
-#' | W_EU_hat | portfolio weights_sample estimate |
+#' | W_mv_hat | portfolio weights_sample estimate |
 #' | weights | shrunk portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
@@ -123,26 +123,26 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
                  cov_mtrx=cov_mtrx,
                  inv_cov_mtrx=invSS,
                  means=mu_est,
-                 W_EU_hat=W_EU_hat,
+                 W_mv_hat=W_EU_hat,
                  weights=weights,
                  alpha=al,
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe,
                  weight_intervals=T_dens),
-            class = c("ExUtil_portfolio_weights_BDOPS21", "ExUtil_portfolio"))
+            class = c("MV_portfolio_weights_BDOPS21", "MeanVar_portfolio"))
   }
 
 
 #' constructor of GMV portfolio object.
 #'
-#' Constructor of global minimum variance  portfolios. For more details of the method,
+#' Constructor of global minimum variance portfolios. For more details of the method,
 #' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @param b a numeric vector. The target for weight shrinkage.
 #' @inheritParams new_MV_portfolio_weights_BDOPS21
-#' @return an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.
+#' @return an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
 #'
 #' | Element | Description |
 #' | --- | --- |
@@ -256,5 +256,5 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe,
                  weight_intervals=T_dens),
-            class = c("GMV_portfolio_weights_BDPS19", "ExUtil_portfolio"))
+            class = c("GMV_portfolio_weights_BDPS19", "MeanVar_portfolio"))
 }

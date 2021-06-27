@@ -42,7 +42,7 @@ Omega_hat_al_c <- function(x, b){
 #'
 #' An asymptotic test of a given mean-variance portfolio in a high-dimensional setting.
 #' The tested hypotheses are
-#' \deqn{H_0: w_{EU} = w_0 \quad vs \quad H_1: w_{EU} \neq w_0.}
+#' \deqn{H_0: w_{MV} = w_0 \quad vs \quad H_1: w_{MV} \neq w_0.}
 #' The test statistic is based on the shrinkage estimator of MV portfolio weights,
 #' see \insertCite{BDOPS2021}{HDShOP}
 #'

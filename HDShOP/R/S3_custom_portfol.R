@@ -1,13 +1,13 @@
 
-#' A constructor for class ExUtil_portfolio
+#' A constructor for class MeanVar_portfolio
 #'
-#' A light-weight constructor of objects of S3 class ExUtil_portfolio. This  function is for development purposes.
-#' A helper function equipped with error messages and allowing more flexible input is \code{\link{MV_portfolio_custom}}.
+#' A light-weight constructor of objects of S3 class MeanVar_portfolio. This  function is for development purposes.
+#' A helper function equipped with error messages and allowing more flexible input is \code{\link{MeanVar_portfolio}}.
 #'
 #' @param mean_vec mean vector of asset returns
 #' @param cov_mtrx the covariance matrix of asset returns
 #' @inheritParams MVShrinkPortfolio
-#' @return Object of S3 class ExUtil_portfolio.
+#' @return Object of S3 class MeanVar_portfolio.
 #'
 #' @examples
 #' n<-3e2 # number of realizations
@@ -16,11 +16,11 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' # Simple EU portfolio
+#' # Simple MV portfolio
 #' cov_mtrx <- Sigma_sample_estimator(x)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' cust_port_simp <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_simp)
 #'
 #' # Portfolio with Bayes-Stein shrunk means
@@ -30,10 +30,10 @@
 #' cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
 #' means <- rowMeans(x)
 #'
-#' cust_port_BS_LW <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_BS_LW)
 #' @export
-new_MV_portfolio_custom <- function(mean_vec, cov_mtrx, gamma){
+new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
 
   cl <- match.call()
 
@@ -60,13 +60,13 @@ new_MV_portfolio_custom <- function(mean_vec, cov_mtrx, gamma){
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe),
-            class = "ExUtil_portfolio")
+            class = "MeanVar_portfolio")
 }
 
 
 
-#' A validator for ExUtil_portfolio
-#' @param x Object of class ExUtil_portfolio.
+#' A validator for MeanVar_portfolio
+#' @param x Object of class MeanVar_portfolio.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -74,14 +74,14 @@ new_MV_portfolio_custom <- function(mean_vec, cov_mtrx, gamma){
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' # Simple EU portfolio
+#' # Simple MV portfolio
 #' cov_mtrx <- Sigma_sample_estimator(x)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
-#' str(validate_MV_portfolio(cust_port_simp))
+#' cust_port_simp <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' str(validate_MeanVar_portfolio(cust_port_simp))
 #' @export
-validate_MV_portfolio <- function(x) {
+validate_MeanVar_portfolio <- function(x) {
 
   values <- unclass(x)
 
@@ -110,7 +110,7 @@ validate_MV_portfolio <- function(x) {
   x
 }
 
-#' A helper function for ExUtil_portfolio
+#' A helper function for MeanVar_portfolio
 #' @param mean_vec mean vector or list of asset returns.
 #' @param cov_mtrx the covariance matrix of asset returns. Could be a matrix or a data frame.
 #' @inheritParams MVShrinkPortfolio
@@ -121,28 +121,28 @@ validate_MV_portfolio <- function(x) {
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' # Simple EU portfolio
+#' # Simple MV portfolio
 #' cov_mtrx <- Sigma_sample_estimator(x)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- MV_portfolio_custom(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' cust_port_simp <- MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_simp)
 #' @export
-MV_portfolio_custom <- function(mean_vec, cov_mtrx, gamma){
+MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
 
   cov_mtrx <- as.matrix(cov_mtrx)
   mean_vec<-unlist(mean_vec)
 
-  xx <- new_MV_portfolio_custom(mean_vec=mean_vec,
+  xx <- new_MeanVar_portfolio(mean_vec=mean_vec,
                                     cov_mtrx=cov_mtrx,
                                     gamma=gamma)
-  validate_MV_portfolio(xx)
+  validate_MeanVar_portfolio(xx)
 }
 
 
-# Summary method for ExUtil_portfolio
+# Summary method for MeanVar_portfolio
 #' @export
-summary.ExUtil_portfolio <- function(object, ...){
+summary.MeanVar_portfolio <- function(object, ...){
 
   list(call=object$call,
        Port_Var=object$Port_Var,

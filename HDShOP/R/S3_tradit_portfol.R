@@ -1,11 +1,11 @@
-#' Traditional expected utility portfolio
+#' Traditional mean-variance portfolio
 #'
 #' Mean-variance portfolios with the traditional (sample) estimators for the mean
 #' vector and the covariance matrix of asset returns. For more details of the method,
 #' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
-#' @return an object of class ExUtil_portfolio
+#' @return an object of class MeanVar_portfolio
 #'
 #' | Element | Description |
 #' | --- | --- |
@@ -13,7 +13,7 @@
 #' | cov_mtrx | the sample covariance matrix of asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
 #' | means | sample mean estimate for the asset returns |
-#' | W_EU_hat | sample estimate of portfolio weights |
+#' | W_mv_hat | sample estimate of portfolio weights |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
@@ -60,5 +60,5 @@ new_MV_portfolio_traditional <- function(x, gamma){
                  Port_Var=Port_Var,
                  Port_mean_return=Port_mean_return,
                  Sharpe=Sharpe),
-  class = c("ExUtil_portfolio"))
+  class = c("MeanVar_portfolio"))
 }

@@ -49,12 +49,12 @@ CovShrinkBGP14<-function(n, TM, SCM)
 #' nonlinear shrinkage estimator of the covariance matrix  of Ledoit  and Wolf (2020, AoS)
 #'
 #' The nonlinear shrinkage estimator of the covariance matrix, that minimizes the
-#' minimum variance loss functions as defined in Eq 2.1 of \insertCite{LW2020}{HDShOP}.
+#' minimum variance loss functions as defined in Eq 2.1 of Ledoit and Wolf (2020, AoS).
 #'
 #' @inheritParams CovarEstim
 #'
 #' @return an object of class matrix
-#' @references \insertAllCited{}
+#' @references \insertRef{LW2020}{HDShOP}
 #' @examples
 #' n<-5e2
 #' c<-0.7

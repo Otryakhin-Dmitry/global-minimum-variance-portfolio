@@ -34,14 +34,14 @@ test_that("All prototypes produce not NULLs", {
 })
 
 
-test_that("All prototypes are valid ExUtil_portfolio objects", {
+test_that("All prototypes are valid MeanVar_portfolio objects", {
 
   if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
   library('waldo')
 
   # Weights
-  expect_s3_class(object=validate_MV_portfolio(port_BDOPS21), class="ExUtil_portfolio", exact = FALSE)
-  expect_s3_class(object=validate_MV_portfolio(port_BDPS19), class="ExUtil_portfolio", exact = FALSE)
+  expect_s3_class(object=validate_MeanVar_portfolio(port_BDOPS21), class="MeanVar_portfolio", exact = FALSE)
+  expect_s3_class(object=validate_MeanVar_portfolio(port_BDPS19), class="MeanVar_portfolio", exact = FALSE)
 })
 
 

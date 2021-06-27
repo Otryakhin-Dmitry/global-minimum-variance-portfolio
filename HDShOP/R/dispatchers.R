@@ -42,8 +42,8 @@
 #' @param type a character. The type of methods to use to construct the portfolio.
 #' @param ... arguments to pass to portfolio constructors
 #'
-#' @return A portfolio in the form of an object of class ExUtil_portfolio potentially with a subclass.
-#' See \code{\link{new_MV_portfolio_custom}} for the details of the class.
+#' @return A portfolio in the form of an object of class MeanVar_portfolio potentially with a subclass.
+#' See \code{\link{new_MeanVar_portfolio}} for the details of the class.
 #' @references \insertAllCited{}
 #' @examples
 #' n<-3e2 # number of realizations
@@ -126,7 +126,7 @@ MVShrinkPortfolio <- function(x, gamma, type='shrinkage', ...) {
 #'
 #' TM <- matrix(0, p, p)
 #' diag(TM) <- 1
-#' Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
+#' Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM)
 #'
 #' Mtrx_lw <- CovarEstim(x, type="LW20")
 #' @export
@@ -136,9 +136,10 @@ CovarEstim <- function(x, type, ...)
       output <- Sigma_sample_estimator(x=x)
     }
     if(type=='BGP14') {
+      ll <- list(...)
       SCM <- Sigma_sample_estimator(x=x)
       n<-ncol(x)
-      output <- CovShrinkBGP14(n, ...)
+      output <- CovShrinkBGP14(n=n, SCM=SCM, TM=ll$TM)$S
     }
     if(type=='LW20') {
       output <- nonlin_shrinkLW(x=x)
@@ -192,13 +193,13 @@ MeanEstim <- function(x, type, ...)
     output <- .rowMeans(x=x, m=p, n=n)
   }
   if(type=='BOP19') {
-    output <- mean_bop19(x=x, ...)
+    output <- mean_bop19(x=x, ...)$means
   }
   if(type=='js') {
-    output <- mean_js(x=x, ...)
+    output <- mean_js(x=x, ...)$means
   }
   if(type=='bs') {
-    output <- mean_bs(x=x, ...)
+    output <- mean_bs(x=x, ...)$means
   }
   output
 }

@@ -16,8 +16,8 @@ MVShrinkPortfolio(x, gamma, type = "shrinkage", ...)
 \item{...}{arguments to pass to portfolio constructors}
 }
 \value{
-A portfolio in the form of an object of class ExUtil_portfolio potentially with a subclass.
-See \code{\link{new_MV_portfolio_custom}} for the details of the class.
+A portfolio in the form of an object of class MeanVar_portfolio potentially with a subclass.
+See \code{\link{new_MeanVar_portfolio}} for the details of the class.
 }
 \description{
 The main function for Mean Variance (also known as Expected Utility) portfolio construction.

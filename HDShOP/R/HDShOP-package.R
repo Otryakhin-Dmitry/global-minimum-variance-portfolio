@@ -1,13 +1,13 @@
 #' A set of tools for shrinkage estimators and Expected Utility portfolios
 #'
 #' Package HDShOP has the following three important functions: \code{\link{MVShrinkPortfolio}},
-#' \code{\link{CovarEstim}} and \code{\link{MeanEstim}}. MVShrinkPortfolio creates Expected Utility
+#' \code{\link{CovarEstim}} and \code{\link{MeanEstim}}. MVShrinkPortfolio creates mean-variance
 #' portfolios using shrinkage estimation methods for portfolio weights. CovarEstim computes estimates of
 #' covariance matrices while MeanEstim- ones for mean vectors. Every of these three functions is
-#' supplied a name of the method to use to perform estimation.
-#' All portfolios are stored in objects of class ExUtil_portfolio. Additionally, most portfolios have
-#' a subclass, specific to their kind, that inherits from ExUtil_portfolio. For the later class, constructor,
-#' validator and helper functions are available, so that custom EU portfolios may be coded by users.
+#' supplied a name of the method to use to perform estimation. All portfolios are stored in objects of 
+#' class ExUtil_portfolio and some have a subclass, specific to their kind, that inherits from 
+#' ExUtil_portfolio. For the later class constructor, validator and helper functions are available, so 
+#' that custom Mean-Variance portfolios may be coded by users.
 #'
 #'
 #' @section Methods:

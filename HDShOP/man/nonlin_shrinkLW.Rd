@@ -14,7 +14,7 @@ an object of class matrix
 }
 \description{
 The nonlinear shrinkage estimator of the covariance matrix, that minimizes the
-minimum variance loss functions as defined in Eq 2.1 of \insertCite{LW2020}{HDShOP}.
+minimum variance loss functions as defined in Eq 2.1 of Ledoit and Wolf (2020, AoS).
 }
 \examples{
 n<-5e2
@@ -27,5 +27,5 @@ X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
 Sigma_shr <- nonlin_shrinkLW(X)
 }
 \references{
-\insertAllCited{}
+\insertRef{LW2020}{HDShOP}
 }

@@ -14,7 +14,7 @@ new_GMV_portfolio_weights_BDPS19(x, b, beta)
 \item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
 \value{
-an object of class MV_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
+an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
@@ -36,7 +36,7 @@ statistic and a p-value for the test on the weight for each individual asset
 \insertCite{BDNT21}{HDShOP}.
 }
 \description{
-Constructor of global minimum variance  portfolios. For more details of the method,
+Constructor of global minimum variance portfolios. For more details of the method,
 see \code{\link{MVShrinkPortfolio}}.
 }
 \examples{

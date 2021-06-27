@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_tradit_portfol.R
 \name{new_MV_portfolio_traditional}
 \alias{new_MV_portfolio_traditional}
-\title{Traditional expected utility portfolio}
+\title{Traditional mean-variance portfolio}
 \usage{
 new_MV_portfolio_traditional(x, gamma)
 }
@@ -12,13 +12,13 @@ new_MV_portfolio_traditional(x, gamma)
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
 \value{
-an object of class ExUtil_portfolio\tabular{ll}{
+an object of class MeanVar_portfolio\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
    means \tab sample mean estimate for the asset returns \cr
-   W_EU_hat \tab sample estimate of portfolio weights \cr
+   W_mv_hat \tab sample estimate of portfolio weights \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab expected portfolio return \cr
    Sharpe \tab portfolio Sharpe ratio \cr
