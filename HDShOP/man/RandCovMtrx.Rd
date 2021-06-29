@@ -4,16 +4,27 @@
 \alias{RandCovMtrx}
 \title{Covariance matrix generator}
 \usage{
-RandCovMtrx(n = 300, p = 200, q = 20.55)
+RandCovMtrx(p = 200, eigenvalues = 0.1 * exp(5 * seq(0, 1, length = p)))
+}
+\arguments{
+\item{p}{dimension of the covariance matrix}
+
+\item{eigenvalues}{the vector of positive eigenvalues}
 }
 \description{
-Useful for examples and tests when an arbitrary covariance is needed.
+Description: generates a covariance matrix from Wishart distribution with given
+eigenvalues or with exponentially decreasing eigenvalues. Useful for examples
+and tests when an arbitrary covariance is needed.
+}
+\details{
+This function generates a symmetric positive definite covariance matrix with
+given eigenvalues. The eigenvalues can be specified either explicitly and by
+default are generated with exponential decay.
 }
 \examples{
 
-n<-3e2 # number of realizations
-p<-.5*n # number of assets
+p<-3e2
 # A non-diagonal covariance matrix
-Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
+Mtrx <- RandCovMtrx(p=p)
 Mtrx[1:6,1:6]
 }

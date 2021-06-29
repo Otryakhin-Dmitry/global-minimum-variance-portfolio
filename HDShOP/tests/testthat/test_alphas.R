@@ -39,7 +39,7 @@ test_that("alphas EU and GMV work and are equal when gamma=Inf and components of
   w_0 <- rep(1/p,p)
   mu <- seq(0.2,-0.2, length.out=p)
 
-  cov_mat <- RandCovMtrx(n=n, p=p)
+  cov_mat <- RandCovMtrx(p=p)
   x <- t(mvrnorm(n,mu, cov_mat))
 
   al_EU <- alpha_hat_star_c(gamma=Inf, x, b=w_0) # must be computable
@@ -78,18 +78,19 @@ test_that("Remark 1. Variances on both sides must be equal; components of x are 
   if (!requireNamespace("MASS", quietly =TRUE)) skip("package MASS is not installed")
   library('MASS')
 
-  n<-1e3 # number of realizations
-  p<-0.1*n # number of assets
+  n<-5e2 # number of realizations
+  p<-0.5*n # number of assets
   w_0 <- rep(0,p)
   w_0[1:10] <- 10:1
 
   mu <- rep(0,p)
   mu[1:10] <-c(1,-1,2,4,6,-10,3,0,2,5)
   set.seed(2)
-  Sigma <- 10*RandCovMtrx(n=n, p=p)
+  Sigma <- 10*RandCovMtrx(p=p)
 
+  set.seed(2)
   vect_as <- sqrt(n)*
-    replicate(n=9e2, {
+    replicate(n=5e2, {
       x <- t(mvrnorm(n=n, mu=mu, Sigma=Sigma))
       alpha_hat_star_c_GMV(x, b=w_0) -
         alpha_star_GMV(Sigma=Sigma, c=p/n, b=w_0)
@@ -106,8 +107,8 @@ test_that("Remark 1. Variances on both sides must be equal; components of x are 
   if (!requireNamespace("MASS", quietly =TRUE)) skip("package MASS is not installed")
   library('MASS')
 
-  n<-1e3 # number of realizations
-  p<-0.1*n # number of assets
+  n<-5e2 # number of realizations
+  p<-0.5*n # number of assets
   w_0 <- rep(0,p)
   w_0[1:10] <- 10:1
 
@@ -117,8 +118,9 @@ test_that("Remark 1. Variances on both sides must be equal; components of x are 
   Sigma <- matrix(0, p, p)
   diag(Sigma) <- 1
 
+  set.seed(2)
   vect_as <- sqrt(n)*
-    replicate(n=2e3, {
+    replicate(n=5e2, {
       x <- t(mvrnorm(n=n, mu=mu, Sigma=Sigma))
       alpha_hat_star_c_GMV(x, b=w_0) -
         alpha_star_GMV(Sigma=Sigma, c=p/n, b=w_0)
