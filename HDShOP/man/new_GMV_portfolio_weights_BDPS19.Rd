@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_weights_portfol.R
 \name{new_GMV_portfolio_weights_BDPS19}
 \alias{new_GMV_portfolio_weights_BDPS19}
-\title{constructor of GMV portfolio object.}
+\title{Constructor of GMV portfolio object.}
 \usage{
 new_GMV_portfolio_weights_BDPS19(x, b, beta)
 }
@@ -33,7 +33,7 @@ an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
 weight_intervals contains a shrinkage estimate of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
 statistic and a p-value for the test on the weight for each individual asset
-\insertCite{BDNT21}{HDShOP}.
+\insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 }
 \description{
 Constructor of global minimum variance portfolios. For more details of the method,
@@ -52,7 +52,7 @@ test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)
 str(test)
 
 # Assets with a non-diagonal covariance matrix
-Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
+Mtrx <- RandCovMtrx(p=p)
 x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
 test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)

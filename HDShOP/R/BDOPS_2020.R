@@ -5,7 +5,7 @@
 #' It computes the sample covariance of matrix x as follows:
 #' \deqn{S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)^T
 #' ,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j ,}
-#' where \eqn{x_j} is the \eqn{j}-th raw of the data matrix \eqn{x}.
+#' where \eqn{x_j} is the \eqn{j}-th column of the data matrix \eqn{x}.
 #'
 #' @param x a numeric \eqn{p\times n} matrix or a data frame with columns containing
 #' independent realizations of \eqn{p} variables

@@ -86,16 +86,3 @@ RandCovMtrx <- function(p=2e2, eigenvalues = 0.1*exp(5*seq(0,1,length=p))){
   cov.mat.H0 <- U%*% Eigen.matrix %*%t(U)
   cov.mat.H0
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

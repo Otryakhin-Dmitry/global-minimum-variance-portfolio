@@ -26,24 +26,24 @@ It is a dispatcher using methods according to argument type.
 \details{
 The sample estimator of the mean-variance portfolio weights, which results in
 a traditional MV portfolio, is calculated by
-\deqn{\hat w_{EU} = \frac{S^{-1} 1}{1' S^{-1} 1} + \gamma^{-1} \hat Q \bar x \quad ,}
+\deqn{\hat w_{MV} = \frac{S^{-1} 1}{1' S^{-1} 1} + \gamma^{-1} \hat Q \bar x \quad ,}
 where \eqn{S^{-1}} and \eqn{\bar x} are the inverse of the sample covariance
 matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
 is the coefficient of risk aversion and \eqn{\hat Q} is given by
 \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
 Then the shrinkage estimator for MV portfolio weights in a high-dimensional
-setting is given by \deqn{\hat w_{GSEW} = \hat \alpha \hat w_{EU} + (1- \hat \alpha)b \quad,}
+setting is given by \deqn{\hat w_{GSMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b \quad,}
 where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 a target vector.
 
 In the case \eqn{\gamma \neq \infty}, estimation of \eqn{\alpha} is based on
-a procedure proposed by \insertCite{BOP16}{HDShOP}. The case of a fully risk averse investor
+a procedure proposed by Eq.2.28 of \insertCite{BOP16;textual}{HDShOP}. The case of a fully risk averse investor
 (\eqn{\gamma=\infty}) leads  to the construction of the traditional global minimum
 variance portfolio (GMVP):
 \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
 The shrinkage estimator for the GMV portfolio is then calculated by
-\deqn{\hat w_{GSEW GMV} = \hat \alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
-with \eqn{\alpha} as in \insertCite{BPS2018}{HDShOP}.
+\deqn{\hat w_{GS GMV} = \hat \alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
+with \eqn{\hat \alpha} as in Eq.2.31 \insertCite{BPS2018;textual}{HDShOP}.
 
 These three estimation methods are available as separate functions dispatched
 accordingly to the following parameter configurations:\tabular{llll}{

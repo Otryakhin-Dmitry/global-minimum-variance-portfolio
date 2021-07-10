@@ -8,7 +8,7 @@
 a matrix with the first column containing the data and company names as column labels.
 }
 \source{
-Thomson Reuters
+Yahoo finance
 }
 \usage{
 SP_daily_asset_returns

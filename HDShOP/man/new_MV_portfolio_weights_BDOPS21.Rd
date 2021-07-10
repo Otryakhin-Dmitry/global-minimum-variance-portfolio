@@ -2,7 +2,7 @@
 % Please edit documentation in R/S3_weights_portfol.R
 \name{new_MV_portfolio_weights_BDOPS21}
 \alias{new_MV_portfolio_weights_BDOPS21}
-\title{constructor of EU portfolio object.}
+\title{Constructor of MV portfolio object.}
 \usage{
 new_MV_portfolio_weights_BDOPS21(x, gamma, b, beta)
 }
@@ -35,7 +35,7 @@ an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
 weight_intervals contains a shrinkage estimate of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
 statistic and a p-value for the test on the weight for each individual asset
-(Bodnar, Dette, Parolya and Thorsen 2021).
+(see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
 }
 \description{
 Constructor of mean-variance shrinkage portfolios. For more details of the method,
@@ -56,7 +56,7 @@ summary(test)
 
 # Assets with a non-diagonal covariance matrix
 
-Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
+Mtrx <- RandCovMtrx(p=p)
 x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
 test <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)

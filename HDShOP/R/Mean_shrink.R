@@ -1,14 +1,14 @@
 
 #' Bayes-Stein shrinkage estimator of the mean vector
 #'
-#' Bayes-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
+#' Bayes-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
 #' The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
 #' where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
-#' derived using Bayesian approach.
+#' derived using Bayesian approach (see Eq.14 and Eq.17 in \insertCite{Jorion1986;textual}{HDShOP}).
 #'
 #' @param x a numeric data matrix. Rows represent different variables, columns- observations.
 #' @return a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
-#' @references \insertRef{Jorion1986}{HDShOP}
+#' @references \insertAllCited{}
 #' @examples
 #' n <- 7e2 # number of realizations
 #' p <- .5*n # number of assets
@@ -36,16 +36,16 @@ mean_bs <- function(x)
 
 #' James-Stein shrinkage estimator of the mean vector
 #'
-#' James-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
+#' James-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
 #' The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
-#' where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is a specific
-#' shrinkage coefficient which minimizes a quadratic loss. \eqn{Y_0} is a prespecified
-#' value.
+#' where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is the shrinkage
+#' coefficient which minimizes a quadratic loss given by Eq.11 in \insertCite{Jorion1986;textual}{HDShOP}.
+#' \eqn{Y_0} is a prespecified value.
 #'
 #' @inheritParams mean_bs
 #' @param Y_0 a numeric variable. Shrinkage target coefficient.
 #' @return a numeric vector containing the James-Stein shrinkage estimator of the mean vector.
-#' @references \insertRef{Jorion1986}{HDShOP}
+#' @references \insertAllCited{}
 #' @examples
 #' n<-7e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -70,17 +70,18 @@ mean_js <- function(x, Y_0 = 1)
 
 #' BOP shrinkage estimator
 #'
-#' Shrinkage estimator of the high-dimensional mean vector as suggested in Bodnar et al. (2019).
+#' Shrinkage estimator of the high-dimensional mean vector as suggested in \insertCite{BOP2019;textual}{HDShOP}.
 #' It uses the formula
-#' \deqn{\hat \mu_{BOP} = \alpha \bar x + \beta \mu_0 \quad ,} where
-#' \eqn{\alpha} and \eqn{\beta} are shrinkage coefficients that minimize weighted quadratic loss
-#' for a given target \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the ordinary
+#' \deqn{\hat \mu_{BOP} = \hat \alpha \bar x + \hat \beta \mu_0 \quad ,} where
+#' \eqn{\hat \alpha} and \eqn{\hat \beta} are shrinkage coefficients given by Eq.6 and Eg.7
+#' of \insertCite{BOP2019;textual}{HDShOP} that minimize weighted quadratic loss for a given
+#' target \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the ordinary
 #' sample estimator.
 #'
 #' @param x a data matrix. Rows represent different variables, columns- observations.
 #' @param mu_0 a numeric vector. The target vector used in the construction of the shrinkage estimator.
 #' @return a numeric vector containing the shrinkage estimation of the mean vector
-#' @references \insertRef{BOP2019}{HDShOP}
+#' @references \insertAllCited{}
 #' @examples
 #' n<-7e2 # number of realizations
 #' p<-.5*n # number of assets

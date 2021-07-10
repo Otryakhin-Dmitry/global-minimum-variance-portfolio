@@ -7,7 +7,7 @@
 MeanEstim(x, type, ...)
 }
 \arguments{
-\item{x}{a data matrix. Rows represent different variables, columns- observations.}
+\item{x}{a p by n data matrix. Rows represent different variables, columns- observations.}
 
 \item{type}{a character. The estimation method to be used.}
 

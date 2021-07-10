@@ -31,7 +31,7 @@ n<-5e2
 c<-0.7
 p<-c*n
 mu <- rep(0, p)
-Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+Sigma <- RandCovMtrx(p=p)
 
 # Generating observations
 X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))

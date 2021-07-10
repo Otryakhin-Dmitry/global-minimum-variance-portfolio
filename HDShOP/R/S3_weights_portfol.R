@@ -1,4 +1,4 @@
-#' constructor of EU portfolio object.
+#' Constructor of MV portfolio object.
 #'
 #' Constructor of mean-variance shrinkage portfolios. For more details of the method,
 #' see \code{\link{MVShrinkPortfolio}}.
@@ -25,7 +25,7 @@
 #' weight_intervals contains a shrinkage estimate of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
 #' statistic and a p-value for the test on the weight for each individual asset
-#' (Bodnar, Dette, Parolya and Thorsen 2021).
+#' (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
 #' @md
 #'
 #' @references \insertRef{BDOPS2021}{HDShOP}
@@ -45,7 +45,7 @@
 #'
 #' # Assets with a non-diagonal covariance matrix
 #'
-#' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
+#' Mtrx <- RandCovMtrx(p=p)
 #' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
 #' test <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
@@ -134,7 +134,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
   }
 
 
-#' constructor of GMV portfolio object.
+#' Constructor of GMV portfolio object.
 #'
 #' Constructor of global minimum variance portfolios. For more details of the method,
 #' see \code{\link{MVShrinkPortfolio}}.
@@ -161,7 +161,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' weight_intervals contains a shrinkage estimate of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
 #' statistic and a p-value for the test on the weight for each individual asset
-#' \insertCite{BDNT21}{HDShOP}.
+#' \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 #' @md
 #'
 #' @references \insertRef{BDPS2019}{HDShOP}
@@ -180,7 +180,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' str(test)
 #'
 #' # Assets with a non-diagonal covariance matrix
-#' Mtrx <- RandCovMtrx(n=n, p=p, q=20.55)
+#' Mtrx <- RandCovMtrx(p=p)
 #' x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 #'
 #' test <- new_GMV_portfolio_weights_BDPS19(x=x, b=b, beta=0.05)

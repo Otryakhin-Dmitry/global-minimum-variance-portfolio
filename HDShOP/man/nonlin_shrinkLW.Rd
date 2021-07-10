@@ -7,7 +7,7 @@
 nonlin_shrinkLW(x)
 }
 \arguments{
-\item{x}{a data matrix. Rows represent different variables, columns- observations.}
+\item{x}{a p by n data matrix. Rows represent different variables, columns- observations.}
 }
 \value{
 an object of class matrix
@@ -21,7 +21,7 @@ n<-5e2
 c<-0.7
 p<-c*n
 mu <- rep(0, p)
-Sigma <- RandCovMtrx(n=n, p=p, q=20.55)
+Sigma <- RandCovMtrx(p=p)
 
 X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
 Sigma_shr <- nonlin_shrinkLW(X)

@@ -29,20 +29,23 @@ Author: Taras Bodnar [aut] (<https://orcid.org/0000-0001-7855-8221>),
     Yarema Okhrin [aut] (<https://orcid.org/0000-0003-4704-5233>),
     Dmitry Otryakhin [aut, cre] (<https://orcid.org/0000-0002-4700-7221>), 
     Nestor Parolya [aut] (<https://orcid.org/0000-0003-2147-2288>)
-Description: Concerned with the applications of the shrinkage-type methods for estimation and inference of
-    high-dimensional mean-variance portfolios. The techniques developed in Bodnar et al. (2018, 2019, 
+Description: Applications of the shrinkage-type methods for estimation and inference of high-
+    dimensional mean-variance portfolios. The techniques developed in Bodnar et al. (2018, 2019,
     2020, 2021) are central to the package. They provide simple and feasible estimators and tests
-    for optimal portfolio weights, which are applicable for 'large p and large n' situations, 
-    where p is the portfolio dimension (number of stocks) and n is the sample size (investment 
-    horizon). The package also includes tools for constructing portfolios with shrinkage means and 
-    covariance matrices as well as a new Bayesian estimator for the Markowitz efficient frontier
-    recently developed by Bauder et al. (2021).
+    for optimal portfolio weights, which are applicable for 'large p and large n' situations,
+    where p is the portfolio dimension (number of stocks) and n is the sample size. The package
+    also includes tools for constructing portfolios with shrinkage means and covariance matrices
+    as well as a new Bayesian estimator for the Markowitz efficient frontier recently developed
+    by Bauder et al. (2021).
 License: GPL-3
 LazyData: yes
 Encoding: UTF-8
+Depends:
+    R (>= 3.5.0)
 Imports: 
     Rdpack,
 Suggests: 
+    ggplot2,
     testthat,
     EstimDiagnostics,
     MASS,

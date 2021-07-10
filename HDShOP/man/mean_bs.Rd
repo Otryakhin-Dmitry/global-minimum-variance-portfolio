@@ -13,10 +13,10 @@ mean_bs(x)
 a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
 }
 \description{
-Bayes-Stein shrinkage estimator of the mean vector as suggested in Jorion (1986).
+Bayes-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
 The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
 where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
-derived using Bayesian approach.
+derived using Bayesian approach (see Eq.14 and Eq.17 in \insertCite{Jorion1986;textual}{HDShOP}).
 }
 \examples{
 n <- 7e2 # number of realizations
@@ -25,5 +25,5 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 mm <- mean_bs(x=x)
 }
 \references{
-\insertRef{Jorion1986}{HDShOP}
+\insertAllCited{}
 }
