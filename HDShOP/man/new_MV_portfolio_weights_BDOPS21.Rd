@@ -2,12 +2,13 @@
 % Please edit documentation in R/S3_weights_portfol.R
 \name{new_MV_portfolio_weights_BDOPS21}
 \alias{new_MV_portfolio_weights_BDOPS21}
-\title{Constructor of MV portfolio object.}
+\title{Constructor of MV portfolio object}
 \usage{
 new_MV_portfolio_weights_BDOPS21(x, gamma, b, beta)
 }
 \arguments{
-\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
+assets, columns -- observations.}
 
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 
@@ -21,12 +22,12 @@ an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate for the asset returns \cr
-   W_mv_hat \tab portfolio weights_sample estimate \cr
-   weights \tab shrunk portfolio weights \cr
+   means \tab sample mean vector estimate of the asset returns \cr
+   W_mv_hat \tab sample estimate of the portfolio weights \cr
+   weights \tab shrinkage estimate of the portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr
-   Port_mean_return \tab expected portfolio returns \cr
+   Port_mean_return \tab expected portfolio return \cr
    Sharpe \tab portfolio Sharpe ratio \cr
    weight_intervals \tab A data frame \cr
 }
@@ -34,8 +35,8 @@ an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
 
 weight_intervals contains a shrinkage estimate of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
-statistic and a p-value for the test on the weight for each individual asset
-(see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
+statistic and a p-value of the test on the equality of the weight of each individual
+asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
 }
 \description{
 Constructor of mean-variance shrinkage portfolios. For more details of the method,

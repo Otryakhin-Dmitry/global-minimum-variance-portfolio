@@ -2,17 +2,20 @@
 % Please edit documentation in R/BDOPS_2020.R
 \name{Sigma_sample_estimator}
 \alias{Sigma_sample_estimator}
-\title{Simple sample covariance estimator}
+\title{Sample covariance estimator}
 \usage{
 Sigma_sample_estimator(x)
 }
 \arguments{
-\item{x}{a numeric \eqn{p\times n} matrix or a data frame with columns containing
-independent realizations of \eqn{p} variables}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
+}
+\value{
+Sample covariance estimation
 }
 \description{
 It computes the sample covariance of matrix x as follows:
-\deqn{S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)^T
+\deqn{S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)'
 ,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j ,}
 where \eqn{x_j} is the \eqn{j}-th column of the data matrix \eqn{x}.
 }

@@ -7,7 +7,7 @@
 #' @param mean_vec mean vector of asset returns
 #' @param cov_mtrx the covariance matrix of asset returns
 #' @inheritParams MVShrinkPortfolio
-#' @return Object of S3 class MeanVar_portfolio.
+#' @return Mean-variance portfolio in the form of object of S3 class MeanVar_portfolio.
 #'
 #' @examples
 #' n<-3e2 # number of realizations
@@ -65,8 +65,10 @@ new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
 
 
 
-#' A validator for MeanVar_portfolio
+#' A validator for objects of class MeanVar_portfolio
 #' @param x Object of class MeanVar_portfolio.
+#' @return If the object passes all the checks, then x itself is returned,
+#' otherwise an error is thrown.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -111,9 +113,22 @@ validate_MeanVar_portfolio <- function(x) {
 }
 
 #' A helper function for MeanVar_portfolio
-#' @param mean_vec mean vector or list of asset returns.
+#'
+#' A user-friendly function making mean-variance portfolios for assets with customly
+#' computed covariance matrix and mean returns.
+#' The weights are computed in accordance with the formula
+#' \deqn{\hat w_{MV} = \frac{S^{-1} 1}{1' S^{-1} 1} + \gamma^{-1} \hat Q \bar x \quad ,}
+#' where \eqn{S^{-1}} is the inverse of the covariance matrix, \eqn{\bar x} is the mean
+#' vector of asset returns, \eqn{\gamma} is the coefficient of risk aversion, and
+#' \eqn{\hat Q} is given by
+#' \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
+#' The computation is made by \code{\link{new_MeanVar_portfolio}} and then the result
+#' is validated by \code{\link{validate_MeanVar_portfolio}}.
+#'
+#' @param mean_vec mean vector of asset returns provided in the form of a vector or a list.
 #' @param cov_mtrx the covariance matrix of asset returns. Could be a matrix or a data frame.
 #' @inheritParams MVShrinkPortfolio
+#' @return Mean-variance portfolio in the form of object of S3 class MeanVar_portfolio.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -134,8 +149,9 @@ MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
   mean_vec<-unlist(mean_vec)
 
   xx <- new_MeanVar_portfolio(mean_vec=mean_vec,
-                                    cov_mtrx=cov_mtrx,
-                                    gamma=gamma)
+                              cov_mtrx=cov_mtrx,
+                              gamma=gamma)
+
   validate_MeanVar_portfolio(xx)
 }
 

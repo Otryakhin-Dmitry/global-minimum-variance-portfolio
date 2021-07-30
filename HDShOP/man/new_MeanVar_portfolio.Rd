@@ -14,7 +14,7 @@ new_MeanVar_portfolio(mean_vec, cov_mtrx, gamma)
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
 \value{
-Object of S3 class MeanVar_portfolio.
+Mean-variance portfolio in the form of object of S3 class MeanVar_portfolio.
 }
 \description{
 A light-weight constructor of objects of S3 class MeanVar_portfolio. This  function is for development purposes.

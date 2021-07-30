@@ -1,13 +1,13 @@
-#' Plotting the Bayesian efficient frontier \insertCite{bauder21}{HDShOP} and the
+#' Plot the Bayesian efficient frontier \insertCite{bauder21}{HDShOP} and the
 #' provided portfolios.
 #'
-#' The plotted  Bayesian efficient frontier is provided by \insertCite{@Eq. 8 in @bauder21;textual}{HDShOP}.
+#' The plotted  Bayesian efficient frontier is provided by \insertCite{@Eq. (8) in @bauder21;textual}{HDShOP}.
 #' It is the set of optimal portfolios obtained by employing the posterior predictive
 #' distribution on the asset returns. This efficient frontier can be used to assess
 #' the mean-variance efficiency of various estimators of the portfolio weights.
-#' The standard deviation of the portfolio return is plotted the \eqn{x}-axis and the
-#' mean portfolio return in the \eqn{y}-axis. The portfolios given in weights are added
-#' to the plot by computing  \eqn{\sqrt{w^\prime \cdot \rm{Sigma} \cdot w} }  and  \eqn{w^\prime \cdot \rm mu}.
+#' The standard deviation of the portfolio return is plotted in the \eqn{x}-axis and the
+#' mean portfolio return in the \eqn{y}-axis. The portfolios with the weights w are added
+#' to the plot by computing  \eqn{\sqrt{\rm{w}^\prime \rm{Sigma} \cdot w} }  and  \eqn{\rm w^\prime \bar x}.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @param weights.eff matrix of portfolio weights. Each column contains p values of

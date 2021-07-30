@@ -2,7 +2,7 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{CovShrinkBGP14}
 \alias{CovShrinkBGP14}
-\title{Linear shrinkage estimator of the covariance matrix of \insertCite{BGP2014}{HDShOP}}
+\title{Linear shrinkage estimator of the covariance matrix \insertCite{BGP2014}{HDShOP}}
 \usage{
 CovShrinkBGP14(n, TM, SCM)
 }
@@ -15,19 +15,19 @@ CovShrinkBGP14(n, TM, SCM)
 }
 \value{
 a list containing an object of class matrix (S) and the estimated shrinkage
-intensities \eqn{\alpha} and \eqn{\beta}.
+intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
 }
 \description{
 The optimal linear shrinkage estimator of the covariance matrix that minimizes the Frobenius norm:
 \deqn{\hat{\Sigma}_{OLSE} = \hat{\alpha} \hat{\Sigma} + \hat{\beta} \Sigma_0,}
 where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
-given in Eq. 4.3 and 4.4 of \insertCite{BGP2014}{HDShOP}. \eqn{\hat{\Sigma}}
-is the sample covariance matrix (SCM) and \eqn{\Sigma_0} is a positive definite
+given in Eq. (4.3) and (4.4) of \insertCite{BGP2014;textual}{HDShOP}. \eqn{\hat{\Sigma}}
+is the sample covariance matrix (SCM, see \code{\link{Sigma_sample_estimator}}) and \eqn{\Sigma_0} is a positive definite
 symmetric matrix used as the target (TM), for example, \eqn{\frac{1}{p} I}.
 }
 \examples{
 # Parameter setting
-n<-5e2
+n<-3e2
 c<-0.7
 p<-c*n
 mu <- rep(0, p)
@@ -38,7 +38,7 @@ X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
 
 # Estimation
 TM <- matrix(0, nrow=p, ncol=p)
-diag(TM) <- 1
+diag(TM) <- 1/p
 SCM <- Sigma_sample_estimator(X)
 Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
 Sigma_shr$S[1:6, 1:6]

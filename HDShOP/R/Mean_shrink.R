@@ -38,8 +38,8 @@ mean_bs <- function(x)
 #'
 #' James-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
 #' The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
-#' where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is the shrinkage
-#' coefficient which minimizes a quadratic loss given by Eq.11 in \insertCite{Jorion1986;textual}{HDShOP}.
+#' where \eqn{\bar x} is the sample mean vector, \eqn{\beta} is the shrinkage
+#' coefficient which minimizes a quadratic loss given by Eq.(11) in \insertCite{Jorion1986;textual}{HDShOP}.
 #' \eqn{Y_0} is a prespecified value.
 #'
 #' @inheritParams mean_bs
@@ -73,12 +73,12 @@ mean_js <- function(x, Y_0 = 1)
 #' Shrinkage estimator of the high-dimensional mean vector as suggested in \insertCite{BOP2019;textual}{HDShOP}.
 #' It uses the formula
 #' \deqn{\hat \mu_{BOP} = \hat \alpha \bar x + \hat \beta \mu_0 \quad ,} where
-#' \eqn{\hat \alpha} and \eqn{\hat \beta} are shrinkage coefficients given by Eq.6 and Eg.7
+#' \eqn{\hat \alpha} and \eqn{\hat \beta} are shrinkage coefficients given by Eq.(6) and Eg.(7)
 #' of \insertCite{BOP2019;textual}{HDShOP} that minimize weighted quadratic loss for a given
-#' target \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the ordinary
-#' sample estimator.
+#' target vector \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the
+#' sample mean vector.
 #'
-#' @param x a data matrix. Rows represent different variables, columns- observations.
+#' @param x a p by n matrix or a data frame. Rows represent different variables, columns- observations.
 #' @param mu_0 a numeric vector. The target vector used in the construction of the shrinkage estimator.
 #' @return a numeric vector containing the shrinkage estimation of the mean vector
 #' @references \insertAllCited{}

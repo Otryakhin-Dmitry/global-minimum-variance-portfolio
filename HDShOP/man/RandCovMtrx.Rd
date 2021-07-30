@@ -11,20 +11,23 @@ RandCovMtrx(p = 200, eigenvalues = 0.1 * exp(5 * seq(0, 1, length = p)))
 
 \item{eigenvalues}{the vector of positive eigenvalues}
 }
+\value{
+covariance matrix
+}
 \description{
 Description: generates a covariance matrix from Wishart distribution with given
 eigenvalues or with exponentially decreasing eigenvalues. Useful for examples
-and tests when an arbitrary covariance is needed.
+and tests when an arbitrary covariance matrix is needed.
 }
 \details{
 This function generates a symmetric positive definite covariance matrix with
-given eigenvalues. The eigenvalues can be specified either explicitly and by
-default are generated with exponential decay.
+given eigenvalues. The eigenvalues can be specified explicitly. By
+default, they are generated with exponential decay.
 }
 \examples{
 
-p<-3e2
+p<-1e1
 # A non-diagonal covariance matrix
 Mtrx <- RandCovMtrx(p=p)
-Mtrx[1:6,1:6]
+Mtrx
 }

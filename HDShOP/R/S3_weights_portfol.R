@@ -1,4 +1,4 @@
-#' Constructor of MV portfolio object.
+#' Constructor of MV portfolio object
 #'
 #' Constructor of mean-variance shrinkage portfolios. For more details of the method,
 #' see \code{\link{MVShrinkPortfolio}}.
@@ -13,19 +13,19 @@
 #' | call | the function call with which it was created |
 #' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean vector estimate for the asset returns |
-#' | W_mv_hat | portfolio weights_sample estimate |
-#' | weights | shrunk portfolio weights |
+#' | means | sample mean vector estimate of the asset returns |
+#' | W_mv_hat | sample estimate of the portfolio weights |
+#' | weights | shrinkage estimate of the portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
-#' | Port_mean_return | expected portfolio returns |
+#' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
 #' | weight_intervals | A data frame |
 #'
 #' weight_intervals contains a shrinkage estimate of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
-#' statistic and a p-value for the test on the weight for each individual asset
-#' (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
+#' statistic and a p-value of the test on the equality of the weight of each individual
+#' asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
 #' @md
 #'
 #' @references \insertRef{BDOPS2021}{HDShOP}
@@ -149,7 +149,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' | call | the function call with which it was created |
 #' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean vector estimate for the asset returns |
+#' | means | sample mean vector estimate of the asset returns |
 #' | w_GMVP | sample estimate of portfolio weights |
 #' | weights | shrinkage estimate of portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
@@ -160,8 +160,8 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #'
 #' weight_intervals contains a shrinkage estimate of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
-#' statistic and a p-value for the test on the weight for each individual asset
-#' \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
+#' statistic and a p-value of the test on the equality of the weight of each
+#' individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 #' @md
 #'
 #' @references \insertRef{BDPS2019}{HDShOP}

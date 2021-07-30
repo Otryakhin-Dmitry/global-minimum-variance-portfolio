@@ -2,14 +2,15 @@
 % Please edit documentation in R/T_alpha_statistics.R
 \name{test_MVSP}
 \alias{test_MVSP}
-\title{Test for MV portfolio weights}
+\title{Test for mean-variance portfolio weights}
 \usage{
 test_MVSP(gamma, x, w_0, beta = 0.05)
 }
 \arguments{
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 
-\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
+assets, columns -- observations.}
 
 \item{w_0}{a numeric vector of tested weights.}
 
@@ -27,11 +28,11 @@ test_MVSP(gamma, x, w_0, beta = 0.05)
 }
 }
 \description{
-An asymptotic test of a given mean-variance portfolio in a high-dimensional setting.
-The tested hypotheses are
+A high-dimensional asymptotic test on a mean-variance efficiency of a given
+portfolio with the weights \eqn{w_0}. The tested hypotheses are
 \deqn{H_0: w_{MV} = w_0 \quad vs \quad H_1: w_{MV} \neq w_0.}
-The test statistic is based on the shrinkage estimator of MV portfolio weights
-\insertCite{@see Eq.44 of @BDOPS2021}{HDShOP}.
+The test statistic is based on the shrinkage estimator of mean-variance portfolio weights
+\insertCite{@see Eq.(44) of @BDOPS2021}{HDShOP}.
 }
 \details{
 Note: when gamma == Inf, we get the test for the weights of the global minimum

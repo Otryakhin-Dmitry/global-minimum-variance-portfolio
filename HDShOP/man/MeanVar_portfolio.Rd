@@ -7,14 +7,26 @@
 MeanVar_portfolio(mean_vec, cov_mtrx, gamma)
 }
 \arguments{
-\item{mean_vec}{mean vector or list of asset returns.}
+\item{mean_vec}{mean vector of asset returns provided in the form of a vector or a list.}
 
 \item{cov_mtrx}{the covariance matrix of asset returns. Could be a matrix or a data frame.}
 
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
+\value{
+Mean-variance portfolio in the form of object of S3 class MeanVar_portfolio.
+}
 \description{
-A helper function for MeanVar_portfolio
+A user-friendly function making mean-variance portfolios for assets with customly
+computed covariance matrix and mean returns.
+The weights are computed in accordance with the formula
+\deqn{\hat w_{MV} = \frac{S^{-1} 1}{1' S^{-1} 1} + \gamma^{-1} \hat Q \bar x \quad ,}
+where \eqn{S^{-1}} is the inverse of the covariance matrix, \eqn{\bar x} is the mean
+vector of asset returns, \eqn{\gamma} is the coefficient of risk aversion, and
+\eqn{\hat Q} is given by
+\deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
+The computation is made by \code{\link{new_MeanVar_portfolio}} and then the result
+is validated by \code{\link{validate_MeanVar_portfolio}}.
 }
 \examples{
 n<-3e2 # number of realizations

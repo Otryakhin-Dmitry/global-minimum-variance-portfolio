@@ -4,8 +4,9 @@
 \alias{Class_MeanVar_portfolio}
 \title{S3 class MeanVar_portfolio}
 \description{
-Class MeanVar_portfolio is designed to describe mean-variance portfolios with
-existing direct and inverse covariance matrices. It includes the following elements:
+Class MeanVar_portfolio is designed to contain mean-variance portfolios with provided
+estimators of the mean vector, covariance matrix, and inverse covariance matrix.
+It includes the following elements:
 }
 \section{Slots}{
 \tabular{ll}{
@@ -13,7 +14,7 @@ existing direct and inverse covariance matrices. It includes the following eleme
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate for the asset returns \cr
+   means \tab sample mean vector estimate of the asset returns \cr
    weights \tab portfolio weights \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab expected portfolio return \cr

@@ -1,13 +1,13 @@
 # Shrinkage of the covariance matrix
 
 
-#' Linear shrinkage estimator of the covariance matrix of \insertCite{BGP2014}{HDShOP}
+#' Linear shrinkage estimator of the covariance matrix \insertCite{BGP2014}{HDShOP}
 #'
 #' The optimal linear shrinkage estimator of the covariance matrix that minimizes the Frobenius norm:
 #' \deqn{\hat{\Sigma}_{OLSE} = \hat{\alpha} \hat{\Sigma} + \hat{\beta} \Sigma_0,}
 #' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
-#' given in Eq. 4.3 and 4.4 of \insertCite{BGP2014}{HDShOP}. \eqn{\hat{\Sigma}}
-#' is the sample covariance matrix (SCM) and \eqn{\Sigma_0} is a positive definite
+#' given in Eq. (4.3) and (4.4) of \insertCite{BGP2014;textual}{HDShOP}. \eqn{\hat{\Sigma}}
+#' is the sample covariance matrix (SCM, see \code{\link{Sigma_sample_estimator}}) and \eqn{\Sigma_0} is a positive definite
 #' symmetric matrix used as the target (TM), for example, \eqn{\frac{1}{p} I}.
 #'
 #' @param n sample size.
@@ -15,11 +15,11 @@
 #' @param SCM sample covariance matrix.
 #'
 #' @return a list containing an object of class matrix (S) and the estimated shrinkage
-#' intensities \eqn{\alpha} and \eqn{\beta}.
+#' intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
 #' @references \insertAllCited{}
 #' @examples
 #' # Parameter setting
-#' n<-5e2
+#' n<-3e2
 #' c<-0.7
 #' p<-c*n
 #' mu <- rep(0, p)
@@ -30,7 +30,7 @@
 #'
 #' # Estimation
 #' TM <- matrix(0, nrow=p, ncol=p)
-#' diag(TM) <- 1
+#' diag(TM) <- 1/p
 #' SCM <- Sigma_sample_estimator(X)
 #' Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
 #' Sigma_shr$S[1:6, 1:6]
@@ -46,17 +46,17 @@ CovShrinkBGP14<-function(n, TM, SCM)
 }
 
 
-#' nonlinear shrinkage estimator of the covariance matrix  of Ledoit  and Wolf (2020, AoS)
+#' nonlinear shrinkage estimator of the covariance matrix  of Ledoit  and Wolf (2020)
 #'
 #' The nonlinear shrinkage estimator of the covariance matrix, that minimizes the
-#' minimum variance loss functions as defined in Eq 2.1 of Ledoit and Wolf (2020, AoS).
+#' minimum variance loss functions as defined in Eq (2.1) of \insertCite{LW2020;textual}{HDShOP}.
 #'
 #' @inheritParams CovarEstim
 #'
 #' @return an object of class matrix
-#' @references \insertRef{LW2020}{HDShOP}
+#' @references \insertAllCited{}
 #' @examples
-#' n<-5e2
+#' n<-3e2
 #' c<-0.7
 #' p<-c*n
 #' mu <- rep(0, p)
@@ -95,15 +95,15 @@ nonlin_shrinkLW = function(x){
 } # analytical nonlinear shrinkage
 
 
-#' Linear shrinkage estimator of the inverse covariance matrix  of \insertCite{BGP2016}{HDShOP}
+#' Linear shrinkage estimator of the inverse covariance matrix \insertCite{BGP2016}{HDShOP}
 #'
 #' The optimal linear shrinkage estimator of the inverse covariance (precision)
 #' matrix that minimizes the Frobenius norm is given by:
 #' \deqn{\hat{\Pi}_{OLSE} = \hat{\alpha} \hat{\Pi} + \hat{\beta} \Pi_0,}
 #' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
-#' given in Eq. 4.4 and 4.5 of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
+#' given in Eq. (4.4) and (4.5) of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
 #' the sample inverse covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
-#' symmetric matrix used as the target (TM), for example, I.
+#' symmetric matrix used as the target matrix (TM), for example, I.
 #'
 #' @param TM the target matrix for the shrinkage estimator
 #' @param n the number of observations
@@ -111,11 +111,11 @@ nonlin_shrinkLW = function(x){
 #' @param iSCM the inverse of the sample covariance matrix
 #'
 #' @return a list containing an object of class matrix (S) and the estimated shrinkage
-#' intensities \eqn{\alpha} and \eqn{\beta}.
+#' intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
 #' @references \insertAllCited{}
 #' @examples
 #' # Parameter setting
-#' n<-5e2
+#' n<-3e2
 #' c<-0.7
 #' p<-c*n
 #' mu <- rep(0, p)

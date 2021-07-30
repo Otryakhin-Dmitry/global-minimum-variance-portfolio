@@ -2,7 +2,7 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{InvCovShrinkBGP16}
 \alias{InvCovShrinkBGP16}
-\title{Linear shrinkage estimator of the inverse covariance matrix  of \insertCite{BGP2016}{HDShOP}}
+\title{Linear shrinkage estimator of the inverse covariance matrix \insertCite{BGP2016}{HDShOP}}
 \usage{
 InvCovShrinkBGP16(n, p, TM, iSCM)
 }
@@ -17,20 +17,20 @@ InvCovShrinkBGP16(n, p, TM, iSCM)
 }
 \value{
 a list containing an object of class matrix (S) and the estimated shrinkage
-intensities \eqn{\alpha} and \eqn{\beta}.
+intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
 }
 \description{
 The optimal linear shrinkage estimator of the inverse covariance (precision)
 matrix that minimizes the Frobenius norm is given by:
 \deqn{\hat{\Pi}_{OLSE} = \hat{\alpha} \hat{\Pi} + \hat{\beta} \Pi_0,}
 where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
-given in Eq. 4.4 and 4.5 of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
+given in Eq. (4.4) and (4.5) of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
 the sample inverse covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
-symmetric matrix used as the target (TM), for example, I.
+symmetric matrix used as the target matrix (TM), for example, I.
 }
 \examples{
 # Parameter setting
-n<-5e2
+n<-3e2
 c<-0.7
 p<-c*n
 mu <- rep(0, p)

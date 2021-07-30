@@ -4,10 +4,11 @@
 \alias{CovarEstim}
 \title{Covariance matrix estimator}
 \usage{
-CovarEstim(x, type, ...)
+CovarEstim(x, type = c("trad", "BGP14", "LW20"), ...)
 }
 \arguments{
-\item{x}{a p by n data matrix. Rows represent different variables, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
+assets, columns -- observations.}
 
 \item{type}{a character. The estimation method to be used.}
 
@@ -34,7 +35,7 @@ p<-.5*n # number of assets
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-Mtrx_naive <- CovarEstim(x, type="naive")
+Mtrx_trad <- CovarEstim(x, type="trad")
 
 TM <- matrix(0, p, p)
 diag(TM) <- 1

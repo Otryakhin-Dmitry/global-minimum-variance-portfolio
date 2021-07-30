@@ -2,13 +2,14 @@
 % Please edit documentation in R/Plot_frontier.R
 \name{plot_frontier}
 \alias{plot_frontier}
-\title{Plotting the Bayesian efficient frontier \insertCite{bauder21}{HDShOP} and the
+\title{Plot the Bayesian efficient frontier \insertCite{bauder21}{HDShOP} and the
 provided portfolios.}
 \usage{
 plot_frontier(x, weights.eff = rep(1/nrow(x), length = nrow(x)))
 }
 \arguments{
-\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
+assets, columns -- observations.}
 
 \item{weights.eff}{matrix of portfolio weights. Each column contains p values of
 the weights for a given portfolio. Default: equally weighted portfolio.}
@@ -17,13 +18,13 @@ the weights for a given portfolio. Default: equally weighted portfolio.}
 a ggplot object
 }
 \description{
-The plotted  Bayesian efficient frontier is provided by \insertCite{@Eq. 8 in @bauder21;textual}{HDShOP}.
+The plotted  Bayesian efficient frontier is provided by \insertCite{@Eq. (8) in @bauder21;textual}{HDShOP}.
 It is the set of optimal portfolios obtained by employing the posterior predictive
 distribution on the asset returns. This efficient frontier can be used to assess
 the mean-variance efficiency of various estimators of the portfolio weights.
-The standard deviation of the portfolio return is plotted the \eqn{x}-axis and the
-mean portfolio return in the \eqn{y}-axis. The portfolios given in weights are added
-to the plot by computing  \eqn{\sqrt{w^\prime \cdot \rm{Sigma} \cdot w} }  and  \eqn{w^\prime \cdot \rm mu}.
+The standard deviation of the portfolio return is plotted in the \eqn{x}-axis and the
+mean portfolio return in the \eqn{y}-axis. The portfolios with the weights w are added
+to the plot by computing  \eqn{\sqrt{\rm{w}^\prime \rm{Sigma} \cdot w} }  and  \eqn{\rm w^\prime \bar x}.
 }
 \examples{
 p = 150

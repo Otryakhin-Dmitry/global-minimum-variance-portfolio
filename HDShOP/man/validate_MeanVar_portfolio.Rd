@@ -2,15 +2,19 @@
 % Please edit documentation in R/S3_custom_portfol.R
 \name{validate_MeanVar_portfolio}
 \alias{validate_MeanVar_portfolio}
-\title{A validator for MeanVar_portfolio}
+\title{A validator for objects of class MeanVar_portfolio}
 \usage{
 validate_MeanVar_portfolio(x)
 }
 \arguments{
 \item{x}{Object of class MeanVar_portfolio.}
 }
+\value{
+If the object passes all the checks, then x itself is returned,
+otherwise an error is thrown.
+}
 \description{
-A validator for MeanVar_portfolio
+A validator for objects of class MeanVar_portfolio
 }
 \examples{
 n<-3e2 # number of realizations

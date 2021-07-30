@@ -2,12 +2,13 @@
 % Please edit documentation in R/dispatchers.R
 \name{MeanEstim}
 \alias{MeanEstim}
-\title{Mean vector shrinkage estimator}
+\title{Mean vector estimator}
 \usage{
 MeanEstim(x, type, ...)
 }
 \arguments{
-\item{x}{a p by n data matrix. Rows represent different variables, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
+assets, columns -- observations.}
 
 \item{type}{a character. The estimation method to be used.}
 
@@ -17,14 +18,14 @@ MeanEstim(x, type, ...)
 a numeric vector containing the specified estimation of the mean vector.
 }
 \description{
-A user-friendly function for estimation of the mean vector from a set of vectors.
+A user-friendly function for estimation of the mean vector.
 Essentially, it is a function dispatcher for estimation of the mean vector that
 chooses a method accordingly to the type argument.
 }
 \details{
 The available estimation methods for the mean are:\tabular{lll}{
    Function \tab Paper \tab Type \cr
-   .rowMeans \tab  \tab naive \cr
+   .rowMeans \tab  \tab trad \cr
    \code{\link{mean_bs}} \tab Jorion 1986 \tab bs \cr
    \code{\link{mean_js}} \tab Jorion 1986 \tab js \cr
    \code{\link{mean_bop19}} \tab Bodnar et al 2019 \tab BOP19 \cr
@@ -36,7 +37,7 @@ p<-.5*n # number of assets
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-Mean_naive <- MeanEstim(x, type="naive")
+Mean_trad <- MeanEstim(x, type="trad")
 
 mu_0 <- rep(1/p, p)
 Mean_BOP <- MeanEstim(x, type="BOP19", mu_0=mu_0)

@@ -17,8 +17,8 @@ a numeric vector containing the James-Stein shrinkage estimator of the mean vect
 \description{
 James-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
 The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
-where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} is the shrinkage
-coefficient which minimizes a quadratic loss given by Eq.11 in \insertCite{Jorion1986;textual}{HDShOP}.
+where \eqn{\bar x} is the sample mean vector, \eqn{\beta} is the shrinkage
+coefficient which minimizes a quadratic loss given by Eq.(11) in \insertCite{Jorion1986;textual}{HDShOP}.
 \eqn{Y_0} is a prespecified value.
 }
 \examples{

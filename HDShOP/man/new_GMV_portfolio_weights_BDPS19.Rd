@@ -7,7 +7,8 @@
 new_GMV_portfolio_weights_BDPS19(x, b, beta)
 }
 \arguments{
-\item{x}{a matrix or a data frame of asset returns. Rows represent different assets, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
+assets, columns -- observations.}
 
 \item{b}{a numeric vector. The target for weight shrinkage.}
 
@@ -19,7 +20,7 @@ an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate for the asset returns \cr
+   means \tab sample mean vector estimate of the asset returns \cr
    w_GMVP \tab sample estimate of portfolio weights \cr
    weights \tab shrinkage estimate of portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
@@ -32,8 +33,8 @@ an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
 
 weight_intervals contains a shrinkage estimate of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
-statistic and a p-value for the test on the weight for each individual asset
-\insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
+statistic and a p-value of the test on the equality of the weight of each
+individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 }
 \description{
 Constructor of global minimum variance portfolios. For more details of the method,
