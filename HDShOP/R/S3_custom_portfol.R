@@ -66,8 +66,8 @@ new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
 
 
 #' A validator for objects of class MeanVar_portfolio
-#' @param x Object of class MeanVar_portfolio.
-#' @return If the object passes all the checks, then x itself is returned,
+#' @param w Object of class MeanVar_portfolio.
+#' @return If the object passes all the checks, then w itself is returned,
 #' otherwise an error is thrown.
 #' @examples
 #' n<-3e2 # number of realizations
@@ -83,9 +83,9 @@ new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
 #' cust_port_simp <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
 #' str(validate_MeanVar_portfolio(cust_port_simp))
 #' @export
-validate_MeanVar_portfolio <- function(x) {
+validate_MeanVar_portfolio <- function(w) {
 
-  values <- unclass(x)
+  values <- unclass(w)
 
   if (is.null(values$cov_mtrx))  stop("a covariance matrix is missing", call. = FALSE)
   if (is.null(values$inv_cov_mtrx))  stop("an inverse covariance matrix is missing", call. = FALSE)
@@ -109,7 +109,7 @@ validate_MeanVar_portfolio <- function(x) {
     )
   }
 
-  x
+  w
 }
 
 #' A helper function for MeanVar_portfolio
