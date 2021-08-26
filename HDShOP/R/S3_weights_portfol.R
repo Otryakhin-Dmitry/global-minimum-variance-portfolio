@@ -136,7 +136,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 
 #' Constructor of GMV portfolio object.
 #'
-#' Constructor of global minimum variance portfolios. For more details of the method,
+#' Constructor of global minimum variance portfolio. For more details of the method,
 #' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
@@ -150,15 +150,15 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
 #' | means | sample mean vector estimate of the asset returns |
-#' | w_GMVP | sample estimate of portfolio weights |
-#' | weights | shrinkage estimate of portfolio weights |
+#' | w_GMVP | sample estimator of portfolio weights |
+#' | weights | shrinkage estimator of portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
 #' | weight_intervals | A data frame, see details |
 #'
-#' weight_intervals contains a shrinkage estimate of portfolio weights,
+#' weight_intervals contains a shrinkage estimator of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
 #' statistic and a p-value of the test on the equality of the weight of each
 #' individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
