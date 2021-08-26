@@ -4,11 +4,11 @@
 #' Linear shrinkage estimator of the covariance matrix \insertCite{BGP2014}{HDShOP}
 #'
 #' The optimal linear shrinkage estimator of the covariance matrix that minimizes the Frobenius norm:
-#' \deqn{\hat{\Sigma}_{OLSE} = \hat{\alpha} \hat{\Sigma} + \hat{\beta} \Sigma_0,}
+#' \deqn{\hat{\Sigma}_{OLSE} = \hat{\alpha} S + \hat{\beta} \Sigma_0,}
 #' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
-#' given in Eq. (4.3) and (4.4) of \insertCite{BGP2014;textual}{HDShOP}. \eqn{\hat{\Sigma}}
+#' given in Eq. (4.3) and (4.4) of \insertCite{BGP2014;textual}{HDShOP}. \eqn{S}
 #' is the sample covariance matrix (SCM, see \code{\link{Sigma_sample_estimator}}) and \eqn{\Sigma_0} is a positive definite
-#' symmetric matrix used as the target (TM), for example, \eqn{\frac{1}{p} I}.
+#' symmetric matrix used as the target matrix (TM), for example, \eqn{\frac{1}{p} I}.
 #'
 #' @param n sample size.
 #' @param TM the target matrix for the shrinkage estimator.
@@ -102,7 +102,7 @@ nonlin_shrinkLW = function(x){
 #' \deqn{\hat{\Pi}_{OLSE} = \hat{\alpha} \hat{\Pi} + \hat{\beta} \Pi_0,}
 #' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
 #' given in Eq. (4.4) and (4.5) of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
-#' the sample inverse covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
+#' the inverse of the sample covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
 #' symmetric matrix used as the target matrix (TM), for example, I.
 #'
 #' @param TM the target matrix for the shrinkage estimator
