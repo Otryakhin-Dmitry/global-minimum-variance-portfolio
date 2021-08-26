@@ -1,10 +1,10 @@
 
 #### Sigma simple estimator (5) in EU tests paper
-#' Sample covariance estimator
+#' Sample covariance matrix
 #'
 #' It computes the sample covariance of matrix x as follows:
-#' \deqn{S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)'
-#' ,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j ,}
+#' \deqn{S = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x)(x_j - \bar x)'
+#' ,\quad \bar x = \frac{1}{n} \sum_{j=1}^n x_j ,}
 #' where \eqn{x_j} is the \eqn{j}-th column of the data matrix \eqn{x}.
 #'
 #' @param x a p by n matrix or a data frame of asset returns. Rows represent
