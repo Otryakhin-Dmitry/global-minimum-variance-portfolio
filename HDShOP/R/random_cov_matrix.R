@@ -58,7 +58,7 @@ SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55){
 #' and tests when an arbitrary covariance matrix is needed.
 #'
 #' This function generates a symmetric positive definite covariance matrix with
-#' given eigenvalues. The eigenvalues can be specified explicitly. By
+#' given eigenvalues. The eigenvalues can be specified explicitly. Or, by
 #' default, they are generated with exponential decay.
 #'
 #' @param p dimension of the covariance matrix
