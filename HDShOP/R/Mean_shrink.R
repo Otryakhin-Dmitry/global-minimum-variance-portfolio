@@ -3,10 +3,10 @@
 #'
 #' Bayes-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
 #' The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
-#' where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
-#' derived using Bayesian approach (see Eq.14 and Eq.17 in \insertCite{Jorion1986;textual}{HDShOP}).
+#' where \eqn{\bar x} is the sample mean vector, \eqn{\beta} and \eqn{Y_0} are
+#' derived using Bayesian approach (see Eq.(14) and Eq.(17) in \insertCite{Jorion1986;textual}{HDShOP}).
 #'
-#' @param x a numeric data matrix. Rows represent different variables, columns- observations.
+#' @param x a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.
 #' @return a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
 #' @references \insertAllCited{}
 #' @examples
@@ -78,9 +78,9 @@ mean_js <- function(x, Y_0 = 1)
 #' target vector \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the
 #' sample mean vector.
 #'
-#' @param x a p by n matrix or a data frame. Rows represent different variables, columns- observations.
+#' @param x a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.
 #' @param mu_0 a numeric vector. The target vector used in the construction of the shrinkage estimator.
-#' @return a numeric vector containing the shrinkage estimation of the mean vector
+#' @return a numeric vector containing the shrinkage estimator of the mean vector
 #' @references \insertAllCited{}
 #' @examples
 #' n<-7e2 # number of realizations
