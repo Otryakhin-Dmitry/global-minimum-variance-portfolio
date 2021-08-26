@@ -2,9 +2,9 @@
 
 #### EU portfolio dispatcher
 
-#' Shrinkage mean variance portfolio
+#' Shrinkage mean-variance portfolio
 #'
-#' The main function for mean variance (also known as expected utility) portfolio construction.
+#' The main function for mean-variance (also known as expected utility) portfolio construction.
 #' It is a dispatcher using methods according to argument type.
 #'
 #' The sample estimator of the mean-variance portfolio weights, which results in
@@ -14,16 +14,16 @@
 #' matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
 #' is the coefficient of risk aversion and \eqn{\hat Q} is given by
 #' \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
-#' The shrinkage estimator for mean-variance portfolio weights in a high-dimensional
+#' The shrinkage estimator for the mean-variance portfolio weights in a high-dimensional
 #' setting is given by \deqn{\hat w_{ShMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b \quad,}
 #' where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 #' a target vector with the sum of the elements equal to one.
 #'
-#' In the case \eqn{\gamma \neq \infty}, estimation of \eqn{\alpha} is computed
+#' In the case \eqn{\gamma \neq \infty}, \eqn{\alpha} is computed
 #' following Eq. (2.28) of \insertCite{BOP16;textual}{HDShOP}.
 #'
 #' The case of a fully risk averse investor (\eqn{\gamma=\infty}) leads to the
-#' traditional global minimum variance (GMV) portfolio with the weights given by:
+#' traditional global minimum variance (GMV) portfolio with the weights given by
 #' \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
 #' The shrinkage estimator for the GMV portfolio is then calculated by
 #' \deqn{\hat w_{ShGMV} = \hat \alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
