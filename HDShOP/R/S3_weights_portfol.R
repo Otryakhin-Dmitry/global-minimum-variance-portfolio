@@ -13,16 +13,16 @@
 #' | call | the function call with which it was created |
 #' | cov_mtrx | the sample covariance matrix of the asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean vector estimate of the asset returns |
-#' | W_mv_hat | sample estimate of the portfolio weights |
-#' | weights | shrinkage estimate of the portfolio weights |
+#' | means | sample mean vector of the asset returns |
+#' | W_mv_hat | sample estimator of the portfolio weights |
+#' | weights | shrinkage estimator of the portfolio weights |
 #' | alpha | shrinkage intensity for the weights |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
 #' | weight_intervals | A data frame |
 #'
-#' weight_intervals contains a shrinkage estimate of portfolio weights,
+#' weight_intervals contains a shrinkage estimator of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of test
 #' statistic and a p-value of the test on the equality of the weight of each individual
 #' asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
