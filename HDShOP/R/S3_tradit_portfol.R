@@ -12,8 +12,8 @@
 #' | call | the function call with which it was created |
 #' | cov_mtrx | the sample covariance matrix of asset returns |
 #' | inv_cov_mtrx | the inverse of the sample covariance matrix |
-#' | means | sample mean estimate of the asset returns |
-#' | W_mv_hat | sample estimate of portfolio weights |
+#' | means | sample mean estimator of the asset returns |
+#' | W_mv_hat | sample estimator of portfolio weights |
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
