@@ -25,7 +25,7 @@ matrix that minimizes the Frobenius norm is given by:
 \deqn{\hat{\Pi}_{OLSE} = \hat{\alpha} \hat{\Pi} + \hat{\beta} \Pi_0,}
 where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
 given in Eq. (4.4) and (4.5) of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
-the sample inverse covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
+the inverse of the sample covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
 symmetric matrix used as the target matrix (TM), for example, I.
 }
 \examples{

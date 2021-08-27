@@ -22,9 +22,9 @@ an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean vector estimate of the asset returns \cr
-   W_mv_hat \tab sample estimate of the portfolio weights \cr
-   weights \tab shrinkage estimate of the portfolio weights \cr
+   means \tab sample mean vector of the asset returns \cr
+   W_mv_hat \tab sample estimator of the portfolio weights \cr
+   weights \tab shrinkage estimator of the portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab expected portfolio return \cr
@@ -33,7 +33,7 @@ an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
 }
 
 
-weight_intervals contains a shrinkage estimate of portfolio weights,
+weight_intervals contains a shrinkage estimator of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
 statistic and a p-value of the test on the equality of the weight of each individual
 asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).

@@ -21,8 +21,8 @@ an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
    means \tab sample mean vector estimate of the asset returns \cr
-   w_GMVP \tab sample estimate of portfolio weights \cr
-   weights \tab shrinkage estimate of portfolio weights \cr
+   w_GMVP \tab sample estimator of portfolio weights \cr
+   weights \tab shrinkage estimator of portfolio weights \cr
    alpha \tab shrinkage intensity for the weights \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab expected portfolio return \cr
@@ -31,13 +31,13 @@ an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
 }
 
 
-weight_intervals contains a shrinkage estimate of portfolio weights,
+weight_intervals contains a shrinkage estimator of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of test
 statistic and a p-value of the test on the equality of the weight of each
 individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 }
 \description{
-Constructor of global minimum variance portfolios. For more details of the method,
+Constructor of global minimum variance portfolio. For more details of the method,
 see \code{\link{MVShrinkPortfolio}}.
 }
 \examples{

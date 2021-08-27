@@ -7,9 +7,9 @@
 \description{
 Package HDShOP has the following three important functions: \code{\link{MVShrinkPortfolio}},
 \code{\link{CovarEstim}} and \code{\link{MeanEstim}}. MVShrinkPortfolio creates mean-variance
-portfolios using shrinkage estimation methods for portfolio weights. CovarEstim computes estimates of
-covariance matrices while MeanEstim- ones for mean vectors. Each of these three functions is
-supplied a name of the method to use to perform estimation. All portfolios are stored in objects of
+portfolios using shrinkage estimation methods for portfolio weights. CovarEstim computes several estimators
+of the covariance matrix, while MeanEstim computes several estimators of the mean vector. Each of these three functions is
+supplied a name of the method used to perform estimation. All portfolios are stored in objects of
 class MeanVar_portfolio and some have a subclass, specific to their kind, that inherits from
 MeanVar_portfolio. For the later class constructor, validator and helper functions are available, so
 that custom mean-variance portfolios may be coded by users.

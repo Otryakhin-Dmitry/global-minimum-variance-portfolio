@@ -7,7 +7,7 @@
 mean_bs(x)
 }
 \arguments{
-\item{x}{a numeric data matrix. Rows represent different variables, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.}
 }
 \value{
 a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
@@ -15,8 +15,8 @@ a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vec
 \description{
 Bayes-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
 The estimator is given by \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
-where \eqn{\bar x} is the ordinary sample mean, \eqn{\beta} and \eqn{Y_0} are
-derived using Bayesian approach (see Eq.14 and Eq.17 in \insertCite{Jorion1986;textual}{HDShOP}).
+where \eqn{\bar x} is the sample mean vector, \eqn{\beta} and \eqn{Y_0} are
+derived using Bayesian approach (see Eq.(14) and Eq.(17) in \insertCite{Jorion1986;textual}{HDShOP}).
 }
 \examples{
 n <- 7e2 # number of realizations

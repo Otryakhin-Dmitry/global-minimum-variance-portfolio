@@ -4,13 +4,13 @@
 \alias{validate_MeanVar_portfolio}
 \title{A validator for objects of class MeanVar_portfolio}
 \usage{
-validate_MeanVar_portfolio(x)
+validate_MeanVar_portfolio(w)
 }
 \arguments{
-\item{x}{Object of class MeanVar_portfolio.}
+\item{w}{Object of class MeanVar_portfolio.}
 }
 \value{
-If the object passes all the checks, then x itself is returned,
+If the object passes all the checks, then w itself is returned,
 otherwise an error is thrown.
 }
 \description{

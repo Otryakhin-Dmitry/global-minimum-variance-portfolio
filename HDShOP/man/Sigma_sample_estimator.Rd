@@ -2,7 +2,7 @@
 % Please edit documentation in R/BDOPS_2020.R
 \name{Sigma_sample_estimator}
 \alias{Sigma_sample_estimator}
-\title{Sample covariance estimator}
+\title{Sample covariance matrix}
 \usage{
 Sigma_sample_estimator(x)
 }
@@ -15,8 +15,8 @@ Sample covariance estimation
 }
 \description{
 It computes the sample covariance of matrix x as follows:
-\deqn{S_n = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x_n)(x_j - \bar x_n)'
-,\quad \bar x_n = \frac{1}{n} \sum_{j=1}^n x_j ,}
+\deqn{S = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x)(x_j - \bar x)'
+,\quad \bar x = \frac{1}{n} \sum_{j=1}^n x_j ,}
 where \eqn{x_j} is the \eqn{j}-th column of the data matrix \eqn{x}.
 }
 \examples{
