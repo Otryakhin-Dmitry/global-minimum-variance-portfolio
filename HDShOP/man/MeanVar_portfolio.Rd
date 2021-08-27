@@ -25,8 +25,9 @@ where \eqn{S^{-1}} is the inverse of the covariance matrix, \eqn{\bar x} is the 
 vector of asset returns, \eqn{\gamma} is the coefficient of risk aversion, and
 \eqn{\hat Q} is given by
 \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
-The computation is made by \code{\link{new_MeanVar_portfolio}} and then the result
-is validated by \code{\link{validate_MeanVar_portfolio}}.
+The computation is made by \code{\link{new_MeanVar_portfolio}} and the result
+is validated by 
+\code{\link{validate_MeanVar_portfolio}}.
 }
 \examples{
 n<-3e2 # number of realizations
