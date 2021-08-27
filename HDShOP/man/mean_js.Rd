@@ -7,7 +7,7 @@
 mean_js(x, Y_0 = 1)
 }
 \arguments{
-\item{x}{a numeric data matrix. Rows represent different variables, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.}
 
 \item{Y_0}{a numeric variable. Shrinkage target coefficient.}
 }

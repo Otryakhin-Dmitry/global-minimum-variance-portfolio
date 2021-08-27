@@ -21,7 +21,7 @@ and tests when an arbitrary covariance matrix is needed.
 }
 \details{
 This function generates a symmetric positive definite covariance matrix with
-given eigenvalues. The eigenvalues can be specified explicitly. By
+given eigenvalues. The eigenvalues can be specified explicitly. Or, by
 default, they are generated with exponential decay.
 }
 \examples{

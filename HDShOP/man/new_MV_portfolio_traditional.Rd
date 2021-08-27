@@ -18,8 +18,8 @@ an object of class MeanVar_portfolio\tabular{ll}{
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of asset returns \cr
    inv_cov_mtrx \tab the inverse of the sample covariance matrix \cr
-   means \tab sample mean estimate of the asset returns \cr
-   W_mv_hat \tab sample estimate of portfolio weights \cr
+   means \tab sample mean estimator of the asset returns \cr
+   W_mv_hat \tab sample estimator of portfolio weights \cr
    Port_Var \tab portfolio variance \cr
    Port_mean_return \tab expected portfolio return \cr
    Sharpe \tab portfolio Sharpe ratio \cr

@@ -7,12 +7,12 @@
 mean_bop19(x, mu_0 = rep(1, p))
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame. Rows represent different variables, columns- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.}
 
 \item{mu_0}{a numeric vector. The target vector used in the construction of the shrinkage estimator.}
 }
 \value{
-a numeric vector containing the shrinkage estimation of the mean vector
+a numeric vector containing the shrinkage estimator of the mean vector
 }
 \description{
 Shrinkage estimator of the high-dimensional mean vector as suggested in \insertCite{BOP2019;textual}{HDShOP}.
