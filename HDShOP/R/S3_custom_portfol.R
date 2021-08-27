@@ -122,8 +122,9 @@ validate_MeanVar_portfolio <- function(w) {
 #' vector of asset returns, \eqn{\gamma} is the coefficient of risk aversion, and
 #' \eqn{\hat Q} is given by
 #' \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
-#' The computation is made by \code{\link{new_MeanVar_portfolio}} and then the result
-#' is validated by \code{\link{validate_MeanVar_portfolio}}.
+#' The computation is made by \code{\link{new_MeanVar_portfolio}} and the result
+#' is validated by 
+#' \code{\link{validate_MeanVar_portfolio}}.
 #'
 #' @param mean_vec mean vector of asset returns provided in the form of a vector or a list.
 #' @param cov_mtrx the covariance matrix of asset returns. Could be a matrix or a data frame.
