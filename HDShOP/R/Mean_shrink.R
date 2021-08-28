@@ -7,7 +7,7 @@
 #' derived using Bayesian approach (see Eq.(14) and Eq.(17) in \insertCite{Jorion1986;textual}{HDShOP}).
 #'
 #' @param x a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.
-#' @return a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
+#' @return a numeric vector containing the Bayes-Stein shrinkage estimator of the mean vector
 #' @references \insertAllCited{}
 #' @examples
 #' n <- 7e2 # number of realizations

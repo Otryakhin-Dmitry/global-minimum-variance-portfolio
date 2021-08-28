@@ -14,7 +14,7 @@ different assets, columns -- observations.}
 Sample covariance estimation
 }
 \description{
-It computes the sample covariance of matrix x as follows:
+It computes the sample covariance of matrix \eqn{S} as follows:
 \deqn{S = \frac{1}{n-1} \sum_{j=1}^n (x_j - \bar x)(x_j - \bar x)'
 ,\quad \bar x = \frac{1}{n} \sum_{j=1}^n x_j ,}
 where \eqn{x_j} is the \eqn{j}-th column of the data matrix \eqn{x}.

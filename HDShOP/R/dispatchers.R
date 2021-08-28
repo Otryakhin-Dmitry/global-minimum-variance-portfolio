@@ -19,7 +19,7 @@
 #' where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 #' a target vector with the sum of the elements equal to one.
 #'
-#' In the case \eqn{\gamma \neq \infty}, \eqn{\alpha} is computed
+#' In the case \eqn{\gamma \neq \infty}, \eqn{\hat{\alpha}} is computed
 #' following Eq. (2.28) of \insertCite{BOP16;textual}{HDShOP}.
 #'
 #' The case of a fully risk averse investor (\eqn{\gamma=\infty}) leads to the

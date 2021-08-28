@@ -53,7 +53,7 @@ SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55){
 #
 #' Covariance matrix generator
 #'
-#' Description: generates a covariance matrix from Wishart distribution with given
+#' Generates a covariance matrix from Wishart distribution with given
 #' eigenvalues or with exponentially decreasing eigenvalues. Useful for examples
 #' and tests when an arbitrary covariance matrix is needed.
 #'
