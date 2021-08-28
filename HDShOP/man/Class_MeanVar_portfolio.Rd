@@ -23,7 +23,7 @@ It includes the following elements:
 }
 
 \seealso{
-\link{summary.MeanVar_portfolio} summary method for the class,
+summary.MeanVar_portfolio summary method for the class,
 \link{new_MeanVar_portfolio} class constructor, \link{validate_MeanVar_portfolio} class validator,
 \link{MeanVar_portfolio} class helper.
 }
