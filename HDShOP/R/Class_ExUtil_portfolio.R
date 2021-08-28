@@ -19,7 +19,7 @@
 #' | Sharpe | portfolio Sharpe ratio |
 #' @md
 #'
-#' @seealso [summary.MeanVar_portfolio] summary method for the class,
+#' @seealso summary.MeanVar_portfolio summary method for the class,
 #' [new_MeanVar_portfolio] class constructor, [validate_MeanVar_portfolio] class validator,
 #' [MeanVar_portfolio] class helper.
 #' @name Class_MeanVar_portfolio

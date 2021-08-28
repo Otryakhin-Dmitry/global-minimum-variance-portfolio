@@ -46,12 +46,6 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     Rdpack,
-Suggests: 
-    ggplot2,
-    testthat,
-    EstimDiagnostics,
-    MASS,
-    corpcor,
-    waldo
+Suggests: ggplot2, testthat, EstimDiagnostics, MASS, corpcor, waldo
 RdMacros: Rdpack
 RoxygenNote: 7.1.1
