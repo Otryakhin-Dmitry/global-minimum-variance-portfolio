@@ -10,7 +10,7 @@ mean_bs(x)
 \item{x}{a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.}
 }
 \value{
-a numeric vector containing the Bayes-Stein shrinkage estimation of the mean vector
+a numeric vector containing the Bayes-Stein shrinkage estimator of the mean vector
 }
 \description{
 Bayes-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.

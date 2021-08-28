@@ -14,7 +14,7 @@ Yahoo finance
 SP_daily_asset_returns
 }
 \description{
-Daily log-returns of selected constituents S&P500 in percents. The data are sampled
+Daily log-returns of selected constituents of S&P500 in percents. The data are sampled
 in business time, i.e., weekends and holidays are omitted.
 }
 \keyword{datasets}

@@ -10,7 +10,7 @@ new_GMV_portfolio_weights_BDPS19(x, b, beta)
 \item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
 assets, columns -- observations.}
 
-\item{b}{a numeric vector. The target for weight shrinkage.}
+\item{b}{a numeric vector. The weights of the target portfolio.}
 
 \item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
@@ -32,8 +32,8 @@ an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
 
 
 weight_intervals contains a shrinkage estimator of portfolio weights,
-asymptotic confidence intervals for the true portfolio weights, value of test
-statistic and a p-value of the test on the equality of the weight of each
+asymptotic confidence intervals for the true portfolio weights, the value of test
+statistic and the p-value of the test on the equality of the weight of each
 individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 }
 \description{

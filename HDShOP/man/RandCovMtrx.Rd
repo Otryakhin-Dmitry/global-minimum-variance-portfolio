@@ -15,7 +15,7 @@ RandCovMtrx(p = 200, eigenvalues = 0.1 * exp(5 * seq(0, 1, length = p)))
 covariance matrix
 }
 \description{
-Description: generates a covariance matrix from Wishart distribution with given
+Generates a covariance matrix from Wishart distribution with given
 eigenvalues or with exponentially decreasing eigenvalues. Useful for examples
 and tests when an arbitrary covariance matrix is needed.
 }

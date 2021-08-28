@@ -4,7 +4,7 @@
 #' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
-#' @param b a numeric variable. The target for weight shrinkage.
+#' @param b a numeric variable. The weights of the target portfolio.
 #' @param beta a numeric variable. The confidence level for weight intervals.
 #' @return an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
 #'
@@ -20,14 +20,14 @@
 #' | Port_Var | portfolio variance |
 #' | Port_mean_return | expected portfolio return |
 #' | Sharpe | portfolio Sharpe ratio |
-#' | weight_intervals | A data frame |
+#' | weight_intervals | A data frame, see details |
 #'
 #' weight_intervals contains a shrinkage estimator of portfolio weights,
-#' asymptotic confidence intervals for the true portfolio weights, value of test
-#' statistic and a p-value of the test on the equality of the weight of each individual
+#' asymptotic confidence intervals for the true portfolio weights, value of the test
+#' statistic and the p-value of the test on the equality of the weight of each individual
 #' asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
 #' @md
-#'
+#' 
 #' @references \insertRef{BDOPS2021}{HDShOP}
 #' @references \insertRef{BDNT21}{HDShOP}
 #' @examples
@@ -140,7 +140,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
-#' @param b a numeric vector. The target for weight shrinkage.
+#' @param b a numeric vector. The weights of the target portfolio.
 #' @inheritParams new_MV_portfolio_weights_BDOPS21
 #' @return an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
 #'
@@ -159,11 +159,11 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' | weight_intervals | A data frame, see details |
 #'
 #' weight_intervals contains a shrinkage estimator of portfolio weights,
-#' asymptotic confidence intervals for the true portfolio weights, value of test
-#' statistic and a p-value of the test on the equality of the weight of each
+#' asymptotic confidence intervals for the true portfolio weights, the value of test
+#' statistic and the p-value of the test on the equality of the weight of each
 #' individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 #' @md
-#'
+#' 
 #' @references \insertRef{BDPS2019}{HDShOP}
 #' @references \insertRef{BPS2018}{HDShOP}
 #' @references \insertRef{BDNT21}{HDShOP}

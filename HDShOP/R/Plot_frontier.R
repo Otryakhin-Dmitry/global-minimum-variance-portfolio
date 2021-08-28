@@ -7,7 +7,7 @@
 #' the mean-variance efficiency of various estimators of the portfolio weights.
 #' The standard deviation of the portfolio return is plotted in the \eqn{x}-axis and the
 #' mean portfolio return in the \eqn{y}-axis. The portfolios with the weights \eqn{\rm{w}} are added
-#' to the plot by computing  \eqn{\sqrt{\rm{w}^\prime \cdot S \cdot w} }  and  \eqn{\rm w^\prime \bar x}.
+#' to the plot by computing  \eqn{\sqrt{\rm{w}^\prime  S  w} }  and  \eqn{\rm w^\prime \bar x}.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @param weights.eff matrix of portfolio weights. Each column contains p values of

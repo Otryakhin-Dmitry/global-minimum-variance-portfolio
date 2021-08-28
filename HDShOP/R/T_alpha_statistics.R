@@ -40,7 +40,7 @@ Omega_hat_al_c <- function(x, b){
 #
 #' Test for mean-variance portfolio weights
 #'
-#' A high-dimensional asymptotic test on a mean-variance efficiency of a given
+#' A high-dimensional asymptotic test on the mean-variance efficiency of a given
 #' portfolio with the weights \eqn{\rm{w}_0}. The tested hypotheses are
 #' \deqn{H_0: w_{MV} = w_0 \quad vs \quad H_1: w_{MV} \neq w_0.}
 #' The test statistic is based on the shrinkage estimator of mean-variance portfolio weights
