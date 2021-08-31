@@ -25,9 +25,9 @@
 #' weight_intervals contains a shrinkage estimator of portfolio weights,
 #' asymptotic confidence intervals for the true portfolio weights, value of the test
 #' statistic and the p-value of the test on the equality of the weight of each individual
-#' asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
+#' asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsén 2021).
 #' @md
-#' 
+#'
 #' @references \insertRef{BDOPS2021}{HDShOP}
 #' @references \insertRef{BDNT21}{HDShOP}
 #' @examples
@@ -163,7 +163,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' statistic and the p-value of the test on the equality of the weight of each
 #' individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 #' @md
-#' 
+#'
 #' @references \insertRef{BDPS2019}{HDShOP}
 #' @references \insertRef{BPS2018}{HDShOP}
 #' @references \insertRef{BDNT21}{HDShOP}

@@ -36,7 +36,7 @@ an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
 weight_intervals contains a shrinkage estimator of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of the test
 statistic and the p-value of the test on the equality of the weight of each individual
-asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsen 2021).
+asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsén 2021).
 }
 \description{
 Constructor of mean-variance shrinkage portfolios. For more details of the method,
