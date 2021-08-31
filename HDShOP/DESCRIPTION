@@ -40,6 +40,7 @@ Description: Constructs shrinkage estimators of high-dimensional mean-variance p
     as well as a new Bayesian estimator for the Markowitz efficient frontier recently developed by 
     Bauder et al. (2021) <doi:10.1080/14697688.2020.1748214>.
 License: GPL-3
+URL: https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio
 LazyData: yes
 Encoding: UTF-8
 Depends:
