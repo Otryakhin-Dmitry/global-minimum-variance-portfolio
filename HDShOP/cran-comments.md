@@ -1,5 +1,5 @@
-## Initial release of HDShOP package
-This is a resubmission following Julia Haider's remarks.
+## Resubmission of HDShOP package
+This is a resubmission of an existing package with updates for help files.
 
 ## Test environments
 * local ubuntu 20.04, R-release

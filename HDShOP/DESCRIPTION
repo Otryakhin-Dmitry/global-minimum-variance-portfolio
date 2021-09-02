@@ -1,6 +1,6 @@
 Package: HDShOP
 Title: High-Dimensional Shrinkage Optimal Portfolios
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     c(person(given = "Taras", 
              family = "Bodnar", 
