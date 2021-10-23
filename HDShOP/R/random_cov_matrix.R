@@ -71,7 +71,7 @@ SRandCovMtrx <- function(n=3e2, p=2e2, q=20.55){
 #' Mtrx <- RandCovMtrx(p=p)
 #' Mtrx
 #' @export
-RandCovMtrx <- function(p=2e2, eigenvalues = 0.1*exp(5*seq(0,1,length=p))){
+RandCovMtrx <- function(p=2e2, eigenvalues = 0.1*exp(5*seq_len(p)/p)){
 
   #####---Covariance matrix from Wishart distr. with given eigenvalues---#####
 

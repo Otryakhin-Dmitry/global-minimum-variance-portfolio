@@ -1,5 +1,5 @@
 ## Resubmission of HDShOP package
-This is a resubmission of an existing package with updates for help files.
+This is a resubmission of an existing package with a small patch.
 
 ## Test environments
 * local ubuntu 20.04, R-release
@@ -15,4 +15,5 @@ There were no ERRORs or WARNINGs or NOTEs. There might be a NOTE about misspelli
 but those are just surnames in the description field.
 
 ## Downstream dependencies
-There are currently no downstream dependencies for this package.
+There is currently 1 downstream dependency for this package. It was checked with 
+this new version, and no ERRORs or WARNINGs or NOTEs occured.

@@ -4,7 +4,7 @@
 \alias{RandCovMtrx}
 \title{Covariance matrix generator}
 \usage{
-RandCovMtrx(p = 200, eigenvalues = 0.1 * exp(5 * seq(0, 1, length = p)))
+RandCovMtrx(p = 200, eigenvalues = 0.1 * exp(5 * seq_len(p)/p))
 }
 \arguments{
 \item{p}{dimension of the covariance matrix}
