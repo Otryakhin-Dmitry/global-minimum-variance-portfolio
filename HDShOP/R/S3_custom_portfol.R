@@ -109,6 +109,13 @@ validate_MeanVar_portfolio <- function(w) {
     )
   }
 
+  if (nrow(values$cov_mtrx)!=ncol(values$cov_mtrx)) {
+    stop(
+      "The covariance matrix is not square",
+      call. = FALSE
+    )
+  }
+
   w
 }
 
@@ -123,7 +130,7 @@ validate_MeanVar_portfolio <- function(w) {
 #' \eqn{\hat Q} is given by
 #' \deqn{\hat Q = \hat{\Sigma}^{-1} - \frac{\hat{\Sigma}^{-1} 1 1' \hat{\Sigma}^{-1}}{1' \hat{\Sigma}^{-1} 1} .}
 #' The computation is made by \code{\link{new_MeanVar_portfolio}} and the result
-#' is validated by 
+#' is validated by
 #' \code{\link{validate_MeanVar_portfolio}}.
 #'
 #' @param mean_vec mean vector of asset returns provided in the form of a vector or a list.

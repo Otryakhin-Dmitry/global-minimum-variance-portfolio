@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r echo = FALSE}
-library(hdsp)
+library(HDShOP)
 ```
 
 ## Overview
@@ -46,40 +46,6 @@ portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=rep(1/p,p))
 str(portfolio)
 ```
 
-### EU portfolio with shrinked means
-
-In this kind of portfolios shrinkage for mean values is used with no shrinkage of other elements. The subtype options available are: James-Stein and Bayes-Stein from [Jorion 1986] and Bodnar-Okhrin-Parolya from [BOP19].
-
-Bodnar-Okhrin-Parolya [BOP19]:
-```{r}
-portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', 
-                               subtype='BOP19', mu_0=mu_0)
-str(portfolio)
-```
-
-Bayes-Stein [Jorion 1986]:
-```{r}
-portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', 
-                               subtype='Bayes-Stein', mu_0=mu_0)
-str(portfolio)
-```
-
-James-Stein [Jorion 1986]:
-```{r}
-portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='mean', 
-                               subtype='James-Stein', mu_0=mu_0)
-str(portfolio)
-```
-
-### EU portfolio with a shrinked covariance matrix
-
-In this type (type='cov') the covariance matrix is obtained via shrinkage estimators. The available subtypes are: 'BGP14' and 'LW20' corresponding to methods from [BGP14] and [LW20].
-
-```{r}
-portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='cov',
-                               subtype='BGP14', TM=TM)
-str(portfolio)
-```
 
 
 ## Shrinkage estimators for covariance matrix
@@ -104,14 +70,21 @@ Mean_BOP <- MeanEstim(x, type="BOP19", mu_0=mu_0)
 head(Mean_BOP)
 ```
 
-## Custom Expected Utility portfolios
-There is a possibility to make custom EU portfolios having mean values of returns and an inverse covariance matrix.
+## Custom mean-variance portfolios
+It is possible to make custom mean-variance portfolios having pre-specified mean values of returns and their covariance matrix.
 ```{r}
-cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
-invSS <- solve(cov_mtrx)
-means <- MeanEstim(x, type="BOP19", mu_0=mu_0)
+TM <- matrix(0, nrow=p, ncol=p)
+diag(TM) <- 1/p
 
-cust_port_BS_LW <- new_ExUtil_portfolio_custom(mean_vec=means, 
-                                               inv_cov_mtrx=invSS, gamma=2)
+SCM <- Sigma_sample_estimator(x)
+
+Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+
+means <- mean_bop19(x=x, mu_0=mu_0)
+
+cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means$means, 
+                                         cov_mtrx=Sigma_shr$S, gamma=2)
 str(cust_port_BS_LW)
 ```
+
+HDShOP includes three functions related to this purpose: new_MeanVar_portfolio which is a constructor of objects of class MeanVar_portfolio, validation function for such objects validate_MeanVar_portfolio and helper MeanVar_portfolio. Conventionally, the constructor is a raw creator of objects of the class: it takes arguments mean_vec, cov_mtrx, gamma and computes weights accordingly to the formula. The validator runs checks designed to verify if the object at hand is a legitimate object of class MeanVar_portfolio, while helper is a combination of the two. Currently, validate_MeanVar_portfolio checks if all the necessary slots are present in the object, its weight and mean vectors have the same length as the number of rows in the covariance matrix and that the covariance matrix is square.
