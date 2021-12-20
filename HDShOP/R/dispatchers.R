@@ -65,7 +65,7 @@
 #' str(test)
 #'
 #' @export
-MVShrinkPortfolio <- function(x, gamma, type='shrinkage', ...) {
+MVShrinkPortfolio <- function(x, gamma, type=c('shrinkage', 'traditional'), ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
   if(!is.character(type)) stop("type is not character")

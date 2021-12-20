@@ -154,7 +154,8 @@ validate_MeanVar_portfolio <- function(w) {
 MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
 
   cov_mtrx <- as.matrix(cov_mtrx)
-  mean_vec<-unlist(mean_vec)
+  mean_vec <- unlist(mean_vec)
+  if(!is.numeric(mean_vec)) stop("mean_vec seems to contain non-numbers")
 
   xx <- new_MeanVar_portfolio(mean_vec=mean_vec,
                               cov_mtrx=cov_mtrx,

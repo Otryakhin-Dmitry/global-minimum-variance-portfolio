@@ -1,5 +1,5 @@
 ---
-title: "An introduction to hdsp package with examples."
+title: "An introduction to HDShOP package with examples."
 output: pdf_document
 ---
 
@@ -12,7 +12,7 @@ library(HDShOP)
 ```
 
 ## Overview
-This package is implementation of various shrinkage techniques with application to the so-called expected utility portfolios. It contains three main functions: EUShrinkPortfolio, CovarEstim and MeanEstim. 
+This package is implementation of various shrinkage techniques with application to the so-called mean-variance portfolios. It contains three main functions: MVShrinkPortfolio, CovarEstim and MeanEstim. 
 
 The following setup will be used throughout all examples:
 ```{r experiment setup}
@@ -32,26 +32,77 @@ mu_0[1:10] <- 10:1
 
 All data matrices in the package are handled in a way that the variables are in rows and observations- in columns.
 ```{r}
-x <- matrix(data = rnorm(n*p), nrow = p, ncol = n) # asset returns
+x <- matrix(data = rnorm(n*p), nrow = p, ncol = n) # simulated asset returns
 ```
 
-## EU Portfolios
-The general function performing portfolio creation is EUShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and subtype. It returns either a portfolio in the form of ExUtil_portfolio S3 class or a human-readable error message. Argument type represents the type of shrinkage to use, while subtype is a particular method. EUShrinkPortfolio should be used in interactive programming as it is more user-friendly and slower than underlying methods, while methods themselves should be exploited for writing more complicated but at the same time efficient and fast code.
+## EU Portfolios with shrinked weights
+The main function performing creation of shrinkage portfolios is MVShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and gamma. It returns either a portfolio in the form of S3 class MeanVar_portfolio or a human-readable error message. Argument type is a switch indicating whether a shrinkage or traditional portfolio is to be returned. MVShrinkPortfolio should be used in interactive programming as it is more user-friendly and slower than underlying methods, while methods themselves should be exploited for writing more complicated but at the same time efficient and fast code.
 
-### EU portfolio with shrinked weights
 
-Weight-shrinked portfolio from [IEEE2020] is constructed by setting type='weights'. Subtype argument is not set since the method is the only one of its type implemented.
+Weight-shrinked portfolio from [BDOPS21] is constructed by setting type='weights' and gamma being equal to a non-infinite real number. 
 ```{r}
-portfolio <- EUShrinkPortfolio(x=x, gamma=gamma, type='weights', b=rep(1/p,p))
-str(portfolio)
+b<-rep(1/p,p)
+portfolio_BDOPS21 <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
+str(portfolio_BDOPS21)
 ```
+
+The result is the same as that of new_MV_portfolio_weights_BDOPS21 which was eventually dispatched by MVShrinkPortfolio:
+```{r, eval=FALSE}
+portfolio_BDOPS21 <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta = 0.05)
+```
+
+Global minimum variance portfolios are created by setting gamma=Inf, in which case new_GMV_portfolio_weights_BDPS19	will be dispatched:
+```{r}
+portfolio_BDPS19 <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
+str(portfolio_BDOPS21)
+```
+
+## Custom mean-variance portfolios
+It is possible to make custom mean-variance portfolios having pre-specified mean values and a covariance matrix of returns.
+HDShOP includes three functions related to this purpose: new_MeanVar_portfolio which is a constructor of objects of class MeanVar_portfolio, validation function for such objects validate_MeanVar_portfolio and helper MeanVar_portfolio. Conventionally, the constructor is a raw creator of objects of the class: it takes arguments mean_vec, cov_mtrx, gamma and computes weights accordingly to the formula *. The validator runs checks designed to verify if the object at hand is a legitimate object of class MeanVar_portfolio, while helper is a combination of the two. Currently, validate_MeanVar_portfolio checks if all the necessary slots are present in the object, its weight and mean vectors have the same length as the number of rows in the covariance matrix and that the covariance matrix is square.
+
+Here is an example of how to use the constructor and the helper.
+```{r}
+TM <- matrix(0, nrow=p, ncol=p)
+diag(TM) <- 1/p
+
+SCM <- Sigma_sample_estimator(x)
+
+Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+
+means <- mean_bop19(x=x, mu_0=mu_0)
+
+cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means$means, 
+                                         cov_mtrx=Sigma_shr$S, gamma=2)
+summary(cust_port_BS_LW)
+
+cust_port_BS_LW_2 <- MeanVar_portfolio(mean_vec=means$means, 
+                                       cov_mtrx=Sigma_shr$S, gamma=2)
+summary(cust_port_BS_LW_2)
+```
+
+Though, the following ill-designed portfolios created with new_MeanVar_portfolio will be tagged by validate_MeanVar_portfolio:
+```{r}
+SCM <- matrix(0, nrow=p, ncol=2*p)
+diag(SCM) <- 1/p
+
+cust_port_BS_LW_3 <- cust_port_BS_LW_2
+cust_port_BS_LW_3$cov_mtrx <- SCM
+
+tools::assertError(
+                   validate_MeanVar_portfolio(cust_port_BS_LW_3),
+                   classes = "error", verbose = TRUE
+                  )
+```
+
+
 
 
 
 ## Shrinkage estimators for covariance matrix
 The next important function is CovarEstim. This is a dispatcher for functions computing the covariance matrix of the data.
 ```{r}
-Mtrx_naive <- CovarEstim(x, type="naive")
+Mtrx_naive <- CovarEstim(x, type="trad")
 # Mtrx_naive[1:6,1:6]
 format(Mtrx_naive[1:6,1:6], scientific = TRUE, digits = 3)
 ```
@@ -70,21 +121,14 @@ Mean_BOP <- MeanEstim(x, type="BOP19", mu_0=mu_0)
 head(Mean_BOP)
 ```
 
-## Custom mean-variance portfolios
-It is possible to make custom mean-variance portfolios having pre-specified mean values of returns and their covariance matrix.
-```{r}
-TM <- matrix(0, nrow=p, ncol=p)
-diag(TM) <- 1/p
 
-SCM <- Sigma_sample_estimator(x)
 
-Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
 
-means <- mean_bop19(x=x, mu_0=mu_0)
 
-cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means$means, 
-                                         cov_mtrx=Sigma_shr$S, gamma=2)
-str(cust_port_BS_LW)
-```
 
-HDShOP includes three functions related to this purpose: new_MeanVar_portfolio which is a constructor of objects of class MeanVar_portfolio, validation function for such objects validate_MeanVar_portfolio and helper MeanVar_portfolio. Conventionally, the constructor is a raw creator of objects of the class: it takes arguments mean_vec, cov_mtrx, gamma and computes weights accordingly to the formula. The validator runs checks designed to verify if the object at hand is a legitimate object of class MeanVar_portfolio, while helper is a combination of the two. Currently, validate_MeanVar_portfolio checks if all the necessary slots are present in the object, its weight and mean vectors have the same length as the number of rows in the covariance matrix and that the covariance matrix is square.
+
+
+
+
+
+
