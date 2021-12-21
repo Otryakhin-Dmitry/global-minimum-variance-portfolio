@@ -176,3 +176,23 @@ summary.MeanVar_portfolio <- function(object, ...){
        )
 }
 
+
+# Plot method for MeanVar_portfolio
+#' @export
+plot.MeanVar_portfolio <- function(x, y=NULL, ...){
+
+  weights <- x$weights
+  ww <- sort(weights)
+  graphics::barplot(ww, xlab="sorted assets", ylab="weight")
+
+  mm<- x$means
+  graphics::barplot(mm, xlab="assets", ylab="mean")
+
+  Cmat <- x$cov_mtrx
+  mat1 <- apply(Cmat, 2, rev)
+  mat2 <- t(mat1)
+
+  graphics::image(mat2)
+
+}
+

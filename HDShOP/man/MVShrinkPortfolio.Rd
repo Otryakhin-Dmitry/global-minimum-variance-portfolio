@@ -4,7 +4,7 @@
 \alias{MVShrinkPortfolio}
 \title{Shrinkage mean-variance portfolio}
 \usage{
-MVShrinkPortfolio(x, gamma, type = "shrinkage", ...)
+MVShrinkPortfolio(x, gamma, type = c("shrinkage", "traditional"), ...)
 }
 \arguments{
 \item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
