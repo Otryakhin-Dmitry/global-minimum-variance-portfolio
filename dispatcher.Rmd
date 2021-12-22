@@ -32,11 +32,23 @@ mu_0[1:10] <- 10:1
 
 All data matrices in the package are handled in a way that the variables are in rows and observations- in columns.
 ```{r}
-x <- matrix(data = rnorm(n*p), nrow = p, ncol = n) # simulated asset returns
+set.seed(5)
+
+CMtrx_true <- RandCovMtrx(p=p)
+x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=CMtrx_true))
+# x <- matrix(data = rnorm(n*p), nrow = p, ncol = n) # simulated asset returns
 ```
 
 ## EU Portfolios with shrinked weights
-The main function performing creation of shrinkage portfolios is MVShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and gamma. It returns either a portfolio in the form of S3 class MeanVar_portfolio or a human-readable error message. Argument type is a switch indicating whether a shrinkage or traditional portfolio is to be returned. MVShrinkPortfolio should be used in interactive programming as it is more user-friendly and slower than underlying methods, while methods themselves should be exploited for writing more complicated but at the same time efficient and fast code.
+The main function performing creation of shrinkage portfolios is MVShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and gamma. 
+
+ | Function |  Type | gamma |
+ | --- | --- | --- |
+ | new_MV_portfolio_weights_BDOPS21  | shrinkage | < Inf |
+ | new_GMV_portfolio_weights_BDPS19  | shrinkage | Inf |
+ | new_MV_portfolio_traditional |  traditional | > 0 |
+ 
+It returns either a portfolio in the form of S3 class MeanVar_portfolio or a human-readable error message. Argument type is a switch indicating whether a shrinkage or traditional portfolio is to be returned. MVShrinkPortfolio should be used in interactive programming as it is more user-friendly and slower than underlying methods, while methods themselves should be exploited for writing more complicated but at the same time efficient and fast code.
 
 
 Weight-shrinked portfolio from [BDOPS21] is constructed by setting type='weights' and gamma being equal to a non-infinite real number. 
@@ -54,8 +66,10 @@ portfolio_BDOPS21 <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, bet
 Global minimum variance portfolios are created by setting gamma=Inf, in which case new_GMV_portfolio_weights_BDPS19	will be dispatched:
 ```{r}
 portfolio_BDPS19 <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
-str(portfolio_BDOPS21)
+str(portfolio_BDPS19)
 ```
+
+### Confidence intervals of weights ($weight_intervals) ...
 
 ## Custom mean-variance portfolios
 It is possible to make custom mean-variance portfolios having pre-specified mean values and a covariance matrix of returns.
@@ -95,9 +109,20 @@ tools::assertError(
                   )
 ```
 
+## S3 class MeanVar_portfolio
+Traditionally, weight-shrunk and custom mean variance portfolios are returned as objects of class MeanVar_portfolio. Ones with shrunk weights have a subclass inheriting from it: MV_portfolio_weights_BDOPS21 and GMV_portfolio_weights_BDPS19. For MeanVar_portfolio methods summary and plot are available.
 
+```{r, fig.pos = "!H", fig.width=3.8}
+portfolio_BDPS19 <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
+summary(portfolio_BDPS19)
+plot(portfolio_BDPS19)
+```
 
-
+```{r, fig.pos = "!H", fig.width=3.8}
+portfolio_BDPS19 <- MVShrinkPortfolio(x=x, gamma=Inf, type='traditional', b=b, beta = 0.05)
+summary(portfolio_BDPS19)
+plot(portfolio_BDPS19)
+```
 
 ## Shrinkage estimators for covariance matrix
 The next important function is CovarEstim. This is a dispatcher for functions computing the covariance matrix of the data.

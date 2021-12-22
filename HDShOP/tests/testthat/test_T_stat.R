@@ -45,7 +45,7 @@ test_that("Ts from (44) and (41) are equivalent", {
 
 test_that("Ts are standard normal", {
 
-  if (!requireNamespace("EstimDiagnostics", quietly =TRUE)) skip("package waldo is not installed")
+  if (!requireNamespace("EstimDiagnostics", quietly =TRUE)) skip("package EstimDiagnostics is not installed")
   library('EstimDiagnostics')
 
   set.seed(1)
