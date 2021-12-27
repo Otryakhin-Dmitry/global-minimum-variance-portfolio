@@ -33,3 +33,7 @@ NULL
 # Imports from stats
 #' @importFrom stats cov pchisq qnorm pnorm
 NULL
+
+# Imports from graphics
+#' @importFrom graphics barplot image
+NULL

@@ -26,7 +26,7 @@ where \eqn{\hat{\Sigma}} is an estimator for the covariance matrix, \eqn{\hat{\m
 \eqn{\hat Q} is given by
 \deqn{\hat Q = \hat{\Sigma}^{-1} - \frac{\hat{\Sigma}^{-1} 1 1' \hat{\Sigma}^{-1}}{1' \hat{\Sigma}^{-1} 1} .}
 The computation is made by \code{\link{new_MeanVar_portfolio}} and the result
-is validated by 
+is validated by
 \code{\link{validate_MeanVar_portfolio}}.
 }
 \examples{
