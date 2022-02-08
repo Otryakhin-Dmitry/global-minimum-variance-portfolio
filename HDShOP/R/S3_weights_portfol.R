@@ -85,7 +85,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
     mode = 'numeric')
 
   # alpha_EU
-  al <- alpha_hat_star_c_fast(gamma=gamma, c=cc, s=s_hat_c, b=b, R_GMV=R_hat_GMV,
+  al <- alpha_hat_star_c_fast(gamma=gamma, c=cc, s=s_hat_c, R_GMV=R_hat_GMV,
                               R_b=R_hat_b, V_c=V_hat_c, V_b=V_hat_b)
   weights <- al*W_EU_hat + (1-al)*b # w_EU_shr
 
