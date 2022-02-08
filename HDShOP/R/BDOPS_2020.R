@@ -177,7 +177,7 @@ alpha_hat_star_c <- function(gamma, x, b){
   as.numeric(numerator/denomenator)
 }
 
-alpha_hat_star_c_fast <- function(gamma, c, s, b, R_GMV, R_b, V_c, V_b){
+alpha_hat_star_c_fast <- function(gamma, c, s, R_GMV, R_b, V_c, V_b){
 
   Exp1 <- (R_GMV-R_b)*(1+1/(1-c))/gamma
   Exp2 <- (V_b-V_c)
