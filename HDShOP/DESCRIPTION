@@ -1,6 +1,6 @@
 Package: HDShOP
 Title: High-Dimensional Shrinkage Optimal Portfolios
-Version: 0.1.2
+Version: 0.1.4
 Authors@R: 
     c(person(given = "Taras", 
              family = "Bodnar", 
@@ -31,8 +31,8 @@ Author: Taras Bodnar [aut] (<https://orcid.org/0000-0001-7855-8221>),
     Nestor Parolya [aut] (<https://orcid.org/0000-0003-2147-2288>)
 Description: Constructs shrinkage estimators of high-dimensional mean-variance portfolios and performs 
     high-dimensional tests on optimality of a given portfolio. The techniques developed in 
-    Bodnar et al. (2018) <doi:10.1016/j.ejor.2017.09.028>, Bodnar et al. (2019) 
-    <doi:10.1109/TSP.2019.2929964>, Bodnar et al. (2020) <doi:10.1109/TSP.2020.3037369> 
+    Bodnar et al. (2018 <doi:10.1016/j.ejor.2017.09.028>, 2019 <doi:10.1109/TSP.2019.2929964>, 
+    2020 <doi:10.1109/TSP.2020.3037369>, 2021 <doi:10.1080/07350015.2021.2004897>) 
     are central to the package. They provide simple and feasible estimators and tests for optimal 
     portfolio weights, which are applicable for 'large p and large n' situations where p is the 
     portfolio dimension (number of stocks) and n is the sample size. The package also includes tools
@@ -49,4 +49,4 @@ Imports:
     Rdpack,
 Suggests: ggplot2, testthat, EstimDiagnostics, MASS, corpcor, waldo
 RdMacros: Rdpack
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
