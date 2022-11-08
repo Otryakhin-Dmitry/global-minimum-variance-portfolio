@@ -5,7 +5,8 @@
 #' Shrinkage mean-variance portfolio
 #'
 #' The main function for mean-variance (also known as expected utility) portfolio construction.
-#' It is a dispatcher using methods according to argument type.
+#' It is a dispatcher using methods according to argument type, values of gamma
+#' and dimensionality of matrix x.
 #'
 #' The sample estimator of the mean-variance portfolio weights, which results in
 #' a traditional mean-variance portfolio, is calculated by
@@ -14,29 +15,35 @@
 #' matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
 #' is the coefficient of risk aversion and \eqn{\hat Q} is given by
 #' \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
-#' The shrinkage estimator for the mean-variance portfolio weights in a high-dimensional
+#' In the case when \eqn{p>n}, \eqn{S^{-1}} becomes \eqn{S^{+}}- Moore-Penrose
+#' inverse. The shrinkage estimator for the mean-variance portfolio weights in a high-dimensional
 #' setting is given by \deqn{\hat w_{ShMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b \quad,}
 #' where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 #' a target vector with the sum of the elements equal to one.
 #'
-#' In the case \eqn{\gamma \neq \infty}, \eqn{\hat{\alpha}} is computed
-#' following Eq. (2.28) of \insertCite{BOP16;textual}{HDShOP}.
+#' In the case \eqn{\gamma \neq \infty}, \eqn{\hat{\alpha}} is computed following
+#' Eq. (2.22) of \insertCite{BOP16;textual}{HDShOP} for c<1 and following Eq. (2.29) of
+#' \insertCite{BOP16;textual}{HDShOP} for c>1
 #'
 #' The case of a fully risk averse investor (\eqn{\gamma=\infty}) leads to the
 #' traditional global minimum variance (GMV) portfolio with the weights given by
 #' \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
 #' The shrinkage estimator for the GMV portfolio is then calculated by
-#' \deqn{\hat w_{ShGMV} = \hat \alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
-#' with \eqn{\hat \alpha} given in Eq. (2.31) \insertCite{BPS2018;textual}{HDShOP}.
+#' \deqn{\hat w_{ShGMV} = \hat\alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
+#' with \eqn{\hat{\alpha}}  given in Eq. (2.31) of \insertCite{BPS2018;textual}{HDShOP}
+#' for c<1 and in Eq. (2.33) of \insertCite{BPS2018;textual}{HDShOP} for c>1.
 #'
-#' These three estimation methods are available as separate functions dispatched
+#' These estimation methods are available as separate functions employed by MVShrinkPortfolio
 #' accordingly to the following parameter configurations:
 #'
-#' | Function | Paper | Type | gamma |
-#' | --- | --- | --- | --- |
-#' | \code{\link{new_MV_portfolio_weights_BDOPS21}} | Bodnar et al 2021 | shrinkage | < Inf |
-#' | \code{\link{new_GMV_portfolio_weights_BDPS19}} | Bodnar et al 2019 | shrinkage | Inf |
-#' | \code{\link{new_MV_portfolio_traditional}} |  | traditional | > 0 |
+#' | Function | Paper | Type | gamma | p/n |
+#' | --- | --- | --- | --- | --- |
+#' | \code{\link{new_MV_portfolio_weights_BDOPS21}} | \insertCite{BOP16;textual}{HDShOP} | shrinkage | < Inf | <1 |
+#' | \code{\link{new_MV_portfolio_weights_BDOPS21_pgn}} | \insertCite{BOP16;textual}{HDShOP} | shrinkage | < Inf | >1 |
+#' | \code{\link{new_GMV_portfolio_weights_BDPS19}} | \insertCite{BPS2018;textual}{HDShOP} | shrinkage | Inf | <1 |
+#' | \code{\link{new_GMV_portfolio_weights_BDPS19_pgn}} | \insertCite{BPS2018;textual}{HDShOP} | shrinkage | Inf | >1 |
+#' | \code{\link{new_MV_portfolio_traditional}} |  | traditional | > 0 | <1 |
+#' | \code{\link{new_MV_portfolio_traditional_pgn}} |  | traditional | > 0 | >1 |
 #' @md
 #' @param x a p by n matrix or a data frame of asset returns. Rows represent different
 #' assets, columns -- observations.
@@ -45,13 +52,16 @@
 #' @param ... arguments to pass to portfolio constructors
 #'
 #' @return A portfolio in the form of an object of class MeanVar_portfolio potentially with a subclass.
-#' See \code{\link{new_MeanVar_portfolio}} for the details of the class.
+#' See \code{\link{Class_MeanVar_portfolio}} for the details of the class.
 #' @references \insertAllCited{}
 #' @examples
 #' n<-3e2 # number of realizations
+#' gamma<-1
+#'
+#' # The case p<n
+#'
 #' p<-.5*n # number of assets
 #' b<-rep(1/p,p)
-#' gamma<-1
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
@@ -62,6 +72,19 @@
 #' str(test)
 #'
 #' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='traditional')
+#' str(test)
+#'
+#' # The case p>n
+#'
+#' p<-1.2*n # Re-define the number of assets
+#' b<-rep(1/p,p)
+#'
+#' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+#'
+#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
+#' str(test)
+#'
+#' test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
 #' @export
@@ -77,15 +100,32 @@ MVShrinkPortfolio <- function(x, gamma, type=c('shrinkage', 'traditional'), ...)
   cl <- match.call()
 
   if(type=='traditional') {
-    output <- new_MV_portfolio_traditional(x=x, gamma=gamma)
+
+    if(nrow(x) >= ncol(x)) {
+      output <- new_MV_portfolio_traditional_pgn(x=x, gamma=gamma)
+    } else {
+      output <- new_MV_portfolio_traditional(x=x, gamma=gamma)
+    }
+
 
   } else  if(type=='shrinkage') {
 
     if(gamma != Inf) {
-      output <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
+
+      if(nrow(x) < ncol(x)) {
+        output <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, ...)
+      } else if(nrow(x) > ncol(x)) {
+        output <- new_MV_portfolio_weights_BDOPS21_pgn(x=x, gamma=gamma, ...)
+      } else if(nrow(x) == ncol(x)) stop('do not know how to treat a square x')
 
     } else {
-      output <- new_GMV_portfolio_weights_BDPS19(x=x, ...)
+
+      if(nrow(x) < ncol(x)) {
+        output <- new_GMV_portfolio_weights_BDPS19(x=x, ...)
+      } else if(nrow(x) > ncol(x)) {
+        output <- new_GMV_portfolio_weights_BDPS19_pgn(x=x, ...)
+      } else if(nrow(x) == ncol(x)) stop('do not know how to treat a square x')
+
     }
 
   } else {
