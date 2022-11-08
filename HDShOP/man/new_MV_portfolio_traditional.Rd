@@ -2,9 +2,12 @@
 % Please edit documentation in R/S3_tradit_portfol.R
 \name{new_MV_portfolio_traditional}
 \alias{new_MV_portfolio_traditional}
+\alias{new_MV_portfolio_traditional_pgn}
 \title{Traditional mean-variance portfolio}
 \usage{
 new_MV_portfolio_traditional(x, gamma)
+
+new_MV_portfolio_traditional_pgn(x, gamma)
 }
 \arguments{
 \item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
@@ -28,7 +31,9 @@ an object of class MeanVar_portfolio\tabular{ll}{
 \description{
 Mean-variance portfolios with the traditional (sample) estimators for the mean
 vector and the covariance matrix of asset returns. For more details of the method,
-see \code{\link{MVShrinkPortfolio}}.
+see \code{\link{MVShrinkPortfolio}}. new_MV_portfolio_traditional is for the
+case p<n, while new_MV_portfolio_traditional_pgn is for p>n, where p is the
+number of assets and n is the number of observations.
 }
 \examples{
 n<-3e2 # number of realizations

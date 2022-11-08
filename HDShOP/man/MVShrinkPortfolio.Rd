@@ -18,11 +18,12 @@ assets, columns -- observations.}
 }
 \value{
 A portfolio in the form of an object of class MeanVar_portfolio potentially with a subclass.
-See \code{\link{new_MeanVar_portfolio}} for the details of the class.
+See \code{\link{Class_MeanVar_portfolio}} for the details of the class.
 }
 \description{
 The main function for mean-variance (also known as expected utility) portfolio construction.
-It is a dispatcher using methods according to argument type.
+It is a dispatcher using methods according to argument type, values of gamma
+and dimensionality of matrix x.
 }
 \details{
 The sample estimator of the mean-variance portfolio weights, which results in
@@ -32,34 +33,43 @@ where \eqn{S^{-1}} and \eqn{\bar x} are the inverse of the sample covariance
 matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
 is the coefficient of risk aversion and \eqn{\hat Q} is given by
 \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
-The shrinkage estimator for the mean-variance portfolio weights in a high-dimensional
+In the case when \eqn{p>n}, \eqn{S^{-1}} becomes \eqn{S^{+}}- Moore-Penrose
+inverse. The shrinkage estimator for the mean-variance portfolio weights in a high-dimensional
 setting is given by \deqn{\hat w_{ShMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b \quad,}
 where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 a target vector with the sum of the elements equal to one.
 
-In the case \eqn{\gamma \neq \infty}, \eqn{\hat{\alpha}} is computed
-following Eq. (2.28) of \insertCite{BOP16;textual}{HDShOP}.
+In the case \eqn{\gamma \neq \infty}, \eqn{\hat{\alpha}} is computed following
+Eq. (2.22) of \insertCite{BOP16;textual}{HDShOP} for c<1 and following Eq. (2.29) of
+\insertCite{BOP16;textual}{HDShOP} for c>1
 
 The case of a fully risk averse investor (\eqn{\gamma=\infty}) leads to the
 traditional global minimum variance (GMV) portfolio with the weights given by
 \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
 The shrinkage estimator for the GMV portfolio is then calculated by
-\deqn{\hat w_{ShGMV} = \hat \alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
-with \eqn{\hat \alpha} given in Eq. (2.31) \insertCite{BPS2018;textual}{HDShOP}.
+\deqn{\hat w_{ShGMV} = \hat\alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
+with \eqn{\hat{\alpha}}  given in Eq. (2.31) of \insertCite{BPS2018;textual}{HDShOP}
+for c<1 and in Eq. (2.33) of \insertCite{BPS2018;textual}{HDShOP} for c>1.
 
-These three estimation methods are available as separate functions dispatched
-accordingly to the following parameter configurations:\tabular{llll}{
-   Function \tab Paper \tab Type \tab gamma \cr
-   \code{\link{new_MV_portfolio_weights_BDOPS21}} \tab Bodnar et al 2021 \tab shrinkage \tab < Inf \cr
-   \code{\link{new_GMV_portfolio_weights_BDPS19}} \tab Bodnar et al 2019 \tab shrinkage \tab Inf \cr
-   \code{\link{new_MV_portfolio_traditional}} \tab  \tab traditional \tab > 0 \cr
+These estimation methods are available as separate functions employed by MVShrinkPortfolio
+accordingly to the following parameter configurations:\tabular{lllll}{
+   Function \tab Paper \tab Type \tab gamma \tab p/n \cr
+   \code{\link{new_MV_portfolio_weights_BDOPS21}} \tab \insertCite{BOP16;textual}{HDShOP} \tab shrinkage \tab < Inf \tab <1 \cr
+   \code{\link{new_MV_portfolio_weights_BDOPS21_pgn}} \tab \insertCite{BOP16;textual}{HDShOP} \tab shrinkage \tab < Inf \tab >1 \cr
+   \code{\link{new_GMV_portfolio_weights_BDPS19}} \tab \insertCite{BPS2018;textual}{HDShOP} \tab shrinkage \tab Inf \tab <1 \cr
+   \code{\link{new_GMV_portfolio_weights_BDPS19_pgn}} \tab \insertCite{BPS2018;textual}{HDShOP} \tab shrinkage \tab Inf \tab >1 \cr
+   \code{\link{new_MV_portfolio_traditional}} \tab  \tab traditional \tab > 0 \tab <1 \cr
+   \code{\link{new_MV_portfolio_traditional_pgn}} \tab  \tab traditional \tab > 0 \tab >1 \cr
 }
 }
 \examples{
 n<-3e2 # number of realizations
+gamma<-1
+
+# The case p<n
+
 p<-.5*n # number of assets
 b<-rep(1/p,p)
-gamma<-1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
@@ -70,6 +80,19 @@ test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
 str(test)
 
 test <- MVShrinkPortfolio(x=x, gamma=gamma, type='traditional')
+str(test)
+
+# The case p>n
+
+p<-1.2*n # Re-define the number of assets
+b<-rep(1/p,p)
+
+x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+
+test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
+str(test)
+
+test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
 str(test)
 
 }

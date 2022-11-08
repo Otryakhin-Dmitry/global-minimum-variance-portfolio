@@ -2,9 +2,12 @@
 % Please edit documentation in R/S3_weights_portfol.R
 \name{new_MV_portfolio_weights_BDOPS21}
 \alias{new_MV_portfolio_weights_BDOPS21}
+\alias{new_MV_portfolio_weights_BDOPS21_pgn}
 \title{Constructor of MV portfolio object}
 \usage{
 new_MV_portfolio_weights_BDOPS21(x, gamma, b, beta)
+
+new_MV_portfolio_weights_BDOPS21_pgn(x, gamma, b, beta)
 }
 \arguments{
 \item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
@@ -37,12 +40,18 @@ weight_intervals contains a shrinkage estimator of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of the test
 statistic and the p-value of the test on the equality of the weight of each individual
 asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsén 2021).
+weight_intervals is only computed when p<n.
 }
 \description{
-Constructor of mean-variance shrinkage portfolios. For more details of the method,
-see \code{\link{MVShrinkPortfolio}}.
+Constructor of mean-variance shrinkage portfolios. new_MV_portfolio_weights_BDOPS21
+is for the case p<n, while new_MV_portfolio_weights_BDOPS21_pgn is for p>n, where
+p is the number of assets and n is the number of observations.
+For more details of the method, see \code{\link{MVShrinkPortfolio}}.
 }
 \examples{
+
+# c<1
+
 # Assets with a diagonal covariance matrix
 
 n<-3e2 # number of realizations
@@ -62,6 +71,20 @@ x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=Mtrx))
 
 test <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=b, beta=0.05)
 str(test)
+
+
+# c>1
+
+n<-2e2 # number of realizations
+p<-1.2*n # number of assets
+b<-rep(1/p,p)
+x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
+
+test <- new_MV_portfolio_weights_BDOPS21_pgn(x=x, gamma=gamma, b=b, beta=0.05)
+summary(test)
+
+# Assets with a non-diagonal covariance matrix
+
 }
 \references{
 \insertRef{BDOPS2021}{HDShOP}
