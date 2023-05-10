@@ -193,7 +193,8 @@ plot.MeanVar_portfolio <- function(x, y=NULL, ...){
   Cmat <- x$cov_mtrx
   mat3 <- t(Cmat)
   lattice::levelplot(mat3, main="Cov matrix", xlab="columns", ylab="rows",
-                     scales=list(x=list(alternating=2)), ylim=c(ncol(Cmat), 0))
+                     scales=list(x=list(alternating=2)),
+                     ylim=c(ncol(Cmat), 0), xlim=c(0, nrow(Cmat)))
 
 }
 
