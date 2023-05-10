@@ -182,17 +182,18 @@ summary.MeanVar_portfolio <- function(object, ...){
 plot.MeanVar_portfolio <- function(x, y=NULL, ...){
 
   weights <- x$weights
-  ww <- sort(weights)
-  graphics::barplot(ww, xlab="sorted assets", ylab="weight")
+  ww <- weights
+  graphics::barplot(ww, xlab="assets", ylab="weight")
 
   mm<- x$means
   graphics::barplot(mm, xlab="assets", ylab="mean")
 
-  Cmat <- x$cov_mtrx
-  mat1 <- apply(Cmat, 2, rev)
-  mat2 <- t(mat1)
+  #############
 
-  graphics::image(mat2)
+  Cmat <- x$cov_mtrx
+  mat3 <- t(Cmat)
+  lattice::levelplot(mat3, main="Cov matrix", xlab="columns", ylab="rows",
+                     scales=list(x=list(alternating=2)), ylim=c(ncol(Cmat), 0))
 
 }
 
