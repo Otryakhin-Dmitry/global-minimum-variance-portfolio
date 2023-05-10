@@ -1,0 +1,91 @@
+---
+title: "alpha<0"
+output: pdf_document
+date: "2023-02-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## General setup
+
+```{r}
+library(HDShOP)
+library(stabledist)
+
+p=200 # no neg values
+
+n=300
+SD=10 # neg values
+
+mu <- runif(p, -1, 1)
+mus <- rep(x=mu, each=n)
+Mu_matr <- matrix(data = mu, nrow = p, ncol = n, byrow = FALSE,
+                  dimnames = NULL)
+```
+
+```{r, echo=FALSE}
+repl <- function(gamma, p, n, SD, Mu_matr)
+{
+  N_rep <- 200
+  Mtrx <- matrix(data = NA, nrow = N_rep, ncol = 2)
+  colnames(Mtrx) <- c("alpha_hat", "s_hat_c")
+  
+  for(ind in 1:N_rep){
+      a_vect <- rnorm(p*n, mean=0, sd=SD)
+      A_matr <- matrix(data = a_vect, nrow = p, ncol = n, byrow = FALSE,
+                       dimnames = NULL)
+
+      A <- Mu_matr +  A_matr
+      alp <- test_MVSP(gamma=gamma, x=A, w_0=rep(1/p, times=p), beta = 0.05)$alpha_hat
+      Mtrx[ind, 'alpha_hat'] <- alp
+      Mtrx[ind, 's_hat_c'] <- HDShOP:::s_hat(x=A)
+  }
+  Mtrx
+}
+```
+
+## Experiments with different alphas
+
+```{r}
+  gamma=5
+  vec_res <- repl(gamma=gamma, p=p, n=n, SD=SD, Mu_matr=Mu_matr)
+  hist(vec_res[,'alpha_hat'], breaks=15)
+  hist(vec_res[,'s_hat_c'], breaks=15)
+  sum(vec_res$alpha_hat<0)
+  which(vec_res$alpha_hat<0)
+  
+  vec_res[which(vec_res[,'alpha_hat']<0), 's_hat_c']
+
+```
+
+```{r}
+  gamma=10
+  vec_res <- repl(gamma=gamma, p=p, n=n, SD=SD, Mu_matr=Mu_matr)
+  hist(vec_res, breaks=15)
+  sum(vec_res<0)
+```
+
+```{r}
+  gamma=20
+  vec_res <- repl(gamma=gamma, p=p, n=n, SD=SD, Mu_matr=Mu_matr)
+  hist(vec_res, breaks=15)
+  sum(vec_res<0)
+```
+
+```{r}
+  gamma=50
+  vec_res <- repl(gamma=gamma, p=p, n=n, SD=SD, Mu_matr=Mu_matr)
+  hist(vec_res, breaks=15)
+  sum(vec_res<0)
+```
+
+```{r}
+  gamma=100
+  vec_res <- repl(gamma=gamma, p=p, n=n, SD=SD, Mu_matr=Mu_matr)
+  hist(vec_res, breaks=15)
+  sum(vec_res<0)
+```
+
+
