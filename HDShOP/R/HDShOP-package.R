@@ -37,3 +37,7 @@ NULL
 # Imports from graphics
 #' @importFrom graphics barplot image
 NULL
+
+# Imports from lattice
+#' @importFrom lattice levelplot
+NULL
