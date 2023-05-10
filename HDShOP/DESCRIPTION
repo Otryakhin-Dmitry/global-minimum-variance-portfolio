@@ -46,7 +46,7 @@ Encoding: UTF-8
 Depends:
     R (>= 3.5.0)
 Imports: 
-    Rdpack,
+    Rdpack, lattice
 Suggests: ggplot2, testthat, EstimDiagnostics, MASS, corpcor, waldo
 RdMacros: Rdpack
 RoxygenNote: 7.2.1
