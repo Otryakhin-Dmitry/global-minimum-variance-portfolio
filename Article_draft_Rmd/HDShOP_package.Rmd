@@ -52,16 +52,13 @@ All data matrices in the package are handled in a way that the variables are in 
 ```{r}
 set.seed(5)
 
-# CMtrx_true <- RandCovMtrx(p=p) # Generate an arbitrary covariance matrix
-# x <- t(MASS::mvrnorm(n=n , mu=rep(0,p), Sigma=CMtrx_true))
-# x <- matrix(data = rnorm(n*p), nrow = p, ncol = n) # simulated asset returns
 x <- t(SP_daily_asset_returns[1:n,2:(p+1)])
 x <- as.matrix(x)
 ```
 
 
 ## S3 class MeanVar_portfolio
-Traditional, weight-shrunk and custom mean variance portfolios are returned as objects of class MeanVar_portfolio. Ones with shrunk weights have a subclass inheriting from it: MV_portfolio_weights_BDOPS21 and GMV_portfolio_weights_BDPS19. 
+Traditional, weight-shrunk and custom mean variance portfolios are returned as objects of class MeanVar_portfolio. Ones with shrunk weights have a subclass inheriting from it: the shrinkage portfolio described in (*) has subclass MV_portfolio_weights_BDOPS21 and the one in (*) --- GMV_portfolio_weights_BDPS19. 
 
 ![Structure of S3 classes for portfolio objects](Scheme_Classes.pdf){}
 
@@ -71,7 +68,8 @@ For example, in the case of the traditional portfolio, slot weights contains the
 
 For MeanVar_portfolio methods summary and plot are available.
 ```{r, fig.pos = "!H", fig.width=3.8}
-portfolio_BDPS19 <- new_MV_portfolio_traditional(x=x, gamma=10)
+#portfolio_BDPS19 <- new_MV_portfolio_traditional(x=x, gamma=10)
+portfolio_BDPS19 <- MVShrinkPortfolio(x=x, gamma=10, type='traditional')
 summary(portfolio_BDPS19)
 plot(portfolio_BDPS19)
 ```
@@ -79,17 +77,20 @@ plot(portfolio_BDPS19)
 
 ## EU Portfolios with shrunk weights
 The main function performing creation of shrinkage portfolios is MVShrinkPortfolio. Essentially, it is a function dispatcher which chooses a method according to arguments type and gamma. 
-
- | Function |  Type | gamma |
- | --- | --- | --- |
- | new_MV_portfolio_weights_BDOPS21  | shrinkage | < Inf |
- | new_GMV_portfolio_weights_BDPS19  | shrinkage | Inf |
- | new_MV_portfolio_traditional |  traditional | > 0 |
  
-It returns either a portfolio in the form of S3 class MeanVar_portfolio or a human-readable error message. Argument type is a switch indicating whether a shrinkage or traditional portfolio is to be returned. MVShrinkPortfolio should be used in interactive programming as it is more user-friendly and slower than underlying methods, while methods themselves should be exploited for writing more complicated but at the same time efficient and fast code.
+ | Function | Paper | Type | gamma | p/n |
+ | --- | --- | --- | --- | --- |
+ | new_MV_portfolio_weights_BDOPS21 | BOP16;textual | shrinkage | < Inf | <1 |
+ | new_MV_portfolio_weights_BDOPS21_pgn | BOP16;textual | shrinkage | < Inf | >1 |
+ | new_GMV_portfolio_weights_BDPS19 | BPS2018;textual | shrinkage | Inf | <1 |
+ | new_GMV_portfolio_weights_BDPS19_pgn | BPS2018;textual | shrinkage | Inf | >1 |
+ | new_MV_portfolio_traditional |  | traditional | > 0 | <1 |
+ | new_MV_portfolio_traditional_pgn |  | traditional | > 0 | >1 |
+
+It returns either a portfolio in the form of S3 class MeanVar_portfolio or a human-readable error message. Argument type is a switch indicating whether a shrinkage or traditional portfolio is to be returned. Generally, MVShrinkPortfolio should be used in interactive programming as it is more user-friendly and slower than underlying methods, while methods themselves should be exploited for writing more complicated but at the same time fast code.
 
 
-Weight-shrunk portfolio from [BDOPS21] is constructed by setting type='weights' and gamma being equal to a non-infinite real number. 
+Weight-shrunk portfolio (*) from [BDOPS21] is constructed by setting type='weights' and gamma being equal to a non-infinite real number. 
 ```{r}
 portfolio_BDOPS21 <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
 str(portfolio_BDOPS21)
@@ -110,30 +111,33 @@ str(portfolio_BDPS19)
 
 
 ## Custom mean-variance portfolios
-It is possible to make custom mean-variance portfolios having pre-specified mean values and a covariance matrix of returns.
-HDShOP includes three functions related to this purpose: new_MeanVar_portfolio which is a constructor of objects of class MeanVar_portfolio, validation function for such objects validate_MeanVar_portfolio and helper MeanVar_portfolio. Conventionally, the constructor is a raw creator of objects of the class: it takes arguments mean_vec, cov_mtrx, gamma and computes weights accordingly to the formula *. The validator runs checks designed to verify if the object at hand is a legitimate object of class MeanVar_portfolio, while helper is a combination of the two. Currently, validate_MeanVar_portfolio checks if all the necessary slots are present in the object, its weight and mean vectors have the same length as the number of rows in the covariance matrix and that the covariance matrix is square.
+It is possible to make custom mean-variance portfolios having pre-specified mean values and a covariance matrix of returns. HDShOP includes three functions related to this purpose: new_MeanVar_portfolio which is a constructor of objects of class MeanVar_portfolio, validation function for such objects validate_MeanVar_portfolio and helper MeanVar_portfolio. Conventionally, the constructor is a raw creator of objects of the class: it takes arguments mean_vec, cov_mtrx, gamma and computes weights accordingly to the formula *. The validator runs checks designed to verify if the object at hand is a legitimate object of class MeanVar_portfolio, while helper is a combination of the two. Currently, validate_MeanVar_portfolio checks if all the necessary slots are present in the object, its weight and mean vectors have the same length as the number of rows in the covariance matrix and that the covariance matrix is square.
 
-Here is an example of how to use the constructor and the helper.
+Here is an example of how to use the constructor and the validator.
 ```{r}
+# Defining a target matrix
 TM <- matrix(0, nrow=p, ncol=p)
 diag(TM) <- 1/p
 
-SCM <- Sigma_sample_estimator(x)
+# Computing the covariance matrix of x
+Sigma_shr <- CovarEstim(x, type="BGP14", TM=TM)
 
-Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
+# Computing the means of x
+means <- MeanEstim(x, type="BOP19", mu_0=mu_0)
 
-means <- mean_bop19(x=x, mu_0=mu_0)
-
-cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means$means, 
-                                         cov_mtrx=Sigma_shr$S, gamma=2)
-summary(cust_port_BS_LW)
-
-cust_port_BS_LW_2 <- MeanVar_portfolio(mean_vec=means$means, 
-                                       cov_mtrx=Sigma_shr$S, gamma=2)
-summary(cust_port_BS_LW_2)
+# Portfolio constructor
+cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means, 
+                                         cov_mtrx=Sigma_shr, gamma=2)
+# Validator
+cust_port_BS_LW <- validate_MeanVar_portfolio(cust_port_BS_LW)
+```
+The last two lines are equivalent to the following.
+```{r}
+cust_port_BS_LW_2 <- MeanVar_portfolio(mean_vec=means, 
+                                       cov_mtrx=Sigma_shr, gamma=2)
 ```
 
-Though, the following ill-designed portfolios created with new_MeanVar_portfolio will be tagged by validate_MeanVar_portfolio:
+The following ill-designed portfolio created through modifying the previous one will trigger the validator to throw an error:
 ```{r}
 SCM <- matrix(0, nrow=p, ncol=2*p)
 diag(SCM) <- 1/p
@@ -147,36 +151,15 @@ tools::assertError(
                   )
 ```
 
-
-## Shrinkage estimators for covariance matrix
-The next important function is CovarEstim. This is a dispatcher for functions computing the covariance matrix of the data.
+For the purpose of creating portfolios with custom mean returns and covariance matrices, we provide two dispatchers: MeanEstim and CovarEstim correspondingly.
 ```{r}
 Mtrx_naive <- CovarEstim(x, type="trad")
-# Mtrx_naive[1:6,1:6]
-format(Mtrx_naive[1:3, 1:3], scientific = TRUE, digits = 3)
-```
 
-```{r}
 Mtrx_bgp <- CovarEstim(x, type="BGP14", TM=TM, SCM=Mtrx_naive)
-# Mtrx_bgp[1:6,1:6]
-format(Mtrx_bgp[1:3, 1:3], scientific = TRUE, digits = 3)
-```
 
-
-## Shrinkage estimators for mean vectors
-```{r}
 Mean_BOP <- MeanEstim(x, type="BOP19", mu_0=mu_0)
-head(Mean_BOP)
+
+Mean_BOP <- MeanEstim(x, type="bs")
 ```
-
-
-
-
-
-
-
-
-
-
 
 
