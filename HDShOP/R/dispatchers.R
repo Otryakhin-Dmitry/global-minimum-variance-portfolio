@@ -65,10 +65,12 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
+#' test <- MVShrinkPortfolio(x=x, gamma=gamma, 
+#'                           type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
+#' test <- MVShrinkPortfolio(x=x, gamma=Inf, 
+#'                           type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
 #' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='traditional')
@@ -81,14 +83,17 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', b=b, beta = 0.05)
+#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', 
+#'                           b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', b=b, beta = 0.05)
+#' test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', 
+#'                           b=b, beta = 0.05)
 #' str(test)
 #'
 #' @export
-MVShrinkPortfolio <- function(x, gamma, type=c('shrinkage', 'traditional'), ...) {
+MVShrinkPortfolio <- function(x, gamma, 
+                              type=c('shrinkage', 'traditional'), ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
   if(!is.character(type)) stop("type is not character")
@@ -185,7 +190,11 @@ CovarEstim <- function(x, type=c('trad', 'BGP14', 'LW20'), ...)
     }
     if(type=='BGP14') {
       ll <- list(...)
-      if(is.null(ll$SCM)) SCM <- Sigma_sample_estimator(x=x) else SCM <- as.matrix(ll$SCM)
+      if(is.null(ll$SCM)) {
+        SCM <- Sigma_sample_estimator(x=x) 
+      } else {
+        SCM <- as.matrix(ll$SCM)
+      }  
       n<-ncol(x)
       output <- CovShrinkBGP14(n=n, SCM=SCM, TM=as.matrix(ll$TM))$S
     }
