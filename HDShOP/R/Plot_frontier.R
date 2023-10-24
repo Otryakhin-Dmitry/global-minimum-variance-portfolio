@@ -17,11 +17,11 @@
 #'
 #' @references \insertAllCited{}
 #' @examples
-#' p = 150
-#' n = 300
+#' p <- 150
+#' n <- 300
 #' gamma <- 10
-#' mu = seq(0.2,-0.2, length.out=p)
-#' Sigma = RandCovMtrx(p=p)
+#' mu <- seq(0.2,-0.2, length.out=p)
+#' Sigma <- RandCovMtrx(p=p)
 #'
 #' x <- t(MASS::mvrnorm(n=n , mu=mu, Sigma=Sigma))
 #'
@@ -31,7 +31,7 @@
 #' MV_trad_port <- new_MV_portfolio_traditional(x=x, gamma=gamma)$weights
 #' GMV_trad_port <- new_MV_portfolio_traditional(x=x, gamma=Inf)$weights
 #'
-#' weights.eff = cbind(EW_port, MV_shr_port, GMV_shr_port, MV_trad_port, GMV_trad_port)
+#' weights.eff <- cbind(EW_port, MV_shr_port, GMV_shr_port, MV_trad_port, GMV_trad_port)
 #' colnames(weights.eff) <- c("EW", "MV_shr", "GMV_shr", "MV_trad", "GMV_trad")
 #'
 #'
@@ -51,27 +51,27 @@ plot_frontier <- function(x, weights.eff = rep(1/nrow(x), length=nrow(x)))
   Sigma.eff <- Sigma_sample_estimator(x)
   mu.eff  <- .rowMeans(x, m=p.eff, n=n.eff, na.rm = TRUE)
 
-  points.weights = apply(weights.eff, 2, function(x) c(as.double(sqrt(t(x)%*%Sigma.eff%*%x)), as.double(t(x)%*%mu.eff)))
-  points.weights = t(points.weights)
+  points.weights <- apply(weights.eff, 2, function(x) c(as.double(sqrt(t(x)%*%Sigma.eff%*%x)), as.double(t(x)%*%mu.eff)))
+  points.weights <- t(points.weights)
 
-  points.weights = data.frame(portfolio.return = points.weights[,2],
-                              portfolio.sd = points.weights[,1],
-                              names = colnames(weights.eff))
+  points.weights <- data.frame(portfolio.return = points.weights[,2],
+                               portfolio.sd = points.weights[,1],
+                               names = colnames(weights.eff))
 
   print(points.weights)
 
   Sigma.bayes <- Sigma.eff*(n.eff-1)
-  c.bayes = 1/(n.eff-p.eff-1) + (2*n.eff-p.eff-1) /(n.eff*(n.eff-p.eff-1)*(n.eff-p.eff-2))
+  c.bayes <- 1/(n.eff-p.eff-1) + (2*n.eff-p.eff-1) /(n.eff*(n.eff-p.eff-1)*(n.eff-p.eff-2))
 
-  iSigma.bayes<-solve(Sigma.bayes)
-  V.est.bayes<-c.bayes/sum(tones%*%iSigma.bayes%*%ones) #estimated variance (cons.)
-  Q.est.bayes<- iSigma.bayes-(iSigma.bayes%*%ones%*%tones%*%iSigma.bayes)/sum(tones%*%iSigma.bayes%*%ones)
-  R.est.bayes<- (tones%*% iSigma.bayes %*% mu.eff)/sum(tones%*%iSigma.bayes%*%ones) #returns of EU portfolio
+  iSigma.bayes <- solve(Sigma.bayes)
+  V.est.bayes <- c.bayes/sum(tones%*%iSigma.bayes%*%ones) #estimated variance (cons.)
+  Q.est.bayes <- iSigma.bayes-(iSigma.bayes%*%ones%*%tones%*%iSigma.bayes)/sum(tones%*%iSigma.bayes%*%ones)
+  R.est.bayes <- (tones%*% iSigma.bayes %*% mu.eff)/sum(tones%*%iSigma.bayes%*%ones) #returns of EU portfolio
 
   V.front.bayes <- seq(sqrt(V.est.bayes), max(1.5*points.weights$portfolio.sd), length=100)
   R.front.bayes <- c(R.est.bayes) + sqrt( as.double(t(mu.eff)%*% Q.est.bayes %*% mu.eff)*(V.front.bayes^2-V.est.bayes)/c.bayes)
 
-  points.eff =  data.frame(portfolio.return = R.front.bayes, portfolio.sd = V.front.bayes)
+  points.eff <-  data.frame(portfolio.return = R.front.bayes, portfolio.sd = V.front.bayes)
 
   pic <- ggplot2::ggplot(points.eff, ggplot2::aes(x=portfolio.sd, y=portfolio.return)) +
          ggplot2::geom_line(col = "royalblue4", linetype = 1, size=1) +
