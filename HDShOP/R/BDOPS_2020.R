@@ -66,7 +66,10 @@ s <- function(mu, Sigma) {
   as.numeric(t(mu) %*% Q(Sigma) %*% mu)
 }
 
-s_hat_c <- function(x) as.numeric((1-nrow(x)/ncol(x))*s_hat(x) - nrow(x)/ncol(x))
+s_hat_c <- function(x) {
+  
+  as.numeric((1-nrow(x)/ncol(x))*s_hat(x) - nrow(x)/ncol(x))
+}
 
 #### R_GMV (page 5, IEEE)
 # R_GMV. The deterministic value. The expected return of the GMV portfolio
@@ -109,13 +112,21 @@ V_hat_b <- function(x, b) {
 
 V_GMV <- function(Sigma){
 
-  as.numeric(1/(rep.int(1, nrow(Sigma)) %*% solve(Sigma) %*% rep.int(1, nrow(Sigma))))
+  as.numeric(1/(rep.int(1, nrow(Sigma)) %*% 
+                solve(Sigma) %*% 
+                rep.int(1, nrow(Sigma))
+               )
+            )
 }
 
 V_hat_GMV <- function(x){
 
   Sigma <- Sigma_sample_estimator(x)
-  as.numeric(1/(rep.int(1, nrow(Sigma)) %*% solve(Sigma) %*% rep.int(1, nrow(Sigma))))
+  as.numeric(1/(rep.int(1, nrow(Sigma)) %*% 
+                solve(Sigma) %*% 
+                rep.int(1, nrow(Sigma))
+               )
+            )
 }
 
 V_hat_c <- function(x) {V_hat_GMV(x)/(1-nrow(x)/ncol(x))}
@@ -252,9 +263,12 @@ Var_alpha_simple <- function(Sigma, b, mu, n){
 # BDOPS2021, under formula 16
 Omega.Lest <- function(s_hat_c, cc, gamma, V_hat_c, L, Q_n_hat, eta.est){
 
-  (((1-cc)/(s_hat_c+cc) + (s_hat_c+cc)/gamma)/gamma + V_hat_c)*(1-cc)*L%*%Q_n_hat%*%t(L)+
-  gamma^{-2}*(2*(1-cc)*cc^3/(s_hat_c+cc)^2+ 4*(1-cc)*cc*s_hat_c*(s_hat_c+2*cc)/(s_hat_c+cc)^2 +
-              2*(1-cc)*cc^2*(s_hat_c+cc)^2/(s_hat_c^2)-s_hat_c^2)*eta.est%*%t(eta.est)
+  (((1-cc)/(s_hat_c+cc) + (s_hat_c+cc)/gamma)/gamma + V_hat_c)*
+  (1-cc)*L%*%Q_n_hat%*%t(L)+
+  gamma^{-2}*(2*(1-cc)*cc^3/(s_hat_c+cc)^2 + 
+              4*(1-cc)*cc*s_hat_c*(s_hat_c+2*cc)/(s_hat_c+cc)^2 +
+              2*(1-cc)*cc^2*(s_hat_c+cc)^2/(s_hat_c^2)-s_hat_c^2)*
+  eta.est%*%t(eta.est)
 }
 
 
