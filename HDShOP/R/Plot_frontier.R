@@ -60,8 +60,8 @@ plot_frontier <- function(x, weights.eff = rep(1/nrow(x), length=nrow(x)))
 
   print(points.weights)
 
-  Sigma.bayes <- Sigma.eff*(n.eff-1);
-  c.bayes = 1/(n.eff-p.eff-1) + (2*n.eff-p.eff-1) /(n.eff*(n.eff-p.eff-1)*(n.eff-p.eff-2));
+  Sigma.bayes <- Sigma.eff*(n.eff-1)
+  c.bayes = 1/(n.eff-p.eff-1) + (2*n.eff-p.eff-1) /(n.eff*(n.eff-p.eff-1)*(n.eff-p.eff-2))
 
   iSigma.bayes<-solve(Sigma.bayes)
   V.est.bayes<-c.bayes/sum(tones%*%iSigma.bayes%*%ones) #estimated variance (cons.)
