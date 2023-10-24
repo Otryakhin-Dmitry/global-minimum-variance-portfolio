@@ -41,6 +41,7 @@ Description: Constructs shrinkage estimators of high-dimensional mean-variance p
     Bauder et al. (2021) <doi:10.1080/14697688.2020.1748214>.
 License: GPL-3
 URL: https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio
+BugReports: https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/issues
 LazyData: yes
 Encoding: UTF-8
 Depends:
