@@ -22,9 +22,9 @@
 #' @md
 #'
 #' @examples
-#' n<-3e2 # number of realizations
-#' p<-.5*n # number of assets
-#' gamma<-1
+#' n <- 3e2 # number of realizations
+#' p <- .5*n # number of assets
+#' gamma <- 1
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
@@ -41,7 +41,8 @@ new_MV_portfolio_traditional <- function(x, gamma){
   n <- ncol(x)
   means <- .rowMeans(x, m=p, n=n)
   I_vect <- rep(1, times=p)
-  Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
+  Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/
+                     as.numeric(t(I_vect) %*% invSS %*% I_vect)
 
   # Portfolio weights
   W_EU_hat <- as.vector(
@@ -79,7 +80,8 @@ new_MV_portfolio_traditional_pgn <- function(x, gamma){
   cov_mtrx <- Sigma_sample_estimator(x)
   invSS <- MASS::ginv(cov_mtrx)
   I_vect <- rep(1, times=p)
-  Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/as.numeric(t(I_vect) %*% invSS %*% I_vect)
+  Q_n_hat <- invSS - (invSS %*% I_vect %*% t(I_vect) %*% invSS)/
+                     as.numeric(t(I_vect) %*% invSS %*% I_vect)
 
   # Portfolio weights
   W_EU_hat <- as.vector(
