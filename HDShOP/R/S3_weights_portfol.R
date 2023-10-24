@@ -39,10 +39,10 @@
 #'
 #' # Assets with a diagonal covariance matrix
 #'
-#' n<-3e2 # number of realizations
-#' p<-.5*n # number of assets
-#' b<-rep(1/p,p)
-#' gamma<-1
+#' n <- 3e2 # number of realizations
+#' p <- .5*n # number of assets
+#' b <- rep(1/p,p)
+#' gamma <- 1
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
@@ -60,9 +60,9 @@
 #'
 #' # c>1
 #'
-#' n<-2e2 # number of realizations
-#' p<-1.2*n # number of assets
-#' b<-rep(1/p,p)
+#' n <-2e2 # number of realizations
+#' p <-1.2*n # number of assets
+#' b <-rep(1/p,p)
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
 #' test <- new_MV_portfolio_weights_BDOPS21_pgn(x=x, gamma=gamma, b=b, beta=0.05)
@@ -76,7 +76,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
   cl <- match.call()
   p <- nrow(x)
   n <- ncol(x)
-  cc<- p/n
+  cc <- p/n
   if (is.data.frame(x)) x <- as.matrix(x)
 
 
@@ -86,13 +86,13 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 
   mu_est <- .rowMeans(x, m=p, n=n)
   ones <- rep.int(1, p)
-  tones<-t(ones)
+  tones <- t(ones)
 
   ########
   V_hat_c <- V_hat_c_fast(ones=ones, invSS=invSS, tones=tones, c=cc)  # V_hat_c is V.est
   Q_n_hat <- Q_hat_n_fast(invSS=invSS, Ip=ones, tIp=tones)  # Q_n_hat is Q.est
   s_hat_c <- as.numeric((1-cc)*t(mu_est)%*% Q_n_hat %*% mu_est-cc) # s.est
-  R_hat_GMV<-(tones%*% invSS %*% mu_est)/as.numeric(tones%*%invSS%*%ones) # R.est, returns of EU portfolio
+  R_hat_GMV <- (tones%*% invSS %*% mu_est)/as.numeric(tones%*%invSS%*%ones) # R.est, returns of EU portfolio
 
   ######## calculate shrinkage weights for EU or GMVP ##############
   V_hat_b <- V_b(Sigma=cov_mtrx, b=b)  # Vb.est
@@ -117,18 +117,21 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
   for(i in seq(1,p,by=1)) {
 
     L <- matrix(rep(0,p), nrow=1)
-    L[1,i]<- 1 # select one!!! component of weights vector for a test
-    eta.est<-((s_hat_c+cc)/s_hat_c)*L%*%Q_n_hat%*%mu_est/as.numeric(t(mu_est)%*%Q_n_hat%*%mu_est)
-    w.est<-(L%*%invSS%*%ones)/sum(tones%*%invSS%*%ones)+gamma^{-1}*s_hat_c*eta.est # weight (component of weights vector)
+    L[1,i] <- 1 # select one!!! component of weights vector for a test
+    eta.est <- ((s_hat_c+cc)/s_hat_c)*L%*%Q_n_hat%*%mu_est/
+               as.numeric(t(mu_est)%*%Q_n_hat%*%mu_est)
+    w.est <- (L%*%invSS%*%ones)/sum(tones%*%invSS%*%ones) +
+             gamma^{-1}*s_hat_c*eta.est # weight (component of weights vector)
 
     ############# BDOPS, formula 15
-    Omega.Lest<- Omega.Lest(s_hat_c=s_hat_c, cc=cc, gamma=gamma,
-                            V_hat_c=V_hat_c, L=L, Q_n_hat=Q_n_hat, eta.est=eta.est)
+    Omega.Lest <- Omega.Lest(s_hat_c=s_hat_c, cc=cc, gamma=gamma,
+                             V_hat_c=V_hat_c, L=L, Q_n_hat=Q_n_hat, 
+                             eta.est=eta.est)
 
-    TDn<- (n-p)*t(w.est)%*%solve(Omega.Lest)%*%(w.est)
+    TDn <- (n-p)*t(w.est)%*%solve(Omega.Lest)%*%(w.est)
     low_bound <- w.est - qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
     upp_bound <- w.est + qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
-    p_value<- pchisq(TDn, df=1, lower.tail=FALSE)
+    p_value <- pchisq(TDn, df=1, lower.tail=FALSE)
 
     T_dens[i,] <- c(weights[i], low_bound, upp_bound, TDn,  p_value) #first column= shrinkage estimator for EU Portfolio weights
   }
@@ -158,10 +161,10 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 #' @export
 new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
 
-  cl<- match.call()
+  cl <- match.call()
   p <- nrow(x)
   n <- ncol(x)
-  cc<- p/n
+  cc <- p/n
   if (is.data.frame(x)) x <- as.matrix(x)
 
 
@@ -190,8 +193,9 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
     mode = 'numeric')
 
   # alpha_EU
-  al <- alpha_hat_star_c_pgn_fast(gamma=gamma, c=cc, s=s_hat_c_pgn, R_GMV=R_hat_GMV,
-                                  R_b=R_hat_b, V_c=V_hat_c_pgn, V_b=V_hat_b)
+  al <- alpha_hat_star_c_pgn_fast(gamma=gamma, c=cc, s=s_hat_c_pgn, 
+                                  R_GMV=R_hat_GMV, R_b=R_hat_b, 
+                                  V_c=V_hat_c_pgn, V_b=V_hat_b)
   weights <- al*W_EU_hat + (1-al)*b # w_EU_shr
 
 
@@ -201,16 +205,16 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
   Port_mean_return <- as.numeric(mu_est %*% weights)
   Sharpe <- Port_mean_return/sqrt(Port_Var)
 
-  structure(list(call=cl,
-                 cov_mtrx=cov_mtrx,
-                 inv_cov_mtrx=invSS,
-                 means=mu_est,
-                 W_mv_hat=W_EU_hat,
-                 weights=weights,
-                 alpha=al,
-                 Port_Var=Port_Var,
-                 Port_mean_return=Port_mean_return,
-                 Sharpe=Sharpe),
+  structure(list(call = cl,
+                 cov_mtrx = cov_mtrx,
+                 inv_cov_mtrx = invSS,
+                 means = mu_est,
+                 W_mv_hat = W_EU_hat,
+                 weights = weights,
+                 alpha = al,
+                 Port_Var = Port_Var,
+                 Port_mean_return = Port_mean_return,
+                 Sharpe = Sharpe),
             class = c("MeanVar_portfolio"))
 }
 
@@ -255,9 +259,9 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
 #'
 #' # c<1
 #'
-#' n<-3e2 # number of realizations
-#' p<-.5*n # number of assets
-#' b<-rep(1/p,p)
+#' n <- 3e2 # number of realizations
+#' p <- .5*n # number of assets
+#' b <- rep(1/p,p)
 #'
 #' # Assets with a diagonal covariance matrix
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
@@ -274,8 +278,8 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
 #'
 #' # c>1
 #'
-#' p<-1.3*n # number of assets
-#' b<-rep(1/p,p)
+#' p <- 1.3*n # number of assets
+#' b <- rep(1/p,p)
 #'
 #' # Assets with a diagonal covariance matrix
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
@@ -289,11 +293,11 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
   cl <- match.call()
   p <- nrow(x)
   n <- ncol(x)
-  cc<- p/n
+  cc <- p/n
   if (is.data.frame(x)) x <- as.matrix(x)
 
   ones <- rep.int(1, p)
-  tones<-t(ones)
+  tones <- t(ones)
   mu_est <- .rowMeans(x, m=p, n=n)
 
 
@@ -385,7 +389,8 @@ new_GMV_portfolio_weights_BDPS19_pgn <- function(x, b, beta){
   w_GMVP_whole <- as.vector(iS%*%ones/as.numeric(tones%*%iS%*%ones),
                             mode='numeric') # sample estimator for GMVP weights
 
-  alpha_GMVP <- alpha_hat_star_c_GMV_pgn_fast(c=cc, V_c=V_hat_c_pgn, V_b=V_hat_b)
+  alpha_GMVP <- alpha_hat_star_c_GMV_pgn_fast(c=cc, V_c=V_hat_c_pgn, 
+                                              V_b=V_hat_b)
   w_GMV_shr <- alpha_GMVP*w_GMVP_whole + (1-alpha_GMVP)*b
 
 
