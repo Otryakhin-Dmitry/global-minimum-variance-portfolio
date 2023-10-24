@@ -41,12 +41,15 @@ new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
   p <- nrow(inv_cov_mtrx)
   I_vect <- rep(1, times=p)
 
-  Q_n_hat <- inv_cov_mtrx - (inv_cov_mtrx %*% I_vect %*% t(I_vect) %*% inv_cov_mtrx)/as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect)
+  Q_n_hat <- inv_cov_mtrx - 
+    (inv_cov_mtrx %*% I_vect %*% t(I_vect) %*% inv_cov_mtrx)/
+    as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect)
 
   W_EU_hat <- as.vector(
-    (inv_cov_mtrx %*% I_vect)/as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect) +
-      Q_n_hat %*% mean_vec / gamma,
-    mode = 'numeric')
+    (inv_cov_mtrx %*% I_vect)/
+    as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect) +
+    Q_n_hat %*% mean_vec / gamma,
+  mode = 'numeric')
 
   Port_Var <- as.numeric(t(W_EU_hat)%*%cov_mtrx%*%W_EU_hat)
   Port_mean_return <- as.numeric(mean_vec %*% W_EU_hat)
@@ -87,24 +90,39 @@ validate_MeanVar_portfolio <- function(w) {
 
   values <- unclass(w)
 
-  if (is.null(values$cov_mtrx))  stop("a covariance matrix is missing", call. = FALSE)
-  if (is.null(values$inv_cov_mtrx))  stop("an inverse covariance matrix is missing", call. = FALSE)
-  if (is.null(values$means))  stop("a mean vector is missing", call. = FALSE)
-  if (is.null(values$weights))  stop("a vector of weights is missing", call. = FALSE)
-
-  if (is.null(values$Port_Var))  stop("a portfolio variance is missing", call. = FALSE)
-  if (is.null(values$Port_mean_return))  stop("a portfolio mean return is missing", call. = FALSE)
+  if (is.null(values$cov_mtrx))  {
+    stop("a covariance matrix is missing", call. = FALSE)
+  }
+  if (is.null(values$inv_cov_mtrx)) {
+    stop("an inverse covariance matrix is missing", call. = FALSE)
+  }  
+  if (is.null(values$means)) {
+    stop("a mean vector is missing", call. = FALSE)
+  }
+  if (is.null(values$weights)) {
+    stop("a vector of weights is missing", call. = FALSE)
+  }
+  if (is.null(values$Port_Var)) {
+    stop("a portfolio variance is missing", call. = FALSE)
+  }  
+  if (is.null(values$Port_mean_return)) {
+    stop("a portfolio mean return is missing", call. = FALSE)
+  }  
   if (is.null(values$Sharpe))  stop("a Sharpe ratio is missing", call. = FALSE)
 
   if (!is.vector(values$means))  stop("means is not a vector", call. = FALSE)
-  if (!is.vector(values$weights))  stop("weights is not a vector", call. = FALSE)
+  if (!is.vector(values$weights)) {
+    stop("weights is not a vector", call. = FALSE)
+  }
   if (!identical(class(values$inv_cov_mtrx), c("matrix", "array"))){
     stop("inv_cov_mtrx is not a matrix", call. = FALSE)
   }
 
-  if (length(values$means)!=length(values$weights) | nrow(values$inv_cov_mtrx)!=length(values$weights)) {
+  if (length(values$means)!=length(values$weights) | 
+      nrow(values$inv_cov_mtrx)!=length(values$weights)) {
     stop(
-      "lenghts of the mean vector and the weights must equal the row number of the covariance matrix",
+      "lenghts of the mean vector and the weights must 
+       equal the row number of the covariance matrix",
       call. = FALSE
     )
   }
@@ -148,7 +166,8 @@ validate_MeanVar_portfolio <- function(w) {
 #' cov_mtrx <- Sigma_sample_estimator(x)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' cust_port_simp <- MeanVar_portfolio(mean_vec=means, 
+#'                                     cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_simp)
 #' @export
 MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
