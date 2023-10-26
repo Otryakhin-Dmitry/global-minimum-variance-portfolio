@@ -2,10 +2,13 @@
 # Formulas under (3)
 alpha_star_n_BOP19 <- function(y_n_aver, Sigma_n_inv, mu_n, mu_0) {
 
-  numerator <- t(y_n_aver) %*% Sigma_n_inv %*% mu_n %*% t(mu_0) %*% Sigma_n_inv %*% mu_0-
-               t(mu_n) %*% Sigma_n_inv %*% mu_0 %*% t(y_n_aver) %*% Sigma_n_inv %*% mu_0
+  numerator <- t(y_n_aver) %*% Sigma_n_inv %*% mu_n %*% 
+               t(mu_0) %*% Sigma_n_inv %*% mu_0-
+               t(mu_n) %*% Sigma_n_inv %*% mu_0 %*% 
+               t(y_n_aver) %*% Sigma_n_inv %*% mu_0
 
-  denomen   <- t(y_n_aver) %*% Sigma_n_inv %*% y_n_aver %*% t(mu_0) %*% Sigma_n_inv %*% mu_0-
+  denomen   <- t(y_n_aver) %*% Sigma_n_inv %*% y_n_aver %*% 
+               t(mu_0) %*% Sigma_n_inv %*% mu_0-
                (t(y_n_aver) %*% Sigma_n_inv %*% mu_0)^2
 
   as.numeric(numerator / denomen)
@@ -14,11 +17,14 @@ alpha_star_n_BOP19 <- function(y_n_aver, Sigma_n_inv, mu_n, mu_0) {
 
 beta_star_n_BOP19 <- function(y_n_aver, Sigma_n_inv, mu_n, mu_0) {
 
-  numerator <- t(y_n_aver) %*% Sigma_n_inv %*% y_n_aver %*% t(mu_n) %*% Sigma_n_inv %*% mu_0-
-    t(y_n_aver) %*% Sigma_n_inv %*% mu_0 %*% t(y_n_aver) %*% Sigma_n_inv %*% mu_n
+  numerator <- t(y_n_aver) %*% Sigma_n_inv %*% y_n_aver %*% 
+               t(mu_n) %*% Sigma_n_inv %*% mu_0-
+               t(y_n_aver) %*% Sigma_n_inv %*% mu_0 %*% 
+               t(y_n_aver) %*% Sigma_n_inv %*% mu_n
 
-  denomen   <- t(y_n_aver) %*% Sigma_n_inv %*% y_n_aver %*% t(mu_0) %*% Sigma_n_inv %*% mu_0-
-    (t(y_n_aver) %*% Sigma_n_inv %*% mu_0)^2
+  denomen   <- t(y_n_aver) %*% Sigma_n_inv %*% y_n_aver %*% 
+               t(mu_0) %*% Sigma_n_inv %*% mu_0-
+               (t(y_n_aver) %*% Sigma_n_inv %*% mu_0)^2
 
   as.numeric(numerator / denomen)
 }
@@ -72,7 +78,8 @@ alpha_star_hat_BOP19 <- function(n, p, y_n_aver, Sigma_n_inv, mu_0) {
 }
 
 
-beta_star_hat_BOP19 <- function(n, p, alpha_star_hat, y_n_aver_t, Sigma_n_inv, mu_0) {
+beta_star_hat_BOP19 <- function(n, p, alpha_star_hat, 
+                                y_n_aver_t, Sigma_n_inv, mu_0) {
 
   I1 <- y_n_aver_t %*% Sigma_n_inv %*% mu_0
   I2 <- t(mu_0) %*% Sigma_n_inv %*% mu_0
@@ -108,7 +115,9 @@ Omega_BOP19 <- function(c, sigma_s_square, Sigma_n_inv, mu_0, s, R){
   El11 <- c^2 * sigma_s_square / (c + s)^4
   El12 <- El21 <- c^2 * sigma_s_square * R / (c + s)^4
   El22 <- c^2 * sigma_s_square * R^2 / (c + s)^4 +
-          c^2 * (c + s)^(-2) * (1 + (c + s)/(1-c)) / as.numeric(t(mu_0) %*% Sigma_n_inv %*% mu_0)
+          c^2 * (c + s)^(-2) * (1 + (c + s)/(1-c)) / 
+          as.numeric(t(mu_0) %*% Sigma_n_inv %*% mu_0)
+  
   matrix(data = c(El11, El12, El21, El22), 2, 2)
 }
 
