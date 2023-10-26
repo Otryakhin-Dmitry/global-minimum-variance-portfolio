@@ -35,13 +35,13 @@
 #' Sigma_shr <- CovShrinkBGP14(n=n, TM=TM, SCM=SCM)
 #' Sigma_shr$S[1:6, 1:6]
 #' @export
-CovShrinkBGP14<-function(n, TM, SCM)
+CovShrinkBGP14 <- function(n, TM, SCM)
 {
-  a_1<-(1/n)*sum(diag(TM%*%TM))*(sum(diag(SCM)))^2
-  a_2<-sum(diag(SCM%*%SCM))*sum(diag(TM%*%TM))-(sum(diag(SCM%*%TM)))^2
-  alfa1<-(1-a_1/a_2)
-  beta1<-sum(diag(SCM%*%TM))*(1-alfa1)/sum(diag(TM%*%TM))
-  BSR<-alfa1*SCM+beta1*TM
+  a_1 <- (1/n)*sum(diag(TM%*%TM))*(sum(diag(SCM)))^2
+  a_2 <- sum(diag(SCM%*%SCM))*sum(diag(TM%*%TM))-(sum(diag(SCM%*%TM)))^2
+  alfa1 <- (1-a_1/a_2)
+  beta1 <- sum(diag(SCM%*%TM))*(1-alfa1)/sum(diag(TM%*%TM))
+  BSR <- alfa1*SCM+beta1*TM
   list(S=BSR, alpha=alfa1, beta=beta1)
 }
 
@@ -65,41 +65,45 @@ CovShrinkBGP14<-function(n, TM, SCM)
 #' X <- t(MASS::mvrnorm(n=n, mu=mu, Sigma=Sigma))
 #' Sigma_shr <- nonlin_shrinkLW(X)
 #' @export
-nonlin_shrinkLW = function(x){
+nonlin_shrinkLW <- function(x){
   # the original version suggested that p is # of columns
-  p = nrow(x)
-  n = ncol(x)
-  sampleC = Sigma_sample_estimator(x)
-  eig = eigen(sampleC)
-  u = eig$vectors[,p:1]
-  lambda = rev(eig$values)
+  p <- nrow(x)
+  n <- ncol(x)
+  sampleC <- Sigma_sample_estimator(x)
+  eig <- eigen(sampleC)
+  u <- eig$vectors[,p:1]
+  lambda <- rev(eig$values)
 
   if(p<=n){
-  lambda = lambda[max(1, p-n+1):p]
-  L = matrix(rep(lambda, min(p, n)), nrow = length(lambda))
-  h = n^(-1/3)
-  H = h * t(L)
+  lambda <- lambda[max(1, p-n+1):p]
+  L <- matrix(rep(lambda, min(p, n)), nrow = length(lambda))
+  h <- n^(-1/3)
+  H <- h * t(L)
   x <- (L - t(L)) / H # This is a different x than before
-  ftilde = (3/4/sqrt(5)) * rowMeans(pmax(1-x^2/5, 0) / H)
-  Hftemp = (-3/10/pi) * x + (3/4/sqrt(5)/pi) * (1 - x^2./5) * log(abs((sqrt(5) - x)/(sqrt(5) + x)))
-  Hftemp[abs(x) == sqrt(5)] = (-3/10/pi) * x[abs(x) == sqrt(5)]
-  Hftilde = rowMeans(Hftemp / H)
-    dtilde = lambda / ((pi*(p/n)*lambda*ftilde)^2 + (1-(p/n)-pi*(p/n)*lambda*Hftilde)^2)
+  ftilde <- (3/4/sqrt(5)) * rowMeans(pmax(1-x^2/5, 0) / H)
+  Hftemp <- (-3/10/pi) * x + (3/4/sqrt(5)/pi) * 
+            (1 - x^2./5) * log(abs((sqrt(5) - x)/(sqrt(5) + x)))
+  Hftemp[abs(x) == sqrt(5)] <- (-3/10/pi) * x[abs(x) == sqrt(5)]
+  Hftilde <- rowMeans(Hftemp / H)
+  dtilde <- lambda / ((pi*(p/n)*lambda*ftilde)^2 + 
+                      (1-(p/n)-pi*(p/n)*lambda*Hftilde)^2)
   }else{
-lambda = lambda[max(1, p-n+2):p]
-  L = matrix(rep(lambda, min(p, n-1)), nrow = length(lambda))
-  h = n^(-1/3)
-  H = h * t(L)
+lambda <- lambda[max(1, p-n+2):p]
+  L <- matrix(rep(lambda, min(p, n-1)), nrow = length(lambda))
+  h <- n^(-1/3)
+  H <- h * t(L)
   x <- (L - t(L)) / H # This is a different x than before
-  ftilde = (3/4/sqrt(5)) * rowMeans(pmax(1-x^2/5, 0) / H)
-  Hftemp = (-3/10/pi) * x + (3/4/sqrt(5)/pi) * (1 - x^2./5) * log(abs((sqrt(5) - x)/(sqrt(5) + x)))
-  Hftemp[abs(x) == sqrt(5)] = (-3/10/pi) * x[abs(x) == sqrt(5)]
-  Hftilde = rowMeans(Hftemp / H)
+  ftilde <- (3/4/sqrt(5)) * rowMeans(pmax(1-x^2/5, 0) / H)
+  Hftemp <- (-3/10/pi) * x + (3/4/sqrt(5)/pi) * (1 - x^2./5) * 
+                             log(abs((sqrt(5) - x)/(sqrt(5) + x)))
+  Hftemp[abs(x) == sqrt(5)] <- (-3/10/pi) * x[abs(x) == sqrt(5)]
+  Hftilde <- rowMeans(Hftemp / H)
 
-    Hftilde0 = (1/pi)*(3/10/h^2+3/4/sqrt(5)/h*(1-1/5/h^2) *log((1+sqrt(5)*h)/(1-sqrt(5)*h))) * mean(1/lambda)
-    dtilde0=1/(pi*(p-n)/n*Hftilde0)
-    dtilde1 = lambda/(pi^2*lambda^2 * (ftilde^2+Hftilde^2))
-    dtilde = c(dtilde0 * rep(1, p-n+1), dtilde1)
+    Hftilde0 <- (1/pi)*(3/10/h^2+3/4/sqrt(5)/h*(1-1/5/h^2) * 
+                        log((1+sqrt(5)*h)/(1-sqrt(5)*h))) * mean(1/lambda)
+    dtilde0 <- 1/(pi*(p-n)/n*Hftilde0)
+    dtilde1 <- lambda/(pi^2*lambda^2 * (ftilde^2+Hftilde^2))
+    dtilde <- c(dtilde0 * rep(1, p-n+1), dtilde1)
   }
   u %*% diag(dtilde) %*% t(u)
 } # analytical nonlinear shrinkage
@@ -125,9 +129,9 @@ lambda = lambda[max(1, p-n+2):p]
 #' @references \insertAllCited{}
 #' @examples
 #' # Parameter setting
-#' n<-3e2
-#' c<-0.7
-#' p<-c*n
+#' n <- 3e2
+#' c <- 0.7
+#' p <- c*n
 #' mu <- rep(0, p)
 #' Sigma <- RandCovMtrx(p=p)
 #'
