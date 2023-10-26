@@ -1,21 +1,25 @@
 # Shrinkage of the covariance matrix
 
 
-#' Linear shrinkage estimator of the covariance matrix \insertCite{BGP2014}{HDShOP}
+#' Linear shrinkage estimator of the covariance matrix 
+#' \insertCite{BGP2014}{HDShOP}
 #'
-#' The optimal linear shrinkage estimator of the covariance matrix that minimizes the Frobenius norm:
+#' The optimal linear shrinkage estimator of the covariance matrix that 
+#' minimizes the Frobenius norm:
 #' \deqn{\hat{\Sigma}_{OLSE} = \hat{\alpha} S + \hat{\beta} \Sigma_0,}
-#' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
-#' given in Eq. (4.3) and (4.4) of \insertCite{BGP2014;textual}{HDShOP}. \eqn{S}
-#' is the sample covariance matrix (SCM, see \code{\link{Sigma_sample_estimator}}) and \eqn{\Sigma_0} is a positive definite
-#' symmetric matrix used as the target matrix (TM), for example, \eqn{\frac{1}{p} I}.
+#' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage 
+#' intensities given in Eq. (4.3) and (4.4) of 
+#' \insertCite{BGP2014;textual}{HDShOP}. \eqn{S} is the sample covariance 
+#' matrix (SCM, see \code{\link{Sigma_sample_estimator}}) and \eqn{\Sigma_0} 
+#' is a positive definite symmetric matrix used as the target matrix (TM), 
+#' for example, \eqn{\frac{1}{p} I}.
 #'
 #' @param n sample size.
 #' @param TM the target matrix for the shrinkage estimator.
 #' @param SCM sample covariance matrix.
 #'
-#' @return a list containing an object of class matrix (S) and the estimated shrinkage
-#' intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
+#' @return a list containing an object of class matrix (S) and the estimated 
+#' shrinkage intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
 #' @references \insertAllCited{}
 #' @examples
 #' # Parameter setting
@@ -46,10 +50,12 @@ CovShrinkBGP14 <- function(n, TM, SCM)
 }
 
 
-#' nonlinear shrinkage estimator of the covariance matrix  of Ledoit  and Wolf (2020)
+#' nonlinear shrinkage estimator of the covariance matrix of 
+#' Ledoit and Wolf (2020)
 #'
-#' The nonlinear shrinkage estimator of the covariance matrix, that minimizes the
-#' minimum variance loss functions as defined in Eq (2.1) of \insertCite{LW2020;textual}{HDShOP}.
+#' The nonlinear shrinkage estimator of the covariance matrix, that minimizes 
+#' the minimum variance loss functions as defined in Eq (2.1) of 
+#' \insertCite{LW2020;textual}{HDShOP}.
 #'
 #' @inheritParams CovarEstim
 #'
@@ -109,23 +115,25 @@ lambda <- lambda[max(1, p-n+2):p]
 } # analytical nonlinear shrinkage
 
 
-#' Linear shrinkage estimator of the inverse covariance matrix \insertCite{BGP2016}{HDShOP}
+#' Linear shrinkage estimator of the inverse covariance matrix 
+#' \insertCite{BGP2016}{HDShOP}
 #'
 #' The optimal linear shrinkage estimator of the inverse covariance (precision)
 #' matrix that minimizes the Frobenius norm is given by:
 #' \deqn{\hat{\Pi}_{OLSE} = \hat{\alpha} \hat{\Pi} + \hat{\beta} \Pi_0,}
-#' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage intensities
-#' given in Eq. (4.4) and (4.5) of \insertCite{BGP2016}{HDShOP}. \eqn{\hat{\Pi}} is
-#' the inverse of the sample covariance matrix (iSCM) and \eqn{\Pi_0} is a positive definite
-#' symmetric matrix used as the target matrix (TM), for example, I.
+#' where \eqn{\hat{\alpha}} and \eqn{\hat{\beta}} are optimal shrinkage 
+#' intensities given in Eq. (4.4) and (4.5) of \insertCite{BGP2016}{HDShOP}. 
+#' \eqn{\hat{\Pi}} is the inverse of the sample covariance matrix (iSCM) and 
+#' \eqn{\Pi_0} is a positive definite symmetric matrix used as the target 
+#' matrix (TM), for example, I.
 #'
 #' @param TM the target matrix for the shrinkage estimator
 #' @param n the number of observations
 #' @param p the number of variables (rows of the covariance matrix)
 #' @param iSCM the inverse of the sample covariance matrix
 #'
-#' @return a list containing an object of class matrix (S) and the estimated shrinkage
-#' intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
+#' @return a list containing an object of class matrix (S) and the estimated 
+#' shrinkage intensities \eqn{\hat{\alpha}} and \eqn{\hat{\beta}}.
 #' @references \insertAllCited{}
 #' @examples
 #' # Parameter setting
