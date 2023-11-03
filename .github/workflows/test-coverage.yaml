@@ -27,7 +27,7 @@ jobs:
           needs: coverage
 
       - name: Test coverage
-        working-directory: ./HDShOP
+        working-directory: HDShOP
         run: |
           covr::codecov(
             quiet = FALSE,
@@ -37,7 +37,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Show testthat output
-        working-directory: ./HDShOP
+        working-directory: HDShOP
         if: always()
         run: |
           ## --------------------------------------------------------------------
