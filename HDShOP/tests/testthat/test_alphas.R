@@ -10,12 +10,12 @@ test_that("alphas EU and GMV work and are equal when gamma=Inf", {
   }
   library('waldo')
 
-  n<-7e2 # number of realizations
-  p<-0.6*n # number of assets
+  n <- 7e2 # number of realizations
+  p <- 0.6*n # number of assets
   w_0 <- rep(1/p,p)
 
   set.seed(2)
-  data = rnorm(n=n*p, mean = 0, sd = 1)
+  data <- rnorm(n=n*p, mean = 0, sd = 1)
   x <-matrix(data = data, nrow = p, ncol = n)
 
   al_EU <- alpha_hat_star_c(gamma=Inf, x, b=w_0) # must be computable
@@ -42,8 +42,8 @@ test_that("alphas EU and GMV work and are equal when
   }
   library('waldo')
 
-  n<-3e2 # number of realizations
-  p<-0.3*n # number of assets
+  n <- 3e2 # number of realizations
+  p <- 0.3*n # number of assets
   w_0 <- rep(1/p,p)
   mu <- seq(0.2,-0.2, length.out=p)
 
@@ -69,14 +69,14 @@ test_that("Deterministic alphas EU and GMV work and are equal when gamma=Inf", {
   }
   library('waldo')
 
-  n<-3e2 # number of realizations
-  p<-0.3*n # number of assets
+  n <- 3e2 # number of realizations
+  p <- 0.3*n # number of assets
   w_0 <- rep(1/p,p)
 
   Sigma <- matrix(0, p, p)
   diag(Sigma) <- 1
   a_s_EU <- alpha_star(gamma=Inf, mu=rep(0,p),
-                                Sigma=Sigma, c=p/n, b=w_0) # must be computable
+                       Sigma=Sigma, c=p/n, b=w_0) # must be computable
   # must be equal to the previous
   a_s_GMV <- alpha_star_GMV(Sigma=Sigma, c=p/n, b=w_0)
 
@@ -95,13 +95,13 @@ test_that("Remark 1. Variances on both sides must be equal;
   }
   library('MASS')
 
-  n<-1e2 # number of realizations
-  p<-0.5*n # number of assets
+  n <- 1e2 # number of realizations
+  p <- 0.5*n # number of assets
   w_0 <- rep(0,p)
   w_0[1:10] <- 10:1
 
   mu <- rep(0,p)
-  mu[1:10] <-c(1,-1,2,4,6,-10,3,0,2,5)
+  mu[1:10] <- c(1,-1,2,4,6,-10,3,0,2,5)
   set.seed(2)
   Sigma <- 10*RandCovMtrx(p=p)
 
@@ -113,8 +113,8 @@ test_that("Remark 1. Variances on both sides must be equal;
         alpha_star_GMV(Sigma=Sigma, c=p/n, b=w_0)
     })
 
-  var1<-var(vect_as)
-  var2<-Var_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
+  var1 <- var(vect_as)
+  var2 <- Var_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
   expect_lt(abs(var1-var2), 0.1*var2)
 })
 
@@ -127,8 +127,8 @@ test_that("Remark 1. Variances on both sides must be equal;
   }
   library('MASS')
 
-  n<-1e2 # number of realizations
-  p<-0.5*n # number of assets
+  n <- 1e2 # number of realizations
+  p <- 0.5*n # number of assets
   w_0 <- rep(0,p)
   w_0[1:10] <- 10:1
 
@@ -146,8 +146,8 @@ test_that("Remark 1. Variances on both sides must be equal;
       alpha_star_GMV(Sigma=Sigma, c=p/n, b=w_0)
     })
 
-  var1<-var(vect_as)
-  var2<-Var_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
+  var1 <- var(vect_as)
+  var2 <- Var_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
   expect_lt(abs(var1-var2), 0.1*var2)
 
 })
