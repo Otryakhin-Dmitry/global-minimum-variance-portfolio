@@ -6,8 +6,8 @@ n <- 7e2
 p <- c*n
 gamma <- 1
 
-mu_n<-rep(0, p)
-Sigma=matrix(0, p, p)
+mu_n <- rep(0, p)
+Sigma <- matrix(0, p, p)
 diag(Sigma) <- 1
 invSigma <- solve(Sigma)
 
