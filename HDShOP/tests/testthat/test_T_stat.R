@@ -1,10 +1,10 @@
 context("T_alpha test")
 
 ###############################
-n<-5e2 # number of realizations
-p<-0.3*n # number of assets
+n <- 5e2 # number of realizations
+p <- 0.3*n # number of assets
 w_0 <- rep(1/p,p)
-gamma<-5e-3
+gamma <- 5e-3
 ###############################
 
 
@@ -13,23 +13,23 @@ test_that("Ts from (44) and (41) are equivalent", {
   if (!requireNamespace("waldo", quietly =TRUE)) skip("package waldo is not installed")
   library('waldo')
 
-  mu=rep(0,p)
+  mu <- rep(0,p)
   d_0 <- d_0(gamma=gamma, p=p, n=n)
   ind_len <- 5e1
   X <- matrix(data = NA, nrow = ind_len, ncol = 2)
 
-  Sigma<-matrix(data=0, nrow=p, ncol=p)
+  Sigma <- matrix(data=0, nrow=p, ncol=p)
   diag(Sigma) <- 1
 
   for (ind in 1:ind_len) {
 
-    x <-matrix(data = rnorm(n*p), nrow = p, ncol = n)
+    x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
     X[ind,1] <- test_MVSP(gamma=gamma, x=x, w_0=w_0)$T_alpha
 
     # Computing T_alpha in another way, (29 & 41)
     Omega.est <- Omega_hat_al_c(x=x, b=w_0)
 
-    t.a<- c(R_hat_GMV(x)-R_GMV(mu, Sigma),
+    t.a <- c(R_hat_GMV(x)-R_GMV(mu, Sigma),
             V_hat_c(x)-V_GMV(Sigma),
             s_hat_c(x)-s(mu, Sigma),
             R_hat_b(x, b=w_0)-R_b(mu, b=w_0),
