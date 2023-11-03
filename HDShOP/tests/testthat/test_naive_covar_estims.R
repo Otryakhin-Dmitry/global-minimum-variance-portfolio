@@ -1,8 +1,8 @@
 context("The simplest covariance estimator")
 
 ###############################
-p<-5 # number of assets
-n<-1e6 # number of realizations
+p <- 5 # number of assets
+n <- 1e6 # number of realizations
 ###############################
 
 
@@ -49,13 +49,13 @@ test_that("cov.shrink produces about the same matrix as Sigma_sample_estimator",
   library('waldo')
 
   ####
-  n<-1e3 # number of realizations
-  p<-0.8*n # number of assets
+  n <- 1e3 # number of realizations
+  p <- 0.8*n # number of assets
 
-  x <-matrix(data = rnorm(n*p, mean=10), nrow = p, ncol = n)
+  x <- matrix(data = rnorm(n*p, mean=10), nrow = p, ncol = n)
 
-  s2 = cov.shrink(t(x), lambda=0, verbose=FALSE)
-  s1 = Sigma_sample_estimator(x)
+  s2 <- cov.shrink(t(x), lambda=0, verbose=FALSE)
+  s1 <- Sigma_sample_estimator(x)
   Expr <- abs(s2[1:6,1:6] - s1[1:6,1:6]) / abs(s2[1:6,1:6])<0.2
 
   expect_equal(sum(Expr), 36)
