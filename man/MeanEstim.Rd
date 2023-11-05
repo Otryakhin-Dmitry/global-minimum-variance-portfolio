@@ -7,20 +7,21 @@
 MeanEstim(x, type, ...)
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
-assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
 \item{type}{a character. The estimation method to be used.}
 
 \item{...}{arguments to pass to estimators}
 }
 \value{
-a numeric vector containing the specified estimation of the mean vector.
+a numeric vector containing the specified estimation of
+the mean vector.
 }
 \description{
 A user-friendly function for estimation of the mean vector.
-Essentially, it is a function dispatcher for estimation of the mean vector that
-chooses a method accordingly to the type argument.
+Essentially, it is a function dispatcher for estimation of the mean vector
+that chooses a method accordingly to the type argument.
 }
 \details{
 The available estimation methods for the mean are:\tabular{lll}{

@@ -39,7 +39,7 @@ Description: Constructs shrinkage estimators of high-dimensional mean-variance p
     for constructing portfolios based on shrinkage estimators of the mean vector and covariance matrix
     as well as a new Bayesian estimator for the Markowitz efficient frontier recently developed by 
     Bauder et al. (2021) <doi:10.1080/14697688.2020.1748214>.
-License: GPL-3
+License: GPL-3 + file LICENSE
 URL: https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio
 BugReports: https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/issues
 LazyData: yes
@@ -50,4 +50,4 @@ Imports:
     Rdpack, lattice
 Suggests: ggplot2, testthat, EstimDiagnostics, MASS, corpcor, waldo
 RdMacros: Rdpack
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

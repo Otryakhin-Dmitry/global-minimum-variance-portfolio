@@ -10,8 +10,8 @@ new_MV_portfolio_traditional(x, gamma)
 new_MV_portfolio_traditional_pgn(x, gamma)
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
-assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
@@ -29,16 +29,17 @@ an object of class MeanVar_portfolio\tabular{ll}{
 }
 }
 \description{
-Mean-variance portfolios with the traditional (sample) estimators for the mean
-vector and the covariance matrix of asset returns. For more details of the method,
-see \code{\link{MVShrinkPortfolio}}. new_MV_portfolio_traditional is for the
-case p<n, while new_MV_portfolio_traditional_pgn is for p>n, where p is the
-number of assets and n is the number of observations.
+Mean-variance portfolios with the traditional (sample) estimators for
+the mean vector and the covariance matrix of asset returns.
+For more details of the method, see \code{\link{MVShrinkPortfolio}}.
+new_MV_portfolio_traditional is for the case p<n, while
+new_MV_portfolio_traditional_pgn is for p>n, where p is the number of
+assets and n is the number of observations.
 }
 \examples{
-n<-3e2 # number of realizations
-p<-.5*n # number of assets
-gamma<-1
+n <- 3e2 # number of realizations
+p <- .5*n # number of assets
+gamma <- 1
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 

@@ -1,14 +1,16 @@
 #' Constructor of MV portfolio object
 #'
-#' Constructor of mean-variance shrinkage portfolios. new_MV_portfolio_weights_BDOPS21
-#' is for the case p<n, while new_MV_portfolio_weights_BDOPS21_pgn is for p>n, where
-#' p is the number of assets and n is the number of observations.
+#' Constructor of mean-variance shrinkage portfolios.
+#' new_MV_portfolio_weights_BDOPS21 is for the case p<n, while
+#' new_MV_portfolio_weights_BDOPS21_pgn is for p>n, where p is the number of
+#' assets and n is the number of observations.
 #' For more details of the method, see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @param b a numeric variable. The weights of the target portfolio.
 #' @param beta a numeric variable. The confidence level for weight intervals.
-#' @return an object of class MeanVar_portfolio with subclass MV_portfolio_weights_BDOPS21.
+#' @return an object of class MeanVar_portfolio with subclass
+#' MV_portfolio_weights_BDOPS21.
 #'
 #' | Element | Description |
 #' | --- | --- |
@@ -25,9 +27,10 @@
 #' | weight_intervals | A data frame, see details |
 #'
 #' weight_intervals contains a shrinkage estimator of portfolio weights,
-#' asymptotic confidence intervals for the true portfolio weights, value of the test
-#' statistic and the p-value of the test on the equality of the weight of each individual
-#' asset to zero (see Section 4.3 of Bodnar, Dette, Parolya and Thorsén 2021).
+#' asymptotic confidence intervals for the true portfolio weights, value of
+#' the test statistic and the p-value of the test on the equality of
+#' the weight of each individual asset to zero
+#' (see Section 4.3 of Bodnar, Dette, Parolya and Thorsén 2021).
 #' weight_intervals is only computed when p<n.
 #' @md
 #'
@@ -65,7 +68,8 @@
 #' b <-rep(1/p,p)
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- new_MV_portfolio_weights_BDOPS21_pgn(x=x, gamma=gamma, b=b, beta=0.05)
+#' test <- new_MV_portfolio_weights_BDOPS21_pgn(x=x, gamma=gamma,
+#'                                              b=b, beta=0.05)
 #' summary(test)
 #'
 #' # Assets with a non-diagonal covariance matrix
@@ -89,10 +93,12 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
   tones <- t(ones)
 
   ########
-  V_hat_c <- V_hat_c_fast(ones=ones, invSS=invSS, tones=tones, c=cc)  # V_hat_c is V.est
+  # V_hat_c is V.est
+  V_hat_c <- V_hat_c_fast(ones=ones, invSS=invSS, tones=tones, c=cc)
   Q_n_hat <- Q_hat_n_fast(invSS=invSS, Ip=ones, tIp=tones)  # Q_n_hat is Q.est
   s_hat_c <- as.numeric((1-cc)*t(mu_est)%*% Q_n_hat %*% mu_est-cc) # s.est
-  R_hat_GMV <- (tones%*% invSS %*% mu_est)/as.numeric(tones%*%invSS%*%ones) # R.est, returns of EU portfolio
+  # R.est, returns of EU portfolio
+  R_hat_GMV <- (tones%*% invSS %*% mu_est)/as.numeric(tones%*%invSS%*%ones)
 
   ######## calculate shrinkage weights for EU or GMVP ##############
   V_hat_b <- V_b(Sigma=cov_mtrx, b=b)  # Vb.est
@@ -125,15 +131,15 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
 
     ############# BDOPS, formula 15
     Omega.Lest <- Omega.Lest(s_hat_c=s_hat_c, cc=cc, gamma=gamma,
-                             V_hat_c=V_hat_c, L=L, Q_n_hat=Q_n_hat, 
+                             V_hat_c=V_hat_c, L=L, Q_n_hat=Q_n_hat,
                              eta.est=eta.est)
 
     TDn <- (n-p)*t(w.est)%*%solve(Omega.Lest)%*%(w.est)
     low_bound <- w.est - qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
     upp_bound <- w.est + qnorm(1-beta/2)*sqrt(Omega.Lest)/sqrt(n-p)
     p_value <- pchisq(TDn, df=1, lower.tail=FALSE)
-
-    T_dens[i,] <- c(weights[i], low_bound, upp_bound, TDn,  p_value) #first column= shrinkage estimator for EU Portfolio weights
+    #first column= shrinkage estimator for EU Portfolio weights
+    T_dens[i,] <- c(weights[i], low_bound, upp_bound, TDn,  p_value)
   }
 
   colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
@@ -177,10 +183,13 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
   tones <- t(ones)
 
   ########
-  V_hat_c_pgn <- V_hat_c_pgn_fast(ones=ones, invSS=invSS, tones=tones, c=cc)  #
-  Q_n_pgn_hat <- Q_hat_n_fast(invSS=invSS, Ip=ones, tIp=tones)  # Q_n_hat is Q.est
-  s_hat_c_pgn <- as.numeric(cc*(cc-1)*t(mu_est) %*% Q_n_pgn_hat %*% mu_est-cc) # s.est
-  R_hat_GMV   <- (tones%*% invSS %*% mu_est)/as.numeric(tones%*%invSS%*%ones) # R.est, returns of EU portfolio
+  V_hat_c_pgn <- V_hat_c_pgn_fast(ones=ones, invSS=invSS, tones=tones, c=cc)
+  # Q_n_hat is Q.est
+  Q_n_pgn_hat <- Q_hat_n_fast(invSS=invSS, Ip=ones, tIp=tones)
+  # s.est
+  s_hat_c_pgn <- as.numeric(cc*(cc-1)*t(mu_est) %*% Q_n_pgn_hat %*% mu_est-cc)
+  # R.est, returns of EU portfolio
+  R_hat_GMV   <- (tones%*% invSS %*% mu_est)/as.numeric(tones%*%invSS%*%ones)
 
   ######## calculate shrinkage weights for EU or GMVP ##############
   V_hat_b <- V_b(Sigma=cov_mtrx, b=b)  # Vb.est
@@ -193,8 +202,8 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
     mode = 'numeric')
 
   # alpha_EU
-  al <- alpha_hat_star_c_pgn_fast(gamma=gamma, c=cc, s=s_hat_c_pgn, 
-                                  R_GMV=R_hat_GMV, R_b=R_hat_b, 
+  al <- alpha_hat_star_c_pgn_fast(gamma=gamma, c=cc, s=s_hat_c_pgn,
+                                  R_GMV=R_hat_GMV, R_b=R_hat_b,
                                   V_c=V_hat_c_pgn, V_b=V_hat_b)
   weights <- al*W_EU_hat + (1-al)*b # w_EU_shr
 
@@ -221,15 +230,17 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
 
 #' Constructor of GMV portfolio object.
 #'
-#' Constructor of global minimum variance portfolio. new_GMV_portfolio_weights_BDPS19
-#' is for the case p<n, while new_GMV_portfolio_weights_BDPS19_pgn is for p>n, where
-#' p is the number of assets and n is the number of observations. For more details
+#' Constructor of global minimum variance portfolio.
+#' new_GMV_portfolio_weights_BDPS19 is for the case p<n, while
+#' new_GMV_portfolio_weights_BDPS19_pgn is for p>n, where p is the number of
+#' assets and n is the number of observations. For more details
 #' of the method, see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @param b a numeric vector. The weights of the target portfolio.
 #' @inheritParams new_MV_portfolio_weights_BDOPS21
-#' @return an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
+#' @return an object of class MeanVar_portfolio with subclass
+#' GMV_portfolio_weights_BDPS19.
 #'
 #' | Element | Description |
 #' | --- | --- |
@@ -246,9 +257,10 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
 #' | weight_intervals | A data frame, see details |
 #'
 #' weight_intervals contains a shrinkage estimator of portfolio weights,
-#' asymptotic confidence intervals for the true portfolio weights, the value of test
-#' statistic and the p-value of the test on the equality of the weight of each
-#' individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
+#' asymptotic confidence intervals for the true portfolio weights,
+#' the value of test statistic and the p-value of the test on the equality of
+#' the weight of each individual asset to zero
+#' \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 #' weight_intervals is only computed when p<n.
 #' @md
 #'
@@ -311,8 +323,10 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
   ####  for calculating shrinkage GMVP weights
   w_GMVP_whole <- as.vector(iS%*%ones/as.numeric(tones%*%iS%*%ones),
                             mode='numeric') # sample estimator for GMVP weights
-  Lb <- (1-cc)*t(b)%*%cov_mtrx%*%b*as.numeric(tones%*%iS%*%ones) -1 #relative loss of GMVP f.(16) IEEE 2019
-  alpha_GMVP <- as.numeric((1-cc)*Lb/(cc+(1-cc)*Lb)) #shrinkage intensity f.(16) IEEE 2019
+  #relative loss of GMVP f.(16) IEEE 2019
+  Lb <- (1-cc)*t(b)%*%cov_mtrx%*%b*as.numeric(tones%*%iS%*%ones) -1
+  #shrinkage intensity f.(16) IEEE 2019
+  alpha_GMVP <- as.numeric((1-cc)*Lb/(cc+(1-cc)*Lb))
   w_GMV_shr <- alpha_GMVP*w_GMVP_whole + (1-alpha_GMVP)*b # f.(17) IEEE 2019
 
 
@@ -326,7 +340,8 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
     L[1,i]<- 1 # select one!!! component of weights vector for a test
     w.est <- (L%*%iS%*%ones)/sum(tones%*%iS%*%ones) #(16) for GMVP
     ############# BDOPS, formula 15
-    Omega.Lest <- V.est*(1-cc)*L%*%Q.est%*%t(L) # (17) IEEE 2021 simplifies to that)
+    # (17) IEEE 2021 simplifies to that)
+    Omega.Lest <- V.est*(1-cc)*L%*%Q.est%*%t(L)
 
     TDn<- (n-p)*t(w.est)%*%solve(Omega.Lest)%*%(w.est) #test statistics
 
@@ -335,7 +350,6 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
 
     p_value <- pchisq(TDn, df=1, lower.tail=FALSE)
 
-    #return(c(w.est, low_bound, upp_bound, TDn,  p_value)) #if you want to have the components of the weights vector in F. ()
     T_dens[i,] <- c(w_GMV_shr[i], low_bound, upp_bound, TDn,  p_value)
   }
 
@@ -389,7 +403,7 @@ new_GMV_portfolio_weights_BDPS19_pgn <- function(x, b, beta){
   w_GMVP_whole <- as.vector(iS%*%ones/as.numeric(tones%*%iS%*%ones),
                             mode='numeric') # sample estimator for GMVP weights
 
-  alpha_GMVP <- alpha_hat_star_c_GMV_pgn_fast(c=cc, V_c=V_hat_c_pgn, 
+  alpha_GMVP <- alpha_hat_star_c_GMV_pgn_fast(c=cc, V_c=V_hat_c_pgn,
                                               V_b=V_hat_b)
   w_GMV_shr <- alpha_GMVP*w_GMVP_whole + (1-alpha_GMVP)*b
 

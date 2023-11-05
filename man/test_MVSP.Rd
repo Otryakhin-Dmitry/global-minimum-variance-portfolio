@@ -9,8 +9,8 @@ test_MVSP(gamma, x, w_0, beta = 0.05)
 \arguments{
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
-assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
 \item{w_0}{a numeric vector of tested weights.}
 
@@ -31,12 +31,13 @@ assets, columns -- observations.}
 A high-dimensional asymptotic test on the mean-variance efficiency of a given
 portfolio with the weights \eqn{\rm{w}_0}. The tested hypotheses are
 \deqn{H_0: w_{MV} = w_0 \quad vs \quad H_1: w_{MV} \neq w_0.}
-The test statistic is based on the shrinkage estimator of mean-variance portfolio weights
-\insertCite{@see Eq.(44) of @BDOPS2021}{HDShOP}.
+The test statistic is based on the shrinkage estimator of mean-variance
+portfolio weights \insertCite{@see Eq.(44) of @BDOPS2021}{HDShOP}.
 }
 \details{
-Note: when gamma == Inf, we get the test for the weights of the global minimum
-variance portfolio as in Theorem 2 of \insertCite{BDPS2019;textual}{HDShOP}.
+Note: when gamma == Inf, we get the test for the weights of
+the global minimum variance portfolio as in Theorem 2 of
+\insertCite{BDPS2019;textual}{HDShOP}.
 }
 \examples{
 n<-3e2 # number of realizations

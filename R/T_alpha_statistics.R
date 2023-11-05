@@ -9,9 +9,6 @@ d_0 <- function(gamma, p, n){
 }
 
 
-#
-# t(d_0) * Omega_hat_al_c * d_0
-
 # This function contains both c and c_n. Is that right?
 Omega_hat_al_c <- function(x, b){
 
@@ -43,11 +40,12 @@ Omega_hat_al_c <- function(x, b){
 #' A high-dimensional asymptotic test on the mean-variance efficiency of a given
 #' portfolio with the weights \eqn{\rm{w}_0}. The tested hypotheses are
 #' \deqn{H_0: w_{MV} = w_0 \quad vs \quad H_1: w_{MV} \neq w_0.}
-#' The test statistic is based on the shrinkage estimator of mean-variance portfolio weights
-#' \insertCite{@see Eq.(44) of @BDOPS2021}{HDShOP}.
+#' The test statistic is based on the shrinkage estimator of mean-variance
+#' portfolio weights \insertCite{@see Eq.(44) of @BDOPS2021}{HDShOP}.
 #'
-#' Note: when gamma == Inf, we get the test for the weights of the global minimum
-#' variance portfolio as in Theorem 2 of \insertCite{BDPS2019;textual}{HDShOP}.
+#' Note: when gamma == Inf, we get the test for the weights of
+#' the global minimum variance portfolio as in Theorem 2 of
+#' \insertCite{BDPS2019;textual}{HDShOP}.
 #' @inheritParams MVShrinkPortfolio
 #' @param w_0 a numeric vector of tested weights.
 #' @param beta a confidence level for the test.

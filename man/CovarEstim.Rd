@@ -7,8 +7,8 @@
 CovarEstim(x, type = c("trad", "BGP14", "LW20"), ...)
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
-assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
 \item{type}{a character. The estimation method to be used.}
 

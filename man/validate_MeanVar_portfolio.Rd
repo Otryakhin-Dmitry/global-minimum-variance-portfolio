@@ -27,6 +27,7 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 cov_mtrx <- Sigma_sample_estimator(x)
 means <- rowMeans(x)
 
-cust_port_simp <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+cust_port_simp <- new_MeanVar_portfolio(mean_vec=means,
+                                        cov_mtrx=cov_mtrx, gamma=2)
 str(validate_MeanVar_portfolio(cust_port_simp))
 }

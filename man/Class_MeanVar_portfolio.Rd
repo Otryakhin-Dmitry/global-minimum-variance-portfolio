@@ -5,8 +5,8 @@
 \title{S3 class MeanVar_portfolio}
 \description{
 Class MeanVar_portfolio is designed to construct mean-variance portfolios
-with provided estimators of the mean vector, covariance matrix, and inverse covariance matrix.
-It includes the following elements:
+with provided estimators of the mean vector, covariance matrix, and
+inverse covariance matrix. It includes the following elements:
 }
 \section{Slots}{
 \tabular{ll}{
@@ -24,6 +24,7 @@ It includes the following elements:
 
 \seealso{
 summary.MeanVar_portfolio summary method for the class,
-\link{new_MeanVar_portfolio} class constructor, \link{validate_MeanVar_portfolio} class validator,
+\link{new_MeanVar_portfolio} class constructor,
+\link{validate_MeanVar_portfolio} class validator,
 \link{MeanVar_portfolio} class helper.
 }

@@ -10,15 +10,16 @@ new_GMV_portfolio_weights_BDPS19(x, b, beta)
 new_GMV_portfolio_weights_BDPS19_pgn(x, b, beta)
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
-assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
 \item{b}{a numeric vector. The weights of the target portfolio.}
 
 \item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
 \value{
-an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.\tabular{ll}{
+an object of class MeanVar_portfolio with subclass
+GMV_portfolio_weights_BDPS19.\tabular{ll}{
    Element \tab Description \cr
    call \tab the function call with which it was created \cr
    cov_mtrx \tab the sample covariance matrix of the asset returns \cr
@@ -35,24 +36,26 @@ an object of class MeanVar_portfolio with subclass GMV_portfolio_weights_BDPS19.
 
 
 weight_intervals contains a shrinkage estimator of portfolio weights,
-asymptotic confidence intervals for the true portfolio weights, the value of test
-statistic and the p-value of the test on the equality of the weight of each
-individual asset to zero \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
+asymptotic confidence intervals for the true portfolio weights,
+the value of test statistic and the p-value of the test on the equality of
+the weight of each individual asset to zero
+\insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
 weight_intervals is only computed when p<n.
 }
 \description{
-Constructor of global minimum variance portfolio. new_GMV_portfolio_weights_BDPS19
-is for the case p<n, while new_GMV_portfolio_weights_BDPS19_pgn is for p>n, where
-p is the number of assets and n is the number of observations. For more details
+Constructor of global minimum variance portfolio.
+new_GMV_portfolio_weights_BDPS19 is for the case p<n, while
+new_GMV_portfolio_weights_BDPS19_pgn is for p>n, where p is the number of
+assets and n is the number of observations. For more details
 of the method, see \code{\link{MVShrinkPortfolio}}.
 }
 \examples{
 
 # c<1
 
-n<-3e2 # number of realizations
-p<-.5*n # number of assets
-b<-rep(1/p,p)
+n <- 3e2 # number of realizations
+p <- .5*n # number of assets
+b <- rep(1/p,p)
 
 # Assets with a diagonal covariance matrix
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
@@ -69,8 +72,8 @@ summary(test)
 
 # c>1
 
-p<-1.3*n # number of assets
-b<-rep(1/p,p)
+p <- 1.3*n # number of assets
+b <- rep(1/p,p)
 
 # Assets with a diagonal covariance matrix
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)

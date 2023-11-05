@@ -1,0 +1,177 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "HDShOP",
+  "description": "Constructs shrinkage estimators of high-dimensional mean-variance portfolios and performs high-dimensional tests on optimality of a given portfolio. The techniques developed in Bodnar et al. (2018 <doi:10.1016/j.ejor.2017.09.028>, 2019 <doi:10.1109/TSP.2019.2929964>, 2020 <doi:10.1109/TSP.2020.3037369>, 2021 <doi:10.1080/07350015.2021.2004897>) are central to the package. They provide simple and feasible estimators and tests for optimal portfolio weights, which are applicable for 'large p and large n' situations where p is the portfolio dimension (number of stocks) and n is the sample size. The package also includes tools for constructing portfolios based on shrinkage estimators of the mean vector and covariance matrix as well as a new Bayesian estimator for the Markowitz efficient frontier recently developed by Bauder et al. (2021) <doi:10.1080/14697688.2020.1748214>.",
+  "name": "HDShOP: High-Dimensional Shrinkage Optimal Portfolios",
+  "codeRepository": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio",
+  "issueTracker": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/issues",
+  "license": "https://spdx.org/licenses/GPL-3.0",
+  "version": "0.1.4",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.3.1 (2023-06-16)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Taras",
+      "familyName": "Bodnar",
+      "@id": "https://orcid.org/0000-0001-7855-8221"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Solomiia",
+      "familyName": "Dmytriv",
+      "@id": "https://orcid.org/0000-0003-1855-3044"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Yarema",
+      "familyName": "Okhrin",
+      "@id": "https://orcid.org/0000-0003-4704-5233"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Dmitry",
+      "familyName": "Otryakhin",
+      "email": "d.otryakhin.acad@protonmail.ch",
+      "@id": "https://orcid.org/0000-0002-4700-7221"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Nestor",
+      "familyName": "Parolya",
+      "@id": "https://orcid.org/0000-0003-2147-2288"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Dmitry",
+      "familyName": "Otryakhin",
+      "email": "d.otryakhin.acad@protonmail.ch",
+      "@id": "https://orcid.org/0000-0002-4700-7221"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "EstimDiagnostics",
+      "name": "EstimDiagnostics",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=EstimDiagnostics"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "MASS",
+      "name": "MASS",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=MASS"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "corpcor",
+      "name": "corpcor",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=corpcor"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "waldo",
+      "name": "waldo",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=waldo"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.5.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "Rdpack",
+      "name": "Rdpack",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=Rdpack"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "lattice",
+      "name": "lattice",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lattice"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "7251.415KB",
+  "releaseNotes": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/blob/master/NEWS.md",
+  "readme": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/blob/master/README.md",
+  "contIntegration": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/actions/workflows/R-CMD-check.yaml",
+  "relatedLink": "https://CRAN.R-project.org/package=HDShOP"
+}

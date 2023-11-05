@@ -1,13 +1,16 @@
 
 #' A constructor for class MeanVar_portfolio
 #'
-#' A light-weight constructor of objects of S3 class MeanVar_portfolio. This  function is for development purposes.
-#' A helper function equipped with error messages and allowing more flexible input is \code{\link{MeanVar_portfolio}}.
+#' A light-weight constructor of objects of S3 class MeanVar_portfolio.
+#' This  function is for development purposes. A helper function equipped with
+#' error messages and allowing more flexible input is
+#' \code{\link{MeanVar_portfolio}}.
 #'
 #' @param mean_vec mean vector of asset returns
 #' @param cov_mtrx the covariance matrix of asset returns
 #' @inheritParams MVShrinkPortfolio
-#' @return Mean-variance portfolio in the form of object of S3 class MeanVar_portfolio.
+#' @return Mean-variance portfolio in the form of object of
+#' S3 class MeanVar_portfolio.
 #'
 #' @examples
 #' n<-3e2 # number of realizations
@@ -20,7 +23,8 @@
 #' cov_mtrx <- Sigma_sample_estimator(x)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' cust_port_simp <- new_MeanVar_portfolio(mean_vec=means,
+#'                                         cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_simp)
 #'
 #' # Portfolio with Bayes-Stein shrunk means
@@ -30,7 +34,8 @@
 #' cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
 #' means <- rowMeans(x)
 #'
-#' cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means,
+#'                                          cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_BS_LW)
 #' @export
 new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
@@ -41,7 +46,7 @@ new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
   p <- nrow(inv_cov_mtrx)
   I_vect <- rep(1, times=p)
 
-  Q_n_hat <- inv_cov_mtrx - 
+  Q_n_hat <- inv_cov_mtrx -
     (inv_cov_mtrx %*% I_vect %*% t(I_vect) %*% inv_cov_mtrx)/
     as.numeric(t(I_vect) %*% inv_cov_mtrx %*% I_vect)
 
@@ -83,7 +88,8 @@ new_MeanVar_portfolio <- function(mean_vec, cov_mtrx, gamma){
 #' cov_mtrx <- Sigma_sample_estimator(x)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+#' cust_port_simp <- new_MeanVar_portfolio(mean_vec=means,
+#'                                         cov_mtrx=cov_mtrx, gamma=2)
 #' str(validate_MeanVar_portfolio(cust_port_simp))
 #' @export
 validate_MeanVar_portfolio <- function(w) {
@@ -95,7 +101,7 @@ validate_MeanVar_portfolio <- function(w) {
   }
   if (is.null(values$inv_cov_mtrx)) {
     stop("an inverse covariance matrix is missing", call. = FALSE)
-  }  
+  }
   if (is.null(values$means)) {
     stop("a mean vector is missing", call. = FALSE)
   }
@@ -104,10 +110,10 @@ validate_MeanVar_portfolio <- function(w) {
   }
   if (is.null(values$Port_Var)) {
     stop("a portfolio variance is missing", call. = FALSE)
-  }  
+  }
   if (is.null(values$Port_mean_return)) {
     stop("a portfolio mean return is missing", call. = FALSE)
-  }  
+  }
   if (is.null(values$Sharpe))  stop("a Sharpe ratio is missing", call. = FALSE)
 
   if (!is.vector(values$means))  stop("means is not a vector", call. = FALSE)
@@ -118,10 +124,10 @@ validate_MeanVar_portfolio <- function(w) {
     stop("inv_cov_mtrx is not a matrix", call. = FALSE)
   }
 
-  if (length(values$means)!=length(values$weights) | 
+  if (length(values$means)!=length(values$weights) |
       nrow(values$inv_cov_mtrx)!=length(values$weights)) {
     stop(
-      "lenghts of the mean vector and the weights must 
+      "lenghts of the mean vector and the weights must
        equal the row number of the covariance matrix",
       call. = FALSE
     )
@@ -139,22 +145,26 @@ validate_MeanVar_portfolio <- function(w) {
 
 #' A helper function for MeanVar_portfolio
 #'
-#' A user-friendly function making mean-variance portfolios for assets with customly
-#' computed covariance matrix and mean returns.
+#' A user-friendly function making mean-variance portfolios for assets
+#' with customly computed covariance matrix and mean returns.
 #' The weights are computed in accordance with the formula
-#' \deqn{\hat w_{MV} = \frac{\hat{\Sigma}^{-1} 1}{1' \hat{\Sigma}^{-1} 1} + \gamma^{-1} \hat Q \hat{\mu} \quad ,}
-#' where \eqn{\hat{\Sigma}} is an estimator for the covariance matrix, \eqn{\hat{\mu}} is an estimator for the mean vector,
-#' \eqn{\gamma} is the coefficient of risk aversion, and
-#' \eqn{\hat Q} is given by
-#' \deqn{\hat Q = \hat{\Sigma}^{-1} - \frac{\hat{\Sigma}^{-1} 1 1' \hat{\Sigma}^{-1}}{1' \hat{\Sigma}^{-1} 1} .}
-#' The computation is made by \code{\link{new_MeanVar_portfolio}} and the result
-#' is validated by
-#' \code{\link{validate_MeanVar_portfolio}}.
+#' \deqn{\hat w_{MV} = \frac{\hat{\Sigma}^{-1} 1}{1' \hat{\Sigma}^{-1} 1} +
+#'                     \gamma^{-1} \hat Q \hat{\mu} \quad ,}
+#' where \eqn{\hat{\Sigma}} is an estimator for the covariance matrix,
+#' \eqn{\hat{\mu}} is an estimator for the mean vector, \eqn{\gamma} is
+#' the coefficient of risk aversion, and \eqn{\hat Q} is given by
+#' \deqn{\hat Q = \hat{\Sigma}^{-1} - \frac{\hat{\Sigma}^{-1} 1
+#' 1' \hat{\Sigma}^{-1}}{1' \hat{\Sigma}^{-1} 1} .}
+#' The computation is made by \code{\link{new_MeanVar_portfolio}} and
+#' the result is validated by \code{\link{validate_MeanVar_portfolio}}.
 #'
-#' @param mean_vec mean vector of asset returns provided in the form of a vector or a list.
-#' @param cov_mtrx the covariance matrix of asset returns. It could be a matrix or a data frame.
+#' @param mean_vec mean vector of asset returns provided in the form of
+#' a vector or a list.
+#' @param cov_mtrx the covariance matrix of asset returns.
+#' It could be a matrix or a data frame.
 #' @inheritParams MVShrinkPortfolio
-#' @return Mean-variance portfolio in the form of object of S3 class MeanVar_portfolio.
+#' @return Mean-variance portfolio in the form of object of
+#' S3 class MeanVar_portfolio.
 #' @examples
 #' n<-3e2 # number of realizations
 #' p<-.5*n # number of assets
@@ -166,7 +176,7 @@ validate_MeanVar_portfolio <- function(w) {
 #' cov_mtrx <- Sigma_sample_estimator(x)
 #' means <- rowMeans(x)
 #'
-#' cust_port_simp <- MeanVar_portfolio(mean_vec=means, 
+#' cust_port_simp <- MeanVar_portfolio(mean_vec=means,
 #'                                     cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_simp)
 #' @export

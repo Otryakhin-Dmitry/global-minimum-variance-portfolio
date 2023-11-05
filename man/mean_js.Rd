@@ -7,18 +7,22 @@
 mean_js(x, Y_0 = 1)
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
 \item{Y_0}{a numeric variable. Shrinkage target coefficient.}
 }
 \value{
-a numeric vector containing the James-Stein shrinkage estimator of the mean vector.
+a numeric vector containing the James-Stein shrinkage estimator
+of the mean vector.
 }
 \description{
-James-Stein shrinkage estimator of the mean vector as suggested in \insertCite{Jorion1986;textual}{HDShOP}.
-The estimator is given by \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
+James-Stein shrinkage estimator of the mean vector as suggested in
+\insertCite{Jorion1986;textual}{HDShOP}. The estimator is given by
+\deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
 where \eqn{\bar x} is the sample mean vector, \eqn{\beta} is the shrinkage
-coefficient which minimizes a quadratic loss given by Eq.(11) in \insertCite{Jorion1986;textual}{HDShOP}.
+coefficient which minimizes a quadratic loss given by Eq.(11) in
+\insertCite{Jorion1986;textual}{HDShOP}.
 \eqn{Y_0} is a prespecified value.
 }
 \examples{

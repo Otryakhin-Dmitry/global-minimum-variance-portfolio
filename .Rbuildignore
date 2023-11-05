@@ -1,3 +1,11 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^cran-comments\.md$
+^\.github$
+^codemeta\.json$
+^CONTRIBUTING\.md$
+^code_pieces$
+^Article_draft_Rmd$
+^Cpp_experiments$
+^HDShop_SP500returns.RData$
+^BOP19$

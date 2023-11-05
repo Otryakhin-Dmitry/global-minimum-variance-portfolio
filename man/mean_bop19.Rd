@@ -7,21 +7,24 @@
 mean_bop19(x, mu_0 = rep(1, p))
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
-\item{mu_0}{a numeric vector. The target vector used in the construction of the shrinkage estimator.}
+\item{mu_0}{a numeric vector. The target vector used in the construction of
+the shrinkage estimator.}
 }
 \value{
-a numeric vector containing the shrinkage estimator of the mean vector
+a numeric vector containing the shrinkage estimator of
+the mean vector
 }
 \description{
-Shrinkage estimator of the high-dimensional mean vector as suggested in \insertCite{BOP2019;textual}{HDShOP}.
-It uses the formula
+Shrinkage estimator of the high-dimensional mean vector as suggested in
+\insertCite{BOP2019;textual}{HDShOP}. It uses the formula
 \deqn{\hat \mu_{BOP} = \hat \alpha \bar x + \hat \beta \mu_0 \quad ,} where
-\eqn{\hat \alpha} and \eqn{\hat \beta} are shrinkage coefficients given by Eq.(6) and Eg.(7)
-of \insertCite{BOP2019;textual}{HDShOP} that minimize weighted quadratic loss for a given
-target vector \eqn{\mu_0} (shrinkage target). \eqn{\bar x} stands for the
-sample mean vector.
+\eqn{\hat \alpha} and \eqn{\hat \beta} are shrinkage coefficients given by
+Eq.(6) and Eg.(7) of \insertCite{BOP2019;textual}{HDShOP} that minimize
+weighted quadratic loss for a given target vector \eqn{\mu_0}
+(shrinkage target). \eqn{\bar x} stands for the sample mean vector.
 }
 \examples{
 n<-7e2 # number of realizations

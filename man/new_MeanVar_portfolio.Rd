@@ -14,11 +14,14 @@ new_MeanVar_portfolio(mean_vec, cov_mtrx, gamma)
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 }
 \value{
-Mean-variance portfolio in the form of object of S3 class MeanVar_portfolio.
+Mean-variance portfolio in the form of object of
+S3 class MeanVar_portfolio.
 }
 \description{
-A light-weight constructor of objects of S3 class MeanVar_portfolio. This  function is for development purposes.
-A helper function equipped with error messages and allowing more flexible input is \code{\link{MeanVar_portfolio}}.
+A light-weight constructor of objects of S3 class MeanVar_portfolio.
+This  function is for development purposes. A helper function equipped with
+error messages and allowing more flexible input is
+\code{\link{MeanVar_portfolio}}.
 }
 \examples{
 n<-3e2 # number of realizations
@@ -31,7 +34,8 @@ x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 cov_mtrx <- Sigma_sample_estimator(x)
 means <- rowMeans(x)
 
-cust_port_simp <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+cust_port_simp <- new_MeanVar_portfolio(mean_vec=means,
+                                        cov_mtrx=cov_mtrx, gamma=2)
 str(cust_port_simp)
 
 # Portfolio with Bayes-Stein shrunk means
@@ -41,6 +45,7 @@ diag(TM) <- 1
 cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
 means <- rowMeans(x)
 
-cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means, cov_mtrx=cov_mtrx, gamma=2)
+cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means,
+                                         cov_mtrx=cov_mtrx, gamma=2)
 str(cust_port_BS_LW)
 }

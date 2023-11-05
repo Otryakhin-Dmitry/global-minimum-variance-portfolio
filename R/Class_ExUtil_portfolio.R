@@ -2,7 +2,7 @@
 #'
 #'
 #' Class MeanVar_portfolio is designed to construct mean-variance portfolios
-#' with provided estimators of the mean vector, covariance matrix, and 
+#' with provided estimators of the mean vector, covariance matrix, and
 #' inverse covariance matrix. It includes the following elements:
 #'
 #' @section Slots:
@@ -20,7 +20,8 @@
 #' @md
 #'
 #' @seealso summary.MeanVar_portfolio summary method for the class,
-#' [new_MeanVar_portfolio] class constructor, 
-#' [validate_MeanVar_portfolio] class validator, [MeanVar_portfolio] class helper.
+#' [new_MeanVar_portfolio] class constructor,
+#' [validate_MeanVar_portfolio] class validator,
+#' [MeanVar_portfolio] class helper.
 #' @name Class_MeanVar_portfolio
 NULL

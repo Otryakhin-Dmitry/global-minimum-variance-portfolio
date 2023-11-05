@@ -8,40 +8,46 @@ provided portfolios.}
 plot_frontier(x, weights.eff = rep(1/nrow(x), length = nrow(x)))
 }
 \arguments{
-\item{x}{a p by n matrix or a data frame of asset returns. Rows represent different
-assets, columns -- observations.}
+\item{x}{a p by n matrix or a data frame of asset returns. Rows represent
+different assets, columns -- observations.}
 
-\item{weights.eff}{matrix of portfolio weights. Each column contains p values of
-the weights for a given portfolio. Default: equally weighted portfolio.}
+\item{weights.eff}{matrix of portfolio weights. Each column contains
+p values of the weights for a given portfolio. Default: equally
+weighted portfolio.}
 }
 \value{
 a ggplot object
 }
 \description{
-The plotted  Bayesian efficient frontier is provided by \insertCite{@Eq. (8) in @bauder21;textual}{HDShOP}.
-It is the set of optimal portfolios obtained by employing the posterior predictive
-distribution on the asset returns. This efficient frontier can be used to assess
-the mean-variance efficiency of various estimators of the portfolio weights.
-The standard deviation of the portfolio return is plotted in the \eqn{x}-axis and the
-mean portfolio return in the \eqn{y}-axis. The portfolios with the weights \eqn{\rm{w}} are added
-to the plot by computing  \eqn{\sqrt{\rm{w}^\prime  S  w} }  and  \eqn{\rm w^\prime \bar x}.
+The plotted  Bayesian efficient frontier is provided by \insertCite{@Eq. (8)
+in @bauder21;textual}{HDShOP}. It is the set of optimal portfolios obtained
+by employing the posterior predictive distribution on the asset returns.
+This efficient frontier can be used to assess the mean-variance efficiency
+of various estimators of the portfolio weights. The standard deviation of
+the portfolio return is plotted in the \eqn{x}-axis and the mean portfolio
+return in the \eqn{y}-axis. The portfolios with the weights \eqn{\rm{w}}
+are added to the plot by computing  \eqn{\sqrt{\rm{w}^\prime  S  w} }
+and  \eqn{\rm w^\prime \bar x}.
 }
 \examples{
-p = 150
-n = 300
+p <- 150
+n <- 300
 gamma <- 10
-mu = seq(0.2,-0.2, length.out=p)
-Sigma = RandCovMtrx(p=p)
+mu <- seq(0.2,-0.2, length.out=p)
+Sigma <- RandCovMtrx(p=p)
 
 x <- t(MASS::mvrnorm(n=n , mu=mu, Sigma=Sigma))
 
 EW_port <- rep(1/p, length=p)
-MV_shr_port <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma, b=EW_port, beta=0.05)$weights
-GMV_shr_port <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=Inf, b=EW_port, beta=0.05)$weights
+MV_shr_port <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=gamma,
+                                                b=EW_port, beta=0.05)$weights
+GMV_shr_port <- new_MV_portfolio_weights_BDOPS21(x=x, gamma=Inf, b=EW_port,
+                                                 beta=0.05)$weights
 MV_trad_port <- new_MV_portfolio_traditional(x=x, gamma=gamma)$weights
 GMV_trad_port <- new_MV_portfolio_traditional(x=x, gamma=Inf)$weights
 
-weights.eff = cbind(EW_port, MV_shr_port, GMV_shr_port, MV_trad_port, GMV_trad_port)
+weights.eff <- cbind(EW_port, MV_shr_port, GMV_shr_port,
+                     MV_trad_port, GMV_trad_port)
 colnames(weights.eff) <- c("EW", "MV_shr", "GMV_shr", "MV_trad", "GMV_trad")
 
 

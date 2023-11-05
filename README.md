@@ -1,7 +1,12 @@
 # Expected utility and global minimum variance portfolios.
+
+<!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/HDShOP)](https://cran.r-project.org/package=HDShOP)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/HDShOP?color=orange)](https://cranlogs.r-pkg.org/)
 [![](https://cranlogs.r-pkg.org/badges/HDShOP)](https://cranlogs.r-pkg.org/)
+[![R-CMD-check](https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 
 ## Installation
 

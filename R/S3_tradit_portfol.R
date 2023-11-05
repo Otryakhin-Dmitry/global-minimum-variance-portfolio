@@ -1,10 +1,11 @@
 #' Traditional mean-variance portfolio
 #'
-#' Mean-variance portfolios with the traditional (sample) estimators for the mean
-#' vector and the covariance matrix of asset returns. For more details of the method,
-#' see \code{\link{MVShrinkPortfolio}}. new_MV_portfolio_traditional is for the
-#' case p<n, while new_MV_portfolio_traditional_pgn is for p>n, where p is the
-#' number of assets and n is the number of observations.
+#' Mean-variance portfolios with the traditional (sample) estimators for
+#' the mean vector and the covariance matrix of asset returns.
+#' For more details of the method, see \code{\link{MVShrinkPortfolio}}.
+#' new_MV_portfolio_traditional is for the case p<n, while
+#' new_MV_portfolio_traditional_pgn is for p>n, where p is the number of
+#' assets and n is the number of observations.
 #'
 #' @inheritParams MVShrinkPortfolio
 #' @return an object of class MeanVar_portfolio
