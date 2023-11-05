@@ -1,4 +1,4 @@
-# Expected utility and global minimum variance portfolios. Package version 0.1.0.
+# Expected utility and global minimum variance portfolios.
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/HDShOP)](https://cran.r-project.org/package=HDShOP)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/HDShOP?color=orange)](https://cranlogs.r-pkg.org/)
 [![](https://cranlogs.r-pkg.org/badges/HDShOP)](https://cranlogs.r-pkg.org/)
