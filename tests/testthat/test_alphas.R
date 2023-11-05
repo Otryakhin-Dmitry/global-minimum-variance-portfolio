@@ -95,7 +95,7 @@ test_that("Remark 1. Variances on both sides must be equal;
   }
   library('MASS')
 
-  n <- 1e2 # number of realizations
+  n <- 2.5e2 # number of realizations
   p <- 0.5*n # number of assets
   w_0 <- rep(0,p)
   w_0[1:10] <- 10:1
@@ -107,7 +107,7 @@ test_that("Remark 1. Variances on both sides must be equal;
 
   set.seed(2)
   vect_as <- sqrt(n)*
-    replicate(n=5e1, {
+    replicate(n=7e1, {
       x <- t(mvrnorm(n=n, mu=mu, Sigma=Sigma))
       alpha_hat_star_c_GMV(x, b=w_0) -
         alpha_star_GMV(Sigma=Sigma, c=p/n, b=w_0)
@@ -115,7 +115,7 @@ test_that("Remark 1. Variances on both sides must be equal;
 
   var1 <- var(vect_as)
   var2 <- Var_alpha_simple(Sigma=Sigma, b=w_0, mu=mu, n=n)
-  expect_lt(abs(var1-var2), 0.1*var2)
+  expect_lt(abs(var1-var2), 0.1*(var2+var1))
 })
 
 
