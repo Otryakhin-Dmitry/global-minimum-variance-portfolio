@@ -2,6 +2,8 @@
 ^\.Rproj\.user$
 ^cran-comments\.md$
 ^\.github$
+^\.git$
+^\.gitignore$
 ^codemeta\.json$
 ^CONTRIBUTING\.md$
 ^code_pieces$
@@ -9,3 +11,5 @@
 ^Cpp_experiments$
 ^HDShop_SP500returns.RData$
 ^BOP19$
+Readme.md
+LICENSE
