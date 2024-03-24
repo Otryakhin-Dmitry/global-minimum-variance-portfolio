@@ -143,7 +143,7 @@ new_MV_portfolio_weights_BDOPS21 <- function(x, gamma, b, beta){
     T_dens[i,] <- c(weights[i], low_bound, upp_bound, TDn,  p_value)
   }
 
-  colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
+  colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'Tmv',  'p_value')
 
   Port_Var <- as.numeric(t(weights)%*%cov_mtrx%*%weights)
   Port_mean_return <- as.numeric(mu_est %*% weights)
@@ -355,7 +355,7 @@ new_GMV_portfolio_weights_BDPS19 <- function(x, b, beta){
     T_dens[i,] <- c(w_GMV_shr[i], low_bound, upp_bound, TDn,  p_value)
   }
 
-  colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'TDn',  'p_value')
+  colnames(T_dens) <- c('weight', 'low_bound', 'upp_bound', 'Tgmv',  'p_value')
 
   Port_Var <- 1/as.numeric(tones%*%iS%*%ones)
   Port_mean_return <- as.numeric(mu_est %*% w_GMV_shr)
