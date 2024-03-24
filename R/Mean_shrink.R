@@ -3,7 +3,7 @@
 #'
 #' Bayes-Stein shrinkage estimator of the mean vector as suggested in
 #' \insertCite{Jorion1986;textual}{HDShOP}. The estimator is given by
-#' \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,} where
+#' \deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1,} where
 #' \eqn{\bar x} is the sample mean vector, \eqn{\beta} and \eqn{Y_0} are
 #' derived using Bayesian approach (see Eq.(14) and Eq.(17) in
 #' \insertCite{Jorion1986;textual}{HDShOP}).
@@ -44,7 +44,7 @@ mean_bs <- function(x)
 #'
 #' James-Stein shrinkage estimator of the mean vector as suggested in
 #' \insertCite{Jorion1986;textual}{HDShOP}. The estimator is given by
-#' \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
+#' \deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1,}
 #' where \eqn{\bar x} is the sample mean vector, \eqn{\beta} is the shrinkage
 #' coefficient which minimizes a quadratic loss given by Eq.(11) in
 #' \insertCite{Jorion1986;textual}{HDShOP}.
@@ -82,7 +82,7 @@ mean_js <- function(x, Y_0 = 1)
 #'
 #' Shrinkage estimator of the high-dimensional mean vector as suggested in
 #' \insertCite{BOP2019;textual}{HDShOP}. It uses the formula
-#' \deqn{\hat \mu_{BOP} = \hat \alpha \bar x + \hat \beta \mu_0 \quad ,} where
+#' \deqn{\hat \mu_{BOP} = \hat \alpha \bar x + \hat \beta \mu_0,} where
 #' \eqn{\hat \alpha} and \eqn{\hat \beta} are shrinkage coefficients given by
 #' Eq.(6) and Eg.(7) of \insertCite{BOP2019;textual}{HDShOP} that minimize
 #' weighted quadratic loss for a given target vector \eqn{\mu_0}
@@ -99,7 +99,7 @@ mean_js <- function(x, Y_0 = 1)
 #' n<-7e2 # number of realizations
 #' p<-.5*n # number of assets
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-#' mm <- mean_bop19(x=x)
+#' mm <- mean_bop19(x=x, mu_0=rep(1,p))
 #' @export
 mean_bop19 <- function(x, mu_0 = rep(1,p))
 {

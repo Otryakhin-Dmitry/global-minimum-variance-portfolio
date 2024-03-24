@@ -30,8 +30,8 @@ argument type, values of gamma and dimensionality of matrix x.
 \details{
 The sample estimator of the mean-variance portfolio weights, which results in
 a traditional mean-variance portfolio, is calculated by
-\deqn{\hat w_{MV} = \frac{S^{-1} 1}{1' S^{-1} 1} + 
-      \gamma^{-1} \hat Q \bar x \quad ,}
+\deqn{\hat w_{MV} = \frac{S^{-1} 1}{1' S^{-1} 1} +
+      \gamma^{-1} \hat Q \bar x,}
 where \eqn{S^{-1}} and \eqn{\bar x} are the inverse of the sample covariance
 matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
 is the coefficient of risk aversion and \eqn{\hat Q} is given by
@@ -39,7 +39,7 @@ is the coefficient of risk aversion and \eqn{\hat Q} is given by
 In the case when \eqn{p>n}, \eqn{S^{-1}} becomes \eqn{S^{+}}- Moore-Penrose
 inverse. The shrinkage estimator for the mean-variance portfolio weights in
 a high-dimensional setting is given by
-\deqn{\hat w_{ShMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b \quad,}
+\deqn{\hat w_{ShMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b,}
 where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 a target vector with the sum of the elements equal to one.
 
@@ -51,7 +51,7 @@ The case of a fully risk averse investor (\eqn{\gamma=\infty}) leads to the
 traditional global minimum variance (GMV) portfolio with the weights given by
 \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
 The shrinkage estimator for the GMV portfolio is then calculated by
-\deqn{\hat w_{ShGMV} = \hat\alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
+\deqn{\hat w_{ShGMV} = \hat\alpha \hat w_{GMV} + (1-\hat \alpha)b,}
 with \eqn{\hat{\alpha}}  given in
 Eq. (2.31) of \insertCite{BPS2018;textual}{HDShOP} for c<1 and in
 Eq. (2.33) of \insertCite{BPS2018;textual}{HDShOP} for c>1.
@@ -78,11 +78,11 @@ b<-rep(1/p,p)
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-test <- MVShrinkPortfolio(x=x, gamma=gamma, 
+test <- MVShrinkPortfolio(x=x, gamma=gamma,
                           type='shrinkage', b=b, beta = 0.05)
 str(test)
 
-test <- MVShrinkPortfolio(x=x, gamma=Inf, 
+test <- MVShrinkPortfolio(x=x, gamma=Inf,
                           type='shrinkage', b=b, beta = 0.05)
 str(test)
 
@@ -96,11 +96,11 @@ b<-rep(1/p,p)
 
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 
-test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', 
+test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage',
                           b=b, beta = 0.05)
 str(test)
 
-test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', 
+test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage',
                           b=b, beta = 0.05)
 str(test)
 

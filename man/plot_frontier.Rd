@@ -19,8 +19,9 @@ weighted portfolio.}
 a ggplot object
 }
 \description{
-The plotted  Bayesian efficient frontier is provided by \insertCite{@Eq. (8)
-in @bauder21;textual}{HDShOP}. It is the set of optimal portfolios obtained
+The plotted  Bayesian efficient frontier is provided by
+\insertCite{@Eq. (8) in @bauder21;textual}{HDShOP}.
+It is the set of optimal portfolios obtained
 by employing the posterior predictive distribution on the asset returns.
 This efficient frontier can be used to assess the mean-variance efficiency
 of various estimators of the portfolio weights. The standard deviation of

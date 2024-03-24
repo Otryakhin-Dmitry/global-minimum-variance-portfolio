@@ -14,7 +14,7 @@ different assets, columns -- observations.}
 
 \item{w_0}{a numeric vector of tested weights.}
 
-\item{beta}{a confidence level for the test.}
+\item{beta}{a significance level for the test.}
 }
 \value{
 \tabular{ll}{

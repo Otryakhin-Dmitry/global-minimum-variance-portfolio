@@ -2,7 +2,7 @@
 % Please edit documentation in R/Matrix_shrink.R
 \name{nonlin_shrinkLW}
 \alias{nonlin_shrinkLW}
-\title{nonlinear shrinkage estimator of the covariance matrix of 
+\title{nonlinear shrinkage estimator of the covariance matrix of
 Ledoit and Wolf (2020)}
 \usage{
 nonlin_shrinkLW(x)
@@ -15,8 +15,8 @@ different assets, columns -- observations.}
 an object of class matrix
 }
 \description{
-The nonlinear shrinkage estimator of the covariance matrix, that minimizes 
-the minimum variance loss functions as defined in Eq (2.1) of 
+The nonlinear shrinkage estimator of the covariance matrix, that minimizes
+the minimum variance loss functions as defined in Eq (2.1) of
 \insertCite{LW2020;textual}{HDShOP}.
 }
 \examples{

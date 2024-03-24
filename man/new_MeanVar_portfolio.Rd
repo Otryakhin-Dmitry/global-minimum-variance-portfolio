@@ -43,9 +43,9 @@ str(cust_port_simp)
 TM <- matrix(0, p, p)
 diag(TM) <- 1
 cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
-means <- rowMeans(x)
+means <- mean_bs(x)
 
-cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means,
+cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means$means,
                                          cov_mtrx=cov_mtrx, gamma=2)
 str(cust_port_BS_LW)
 }

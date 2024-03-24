@@ -50,4 +50,4 @@ Imports:
     Rdpack, lattice
 Suggests: ggplot2, testthat, EstimDiagnostics, MASS, corpcor, waldo
 RdMacros: Rdpack
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1

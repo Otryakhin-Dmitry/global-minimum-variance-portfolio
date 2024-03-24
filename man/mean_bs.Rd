@@ -17,7 +17,7 @@ of the mean vector
 \description{
 Bayes-Stein shrinkage estimator of the mean vector as suggested in
 \insertCite{Jorion1986;textual}{HDShOP}. The estimator is given by
-\deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,} where
+\deqn{\hat \mu_{BS} = (1-\beta) \bar x + \beta Y_0 1,} where
 \eqn{\bar x} is the sample mean vector, \eqn{\beta} and \eqn{Y_0} are
 derived using Bayesian approach (see Eq.(14) and Eq.(17) in
 \insertCite{Jorion1986;textual}{HDShOP}).

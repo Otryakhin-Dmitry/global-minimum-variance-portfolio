@@ -20,7 +20,7 @@ the mean vector
 \description{
 Shrinkage estimator of the high-dimensional mean vector as suggested in
 \insertCite{BOP2019;textual}{HDShOP}. It uses the formula
-\deqn{\hat \mu_{BOP} = \hat \alpha \bar x + \hat \beta \mu_0 \quad ,} where
+\deqn{\hat \mu_{BOP} = \hat \alpha \bar x + \hat \beta \mu_0,} where
 \eqn{\hat \alpha} and \eqn{\hat \beta} are shrinkage coefficients given by
 Eq.(6) and Eg.(7) of \insertCite{BOP2019;textual}{HDShOP} that minimize
 weighted quadratic loss for a given target vector \eqn{\mu_0}
@@ -30,7 +30,7 @@ weighted quadratic loss for a given target vector \eqn{\mu_0}
 n<-7e2 # number of realizations
 p<-.5*n # number of assets
 x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
-mm <- mean_bop19(x=x)
+mm <- mean_bop19(x=x, mu_0=rep(1,p))
 }
 \references{
 \insertAllCited{}

@@ -32,9 +32,9 @@
 #' TM <- matrix(0, p, p)
 #' diag(TM) <- 1
 #' cov_mtrx <- CovarEstim(x, type="LW20", TM=TM)
-#' means <- rowMeans(x)
+#' means <- mean_bs(x)
 #'
-#' cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means,
+#' cust_port_BS_LW <- new_MeanVar_portfolio(mean_vec=means$means,
 #'                                          cov_mtrx=cov_mtrx, gamma=2)
 #' str(cust_port_BS_LW)
 #' @export
@@ -149,7 +149,7 @@ validate_MeanVar_portfolio <- function(w) {
 #' with customly computed covariance matrix and mean returns.
 #' The weights are computed in accordance with the formula
 #' \deqn{\hat w_{MV} = \frac{\hat{\Sigma}^{-1} 1}{1' \hat{\Sigma}^{-1} 1} +
-#'                     \gamma^{-1} \hat Q \hat{\mu} \quad ,}
+#'                     \gamma^{-1} \hat Q \hat{\mu},}
 #' where \eqn{\hat{\Sigma}} is an estimator for the covariance matrix,
 #' \eqn{\hat{\mu}} is an estimator for the mean vector, \eqn{\gamma} is
 #' the coefficient of risk aversion, and \eqn{\hat Q} is given by

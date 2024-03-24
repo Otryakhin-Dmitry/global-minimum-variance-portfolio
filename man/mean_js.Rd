@@ -19,7 +19,7 @@ of the mean vector.
 \description{
 James-Stein shrinkage estimator of the mean vector as suggested in
 \insertCite{Jorion1986;textual}{HDShOP}. The estimator is given by
-\deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1 \quad ,}
+\deqn{\hat \mu_{JS} = (1-\beta) \bar x + \beta Y_0 1,}
 where \eqn{\bar x} is the sample mean vector, \eqn{\beta} is the shrinkage
 coefficient which minimizes a quadratic loss given by Eq.(11) in
 \insertCite{Jorion1986;textual}{HDShOP}.

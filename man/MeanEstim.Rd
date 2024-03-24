@@ -15,7 +15,7 @@ different assets, columns -- observations.}
 \item{...}{arguments to pass to estimators}
 }
 \value{
-a numeric vector containing the specified estimation of
+a numeric vector--- a value of the specified estimator of
 the mean vector.
 }
 \description{

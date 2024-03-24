@@ -2,6 +2,7 @@
 % Please edit documentation in R/HDShOP-package.R
 \docType{package}
 \name{HDShOP-package}
+\alias{HDShOP}
 \alias{HDShOP-package}
 \title{A set of tools for shrinkage estimation of mean-variance optimal portfolios}
 \description{
@@ -32,4 +33,24 @@ MVShrinkPortfolio: \insertCite{BDOPS2021}{HDShOP},
 
 \references{
 \insertAllCited{}
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio}
+  \item Report bugs at \url{https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Dmitry Otryakhin \email{d.otryakhin.acad@protonmail.ch} (\href{https://orcid.org/0000-0002-4700-7221}{ORCID})
+
+Authors:
+\itemize{
+  \item Taras Bodnar (\href{https://orcid.org/0000-0001-7855-8221}{ORCID})
+  \item Solomiia Dmytriv (\href{https://orcid.org/0000-0003-1855-3044}{ORCID})
+  \item Yarema Okhrin (\href{https://orcid.org/0000-0003-4704-5233}{ORCID})
+  \item Nestor Parolya (\href{https://orcid.org/0000-0003-2147-2288}{ORCID})
+}
+
 }

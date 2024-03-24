@@ -15,7 +15,8 @@ different assets, columns -- observations.}
 
 \item{gamma}{a numeric variable. Coefficient of risk aversion.}
 
-\item{b}{a numeric variable. The weights of the target portfolio.}
+\item{b}{a numeric variable. 1-beta is the confidence level of the symmetric
+confidence interval, constructed for each weight.}
 
 \item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
@@ -41,7 +42,7 @@ weight_intervals contains a shrinkage estimator of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights, value of
 the test statistic and the p-value of the test on the equality of
 the weight of each individual asset to zero
-(see Section 4.3 of Bodnar, Dette, Parolya and Thorsén 2021).
+\insertCite{@see Section 4.3 of @CORRBDNT23}{HDShOP}
 weight_intervals is only computed when p<n.
 }
 \description{
@@ -93,5 +94,5 @@ summary(test)
 \references{
 \insertRef{BDOPS2021}{HDShOP}
 
-\insertRef{BDNT21}{HDShOP}
+\insertRef{CORRBDNT23}{HDShOP}
 }

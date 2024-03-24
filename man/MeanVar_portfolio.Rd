@@ -24,7 +24,7 @@ A user-friendly function making mean-variance portfolios for assets
 with customly computed covariance matrix and mean returns.
 The weights are computed in accordance with the formula
 \deqn{\hat w_{MV} = \frac{\hat{\Sigma}^{-1} 1}{1' \hat{\Sigma}^{-1} 1} +
-                    \gamma^{-1} \hat Q \hat{\mu} \quad ,}
+                    \gamma^{-1} \hat Q \hat{\mu},}
 where \eqn{\hat{\Sigma}} is an estimator for the covariance matrix,
 \eqn{\hat{\mu}} is an estimator for the mean vector, \eqn{\gamma} is
 the coefficient of risk aversion, and \eqn{\hat Q} is given by

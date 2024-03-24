@@ -4,39 +4,39 @@
 
 #' Shrinkage mean-variance portfolio
 #'
-#' The main function for mean-variance (also known as expected utility) 
-#' portfolio construction. It is a dispatcher using methods according to 
+#' The main function for mean-variance (also known as expected utility)
+#' portfolio construction. It is a dispatcher using methods according to
 #' argument type, values of gamma and dimensionality of matrix x.
 #'
 #' The sample estimator of the mean-variance portfolio weights, which results in
 #' a traditional mean-variance portfolio, is calculated by
-#' \deqn{\hat w_{MV} = \frac{S^{-1} 1}{1' S^{-1} 1} + 
-#'       \gamma^{-1} \hat Q \bar x \quad ,}
+#' \deqn{\hat w_{MV} = \frac{S^{-1} 1}{1' S^{-1} 1} +
+#'       \gamma^{-1} \hat Q \bar x,}
 #' where \eqn{S^{-1}} and \eqn{\bar x} are the inverse of the sample covariance
 #' matrix and the sample mean vector of asset returns respectively, \eqn{\gamma}
 #' is the coefficient of risk aversion and \eqn{\hat Q} is given by
 #' \deqn{\hat Q = S^{-1} - \frac{S^{-1} 1 1' S^{-1}}{1' S^{-1} 1} .}
 #' In the case when \eqn{p>n}, \eqn{S^{-1}} becomes \eqn{S^{+}}- Moore-Penrose
-#' inverse. The shrinkage estimator for the mean-variance portfolio weights in 
-#' a high-dimensional setting is given by 
-#' \deqn{\hat w_{ShMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b \quad,}
+#' inverse. The shrinkage estimator for the mean-variance portfolio weights in
+#' a high-dimensional setting is given by
+#' \deqn{\hat w_{ShMV} = \hat \alpha \hat w_{MV} + (1- \hat \alpha)b,}
 #' where \eqn{\hat \alpha} is the estimated shrinkage intensity and \eqn{b} is
 #' a target vector with the sum of the elements equal to one.
 #'
 #' In the case \eqn{\gamma \neq \infty}, \eqn{\hat{\alpha}} is computed following
-#' Eq. (2.22) of \insertCite{BOP16;textual}{HDShOP} for c<1 and following 
+#' Eq. (2.22) of \insertCite{BOP16;textual}{HDShOP} for c<1 and following
 #' Eq. (2.29) of \insertCite{BOP16;textual}{HDShOP} for c>1.
 #'
 #' The case of a fully risk averse investor (\eqn{\gamma=\infty}) leads to the
 #' traditional global minimum variance (GMV) portfolio with the weights given by
 #' \deqn{\hat w_{GMV} = \frac{S^{-1} 1}{1' S^{-1} 1} .}
 #' The shrinkage estimator for the GMV portfolio is then calculated by
-#' \deqn{\hat w_{ShGMV} = \hat\alpha \hat w_{GMV} + (1-\hat \alpha)b \quad,}
-#' with \eqn{\hat{\alpha}}  given in 
-#' Eq. (2.31) of \insertCite{BPS2018;textual}{HDShOP} for c<1 and in 
+#' \deqn{\hat w_{ShGMV} = \hat\alpha \hat w_{GMV} + (1-\hat \alpha)b,}
+#' with \eqn{\hat{\alpha}}  given in
+#' Eq. (2.31) of \insertCite{BPS2018;textual}{HDShOP} for c<1 and in
 #' Eq. (2.33) of \insertCite{BPS2018;textual}{HDShOP} for c>1.
 #'
-#' These estimation methods are available as separate functions employed by 
+#' These estimation methods are available as separate functions employed by
 #' MVShrinkPortfolio accordingly to the following parameter configurations:
 #'
 #' | Function | Paper | Type | gamma | p/n |
@@ -48,14 +48,14 @@
 #' | \code{\link{new_MV_portfolio_traditional}} |  | traditional | > 0 | <1 |
 #' | \code{\link{new_MV_portfolio_traditional_pgn}} |  | traditional | > 0 | >1 |
 #' @md
-#' @param x a p by n matrix or a data frame of asset returns. Rows represent 
+#' @param x a p by n matrix or a data frame of asset returns. Rows represent
 #' different assets, columns -- observations.
 #' @param gamma a numeric variable. Coefficient of risk aversion.
-#' @param type a character. The type of methods to use to construct the 
+#' @param type a character. The type of methods to use to construct the
 #' portfolio.
 #' @param ... arguments to pass to portfolio constructors
 #'
-#' @return A portfolio in the form of an object of class MeanVar_portfolio 
+#' @return A portfolio in the form of an object of class MeanVar_portfolio
 #' potentially with a subclass.
 #' See \code{\link{Class_MeanVar_portfolio}} for the details of the class.
 #' @references \insertAllCited{}
@@ -70,11 +70,11 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=gamma, 
+#' test <- MVShrinkPortfolio(x=x, gamma=gamma,
 #'                           type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=Inf, 
+#' test <- MVShrinkPortfolio(x=x, gamma=Inf,
 #'                           type='shrinkage', b=b, beta = 0.05)
 #' str(test)
 #'
@@ -88,16 +88,16 @@
 #'
 #' x <- matrix(data = rnorm(n*p), nrow = p, ncol = n)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage', 
+#' test <- MVShrinkPortfolio(x=x, gamma=gamma, type='shrinkage',
 #'                           b=b, beta = 0.05)
 #' str(test)
 #'
-#' test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage', 
+#' test <- MVShrinkPortfolio(x=x, gamma=Inf, type='shrinkage',
 #'                           b=b, beta = 0.05)
 #' str(test)
 #'
 #' @export
-MVShrinkPortfolio <- function(x, gamma, 
+MVShrinkPortfolio <- function(x, gamma,
                               type=c('shrinkage', 'traditional'), ...) {
 
   if(!is.numeric(gamma) || is.na(gamma)) stop("gamma is not numeric")
@@ -165,7 +165,7 @@ MVShrinkPortfolio <- function(x, gamma,
 #'
 #' @md
 #'
-#' @param x a p by n matrix or a data frame of asset returns. Rows represent 
+#' @param x a p by n matrix or a data frame of asset returns. Rows represent
 #' different assets, columns -- observations.
 #' @param type a character. The estimation method to be used.
 #' @param ... arguments to pass to estimators
@@ -196,10 +196,10 @@ CovarEstim <- function(x, type=c('trad', 'BGP14', 'LW20'), ...)
     if(type=='BGP14') {
       ll <- list(...)
       if(is.null(ll$SCM)) {
-        SCM <- Sigma_sample_estimator(x=x) 
+        SCM <- Sigma_sample_estimator(x=x)
       } else {
         SCM <- as.matrix(ll$SCM)
-      }  
+      }
       n<-ncol(x)
       output <- CovShrinkBGP14(n=n, SCM=SCM, TM=as.matrix(ll$TM))$S
     }
@@ -216,7 +216,7 @@ CovarEstim <- function(x, type=c('trad', 'BGP14', 'LW20'), ...)
 #' Mean vector estimator
 #'
 #' A user-friendly function for estimation of the mean vector.
-#' Essentially, it is a function dispatcher for estimation of the mean vector 
+#' Essentially, it is a function dispatcher for estimation of the mean vector
 #' that chooses a method accordingly to the type argument.
 #'
 #' The available estimation methods for the mean are:
@@ -230,7 +230,7 @@ CovarEstim <- function(x, type=c('trad', 'BGP14', 'LW20'), ...)
 #' @md
 #'
 #' @inheritParams CovarEstim
-#' @return a numeric vector containing the specified estimation of 
+#' @return a numeric vector--- a value of the specified estimator of
 #' the mean vector.
 #' @references
 #' \insertRef{Jorion1986}{HDShOP}

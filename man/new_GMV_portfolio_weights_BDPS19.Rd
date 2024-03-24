@@ -13,7 +13,8 @@ new_GMV_portfolio_weights_BDPS19_pgn(x, b, beta)
 \item{x}{a p by n matrix or a data frame of asset returns. Rows represent
 different assets, columns -- observations.}
 
-\item{b}{a numeric vector. The weights of the target portfolio.}
+\item{b}{a numeric vector. 1-beta is the confidence level of the symmetric
+confidence interval, constructed for each weight.}
 
 \item{beta}{a numeric variable. The confidence level for weight intervals.}
 }
@@ -39,7 +40,7 @@ weight_intervals contains a shrinkage estimator of portfolio weights,
 asymptotic confidence intervals for the true portfolio weights,
 the value of test statistic and the p-value of the test on the equality of
 the weight of each individual asset to zero
-\insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
+\insertCite{@see Section 4.3 of @CORRBDNT23}{HDShOP}.
 weight_intervals is only computed when p<n.
 }
 \description{
@@ -87,5 +88,5 @@ str(test)
 
 \insertRef{BPS2018}{HDShOP}
 
-\insertRef{BDNT21}{HDShOP}
+\insertRef{CORRBDNT23}{HDShOP}
 }

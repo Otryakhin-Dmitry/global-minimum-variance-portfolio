@@ -48,7 +48,7 @@ Omega_hat_al_c <- function(x, b){
 #' \insertCite{BDPS2019;textual}{HDShOP}.
 #' @inheritParams MVShrinkPortfolio
 #' @param w_0 a numeric vector of tested weights.
-#' @param beta a confidence level for the test.
+#' @param beta a significance level for the test.
 #' @return
 #'
 #' | Element | Description |

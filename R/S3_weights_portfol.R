@@ -7,7 +7,8 @@
 #' For more details of the method, see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
-#' @param b a numeric variable. The weights of the target portfolio.
+#' @param b a numeric variable. 1-beta is the confidence level of the symmetric
+#' confidence interval, constructed for each weight.
 #' @param beta a numeric variable. The confidence level for weight intervals.
 #' @return an object of class MeanVar_portfolio with subclass
 #' MV_portfolio_weights_BDOPS21.
@@ -30,12 +31,12 @@
 #' asymptotic confidence intervals for the true portfolio weights, value of
 #' the test statistic and the p-value of the test on the equality of
 #' the weight of each individual asset to zero
-#' (see Section 4.3 of Bodnar, Dette, Parolya and Thorsén 2021).
+#' \insertCite{@see Section 4.3 of @CORRBDNT23}{HDShOP}
 #' weight_intervals is only computed when p<n.
 #' @md
 #'
 #' @references \insertRef{BDOPS2021}{HDShOP}
-#' @references \insertRef{BDNT21}{HDShOP}
+#' @references \insertRef{CORRBDNT23}{HDShOP}
 #' @examples
 #'
 #' # c<1
@@ -237,7 +238,8 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
 #' of the method, see \code{\link{MVShrinkPortfolio}}.
 #'
 #' @inheritParams MVShrinkPortfolio
-#' @param b a numeric vector. The weights of the target portfolio.
+#' @param b a numeric vector. 1-beta is the confidence level of the symmetric
+#' confidence interval, constructed for each weight.
 #' @inheritParams new_MV_portfolio_weights_BDOPS21
 #' @return an object of class MeanVar_portfolio with subclass
 #' GMV_portfolio_weights_BDPS19.
@@ -260,13 +262,13 @@ new_MV_portfolio_weights_BDOPS21_pgn <- function(x, gamma, b, beta){
 #' asymptotic confidence intervals for the true portfolio weights,
 #' the value of test statistic and the p-value of the test on the equality of
 #' the weight of each individual asset to zero
-#' \insertCite{@see Section 4.3 of @BDNT21}{HDShOP}.
+#' \insertCite{@see Section 4.3 of @CORRBDNT23}{HDShOP}.
 #' weight_intervals is only computed when p<n.
 #' @md
 #'
 #' @references \insertRef{BDPS2019}{HDShOP}
 #' @references \insertRef{BPS2018}{HDShOP}
-#' @references \insertRef{BDNT21}{HDShOP}
+#' @references \insertRef{CORRBDNT23}{HDShOP}
 #' @examples
 #'
 #' # c<1
