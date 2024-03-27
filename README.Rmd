@@ -1,4 +1,4 @@
-# Expected utility and global minimum variance portfolios.
+# Expected utility and global minimum variance shrinkage portfolios.
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/HDShOP)](https://cran.r-project.org/package=HDShOP)
@@ -8,6 +8,12 @@
 [![](https://cranlogs.r-pkg.org/badges/HDShOP)](https://cranlogs.r-pkg.org/)
 <!-- badges: end -->
 
+## Description
+The package features a framework for working with high-dimensional shrinkage 
+optimal portfolios. It allows constructing those in two ways: 1) by applying 
+shrinkage directly to the portfolio weights (function `MVShrinkPortfolio`) and 
+2) by obtaining shrinkage estimates of mean returns and covariance matrices 
+(function `MeanVar_portfolio`).
 
 ## Installation
 
@@ -21,8 +27,30 @@ library("remotes")
 
 u<-"Otryakhin-Dmitry/"
 r<-"global-minimum-variance-portfolio"
-sd<-"gmvp"
 
 re <- paste(u,r,sep="")
-remotes::install_github(repo=re, subdir=sd)
+remotes::install_github(repo=re, subdir="")
+```
+
+## Example
+
+```{r}
+library(HDShOP)
+
+# loading S&P daily asset returns
+data("SP_daily_asset_returns")
+assets <- t(SP_daily_asset_returns[2:301, 2:201])
+
+gamma<-1
+p <- nrow(assets)
+b<-exp(-0.1*(1:p))
+
+# creating an MV shrinkage portfolio
+sh_mv_port <- MVShrinkPortfolio(x=assets, gamma=gamma,
+                                type='shrinkage', b=b, beta = 0.05)
+
+# Making a summary and plotting the portfolio
+summary(sh_mv_port)
+plot(sh_mv_port)
+
 ```

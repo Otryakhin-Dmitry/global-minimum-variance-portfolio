@@ -12,4 +12,7 @@
 ^HDShop_SP500returns.RData$
 ^BOP19$
 Readme.md
+Readme.Rmd
+Readme.html
 LICENSE
+^CRAN-SUBMISSION$
