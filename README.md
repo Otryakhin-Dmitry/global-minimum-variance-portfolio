@@ -17,11 +17,11 @@ shrinkage directly to the portfolio weights (function `MVShrinkPortfolio`) and
 
 ## Installation
 
-### The latest version on CRAN:
+The latest stable release is always on CRAN:
 ``` r
 install.packages('HDShOP')
 ```
-### The latest development version:
+The latest development version can be installed in the following way:
 ``` r
 library("remotes")
 
@@ -33,8 +33,9 @@ remotes::install_github(repo=re, subdir="")
 ```
 
 ## Example
-
-```{r}
+In this example, returns of assets from S&P500 are loaded and an MV portfolio is
+created, for which methods `summary` and `plot` are called.  
+```r
 library(HDShOP)
 
 # loading S&P daily asset returns
