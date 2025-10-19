@@ -91,7 +91,7 @@ plot_frontier <- function(x, weights.eff = rep(1/nrow(x), length=nrow(x)))
 
   pic <- ggplot2::ggplot(points.eff,
                          ggplot2::aes(x=portfolio.sd, y=portfolio.return)) +
-         ggplot2::geom_line(col = "royalblue4", linetype = 1, size=1) +
+         ggplot2::geom_line(col = "royalblue4", linetype = 1, linewidth = 1) +
          ggplot2::theme_bw() +
          ggplot2::theme(legend.position = "none") +
          ggplot2::geom_point(data=points.weights,

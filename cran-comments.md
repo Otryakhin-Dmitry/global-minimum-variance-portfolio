@@ -1,12 +1,10 @@
 ## Resubmission of HDShOP package
-This is a resubmission of an existing package with an update to documentation 
-and code formating.
+This is a resubmission of an existing package with added citation info and slight updates for compatibility reasons.
 
 ## Test environments
-* local ubuntu 20.04, R-release
+* local Ubuntu 24.04.3 LTS, R-release
 * win-builder
 
-* r-devel-linux-x86_64-debian-gcc (on R-hub)
 * r-devel-linux-x86_64-fedora-gcc (on R-hub)
 
 * r-release-osx-x86_64 (on R-hub)

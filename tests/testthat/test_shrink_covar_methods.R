@@ -1,4 +1,4 @@
-context("Shrinkage estimators for covariance")
+# context("Shrinkage estimators for covariance")
 
 #### Parameter setting
 c <- 0.7
@@ -26,8 +26,8 @@ Cov_BGP14 <- CovShrinkBGP14(n=n, TM=Sigma, SCM=SCM)$S
 #### tests
 test_that("All cov estimators produce matrices", {
 
-  expect_is(Cov_LW02, class="matrix")
-  expect_is(Cov_BGP14, class="matrix")
+  expect_true(inherits(Cov_LW02, "matrix"))
+  expect_true(inherits(Cov_BGP14, "matrix"))
 })
 
 test_that("All cov estimators are close to the real covariance", {
@@ -49,7 +49,7 @@ test_that("nonlin_shrinkLW works when c>1", {
   min_eig <- min(eigen(LW)$values)
 
   expect_gte(min_eig, 0.05)
-  expect_is(LW , class="matrix")
+  expect_true(inherits(LW , "matrix"))
 
   #### the same with another c and seed
 
@@ -64,6 +64,6 @@ test_that("nonlin_shrinkLW works when c>1", {
   min_eig <- min(eigen(LW)$values)
 
   expect_gte(min_eig, 0.05)
-  expect_is(LW , class="matrix")
+  expect_true(inherits(LW, "matrix"))
 })
 

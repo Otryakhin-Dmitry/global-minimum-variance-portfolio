@@ -1,4 +1,4 @@
-context("Portfolio prototypes on data frames")
+# context("Portfolio prototypes on data frames")
 
 #### Parameter setting
 c <- 0.4

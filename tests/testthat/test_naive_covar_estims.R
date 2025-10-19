@@ -1,4 +1,4 @@
-context("The simplest covariance estimator")
+# context("The simplest covariance estimator")
 
 ###############################
 p <- 5 # number of assets

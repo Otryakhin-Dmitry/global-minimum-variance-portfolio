@@ -1,4 +1,4 @@
-context("BDPS19 and BDOPS21 return equivalent portfolios when gamma==Inf")
+# context("BDPS19 and BDOPS21 return equivalent portfolios when gamma==Inf")
 
 library(MASS)
 n<-3e2 # number of realizations
@@ -18,8 +18,8 @@ test_that("Elements of outputs GMV and EU portfolios are equal", {
   library('waldo')
 
   # Weights
-  expect_equivalent(test_GMV$weights, test_MV$weights)
-  expect_equivalent(test_GMV$means, test_MV$means)
-  expect_equivalent(test_GMV$cov_mtrx, test_MV$cov_mtrx)
-  expect_equivalent(test_GMV$inv_cov_mtrx, test_MV$inv_cov_mtrx)
+  expect_equal(test_GMV$weights, test_MV$weights, ignore_attr = TRUE)
+  expect_equal(test_GMV$means, test_MV$means, ignore_attr = TRUE)
+  expect_equal(test_GMV$cov_mtrx, test_MV$cov_mtrx, ignore_attr = TRUE)
+  expect_equal(test_GMV$inv_cov_mtrx, test_MV$inv_cov_mtrx, ignore_attr = TRUE)
 })

@@ -1,9 +1,9 @@
 
 #---------------------------------------------------------------
 
-n<-100 
-c<-.8 
-p<-c*n 
+n<-100
+c<-.8
+p<-c*n
 mu <- rep(0, p)
 
 set.seed(1)
@@ -23,8 +23,8 @@ test_that("new_MeanVar_portfolio works properly", {
                                            cov_mtrx=cov_mtrx, gamma=2)
 
   expect_type(cust_port_BS_LW$call, "language")
-  expect_is(cust_port_BS_LW$cov_mtrx, "matrix")
-  expect_is(cust_port_BS_LW$inv_cov_mtrx, "matrix")
+  expect_true(inherits(cust_port_BS_LW$cov_mtrx, "matrix"))
+  expect_true(inherits(cust_port_BS_LW$inv_cov_mtrx, "matrix"))
   expect_type(cust_port_BS_LW$means, "double")
   expect_type(cust_port_BS_LW$weights, "double")
 
@@ -46,8 +46,8 @@ test_that("MeanVar_portfolio works properly", {
                                        cov_mtrx=cov_mtrx, gamma=2)
 
   expect_type(cust_port_BS_LW$call, "language")
-  expect_is(cust_port_BS_LW$cov_mtrx, "matrix")
-  expect_is(cust_port_BS_LW$inv_cov_mtrx, "matrix")
+  expect_true(inherits(cust_port_BS_LW$cov_mtrx, "matrix"))
+  expect_true(inherits(cust_port_BS_LW$inv_cov_mtrx, "matrix"))
   expect_type(cust_port_BS_LW$means, "double")
   expect_type(cust_port_BS_LW$weights, "double")
 

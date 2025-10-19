@@ -1,4 +1,4 @@
-context("T_alpha test")
+# context("T_alpha test")
 
 ###############################
 n <- 5e2 # number of realizations

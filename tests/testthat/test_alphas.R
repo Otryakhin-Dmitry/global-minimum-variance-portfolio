@@ -1,4 +1,4 @@
-context("Different expressions for alphas")
+# context("Different expressions for alphas")
 
 #### alphas EU and GMV work and are equal when gamma=Inf
 
@@ -21,8 +21,8 @@ test_that("alphas EU and GMV work and are equal when gamma=Inf", {
   al_EU <- alpha_hat_star_c(gamma=Inf, x, b=w_0) # must be computable
   al_GMV <- alpha_hat_star_c_GMV(x, b=w_0) # must be equal to the previous
 
-  expect_is(al_EU, class="numeric")
-  expect_is(al_GMV, class="numeric")
+  expect_type(al_EU, type="double")
+  expect_type(al_GMV, type="double")
   expect_equal(al_EU, al_GMV)
 })
 
@@ -55,8 +55,8 @@ test_that("alphas EU and GMV work and are equal when
   al_EU <- alpha_hat_star_c(gamma=Inf, x, b=w_0) # must be computable
   al_GMV <- alpha_hat_star_c_GMV(x, b=w_0) # must be equal to the previous
 
-  expect_is(al_EU, class="numeric")
-  expect_is(al_GMV, class="numeric")
+  expect_type(al_EU, type="double")
+  expect_type(al_GMV, type="double")
   expect_equal(al_EU, al_GMV)
 })
 
@@ -80,8 +80,8 @@ test_that("Deterministic alphas EU and GMV work and are equal when gamma=Inf", {
   # must be equal to the previous
   a_s_GMV <- alpha_star_GMV(Sigma=Sigma, c=p/n, b=w_0)
 
-  expect_is(a_s_EU, class="numeric")
-  expect_is(a_s_GMV, class="numeric")
+  expect_type(a_s_EU, type="double")
+  expect_type(a_s_GMV, type="double")
   expect_equal(a_s_EU, a_s_GMV)
 
 })

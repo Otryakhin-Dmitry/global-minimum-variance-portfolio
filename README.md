@@ -55,3 +55,7 @@ summary(sh_mv_port)
 plot(sh_mv_port)
 
 ```
+## Citation
+Taras Bodnar, Solomiia Dmytriv, Yarema Okhrin, Dmitry Otryakhin & Nestor
+Parolya (12 May 2025): High-Dimensional portfolio selection with HDShOP package, The
+European Journal of Finance, [DOI: 10.1080/1351847X.2025.2501637](https://doi.org/10.1080/1351847X.2025.2501637)

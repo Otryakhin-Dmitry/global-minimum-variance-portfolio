@@ -18,10 +18,10 @@ Mtrx_lw <- CovarEstim(x, type="LW20")
 #### tests on matrices
 test_that("CovarEstim works on matrices", {
 
-  expect_is(Mtrx_trad, class="matrix")
-  expect_is(Mtrx_bgp, class="matrix")
-  expect_is(Mtrx_bgp_2, class="matrix")
-  expect_is(Mtrx_lw, class="matrix")
+  expect_true(inherits(Mtrx_trad, "matrix"))
+  expect_true(inherits(Mtrx_bgp, "matrix"))
+  expect_true(inherits(Mtrx_bgp_2, "matrix"))
+  expect_true(inherits(Mtrx_lw, "matrix"))
 })
 
 
@@ -40,16 +40,11 @@ Mtrx_bgp_2 <- CovarEstim(x, type="BGP14", SCM=TM, TM=TM)
 Mtrx_lw <- CovarEstim(x, type="LW20")
 
 
-
 #### tests on data frames
 test_that("CovarEstim works on data frames", {
 
-  expect_is(Mtrx_trad, class="matrix")
-  expect_is(Mtrx_bgp, class="matrix")
-  expect_is(Mtrx_bgp_2, class="matrix")
-  expect_is(Mtrx_lw, class="matrix")
+  expect_true(inherits(Mtrx_trad, "matrix"))
+  expect_true(inherits(Mtrx_bgp, "matrix"))
+  expect_true(inherits(Mtrx_bgp_2, "matrix"))
+  expect_true(inherits(Mtrx_lw, "matrix"))
 })
-
-
-
-

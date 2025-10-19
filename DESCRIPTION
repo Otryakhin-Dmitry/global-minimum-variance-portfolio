@@ -1,6 +1,6 @@
 Package: HDShOP
 Title: High-Dimensional Shrinkage Optimal Portfolios
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: 
     c(person(given = "Taras", 
              family = "Bodnar", 
@@ -48,6 +48,13 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     Rdpack, lattice
-Suggests: ggplot2, testthat, EstimDiagnostics, MASS, corpcor, waldo
+Suggests: 
+    ggplot2,
+    testthat (>= 3.0.0),
+    EstimDiagnostics,
+    MASS,
+    corpcor,
+    waldo
 RdMacros: Rdpack
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
+Config/testthat/edition: 3

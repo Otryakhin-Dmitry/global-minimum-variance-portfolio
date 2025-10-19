@@ -1,4 +1,4 @@
-context("Various quantities")
+# context("Various quantities")
 
 ###############################
 p<-5 # number of assets

@@ -1,4 +1,4 @@
-context("Portfolio prototypes")
+# context("Portfolio prototypes")
 
 #### Parameter setting
 c <- 0.4

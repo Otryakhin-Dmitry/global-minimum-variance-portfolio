@@ -1,4 +1,4 @@
-context("Portfolio prototypes")
+# context("Portfolio prototypes")
 
 
 #### Parameter setting, p<n
@@ -43,8 +43,8 @@ test_that("Traditional portfolios work properly, p<n", {
   trad_port <- MVShrinkPortfolio(x=X, gamma=gamma, type='traditional')
 
   expect_type(trad_port$call, "language")
-  expect_is(trad_port$cov_mtrx, "matrix")
-  expect_is(trad_port$inv_cov_mtrx, "matrix")
+  expect_true(inherits(trad_port$cov_mtrx, "matrix"))
+  expect_true(inherits(trad_port$inv_cov_mtrx, "matrix"))
   expect_type(trad_port$means, "double")
   expect_type(trad_port$weights, "double")
 
@@ -62,8 +62,8 @@ test_that("Traditional portfolios work properly, p>n", {
   trad_port <- MVShrinkPortfolio(x=X_g, gamma=gamma, type='traditional')
 
   expect_type(trad_port$call, "language")
-  expect_is(trad_port$cov_mtrx, "matrix")
-  expect_is(trad_port$inv_cov_mtrx, "matrix")
+  expect_true(inherits(trad_port$cov_mtrx, "matrix"))
+  expect_true(inherits(trad_port$inv_cov_mtrx, "matrix"))
   expect_type(trad_port$means, "double")
   expect_type(trad_port$weights, "double")
 
@@ -87,8 +87,8 @@ test_that("Shrinkage portfolios work properly, p<n", {
                                    beta = 0.05, type='shrinkage')
 
   expect_type(shrink_port$call, "language")
-  expect_is(shrink_port$cov_mtrx, "matrix")
-  expect_is(shrink_port$inv_cov_mtrx, "matrix")
+  expect_true(inherits(shrink_port$cov_mtrx, "matrix"))
+  expect_true(inherits(shrink_port$inv_cov_mtrx, "matrix"))
   expect_type(shrink_port$means, "double")
   expect_type(shrink_port$weights, "double")
 
@@ -107,8 +107,8 @@ test_that("Shrinkage portfolios work properly, p>n", {
                                    beta = 0.05, type='shrinkage')
 
   expect_type(shrink_port$call, "language")
-  expect_is(shrink_port$cov_mtrx, "matrix")
-  expect_is(shrink_port$inv_cov_mtrx, "matrix")
+  expect_true(inherits(shrink_port$cov_mtrx, "matrix"))
+  expect_true(inherits(shrink_port$inv_cov_mtrx, "matrix"))
   expect_type(shrink_port$means, "double")
   expect_type(shrink_port$weights, "double")
 
@@ -129,8 +129,8 @@ test_that("Shrinkage portfolios work properly, p<n, gamma=Inf", {
                                    beta = 0.05, type='shrinkage')
 
   expect_type(shrink_port$call, "language")
-  expect_is(shrink_port$cov_mtrx, "matrix")
-  expect_is(shrink_port$inv_cov_mtrx, "matrix")
+  expect_true(inherits(shrink_port$cov_mtrx, "matrix"))
+  expect_true(inherits(shrink_port$inv_cov_mtrx, "matrix"))
   expect_type(shrink_port$means, "double")
   expect_type(shrink_port$weights, "double")
 
@@ -149,8 +149,8 @@ test_that("Shrinkage portfolios work properly, p>n", {
                                    beta = 0.05, type='shrinkage')
 
   expect_type(shrink_port$call, "language")
-  expect_is(shrink_port$cov_mtrx, "matrix")
-  expect_is(shrink_port$inv_cov_mtrx, "matrix")
+  expect_true(inherits(shrink_port$cov_mtrx, "matrix"))
+  expect_true(inherits(shrink_port$inv_cov_mtrx, "matrix"))
   expect_type(shrink_port$means, "double")
   expect_type(shrink_port$weights, "double")
 
