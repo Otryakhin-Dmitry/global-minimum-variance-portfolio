@@ -7,13 +7,13 @@
   "codeRepository": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio",
   "issueTracker": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.3 (2024-02-29)",
+  "runtimePlatform": "R version 4.5.1 (2025-06-13)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -79,6 +79,7 @@
       "@type": "SoftwareApplication",
       "identifier": "testthat",
       "name": "testthat",
+      "version": ">= 3.0.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -169,10 +170,56 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1011.513KB",
-  "releaseNotes": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/blob/master/NEWS.md",
+  "fileSize": "1649.206KB",
+  "citation": [
+    {
+      "@type": "ScholarlyArticle",
+      "datePublished": "2025",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Taras",
+          "familyName": "Bodnar"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Solomiia",
+          "familyName": "Dmytriv"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Yarema",
+          "familyName": "Okhrin"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Dmitry",
+          "familyName": "Otryakhin"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Nestor",
+          "familyName": "Parolya"
+        }
+      ],
+      "name": "High-Dimensional portfolio selection with HDShOP package",
+      "url": "https://doi.org/10.1080/1351847X.2025.2501637",
+      "pagination": "1--23",
+      "isPartOf": {
+        "@type": "PublicationIssue",
+        "issueNumber": "0",
+        "datePublished": "2025",
+        "isPartOf": {
+          "@type": ["PublicationVolume", "Periodical"],
+          "volumeNumber": "0",
+          "name": "The European Journal of Finance"
+        }
+      }
+    }
+  ],
   "readme": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/blob/master/README.md",
   "contIntegration": "https://github.com/Otryakhin-Dmitry/global-minimum-variance-portfolio/actions/workflows/R-CMD-check.yaml",
+  "developmentStatus": "https://www.repostatus.org/#active",
   "keywords": ["financial-mathematics", "high-dimensional-data", "portfolio-management", "shrinkage-estimators"],
   "relatedLink": "https://CRAN.R-project.org/package=HDShOP"
 }

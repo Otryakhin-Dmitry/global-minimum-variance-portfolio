@@ -1,19 +1,13 @@
-citHeader("To cite HDShOP in publications use:")
-
-citEntry(
-  entry    = "Article",
+bibentry(
+  bibtype  = "article",
+  header   = "To cite HDShOP in publications, please use",
+  author   = "Taras Bodnar and Solomiia Dmytriv and Yarema Okhrin and Dmitry Otryakhin and Nestor Parolya",
   title    = "High-Dimensional portfolio selection with HDShOP package",
-  author   = c(as.person("Taras Bodnar"), as.person("Solomiia Dmytriv"), as.person("Yarema Okhrin"), as.person("Dmitry Otryakhin"), as.person("Nestor Parolya")),
   journal  = "The European Journal of Finance",
   year     = "2025",
   volume   = "0",
   number   = "0",
-  pages    = "1--23",
+  pages    = "1--23",  
   url      = "https://doi.org/10.1080/1351847X.2025.2501637",
-  textVersion = paste(
-      "Taras Bodnar and Solomiia Dmytriv and Yarema Okhrin and Dmitry Otryakhin and Nestor Parolya (2025).",
-      "High-Dimensional portfolio selection with HDShOP package.",
-      "The European Journal of Finance, 0(0), 1--23.",
-      "URL https://doi.org/10.1080/1351847X.2025.2501637."
-  )
+  textVersion = "Taras Bodnar, Solomiia Dmytriv, Yarema Okhrin, Dmitry Otryakhin and Nestor Parolya (2025). High-Dimensional portfolio selection with HDShOP package. The European Journal of Finance, 0(0), 1--23. URL https://doi.org/10.1080/1351847X.2025.2501637."
 )
